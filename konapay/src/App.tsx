@@ -20,14 +20,14 @@ import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
 
 /* Theme variables */
-import Layout1 from './components/layout/Layout1';
+import MainPage from './components/layout/MainPage/MainPage';
 
 setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-        <Layout1 name={'sssssssssssssssss'}/>
+        <MainPage/>
     </IonReactRouter>
   </IonApp>
 );
