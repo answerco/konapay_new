@@ -1,0 +1,42 @@
+// import "./Layout.css";
+import React, { useEffect, useState } from "react";
+
+interface SignUpCheckBox2Interface {
+  check: "필수" | "선택";
+  description: string;
+}
+
+const SignUpCheckBox2: React.FC<SignUpCheckBox2Interface> = ({ check, description }) => {
+  return (
+    <div
+      className="box-init"
+      style={{
+        marginBottom: "5%",
+        height: "12.5%",
+        width: "90%",
+        backgroundColor: "ButtonShadow",
+        alignItems: "center",
+        justifyContent: "flex-start",
+      }}
+    >
+      <input type="checkbox" id="TEST" style={{ marginLeft: "2.5%", marginRight: "2.5%" }} />
+      <label
+        htmlFor="TEST"
+        style={{
+          fontSize: "14px",
+          textAlign: "left",
+          background: "black",
+          width: "70%",
+        }}
+      >
+        [{check}] {description}
+      </label>
+      <div style={{ backgroundColor: "green" }}>
+        <p style={{ fontSize: "14px", textAlign: "end" }}>
+          <a href="www.naver.com">[상세보기]</a>
+        </p>
+      </div>
+    </div>
+  );
+};
+export default SignUpCheckBox2;
