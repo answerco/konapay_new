@@ -4,6 +4,8 @@
     height: 100vh;
     overflow: hidden;
     margin: 0 auto;
+    justify-content: center; 
+
   } 
   
   .grid-init {
