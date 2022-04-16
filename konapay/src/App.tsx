@@ -18,6 +18,8 @@ import '@ionic/react/css/text-alignment.css';
 import '@ionic/react/css/text-transformation.css';
 import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
+import Menu from './components/layout/SideMenu/Menu';
+
 
 /* Theme variables */
 import MainPage from './components/layout/MainPage/MainPage';
@@ -27,11 +29,13 @@ setupIonicReact();
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-        <IonRouterOutlet/>
-
-        <MainPage/>
-    </IonReactRouter>
+    <IonRouterOutlet id="main">
+      <Menu />
+     <MainPage/>
+    </IonRouterOutlet>
+</IonReactRouter>
   </IonApp>
 );
 
 export default App;
+
