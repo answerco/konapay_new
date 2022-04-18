@@ -13,7 +13,7 @@ const SignUpHeaderGrid: React.FC = () => {
         backgroundImage: `url(${KonapayLogo}) `,
         backgroundRepeat: "no-repeat",
         backgroundPosition: "left",
-        backgroundSize: "75%",
+        backgroundSize: "60%",
       }}
     >
       {/* <img src={KonapayLogo} alt="KonapayLogo.png" style={{ height: "30%" }} /> */}

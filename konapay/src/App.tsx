@@ -14,14 +14,14 @@ import "@ionic/react/css/display.css";
 /* Theme variables */
 // import Layout from "./components/layout3/Layout";
 import SignUpPage1 from "./components/signUp/SignUpPage3";
-
+import SwapPage from "./components/swap/Layout";
 setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      {/* <Layout name={"sssssssssssssssss"} /> */}
-      <SignUpPage1 />
+      {/* <SignUpPage1 /> */}
+      <SwapPage></SwapPage>
     </IonReactRouter>
   </IonApp>
 );

@@ -6,10 +6,10 @@ const SignUpHeaderGrid: React.FC = () => {
   return (
     <div
       style={{
-        margin: "5%",
+        marginRight: "5%",
         backgroundColor: "green",
         height: "100%",
-        width: "100%",
+        width: "90%",
       }}
     >
       {/* <img src={KonapayLogo} alt="KonapayLogo.png" style={{ height: "30%" }} /> */}

@@ -9,16 +9,23 @@
   /* max-width: 400px;  */
   height: 100vh;
   margin: auto;
-  background-color: lightsteelblue;
+  /* background-color: lightsteelblue; */
 }
 
 .box-init {
   font-size: larger;
   color: #fff;
   border-radius: 5px;
-  background-color: #2196f3;
-  border: 1px solid black;
+  /* background-color: #2196f3; */
+  /* border: 1px solid black; */
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.header-title {
+  color: black;
+
+  font: 700;
+  /* text-rendering: optimizeLegibility; */
 }
