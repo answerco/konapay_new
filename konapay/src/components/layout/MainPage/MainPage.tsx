@@ -1,5 +1,35 @@
+import { 
+  IonApp, 
+  IonHeader, 
+  IonToolbar, 
+  IonTitle, 
+  IonContent, 
+  IonFooter, 
+  IonMenu,
+  IonList,
+  IonListHeader,
+  IonMenuToggle,
+  IonIcon,
+  IonLabel,
+  IonPage ,
+  IonButtons,
+  IonButton,
+  IonItem } from '@ionic/react';
 import './MainPage.css';
 import React from 'react';
+import Sidebar from '../../assets/img/sideMenu.png';
+import Myinfo from '../../assets/img/myInfo.png';
+import Setting from '../../assets/img/setting.png';
+import Home from '../../assets/img/home.png';
+import Banner from '../../assets/img/bannerImg.png';
+import MainCard from '../../assets/img/mainCard.png';
+import CardSelectBar from '../../assets/img/cardSelectBar.png';
+import FooterMenu_Home from '../../assets/img/footerMenu_home.png';
+import FooterMenu_Pay from '../../assets/img/footerMenu_pay.png';
+import FooterMenu_Benefit from '../../assets/img/footerMenu_benefit.png';
+import Menu from '../SideMenu/Menu';
+
+
 
 const meta = document.createElement('meta');
 meta.name = "viewport";
@@ -9,76 +39,50 @@ document.getElementsByTagName('head')[0].appendChild(meta);
 
 const MainPage: React.FC = () => {
   return (
-  <div className="grid-init grid">
-    <div className="box-init box" style={{height:'30%',backgroundColor:'red'}}>
-      <a>
-        <a>
-          <span style={{height:'10%',width:'10%',float:'right',backgroundColor:'black'}}></span>
-          <span style={{height:'10%',width:'10%',float:'right',backgroundColor:'white'}}></span>
-          <span style={{height:'10%',width:'10%',float:'right',backgroundColor:'yellow'}}></span>
+    <IonApp>
+    <IonMenu content-id="main-content">
+    <IonHeader>
+      <IonToolbar color="primary">
+        <IonTitle>Menu</IonTitle>
+      </IonToolbar>
+    </IonHeader>
 
-          <span style={{height:'10%',width:'30%',float:'left',backgroundColor:'black'}}></span>
+    <IonContent>
+      <IonList>
+        <IonListHeader>
+          Navigate
+        </IonListHeader>
+        <IonMenuToggle auto-hide="false">
+          <IonItem button>
+            <IonIcon slot="start" name='home'></IonIcon>
+            <IonLabel>
+              Home
+            </IonLabel>
+          </IonItem>
+        </IonMenuToggle>
+      </IonList>
+    </IonContent>
+  </IonMenu>
 
-          <div style={{marginTop:'10%', marginLeft:'5%', height:'20%',width:'40%'}}>
-            <a style={{fontSize:'30px',fontWeight: 'bold'}}>KONA PAY</a>
-          </div>
-
-          <div style={{marginTop:'10%', marginLeft:'5%', height:'40%',width:'60%'}}>
-            <a style={{fontSize:'20px',fontWeight: 'bold'}}>언제 어디서든 간편 한 결제</a>
-          </div>
-        </a>
-
-        
-
-        
-      </a>
-    </div>
-    <div className="box-init box" style={{height:'40%', backgroundColor:'green'}}>
-      <a>
-        <span style={{height:'10%',width:'20%',float:'right',backgroundColor:'black'}}><a style={{fontSize:'15px'}}>카드선택</a></span>
-      </a>
-      <div style={{background:'yellow',width:'',height:'70%'}}>
-        <div style={{backgroundColor:'white', width:'80%',height:'100%'}}>
-          카드
-        </div>
-      </div>
-      <div style={{backgroundColor:'red', width:'20%',height:'15%', alignItems: 'center'}}>
-          또옹그라미
-      </div>
-    </div> 
-    <div className="box-init box" style={{height:'15%', backgroundColor:'blue'}}>
-      <div>
-        <button style={{color:'red' ,height:'5%', width:'20%',marginLeft:'40%',marginTop:'3%',borderRadius:'20px'}}>
-          비밀번호
-        </button>
-        <div style={{color:'red' ,height:'5%', width:'40%',marginLeft:'30%',backgroundColor:'yellow'}}>
-          스캔으로 결제 하세요
-        </div>
-      </div>      
-    </div> 
-    <div className="box-init box" style={{height:'15%', backgroundColor:'pink'}}>
-      <span style={{backgroundColor:'white', width:'100%', height:'100%'}}>
-        <span style={{backgroundColor:'red'}}>
-          <a>
-            ddd
-          </a>
-        </span>
-
-        <span style={{marginLeft:'30%', backgroundColor:'red'}}>
-          <a>
-            1111111111111
-          </a>
-        </span>
-
-        <span style={{marginLeft:'20%', backgroundColor:'red'}}>
-          <a>
-            jkadslkjlasd
-          </a>
-        </span>
-      </span>
-
-    </div> 
-  </div>
+  <IonPage className="ion-page" id="main-content">
+    <IonHeader>
+      <IonToolbar>
+        <IonButtons slot="start">
+          <IonMenuToggle>
+            <IonButton>
+              <IonIcon slot="icon-only" name='menu'></IonIcon>
+            </IonButton>
+          </IonMenuToggle>
+        </IonButtons>
+        <IonTitle>Header</IonTitle>
+      </IonToolbar>
+    </IonHeader>
+    <IonContent className="ion-padding">
+      <h1>Main Content</h1>
+      <p>Click the icon in the top left to toggle the menu.</p>
+    </IonContent>
+  </IonPage>
+  </IonApp>
   );
 };
 
