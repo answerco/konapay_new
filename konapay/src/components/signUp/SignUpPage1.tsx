@@ -1,6 +1,6 @@
 import "./SignUpPageLayout.css";
 import React from "react";
-import SignUpHeader from "./SignUpHeader";
+import Header from "./../layout/Header";
 import SignUpHeaderGrid1 from "./SignUpHeaderGrid1";
 import SignUpHeaderGrid2 from "./SignUpHeaderGrid2";
 import SignUpTextArea from "./SignUpTextArea";
@@ -16,7 +16,7 @@ const SignUpPage1: React.FC = () => {
   return (
     <div className="grid-init grid">
       <div className="box-init box" style={{ height: "7.5%" }}>
-        <SignUpHeader></SignUpHeader>
+        <Header name="회원가입"></Header>
       </div>
       <div className="box-init box" style={{ height: "7.5%" }}>
         <SignUpHeaderGrid1></SignUpHeaderGrid1>

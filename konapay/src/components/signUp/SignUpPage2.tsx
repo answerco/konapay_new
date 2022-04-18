@@ -1,11 +1,9 @@
 import "./SignUpPageLayout.css";
 import React from "react";
-import SignUpHeader from "./SignUpHeader";
+import Header from "./../layout/Header";
 import SignUpHeaderGrid1 from "./SignUpHeaderGrid1";
 import SignUpHeaderGrid2 from "./SignUpHeaderGrid2";
 import SignUpTextArea from "./SignUpTextArea";
-import SignUpCheckBox1 from "./SignUpCheckBox1";
-import SignUpCheckBox2 from "./SignUpCheckBox2";
 import SignUpCheckBox3 from "./SignUpCheckBox3";
 
 const meta = document.createElement("meta");
@@ -17,7 +15,7 @@ const SignUpPage2: React.FC = () => {
   return (
     <div className="grid-init grid">
       <div className="box-init box" style={{ height: "7.5%" }}>
-        <SignUpHeader></SignUpHeader>
+        <Header name="회원가입"></Header>
       </div>
       <div className="box-init box" style={{ height: "7.5%" }}>
         <SignUpHeaderGrid1></SignUpHeaderGrid1>

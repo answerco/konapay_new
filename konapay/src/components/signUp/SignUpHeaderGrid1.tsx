@@ -7,7 +7,7 @@ const SignUpHeaderGrid: React.FC = () => {
     <div
       style={{
         margin: "5%",
-        backgroundColor: "green",
+        // backgroundColor: "green",
         height: "100%",
         width: "100%",
         backgroundImage: `url(${KonapayLogo}) `,
