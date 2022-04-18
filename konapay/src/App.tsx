@@ -14,7 +14,14 @@ import { IonApp,
   IonPage ,
   IonButtons,
   IonButton,
-  IonItem } from '@ionic/react';
+  IonItem,
+  IonRouterOutlet
+ } from '@ionic/react';
+import { IonReactRouter } from '@ionic/react-router';
+import { Redirect, Route } from 'react-router-dom';
+
+
+
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -35,50 +42,20 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './components/assets/css/main.css';
 
+
+/* layout */
+import Main from './components/layout/Main/Main'
+
 const App: React.FC = () => (
-  <IonApp>
-    <IonMenu content-id="main-content">
-    <IonHeader>
-      <IonToolbar color="primary">
-        <IonTitle>Menu</IonTitle>
-      </IonToolbar>
-    </IonHeader>
-
-    <IonContent>
-      <IonList>
-        <IonListHeader>
-          Navigate
-        </IonListHeader>
-        <IonMenuToggle auto-hide="false">
-          <IonItem button>
-            <IonIcon slot="start" name='home'></IonIcon>
-            <IonLabel>
-              Home
-            </IonLabel>
-          </IonItem>
-        </IonMenuToggle>
-      </IonList>
-    </IonContent>
-  </IonMenu>
-
-  <IonPage className="ion-page" id="main-content">
-    <IonHeader>
-      <IonToolbar>
-        <IonButtons slot="start">
-          <IonMenuToggle>
-            <IonButton>
-              <IonIcon slot="icon-only" name='menu'></IonIcon>
-            </IonButton>
-          </IonMenuToggle>
-        </IonButtons>
-        <IonTitle>Header</IonTitle>
-      </IonToolbar>
-    </IonHeader>
-    <IonContent className="ion-padding">
-      <h1>Main</h1>
-    </IonContent>
-  </IonPage>
-  </IonApp>
+	<IonApp>
+		<IonReactRouter>
+			<IonRouterOutlet>
+				<Route exact path="/">
+					<Main />
+				</Route>
+			</IonRouterOutlet>
+		</IonReactRouter>
+	</IonApp>
 );
 
 export default App;
