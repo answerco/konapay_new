@@ -1,7 +1,7 @@
 // import "./Layout.css";
 import { url } from "inspector";
 import React from "react";
-import KonapayLogo from "../../assets/img/KonapayLogo.png";
+import KonapayLogo from "../../../assets/img/KonapayLogo.png";
 const SignUpHeaderGrid: React.FC = () => {
   return (
     <div

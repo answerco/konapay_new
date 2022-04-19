@@ -5,6 +5,7 @@ import Header from "./Header";
 import SignUpHeaderGrid1 from "./SignUpHeaderGrid1";
 import SignUpHeaderGrid2 from "./SignUpHeaderGrid2";
 import SignUpInputBox from "./SignUpInputBox";
+import { IonRouterLink } from "@ionic/react";
 
 const meta = document.createElement("meta");
 meta.name = "viewport";
@@ -40,9 +41,11 @@ const SignUpPage2: React.FC = () => {
           </label>
         </div>
         <div className="box-init" style={{ height: "27.5%", width: "100%", marginTop: "10%", flexDirection: "column", justifyContent: "flex-start" }}>
-          <button className="box-init" style={{ height: "25%", width: "65%", color: "gray", border: "none", fontSize: "20px" }}>
-            회원가입
-          </button>
+          <IonRouterLink href="/">
+            <button className="box-init" style={{ height: "25%", width: "65%", color: "gray", border: "none", fontSize: "20px" }}>
+              회원가입
+            </button>
+          </IonRouterLink>
         </div>
       </div>
     </div>

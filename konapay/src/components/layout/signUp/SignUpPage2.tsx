@@ -5,6 +5,7 @@ import SignUpHeaderGrid1 from "./SignUpHeaderGrid1";
 import SignUpHeaderGrid2 from "./SignUpHeaderGrid2";
 import SignUpTextArea from "./SignUpTextArea";
 import SignUpCheckBox3 from "./SignUpCheckBox3";
+import { IonRouterLink } from "@ionic/react";
 
 const meta = document.createElement("meta");
 meta.name = "viewport";
@@ -39,9 +40,11 @@ const SignUpPage2: React.FC = () => {
           <SignUpCheckBox3 description="판매자"></SignUpCheckBox3>
         </div>
         <div className="box-init" style={{ height: "40%", width: "100%", flexDirection: "column", justifyContent: "flex-start" }}>
-          <button className="box-init" style={{ height: "25%", width: "65%", color: "gray", border: "none" }}>
-            다음
-          </button>
+          <IonRouterLink href="/signuppage3">
+            <button className="box-init" style={{ height: "25%", width: "65%", color: "gray", border: "none" }}>
+              다음
+            </button>
+          </IonRouterLink>
         </div>
       </div>
     </div>

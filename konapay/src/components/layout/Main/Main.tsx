@@ -249,11 +249,11 @@ import './main.css'
                         </IonButtons>
 
                         <IonButtons slot="end" id="myinfo" >
-                            <IonMenuToggle>
+                            <IonRouterLink href="/signuppage1">
                                 <IonButton>
                                     <IonIcon src={personCircleOutline} ></IonIcon>
                                 </IonButton>
-                            </IonMenuToggle>
+                            </IonRouterLink>
                         </IonButtons>
 
                         <IonButtons slot="end" id="setting" >

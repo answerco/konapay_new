@@ -1,5 +1,5 @@
 import React from "react";
-import Vecotr from "../../assets/icon/Vector.png";
+import Vecotr from "../../../assets/icon/Vector.png";
 
 interface HeaderInterface {
   name: string;
