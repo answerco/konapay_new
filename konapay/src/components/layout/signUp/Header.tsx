@@ -1,11 +1,16 @@
+import { IonIcon } from "@ionic/react";
+import { chevronBackCircle, chevronBackOutline } from "ionicons/icons";
 import React from "react";
-import Vector from "../../../assets/icon/Vector.png"
+import Vector from "../../../assets/icon/Vector.png";
 
 interface HeaderInterface {
   name: string;
 }
 
 const Header: React.FC<HeaderInterface> = ({ name }) => {
+  const backLocation = () => {
+    window.history.back();
+  };
   return (
     <div
       style={{
@@ -15,11 +20,9 @@ const Header: React.FC<HeaderInterface> = ({ name }) => {
         width: "100%",
       }}
     >
-      <div style={{ height: "100%", lineHeight: "100%" }}>
-        <p style={{ display: "block", color: "black", fontSize: "20px", height: "100%", lineHeight: "100%" }}>
-          <img src={Vector} alt="Vector.png" style={{ marginRight: "5%" }} />
-          <span>{name}</span>
-        </p>
+      <div className="box-init" style={{ height: "100%", color: "black", justifyContent: "flex-start", fontSize: "20px" }}>
+        <IonIcon icon={chevronBackOutline} size="large" onClick={backLocation}></IonIcon>
+        {name}
       </div>
     </div>
   );
