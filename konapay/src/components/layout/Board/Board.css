@@ -1,0 +1,10 @@
+
+.balance {
+    --indicator-box-shadow: none;
+    border-bottom: 1px solid lightgray;
+    border-radius: 0;
+}
+
+.balance::part(indicator) {
+    border-bottom: 3px solid lightgray;
+}
