@@ -1,6 +1,6 @@
 import "./Layout.css";
 import React from "react";
-import Header from "./../layout/Header";
+import Header from "./Header";
 
 const meta = document.createElement("meta");
 meta.name = "viewport";

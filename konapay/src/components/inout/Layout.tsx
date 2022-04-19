@@ -2,7 +2,7 @@ import { IonIcon, IonButton } from "@ionic/react";
 import { addOutline, searchOutline, statsChartOutline } from "ionicons/icons";
 import "./Layout.css";
 import React from "react";
-import Header from "./../layout/Header";
+import Header from "./Header";
 
 const meta = document.createElement("meta");
 meta.name = "viewport";
