@@ -61,7 +61,7 @@ import './payment.css'
   document.getElementsByTagName('head')[0].appendChild(meta);
   
   
-  const Payment: React.FC = () => {
+  const Payment2: React.FC = () => {
     return (
     <IonApp>
         
@@ -133,7 +133,7 @@ import './payment.css'
     );
   };
   
-  export default Payment;
+  export default Payment2;
   
 
 
