@@ -69,9 +69,11 @@ import '@ionic/react/css/display.css';
         <IonContent className="ion-padding">
         <IonHeader >
         <IonToolbar >
-            <IonButtons slot="start">
-            <IonBackButton  defaultHref= "" />
-            </IonButtons>
+            
+                <IonButtons slot="start">
+                <IonBackButton  defaultHref= "/" />
+                </IonButtons>
+            
 
             <IonTitle>
       

@@ -72,7 +72,7 @@ import '../Payment/payment.css'
         <IonHeader >
         <IonToolbar >
             <IonButtons slot="start">
-            <IonBackButton  defaultHref= "" />
+            <IonBackButton  defaultHref= "/" />
             </IonButtons>
 
             <IonTitle>구매내역</IonTitle>

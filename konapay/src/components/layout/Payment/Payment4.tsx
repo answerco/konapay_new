@@ -74,7 +74,7 @@ import './payment.css'
         <IonHeader >
         <IonToolbar >
             <IonButtons slot="start">
-            <IonBackButton  defaultHref= "" />
+            <IonBackButton  defaultHref= "/payment3" />
             </IonButtons>
 
             <IonTitle>매출 조회</IonTitle>

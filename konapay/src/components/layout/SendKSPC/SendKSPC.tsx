@@ -68,7 +68,7 @@ import '@ionic/react/css/display.css';
         <IonHeader >
         <IonToolbar >
             <IonButtons slot="start">
-            <IonBackButton  defaultHref= "" />
+            <IonBackButton  defaultHref= "/inout" />
             </IonButtons>
 
             <IonTitle> KSPC 보내기
