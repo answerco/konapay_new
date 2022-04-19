@@ -20,7 +20,9 @@ import {
     IonBackButton,
     IonGrid,
     IonRow,
-    IonCol
+    IonCol,
+    IonModal,
+    IonDatetime
 } from '@ionic/react';
 
 import React from 'react';
@@ -75,12 +77,7 @@ import './payment.css'
             <IonBackButton  defaultHref= "" />
             </IonButtons>
 
-            <IonTitle>
-      
-            
-      
-                상품, 대금 정보 입력
-            </IonTitle>
+            <IonTitle>매출 조회</IonTitle>
 
         </IonToolbar>
         </IonHeader>
@@ -95,6 +92,12 @@ import './payment.css'
                     <span style={{border:'1px solid gray', padding:'7px', borderRadius:'10px'}}>
                         2022.08-01
                     </span>
+                    <IonButton id="open-modal">Open Datetime Modal</IonButton>
+                    <IonModal isOpen={false}  >
+                      <IonContent force-overscroll="false">
+                        <IonDatetime></IonDatetime>
+                      </IonContent>
+                    </IonModal>
                 </div>
 
                 <div style={{margin:'10% 0'}}>

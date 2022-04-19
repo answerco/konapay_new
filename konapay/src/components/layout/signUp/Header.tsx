@@ -1,5 +1,5 @@
 import React from "react";
-import Vecotr from "../../assets/icon/Vector.png";
+import Vector from "../../../assets/icon/Vector.png"
 
 interface HeaderInterface {
   name: string;
@@ -17,7 +17,7 @@ const Header: React.FC<HeaderInterface> = ({ name }) => {
     >
       <div style={{ height: "100%", lineHeight: "100%" }}>
         <p style={{ display: "block", color: "black", fontSize: "20px", height: "100%", lineHeight: "100%" }}>
-          <img src={Vecotr} alt="Vector.png" style={{ marginRight: "5%" }} />
+          <img src={Vector} alt="Vector.png" style={{ marginRight: "5%" }} />
           <span>{name}</span>
         </p>
       </div>
