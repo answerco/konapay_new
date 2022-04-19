@@ -21,7 +21,10 @@ const Layout: React.FC = () => {
         <p style={{ color: "#E3E3E3", fontSize: "14px", width: "75%" }}>TOTAL PORTFOLIO VALUE</p>
       </div>
       <div className="box-init box" style={{ height: "22.5%" }}>
-        <div className="card" style={{ width: "80%", height: "90%", backgroundColor: "white", borderRadius: "10px", boxShadow: "5px 5px 5px gray" }}>
+        <div
+          className="box-init card"
+          style={{ width: "80%", height: "90%", backgroundColor: "white", borderRadius: "10px", boxShadow: "5px 5px 5px gray", justifyContent: "center", flexDirection: "column" }}
+        >
           <div style={{ width: "100%", textAlign: "center" }}>
             <p style={{ width: "100%", height: "100%", color: "gray" }}>
               <span style={{ color: "black", marginRight: "5%" }}>33,000</span>KSP POINT
@@ -44,7 +47,7 @@ const Layout: React.FC = () => {
         </div>
       </div>
       <div className="box-init box" style={{ height: "15%" }}>
-        <button style={{ width: "80%", height: "30%", border: "none", backgroundColor: "GrayText", borderRadius: "5px" }}>포인트 전환</button>
+        <button style={{ width: "80%", height: "50%", border: "none", backgroundColor: "GrayText", borderRadius: "5px" }}>포인트 전환</button>
       </div>
     </div>
   );

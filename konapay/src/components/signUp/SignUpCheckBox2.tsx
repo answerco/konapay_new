@@ -14,7 +14,6 @@ const SignUpCheckBox2: React.FC<SignUpCheckBox2Interface> = ({ check, descriptio
         marginBottom: "5%",
         height: "12.5%",
         width: "90%",
-        backgroundColor: "ButtonShadow",
         alignItems: "center",
         justifyContent: "flex-start",
       }}
@@ -25,13 +24,12 @@ const SignUpCheckBox2: React.FC<SignUpCheckBox2Interface> = ({ check, descriptio
         style={{
           fontSize: "14px",
           textAlign: "left",
-          background: "black",
           width: "70%",
         }}
       >
         [{check}] {description}
       </label>
-      <div style={{ backgroundColor: "green" }}>
+      <div>
         <p style={{ fontSize: "14px", textAlign: "end" }}>
           <a href="www.naver.com">[상세보기]</a>
         </p>

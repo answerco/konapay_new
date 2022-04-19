@@ -12,16 +12,19 @@ import "@ionic/react/css/flex-utils.css";
 import "@ionic/react/css/display.css";
 
 /* Theme variables */
-// import Layout from "./components/layout3/Layout";
-import SignUpPage1 from "./components/signUp/SignUpPage3";
+import Layout from "./components/layout/Layout1";
+import SignUpPage1 from "./components/signUp/SignUpPage1";
 import SwapPage from "./components/swap/Layout";
+import InOutPage from "./components/inout/Layout";
 setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      {/* <SignUpPage1 /> */}
-      <SwapPage></SwapPage>
+      {/* <Layout></Layout> */}
+      <SignUpPage1 />
+      {/* <SwapPage></SwapPage> */}
+      {/* <InOutPage></InOutPage> */}
     </IonReactRouter>
   </IonApp>
 );
