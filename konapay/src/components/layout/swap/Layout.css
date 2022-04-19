@@ -1,23 +1,11 @@
-* {
-  box-sizing: border-box;
-
-  padding: 0;
-  margin: 0;
-}
-
 .grid-init {
-  /* max-width: 400px;  */
   height: 100vh;
   margin: auto;
-  background-color: #fbfaf8;
 }
 
 .box-init {
   font-size: larger;
-  color: #fff;
   border-radius: 5px;
-  /* background-color: #2196f3; */
-  /* border: 1px solid black; */
   display: flex;
   align-items: center;
   justify-content: center;
