@@ -47,15 +47,46 @@ import './components/assets/css/main.css';
 /* layout */
 import Main from './components/layout/Main/Main'
 import PayToCamera from './components/layout/PurchaseHistory/PurchaseHistory'
+import Payment from './components/layout/Payment/Payment';
+import Payment2 from './components/layout/Payment/Payment2';
+import Payment3 from './components/layout/Payment/Payment3';
+import Payment4 from './components/layout/Payment/Payment4';
+import PurchaseHistory from './components/layout/PurchaseHistory/PurchaseHistory';
+import Inout from './components/layout/inout/Layout'
+import SendKSPC from './components/layout/SendKSPC/SendKSPC';
+import BalanceInquiry from './components/layout/BalanceInquiry/BalanceInquiry';
+import Board from './components/layout/Board/Board';
+import SignUpPage1 from './components/layout/signUp/SignUpPage1';
+import SignUpPage2 from './components/layout/signUp/SignUpPage2';
+import SignUpPage3 from './components/layout/signUp/SignUpPage3';
 
 const App: React.FC = () => (
 	<IonApp>
 		<IonReactRouter>
 			<IonRouterOutlet>
-				<Route exact path="/">
-					<Main />
-          <PayToCamera/>
-				</Route>
+				<Route exact path="/"> <Main /> </Route>
+
+        <Route exact path="/signuppage1"> <SignUpPage1 /> </Route>
+        <Route exact path="/signuppage2"> <SignUpPage2 /> </Route>
+        <Route exact path="/signuppage3"> <SignUpPage3 /> </Route>
+
+        {/* <Route exact path="/scan"> < /> </Route> */}
+        {/* <Route exact path="/"> < /> </Route> */}
+
+        <Route exact path="/purchasehistory"> <PurchaseHistory /> </Route>
+
+        <Route exact path="/inout"> <Inout /> </Route>
+        <Route exact path="/sendkspc"> <SendKSPC /> </Route>
+
+        <Route exact path="/balanceinquiry"> <BalanceInquiry /> </Route>
+        <Route exact path="/payment4"> <Payment4 /> </Route>
+
+        <Route exact path="/board"> <Board /> </Route>
+
+        <Route exact path="/payment"> <Payment /> </Route>
+        <Route exact path="/payment2"> <Payment2 /> </Route>
+        <Route exact path="/payment3"> <Payment3 /> </Route>
+        <Route exact path="/payment4"> <Payment4 /> </Route>
 			</IonRouterOutlet>
 		</IonReactRouter>
 	</IonApp>

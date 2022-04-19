@@ -19,7 +19,7 @@ const SignUpInputBox: React.FC<SignUpInputBoxInterface> = ({ name, checkValue, p
         </div>
       </div>
       <div className="box-init" style={{ width: "100%", height: "50%", marginBottom: "1.25%" }}>
-        <input type={name.includes("비밀번호") ? "password" : "text"} placeholder={placeHolder} style={{ width: "90%", height: "90%", border: "none" }} />
+        <input type={name.includes("비밀번호") ? "password" : "text"} placeholder={placeHolder} style={{ width: "90%", height: "90%", border: "none", fontSize: "18px" }} />
       </div>
     </div>
   );

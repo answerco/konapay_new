@@ -17,7 +17,8 @@ import {
     IonItem, 
     IonItemDivider,
     IonInput,
-    IonBackButton
+    IonBackButton,
+    IonRouterLink
 } from '@ionic/react';
 
 import React from 'react';
@@ -68,9 +69,11 @@ import '@ionic/react/css/display.css';
         <IonContent className="ion-padding">
         <IonHeader >
         <IonToolbar >
-            <IonButtons slot="start">
-            <IonBackButton  defaultHref= "" />
-            </IonButtons>
+            
+                <IonButtons slot="start">
+                <IonBackButton  defaultHref= "/" />
+                </IonButtons>
+            
 
             <IonTitle>
       
@@ -110,10 +113,11 @@ import '@ionic/react/css/display.css';
                     <br />
                     미리 이더리움을 충전해 놓으시기 바랍니다.
                 </div>
-                <div style={{display:'flex', justifyContent:'center'}}>
-                    <button style={{width:'75%', fontSize:'18px', padding:'10px', borderRadius:'10px'}}>승인 요청
-                    </button>
-                </div>
+                <IonRouterLink href="/payment2">
+                    <div style={{display:'flex', justifyContent:'center'}}>
+                        <button style={{width:'75%', fontSize:'18px', padding:'10px', borderRadius:'10px'}}>승인 요청</button>
+                    </div>
+                </IonRouterLink>
             </div>
         </IonContent>
 

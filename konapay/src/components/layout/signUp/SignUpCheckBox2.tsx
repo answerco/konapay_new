@@ -2,11 +2,12 @@
 import React, { useEffect, useState } from "react";
 
 interface SignUpCheckBox2Interface {
+  forId: string;
   check: "필수" | "선택";
   description: string;
 }
 
-const SignUpCheckBox2: React.FC<SignUpCheckBox2Interface> = ({ check, description }) => {
+const SignUpCheckBox2: React.FC<SignUpCheckBox2Interface> = ({ forId, check, description }) => {
   return (
     <div
       className="box-init"
@@ -18,9 +19,9 @@ const SignUpCheckBox2: React.FC<SignUpCheckBox2Interface> = ({ check, descriptio
         justifyContent: "flex-start",
       }}
     >
-      <input type="checkbox" id="TEST" style={{ marginLeft: "2.5%", marginRight: "2.5%" }} />
+      <input type="checkbox" id={forId} style={{ marginLeft: "2.5%", marginRight: "2.5%" }} />
       <label
-        htmlFor="TEST"
+        htmlFor={forId}
         style={{
           fontSize: "14px",
           textAlign: "left",

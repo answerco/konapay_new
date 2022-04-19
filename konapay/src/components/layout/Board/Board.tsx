@@ -108,7 +108,7 @@ import './Board.css'
         <IonHeader >
         <IonToolbar >
             <IonButtons slot="start">
-            <IonBackButton  defaultHref= "" />
+            <IonBackButton  defaultHref= "/" />
             </IonButtons>
 
             <IonTitle>게시판</IonTitle>
