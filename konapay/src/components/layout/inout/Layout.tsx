@@ -1,4 +1,4 @@
-import { IonIcon, IonButton } from "@ionic/react";
+import { IonIcon, IonButton, IonRouterLink } from "@ionic/react";
 import { addOutline, searchOutline, statsChartOutline } from "ionicons/icons";
 import "./Layout.css";
 import React from "react";
@@ -63,7 +63,9 @@ const Layout: React.FC = () => {
             </div>
           </div>
           <div className="box-init" style={{ marginTop: "5%", width: "90%", height: "40%" }}>
-            <button style={{ width: "100%", height: "75%", borderRadius: "30px", border: "none", backgroundColor: "gray" }}>QR스캔</button>
+            <IonRouterLink href="/sendkspc"> 
+              <button style={{ width: "100%", height: "75%", borderRadius: "30px", border: "none", backgroundColor: "gray" }}>보내기</button>
+            </IonRouterLink>
           </div>
         </div>
         <div className="box-init" style={{ width: "47.5%", height: "100%", borderRadius: "10px", flexDirection: "column", boxShadow: "5px 5px 5px black" }}></div>

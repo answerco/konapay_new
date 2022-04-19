@@ -5,6 +5,7 @@ import Header from "./Header";
 import SignUpHeaderGrid1 from "./SignUpHeaderGrid1";
 import SignUpHeaderGrid2 from "./SignUpHeaderGrid2";
 import SignUpInputBox from "./SignUpInputBox";
+import { IonRouterLink } from "@ionic/react";
 
 const meta = document.createElement("meta");
 meta.name = "viewport";
@@ -12,6 +13,9 @@ meta.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-s
 document.getElementsByTagName("head")[0].appendChild(meta);
 
 const SignUpPage2: React.FC = () => {
+  const locationFunction = () => {
+    return (window.location.href = "/");
+  };
   return (
     <div className="grid-init grid">
       <div className="box-init box" style={{ height: "7.5%" }}>

@@ -21,7 +21,8 @@ import {
     IonGrid,
     IonRow,
     IonCol,
-    IonCheckbox
+    IonCheckbox,
+    IonRouterLink
 } from '@ionic/react';
 
 import React from 'react';
@@ -73,7 +74,7 @@ import './payment.css'
         <IonHeader >
         <IonToolbar >
             <IonButtons slot="start">
-            <IonBackButton  defaultHref= "" />
+            <IonBackButton  defaultHref= "/payment" />
             </IonButtons>
 
             <IonTitle>
@@ -119,12 +120,12 @@ import './payment.css'
                     <IonCheckbox slot="start" color="dark" />
                     <IonLabel >결제 정보를 구매자에게 발송</IonLabel>
                 </IonItem>
-
-                <div style={{display:'flex', justifyContent:'center'}}>
-                    {/* <IonButton className='payment_button' color="light" size='large'>결제 요청</IonButton> */}
-                    <button style={{width:'75%', fontSize:'18px', padding:'10px', borderRadius:'10px'}}>결제 요청</button>
-                </div>
-
+                <IonRouterLink href="/payment3">
+                    <div style={{display:'flex', justifyContent:'center'}}>
+                        {/* <IonButton className='payment_button' color="light" size='large'>결제 요청</IonButton> */}
+                        <button style={{width:'75%', fontSize:'18px', padding:'10px', borderRadius:'10px'}}>결제 요청</button>
+                    </div>
+                </IonRouterLink>
             </div>
         </IonContent>
 

@@ -69,7 +69,7 @@ import './BalanceInquiry.css'
                 <IonHeader >
                     <IonToolbar >
                         <IonButtons slot="start">
-                            <IonBackButton  defaultHref= "" />
+                            <IonBackButton  defaultHref= "/" />
                         </IonButtons>
                         <IonTitle> 잔고조회</IonTitle>
                     </IonToolbar>
