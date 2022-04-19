@@ -2,10 +2,11 @@
 import React from "react";
 
 interface SignUpCheckBox3Interface {
+  value: 1 | 2;
   description: "일반유저" | "판매자";
 }
 
-const SignUpCheckBox2: React.FC<SignUpCheckBox3Interface> = ({ description }) => {
+const SignUpCheckBox2: React.FC<SignUpCheckBox3Interface> = ({ value, description }) => {
   return (
     <div
       className="box-init"
@@ -13,18 +14,14 @@ const SignUpCheckBox2: React.FC<SignUpCheckBox3Interface> = ({ description }) =>
         marginBottom: "5%",
         width: "90%",
         height: "15%",
-        backgroundColor: "yellowgreen",
+        border: "1px solid black",
         justifyContent: "flex-start",
       }}
     >
-      <div style={{ height: "100%", lineHeight: "100%", backgroundColor: "purple", marginLeft: "2.5%", marginRight: "2.5%" }}>
-        <input type="checkbox" id="모두" />
-      </div>
-      <div>
-        <label htmlFor="모두" style={{ fontSize: "20px" }}>
-          {description}
-        </label>
-      </div>
+      <input type="radio" name="user" id={`user` + value} value={value} style={{ margin: "0 2.5% 0 2.5% " }} />
+      <label htmlFor={`user` + value} style={{ fontSize: "20px", marginLeft: "2.5%" }}>
+        {description}
+      </label>
     </div>
   );
 };

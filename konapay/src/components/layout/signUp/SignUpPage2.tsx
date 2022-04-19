@@ -14,7 +14,7 @@ document.getElementsByTagName("head")[0].appendChild(meta);
 
 const SignUpPage2: React.FC = () => {
   const locationFunction = () => {
-    window.location.href = "/signuppage3";
+    return (window.location.href = "/signuppage3");
   };
   return (
     <div className="grid-init grid">
@@ -33,14 +33,14 @@ const SignUpPage2: React.FC = () => {
           className="box-init"
           style={{
             width: "100%",
-
             flexDirection: "column",
             justifyContent: "flex-start",
             height: "70%",
+            paddingTop: "2.5%",
           }}
         >
-          <SignUpCheckBox3 description="일반유저"></SignUpCheckBox3>
-          <SignUpCheckBox3 description="판매자"></SignUpCheckBox3>
+          <SignUpCheckBox3 value={1} description="일반유저"></SignUpCheckBox3>
+          <SignUpCheckBox3 value={2} description="판매자"></SignUpCheckBox3>
         </div>
         <div className="box-init" style={{ height: "40%", width: "100%", flexDirection: "column", justifyContent: "flex-start" }}>
           <button className="box-init" style={{ height: "25%", width: "65%", color: "gray", border: "none" }} onClick={locationFunction}>
