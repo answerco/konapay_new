@@ -73,7 +73,7 @@ import './payment.css'
         <IonHeader >
         <IonToolbar >
             <IonButtons slot="start">
-            <IonBackButton  defaultHref= "/payment2" />
+            <IonBackButton  defaultHref= "/payment" />
             </IonButtons>
 
             <IonTitle>
