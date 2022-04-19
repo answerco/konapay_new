@@ -14,7 +14,11 @@ ion-content.background{
 ion-toolbar.mainFooter{
     --background: none;
 }
-
+ion-menu::part(container) {
+    border-radius: 0px 80px 80px 0px;
+    padding-bottom: 5%;
+    height:90%
+    }
 .bannerText{
     color: rgb(255, 255, 255);
     position: fixed;

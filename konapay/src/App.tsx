@@ -45,6 +45,7 @@ import './components/assets/css/main.css';
 
 /* layout */
 import Main from './components/layout/Main/Main'
+import PayToCamera from './components/layout/PayToCamera/PaytoCamera'
 
 const App: React.FC = () => (
 	<IonApp>
@@ -52,6 +53,7 @@ const App: React.FC = () => (
 			<IonRouterOutlet>
 				<Route exact path="/">
 					<Main />
+          <PayToCamera/>
 				</Route>
 			</IonRouterOutlet>
 		</IonReactRouter>
