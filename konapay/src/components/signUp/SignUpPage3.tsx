@@ -1,7 +1,7 @@
 import "./SignUpPageLayout.css";
 import React from "react";
 import SignUpHeader from "./SignUpHeader";
-import Header from "./../layout/Header";
+import Header from "./Header";
 import SignUpHeaderGrid1 from "./SignUpHeaderGrid1";
 import SignUpHeaderGrid2 from "./SignUpHeaderGrid2";
 import SignUpInputBox from "./SignUpInputBox";
