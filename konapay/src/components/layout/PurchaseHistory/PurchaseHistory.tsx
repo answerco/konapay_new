@@ -60,7 +60,7 @@ import './payment.css'
   document.getElementsByTagName('head')[0].appendChild(meta);
   
   
-  const Payment4: React.FC = () => {
+  const PurchaseHistory: React.FC = () => {
     return (
     <IonApp>
         
@@ -75,12 +75,7 @@ import './payment.css'
             <IonBackButton  defaultHref= "" />
             </IonButtons>
 
-            <IonTitle>
-      
-            
-      
-                상품, 대금 정보 입력
-            </IonTitle>
+            <IonTitle>구매내역</IonTitle>
 
         </IonToolbar>
         </IonHeader>
@@ -88,7 +83,6 @@ import './payment.css'
                 
                 <div style={{margin:'7% 0px', display:'flex', justifyContent:'space-between'}}>
                     <div style={{fontSize:'20px', color:'gray', fontWeight:'bold'}}>KONA PAY</div>
-                    <div style={{fontWeight:'bold', color:'lightgray'}}>● ● ● ○</div>
                 </div>
         
                 <div style={{display:'flex' ,justifyContent:'center'}}>
@@ -160,7 +154,7 @@ import './payment.css'
     );
   };
   
-  export default Payment4;
+  export default PurchaseHistory;
   
 
 

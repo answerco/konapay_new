@@ -17,10 +17,7 @@ import {
     IonItem, 
     IonItemDivider,
     IonInput,
-    IonBackButton,
-    IonGrid,
-    IonRow,
-    IonCol
+    IonBackButton
 } from '@ionic/react';
 
 import React from 'react';
@@ -46,7 +43,6 @@ import '@ionic/react/css/text-alignment.css';
 import '@ionic/react/css/text-transformation.css';
 import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
-import './payment.css'
 
 
   
@@ -60,7 +56,7 @@ import './payment.css'
   document.getElementsByTagName('head')[0].appendChild(meta);
   
   
-  const Payment3: React.FC = () => {
+  const SendKSPC: React.FC = () => {
     return (
     <IonApp>
         
@@ -75,8 +71,7 @@ import './payment.css'
             <IonBackButton  defaultHref= "" />
             </IonButtons>
 
-            <IonTitle>
-                결제 요청
+            <IonTitle> KSPC 보내기
             </IonTitle>
 
         </IonToolbar>
@@ -84,32 +79,22 @@ import './payment.css'
             <div style={{padding:'0px 2%'}}>
                 <div style={{margin:'7% 0px', display:'flex', justifyContent:'space-between'}}>
                     <div style={{fontSize:'20px', color:'gray', fontWeight:'bold'}}>KONA PAY</div>
-                    <div style={{fontWeight:'bold', color:'lightgray'}}>● ● ○ ●</div>
                 </div>
 
-                <div>
-                    지불 승인이 완료 되었습니다.
+                <div style={{marginBottom:'10%'}}>KSPC 출금을 위해 주소를 입력해 주세요.</div>
+
+                <div style={{border:'2px solid lightgray', padding:'15px 20px', borderRadius:'10px', margin:'1.5% 0px' }}>
+                    <div style={{margin:'0px 0px 10px 0px'}}>주소를 입력해주세요.</div>
+                    <input style={{width:'100%', height:'30px'}} type="text"></input>
                 </div>
 
-                <IonGrid className='total_text'>
-                    <IonRow className='table_total'>
-                        <IonCol>사용금액</IonCol>
-                    </IonRow>
-                    <IonRow>
-                        <IonCol>33,000</IonCol>
-                    </IonRow>
-                </IonGrid>
+                <div style={{border:'2px solid lightgray', padding:'15px 20px', borderRadius:'10px', margin:'1.5% 0px' }}>
+                    <div style={{margin:'0px 0px 10px 0px'}}>수량을 입력해주세요.</div>
+                    <input style={{width:'100%', height:'30px'}} type="text"></input>
+                </div>
 
-                <IonGrid className='total_text'>
-                    <IonRow className='table_total'>
-                        <IonCol>사용가능 금액</IonCol>
-                    </IonRow>
-                    <IonRow>
-                        <IonCol>0</IonCol>
-                    </IonRow>
-                </IonGrid>
-                <div style={{display:'flex', justifyContent:'center'}}>
-                    <button style={{width:'75%', fontSize:'18px', padding:'10px', borderRadius:'10px'}}>매출조회</button>
+                <div style={{display:'flex', justifyContent:'center', marginTop:'25%'}}>
+                    <button style={{width:'75%', fontSize:'18px', padding:'10px', borderRadius:'10px'}}>보내기</button>
                 </div>
             </div>
         </IonContent>
@@ -119,7 +104,7 @@ import './payment.css'
     );
   };
   
-  export default Payment3;
+  export default SendKSPC;
   
 
 
