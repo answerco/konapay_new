@@ -13,18 +13,20 @@ import "@ionic/react/css/display.css";
 
 /* Theme variables */
 import Layout from "./components/layout/Layout1";
-import SignUpPage1 from "./components/signUp/SignUpPage1";
+import SignUpPage1 from "./components/signUp/SignUpPage2";
 import SwapPage from "./components/swap/Layout";
 import InOutPage from "./components/inout/Layout";
+import CameraPage from "./components/camera/Layout";
 setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       {/* <Layout></Layout> */}
-      <SignUpPage1 />
+      {/* <SignUpPage1 /> */}
       {/* <SwapPage></SwapPage> */}
       {/* <InOutPage></InOutPage> */}
+      <CameraPage></CameraPage>
     </IonReactRouter>
   </IonApp>
 );
