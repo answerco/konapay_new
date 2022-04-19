@@ -1,0 +1,72 @@
+ion-content.background{
+    --background: none;
+    background-image: url('../../assets/img/bannerImg.png');
+    size: 30%;
+    height: 30%;
+    overflow:hidden;
+    position: fixed;
+    background-size: cover;
+    -ms-overflow-style: none;
+    object-fit: contain;
+    filter: brightness(70%);
+}
+
+ion-toolbar.mainFooter{
+    --background: none;
+}
+ion-menu::part(container) {
+    border-radius: 0px 80px 80px 0px;
+    padding-bottom: 5%;
+    height:90%
+    }
+.bannerText{
+    color: rgb(255, 255, 255);
+    position: fixed;
+    top:10%;
+    left:10%;
+    font-size: 30px;
+    font-weight: bold;
+}
+.bannerText2{
+    color: rgb(255, 255, 255);
+    position: fixed;
+    top:20%;
+    left:10%;
+    font-size: 20px;
+    font-weight: bold;
+}
+.selectCard{
+    color:rgb(150, 146, 146);
+    position: fixed;
+    top:35%;
+    left:60%;
+    font-size: 15px;
+}
+.walletCard{
+    margin-top: 50%;
+    box-shadow: none;
+}
+.cardHeader{
+    float: right;
+}
+.mainCard{
+    position: relative;
+}
+.cardSub{
+    position: fixed;
+    color: rgb(150, 146, 146);
+    top:65%;
+    left:40% 
+}
+.pwdBtn{
+    margin-bottom: 15%;
+    width: 30%;
+    margin-left: 35%;
+    
+}
+.scanTopay{
+    position: fixed;
+    top:79%;
+    left:28%;
+}
+
