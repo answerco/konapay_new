@@ -13,6 +13,9 @@ meta.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-s
 document.getElementsByTagName("head")[0].appendChild(meta);
 
 const SignUpPage2: React.FC = () => {
+  const locationFunction = () => {
+    return (window.location.href = "/");
+  };
   return (
     <div className="grid-init grid">
       <div className="box-init box" style={{ height: "7.5%" }}>
@@ -41,11 +44,9 @@ const SignUpPage2: React.FC = () => {
           </label>
         </div>
         <div className="box-init" style={{ height: "27.5%", width: "100%", marginTop: "10%", flexDirection: "column", justifyContent: "flex-start" }}>
-          <IonRouterLink href="/">
-            <button className="box-init" style={{ height: "25%", width: "65%", color: "gray", border: "none", fontSize: "20px" }}>
-              회원가입
-            </button>
-          </IonRouterLink>
+          <button className="box-init" style={{ height: "25%", width: "65%", color: "gray", border: "none", fontSize: "20px" }}>
+            회원가입
+          </button>
         </div>
       </div>
     </div>
