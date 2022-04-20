@@ -5,9 +5,12 @@ interface SignUpInputBoxInterface {
   name: string;
   checkValue: boolean;
   placeHolder: string;
+  state: any;
+  setState: any;
+  id:string;
 }
 
-const SignUpInputBox: React.FC<SignUpInputBoxInterface> = ({ name, checkValue, placeHolder }) => {
+const SignUpInputBox: React.FC<SignUpInputBoxInterface> = ({ id, name, checkValue, placeHolder, state, setState }) => {
   return (
     <div className="box-init inputLayout" style={{ border: "1px solid black", width: "90%", flexDirection: "column", height: "12.5%", marginTop: "2%" }}>
       <div className="box-init" style={{ height: "50%", width: "100%" }}>
@@ -19,7 +22,7 @@ const SignUpInputBox: React.FC<SignUpInputBoxInterface> = ({ name, checkValue, p
         </div>
       </div>
       <div className="box-init" style={{ width: "100%", height: "50%", marginBottom: "1.25%" }}>
-        <input type={name.includes("비밀번호") ? "password" : "text"} placeholder={placeHolder} style={{ width: "90%", height: "90%", border: "none", fontSize: "18px" }} />
+        <input id={id} type={name.includes("비밀번호") ? "password" : "text"} placeholder={placeHolder} style={{ width: "90%", height: "90%", border: "none", fontSize: "18px" }} value={state[id]} onChange={(e)=>{setState({...state,[e.target.id]:e.target.value})}} />
       </div>
     </div>
   );

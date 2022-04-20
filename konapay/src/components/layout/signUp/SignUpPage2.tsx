@@ -1,11 +1,11 @@
 import "./SignUpPageLayout.css";
-import React from "react";
+import React, { useState } from "react";
 import Header from "./Header";
 import SignUpHeaderGrid1 from "./SignUpHeaderGrid1";
 import SignUpHeaderGrid2 from "./SignUpHeaderGrid2";
 import SignUpTextArea from "./SignUpTextArea";
 import SignUpCheckBox3 from "./SignUpCheckBox3";
-import { IonRouterLink } from "@ionic/react";
+import { IonItem, IonLabel, IonRadio, IonRadioGroup, IonRouterLink } from "@ionic/react";
 import { useHistory } from "react-router";
 
 const meta = document.createElement("meta");
@@ -17,8 +17,14 @@ const SignUpPage2: React.FC = () => {
   const history = useHistory()
 
   const locationFunction = () => {
-    history.push({pathname:"/signuppage3" ,state:{}})
+    history.push({pathname:"/signuppage3" ,state:userType})
   };
+
+  const [userType, setUserType] = useState("")
+
+  const onChange = (e:any) => {
+    setUserType(e.target.value)
+  }
 
   return (
     <div className="grid-init grid">
@@ -43,11 +49,24 @@ const SignUpPage2: React.FC = () => {
             paddingTop: "2.5%",
           }}
         >
-          <SignUpCheckBox3 value={1} description="일반유저"></SignUpCheckBox3>
-          <SignUpCheckBox3 value={2} description="판매자"></SignUpCheckBox3>
+          {/* <SignUpCheckBox3 value={1} description="일반유저"></SignUpCheckBox3>
+          <SignUpCheckBox3 value={2} description="판매자"></SignUpCheckBox3> */}
+          
+          <IonRadioGroup style={{ width : "90%", margin:"10% 0 0 0" }} >
+            <IonItem className="box-init" style={{marginBottom: "5%", height: "35%", border: "1px solid black"}}>
+              <IonLabel>일반유저</IonLabel>
+              <IonRadio slot="start" value="U" onClick={onChange}/>
+            </IonItem>
+
+            <IonItem className="box-init" style={{marginBottom: "5%", height: "35%", border: "1px solid black"}}>
+              <IonLabel>판매자</IonLabel>
+              <IonRadio slot="start" value="S" onClick={onChange} />
+            </IonItem>
+          </IonRadioGroup>
+
         </div>
         <div className="box-init" style={{ height: "40%", width: "100%", flexDirection: "column", justifyContent: "flex-start" }}>
-          <button className="box-init" style={{ height: "25%", width: "65%", color: "gray", border: "none" }} onClick={locationFunction}>
+          <button className="box-init" style={{ height: "25%", width: "65%", color: "gray", border: "none" }} onClick={locationFunction} disabled={userType===""}>
             다음
           </button>
         </div>

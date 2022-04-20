@@ -45,7 +45,7 @@ import { chevronBackOutline } from 'ionicons/icons';
     <IonPage className="ion-page" id="main-content">
         
 
-        <IonContent className="ion-padding">
+        <IonContent>
         <IonHeader >
         <IonToolbar >
             
