@@ -54,6 +54,7 @@ import SendKSPC from "./components/layout/SendKSPC/SendKSPC";
 import BalanceInquiry from "./components/layout/BalanceInquiry/BalanceInquiry";
 import Board from "./components/layout/Board/Board";
 import BoardWrite from "./components/layout/Board/BoardWrite";
+import BoardRead from "./components/layout/Board/BoardRead";
 import SignUpPage1 from "./components/layout/signUp/SignUpPage1";
 import SignUpPage2 from "./components/layout/signUp/SignUpPage2";
 import SignUpPage3 from "./components/layout/signUp/SignUpPage3";
@@ -121,6 +122,10 @@ const App: React.FC = () => (
         <Route exact path="/boardwrite">
           {" "}
           <BoardWrite />{" "}
+        </Route>
+        <Route exact path="/boardread">
+          {" "}
+          <BoardRead />{" "}
         </Route>
 
         <Route exact path="/payment">
