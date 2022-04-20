@@ -53,6 +53,7 @@ import Inout from "./components/layout/inout/Layout";
 import SendKSPC from "./components/layout/SendKSPC/SendKSPC";
 import BalanceInquiry from "./components/layout/BalanceInquiry/BalanceInquiry";
 import Board from "./components/layout/Board/Board";
+import BoardWrite from "./components/layout/Board/BoardWrite";
 import SignUpPage1 from "./components/layout/signUp/SignUpPage1";
 import SignUpPage2 from "./components/layout/signUp/SignUpPage2";
 import SignUpPage3 from "./components/layout/signUp/SignUpPage3";
@@ -116,6 +117,10 @@ const App: React.FC = () => (
         <Route exact path="/board">
           {" "}
           <Board />{" "}
+        </Route>
+        <Route exact path="/boardwrite">
+          {" "}
+          <BoardWrite />{" "}
         </Route>
 
         <Route exact path="/payment">

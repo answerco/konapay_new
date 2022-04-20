@@ -73,7 +73,7 @@ const Board: React.FC = () => {
         <IonContent className="ion-padding">
           <IonHeader>
             <IonItem>
-              <IonItem button onClick={() => history.goBack()}>
+              <IonItem button onClick={() => history.push({ pathname: "/" })}>
                 <IonIcon icon={chevronBack}></IonIcon>
               </IonItem>
               <IonTitle>구매내역</IonTitle>
@@ -83,6 +83,7 @@ const Board: React.FC = () => {
           <div>
             <div style={{ margin: "7% 0px", display: "flex", justifyContent: "space-between" }}>
               <div style={{ fontSize: "20px", color: "gray", fontWeight: "bold" }}>KONA PAY</div>
+              <IonButton onClick={() => history.push({ pathname: "/boardwrite" })}>글작성</IonButton>
             </div>
             <IonItem>
               <IonSegment value="favorite" color="white">
