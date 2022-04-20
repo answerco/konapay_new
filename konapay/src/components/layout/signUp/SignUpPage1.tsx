@@ -7,6 +7,8 @@ import SignUpTextArea from "./SignUpTextArea";
 import SignUpCheckBox1 from "./SignUpCheckBox1";
 import SignUpCheckBox2 from "./SignUpCheckBox2";
 import { IonApp, IonBackButton, IonButton, IonCol, IonContent, IonGrid, IonHeader, IonPage, IonRouterLink, IonRow, IonTitle, IonToolbar } from "@ionic/react";
+import { Link } from "react-router-dom";
+import { useHistory } from "react-router";
 
 const meta = document.createElement("meta");
 meta.name = "viewport";
@@ -14,9 +16,13 @@ meta.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-s
 document.getElementsByTagName("head")[0].appendChild(meta);
 
 const SignUpPage1: React.FC = () => {
+
+  const history = useHistory()
+
   const locationFunction = () => {
-    window.location.href = "/signuppage2";
+    history.push({pathname:"/signuppage2" ,state:{}})
   };
+  
   return (
     <div className="grid-init grid">
       <div className="box-init box" style={{ height: "7.5%" }}>
@@ -48,9 +54,7 @@ const SignUpPage1: React.FC = () => {
         <div className="box-init" style={{ height: "40%", width: "100%", flexDirection: "column", justifyContent: "flex-start" }}>
           <button className="box-init" style={{ height: "25%", width: "65%", color: "gray", border: "none" }} onClick={locationFunction}>
             다음
-          </button>
-          {/* <IonRouterLink href="/signuppage2">
-          </IonRouterLink> */}
+          </button> 
         </div>
       </div>
     </div>

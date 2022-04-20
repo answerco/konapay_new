@@ -6,6 +6,7 @@ import SignUpHeaderGrid1 from "./SignUpHeaderGrid1";
 import SignUpHeaderGrid2 from "./SignUpHeaderGrid2";
 import SignUpInputBox from "./SignUpInputBox";
 import { IonRouterLink } from "@ionic/react";
+import { useHistory } from "react-router";
 
 const meta = document.createElement("meta");
 meta.name = "viewport";
@@ -13,9 +14,12 @@ meta.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-s
 document.getElementsByTagName("head")[0].appendChild(meta);
 
 const SignUpPage2: React.FC = () => {
+  const history = useHistory()
+
   const locationFunction = () => {
-    return (window.location.href = "/");
+    history.push({pathname:"/signuppage3" ,state:{}})
   };
+
   return (
     <div className="grid-init grid">
       <div className="box-init box" style={{ height: "7.5%" }}>
@@ -44,7 +48,7 @@ const SignUpPage2: React.FC = () => {
           </label>
         </div>
         <div className="box-init" style={{ height: "27.5%", width: "100%", marginTop: "10%", flexDirection: "column", justifyContent: "flex-start" }}>
-          <button className="box-init" style={{ height: "25%", width: "65%", color: "gray", border: "none", fontSize: "20px" }}>
+          <button className="box-init" style={{ height: "25%", width: "65%", color: "gray", border: "none", fontSize: "20px" }} onClick={locationFunction} >
             회원가입
           </button>
         </div>
