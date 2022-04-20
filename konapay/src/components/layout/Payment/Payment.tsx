@@ -1,38 +1,6 @@
-import { 
-    IonApp, 
-    IonHeader, 
-    IonToolbar, 
-    IonTitle, 
-    IonContent, 
-    IonFooter, 
-    IonMenu,
-    IonList,
-    IonListHeader,
-    IonMenuToggle,
-    IonIcon,
-    IonLabel,
-    IonPage ,
-    IonButtons,
-    IonButton,
-    IonItem, 
-    IonItemDivider,
-    IonInput,
-    IonBackButton,
-    IonRouterLink
-} from '@ionic/react';
+import { IonApp, IonHeader, IonToolbar, IonTitle, IonContent, IonFooter, IonMenu,IonList,IonListHeader,IonMenuToggle,IonIcon,IonLabel,IonPage ,IonButtons,IonButton,IonItem, IonItemDivider,IonInput,IonBackButton,IonRouterLink} from '@ionic/react';
 
-import React from 'react';
-import Sidebar from '../../assets/img/sideMenu.png';
-import Myinfo from '../../assets/img/myInfo.png';
-import Setting from '../../assets/img/setting.png';
-import Home from '../../assets/img/home.png';
-import Banner from '../../assets/img/bannerImg.png';
-import MainCard from '../../assets/img/mainCard.png';
-import CardSelectBar from '../../assets/img/cardSelectBar.png';
-import FooterMenu_Home from '../../assets/img/footerMenu_home.png';
-import FooterMenu_Pay from '../../assets/img/footerMenu_pay.png';
-import FooterMenu_Benefit from '../../assets/img/footerMenu_benefit.png';
-
+import React, { useState } from 'react';
 
 import '@ionic/react/css/normalize.css';
 import '@ionic/react/css/structure.css';
@@ -44,21 +12,32 @@ import '@ionic/react/css/text-alignment.css';
 import '@ionic/react/css/text-transformation.css';
 import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
+import { useHistory } from "react-router";  
+import { chevronBackOutline } from 'ionicons/icons';
 
-
-
-  
-  
-  
-  
-  
   const meta = document.createElement('meta');
   meta.name = "viewport";
   meta.content = "width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover";
   document.getElementsByTagName('head')[0].appendChild(meta);
   
-  
   const Payment: React.FC = () => {
+
+    const [content, setContent] = useState({
+        product : "",
+        price : "",
+        id : ""
+    })
+
+    const onChange = (e: any) => {
+        setContent({...content,[e.target.name]: e.target.value})
+    }
+
+    const history = useHistory()
+
+    const locationFunction = () => {
+      history.push({pathname:"/payment2" ,state:content})
+    };
+
     return (
     <IonApp>
         
@@ -71,7 +50,7 @@ import '@ionic/react/css/display.css';
         <IonToolbar >
             
                 <IonButtons slot="start">
-                <IonBackButton  defaultHref= "/" />
+                        <IonBackButton  defaultHref= "/" icon={chevronBackOutline} />
                 </IonButtons>
             
 
@@ -91,15 +70,15 @@ import '@ionic/react/css/display.css';
                 </div>
                 <div style={{border:'2px solid lightgray', padding:'15px 20px', borderRadius:'10px', margin:'1.5% 0px' }}>
                     <div style={{margin:'0px 0px 10px 0px'}}>상품</div>
-                    <input style={{width:'100%', height:'30px'}} type="text"></input>
+                    <input style={{width:'100%', height:'30px'}} type="text" name="product" value={content.product} onChange={onChange} ></input>
                 </div>
                 <div style={{border:'2px solid lightgray', padding:'15px 20px', borderRadius:'10px', margin:'1.5% 0px' }}>
                     <div style={{margin:'0px 0px 10px 0px'}}>가격</div>
-                    <input style={{width:'100%', height:'30px'}} type="text"></input>
+                    <input style={{width:'100%', height:'30px'}} type="number" name="price" value={content.price} onChange={onChange}></input>
                 </div>
                 <div style={{border:'2px solid lightgray', padding:'15px 20px', borderRadius:'10px', margin:'1.5% 0px' }}>
                     <div style={{margin:'0px 0px 10px 0px'}}>구매자 아이디</div>
-                    <input style={{width:'100%', height:'30px'}} type="text"></input>
+                    <input style={{width:'100%', height:'30px'}} type="text" name="id" value={content.id} onChange={onChange}></input>
                 </div>
                 <div style={{fontSize:'80%', margin:'15% 0px'}}>
                     [유의사항]
@@ -113,11 +92,9 @@ import '@ionic/react/css/display.css';
                     <br />
                     미리 이더리움을 충전해 놓으시기 바랍니다.
                 </div>
-                <IonRouterLink href="/payment2">
-                    <div style={{display:'flex', justifyContent:'center'}}>
-                        <button style={{width:'75%', fontSize:'18px', padding:'10px', borderRadius:'10px'}}>승인 요청</button>
-                    </div>
-                </IonRouterLink>
+                <div style={{display:'flex', justifyContent:'center'}}>
+                    <button style={{width:'75%', fontSize:'18px', padding:'10px', borderRadius:'10px'}} disabled={content.product==="" || content.price==="" || content.id===""} onClick={locationFunction} >승인 요청</button>
+                </div>
             </div>
         </IonContent>
 
