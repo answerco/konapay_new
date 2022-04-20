@@ -31,7 +31,7 @@ const SignUpPage1: React.FC = () => {
   })
 
   const onChange = (e:any) => {
-    setCheck({...check,[e.target.name]:e.detail.checked})
+    setCheck({...check,[e.target.name]:e.target.checked})
   }
 
   return (
@@ -74,13 +74,13 @@ const SignUpPage1: React.FC = () => {
           {/* <SignUpCheckBox1></SignUpCheckBox1> */}
 
             <IonItem  style={{display:'flex', width: '90%', marginBottom:'3%', marginRight:'5%'}}>
-              <IonCheckbox checked={check.service && check.personal && check.alarm} onIonChange={()=>setCheck({ service: true, personal: true, alarm: true})} />
+              <IonCheckbox checked={check.service && check.personal && check.alarm} onClick={(e: any)=>setCheck({ service: e.target.checked, personal: e.target.checked, alarm: e.target.checked})}  />
               <IonLabel style={{marginLeft:'3%', fontSize: '100%'}}>모두 동의하기</IonLabel>
             </IonItem>
 
           <div style={{display:'flex', width:'100%', justifyContent:'space-around'}}>
             <IonItem className="signup_item" style={{display:'flex', width: '70%'}}>
-              <IonCheckbox name="service" checked={check.service} onIonChange={onChange} />
+              <IonCheckbox name="service" checked={check.service} onClick={onChange} />
               <IonLabel style={{marginLeft:'3%', fontSize: '85%'}}>[필수] 서비스 이용약관 동의</IonLabel>
             </IonItem>
             <a style={{ fontSize: "14px", textAlign: "center", marginRight:"5%", alignSelf:'center' }} href="http://www.naver.com" target="_blank">[상세보기]</a>
@@ -88,7 +88,7 @@ const SignUpPage1: React.FC = () => {
 
           <div style={{display:'flex', width:'100%', justifyContent:'space-around'}}>
             <IonItem className="signup_item" style={{display:'flex', width: '70%'}}>
-              <IonCheckbox name="personal" checked={check.personal} onIonChange={onChange} />
+              <IonCheckbox name="personal" checked={check.personal} onClick={onChange} />
               <IonLabel style={{marginLeft:'3%', fontSize: '85%'}}>[필수] 개인정보 수집 및 이용 동의</IonLabel>
             </IonItem>
             <a style={{ fontSize: "14px", textAlign: "center", marginRight:"5%", alignSelf:'center' }} href="http://www.naver.com" target="_blank">[상세보기]</a>
@@ -96,7 +96,7 @@ const SignUpPage1: React.FC = () => {
 
           <div style={{display:'flex', width:'100%', justifyContent:'space-around'}}>
             <IonItem className="signup_item" style={{display:'flex', width: '70%'}}>
-              <IonCheckbox name="alarm" checked={check.alarm} onIonChange={onChange} />
+              <IonCheckbox name="alarm" checked={check.alarm} onClick={onChange} />
               <IonLabel style={{marginLeft:'3%', fontSize: '85%'}}>[선택] 마케팅정보 알람 동의</IonLabel>
             </IonItem>
             <a style={{ fontSize: "14px", textAlign: "center", marginRight:"5%", alignSelf:'center' }} href="http://www.naver.com" target="_blank">[상세보기]</a>
@@ -109,7 +109,7 @@ const SignUpPage1: React.FC = () => {
           <SignUpCheckBox2 forId="checkBox3" check="선택" description="마케팅정보 알람 동의"></SignUpCheckBox2> */}
         </div>
         <div className="box-init" style={{ height: "40%", width: "100%", flexDirection: "column", justifyContent: "flex-start" }}>
-          <button className="box-init" style={{ height: "25%", width: "65%", color: "gray", border: "none" }} onClick={locationFunction}>
+          <button className="box-init" style={{ height: "25%", width: "65%", color: "gray", border: "none" }} onClick={locationFunction} disabled={!(check.service && check.personal)}>
             다음
           </button> 
         </div>
