@@ -5,7 +5,8 @@ import SignUpHeaderGrid1 from "./SignUpHeaderGrid1";
 import SignUpHeaderGrid2 from "./SignUpHeaderGrid2";
 import SignUpTextArea from "./SignUpTextArea";
 import SignUpCheckBox3 from "./SignUpCheckBox3";
-import { IonRouterLink } from "@ionic/react";
+import { IonBackButton, IonButtons, IonHeader, IonIcon, IonItem, IonRouterLink, IonTitle, IonToolbar } from "@ionic/react";
+import { chevronBack } from "ionicons/icons";
 import { useHistory } from "react-router";
 
 const meta = document.createElement("meta");
@@ -14,20 +15,24 @@ meta.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-s
 document.getElementsByTagName("head")[0].appendChild(meta);
 
 const SignUpPage2: React.FC = () => {
-  const history = useHistory()
+  const history = useHistory();
 
-  const locationFunction = () => {
-    history.push({pathname:"/signuppage3" ,state:{}})
+  const prevHistoryFunction = () => {
+    history.push({ pathname: "/signuppage3", state: {} });
   };
-
   return (
     <div className="grid-init grid">
-      <div className="box-init box" style={{ height: "7.5%" }}>
-        <Header name="회원가입"></Header>
-      </div>
+      <IonHeader>
+        <IonItem>
+          <IonItem button onClick={() => history.goBack()}>
+            <IonIcon icon={chevronBack}></IonIcon>
+          </IonItem>
+          <IonTitle>회원가입</IonTitle>
+        </IonItem>
+      </IonHeader>
       <div className="box-init box" style={{ height: "7.5%" }}>
         <SignUpHeaderGrid1></SignUpHeaderGrid1>
-        <SignUpHeaderGrid2></SignUpHeaderGrid2>
+        <SignUpHeaderGrid2 tag={"● ○ ●"}></SignUpHeaderGrid2>
       </div>
       <div className="box-init" style={{ height: "30%" }}>
         <SignUpTextArea></SignUpTextArea>
@@ -47,7 +52,7 @@ const SignUpPage2: React.FC = () => {
           <SignUpCheckBox3 value={2} description="판매자"></SignUpCheckBox3>
         </div>
         <div className="box-init" style={{ height: "40%", width: "100%", flexDirection: "column", justifyContent: "flex-start" }}>
-          <button className="box-init" style={{ height: "25%", width: "65%", color: "gray", border: "none" }} onClick={locationFunction}>
+          <button className="box-init" style={{ height: "25%", width: "65%", color: "gray", border: "none" }} onClick={prevHistoryFunction}>
             다음
           </button>
         </div>

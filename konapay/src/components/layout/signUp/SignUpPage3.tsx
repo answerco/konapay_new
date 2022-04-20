@@ -5,8 +5,9 @@ import Header from "./Header";
 import SignUpHeaderGrid1 from "./SignUpHeaderGrid1";
 import SignUpHeaderGrid2 from "./SignUpHeaderGrid2";
 import SignUpInputBox from "./SignUpInputBox";
-import { IonRouterLink } from "@ionic/react";
+import { IonBackButton, IonButtons, IonHeader, IonIcon, IonItem, IonRouterLink, IonTitle, IonToolbar } from "@ionic/react";
 import { useHistory } from "react-router";
+import { chevronBack } from "ionicons/icons";
 
 const meta = document.createElement("meta");
 meta.name = "viewport";
@@ -14,20 +15,29 @@ meta.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-s
 document.getElementsByTagName("head")[0].appendChild(meta);
 
 const SignUpPage2: React.FC = () => {
-  const history = useHistory()
+  const history = useHistory();
 
-  const locationFunction = () => {
-    history.push({pathname:"/signuppage3" ,state:{}})
+  const sendSignUpFunction = () => {
+    history.push({ pathname: "/", state: {} });
   };
-
   return (
     <div className="grid-init grid">
-      <div className="box-init box" style={{ height: "7.5%" }}>
-        <Header name="회원가입"></Header>
-      </div>
+      <IonHeader>
+        <IonItem>
+          <IonItem button onClick={() => history.goBack()}>
+            <IonIcon icon={chevronBack}></IonIcon>
+          </IonItem>
+          <IonTitle>회원가입</IonTitle>
+        </IonItem>
+        {/* <IonToolbar>
+          <IonButtons slot="start">
+            <IonBackButton defaultHref="/" icon={chevronBack} />
+          </IonButtons>
+        </IonToolbar> */}
+      </IonHeader>
       <div className="box-init box" style={{ height: "7.5%" }}>
         <SignUpHeaderGrid1></SignUpHeaderGrid1>
-        <SignUpHeaderGrid2></SignUpHeaderGrid2>
+        <SignUpHeaderGrid2 tag={"● ● ○"}></SignUpHeaderGrid2>
       </div>
       <div className="box-init box" style={{ height: "85%", flexDirection: "column", justifyContent: "start" }}>
         <SignUpInputBox name="아이디" checkValue={true} placeHolder="3-15 영문/숫자조합으로 입력"></SignUpInputBox>
@@ -48,7 +58,7 @@ const SignUpPage2: React.FC = () => {
           </label>
         </div>
         <div className="box-init" style={{ height: "27.5%", width: "100%", marginTop: "10%", flexDirection: "column", justifyContent: "flex-start" }}>
-          <button className="box-init" style={{ height: "25%", width: "65%", color: "gray", border: "none", fontSize: "20px" }} onClick={locationFunction} >
+          <button className="box-init" style={{ height: "25%", width: "65%", color: "gray", border: "none", fontSize: "20px" }} onClick={sendSignUpFunction}>
             회원가입
           </button>
         </div>

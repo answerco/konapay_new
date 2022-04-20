@@ -1,24 +1,36 @@
-import { IonIcon, IonButton, IonRouterLink } from "@ionic/react";
-import { addOutline, searchOutline, statsChartOutline } from "ionicons/icons";
+import { IonIcon, IonRouterLink, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonRow, IonItem } from "@ionic/react";
+import { addOutline, chevronBack, searchOutline, statsChartOutline } from "ionicons/icons";
 import "./Layout.css";
 import React from "react";
-import Header from "./Header";
+import { useHistory } from "react-router";
 
 const meta = document.createElement("meta");
 meta.name = "viewport";
 meta.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover";
 document.getElementsByTagName("head")[0].appendChild(meta);
 
-interface ContainerProps {
-  name: string;
-}
-
 const Layout: React.FC = () => {
+  const history = useHistory();
   return (
     <div className="grid-init grid">
-      <div className="box-init box" style={{ height: "7.5%" }}>
+      <IonHeader>
+        <IonItem>
+          <IonItem button onClick={() => history.push({ pathname: "/" })}>
+            <IonIcon icon={chevronBack}></IonIcon>
+          </IonItem>
+          <IonTitle>송금</IonTitle>
+        </IonItem>
+        {/* <IonToolbar>
+          <IonButtons slot="start">
+            <IonBackButton defaultHref="/" icon={chevronBack} />
+          </IonButtons>
+          <IonTitle>송금</IonTitle>
+        </IonToolbar> */}
+      </IonHeader>
+
+      {/* <div className="box-init box" style={{ height: "7.5%" }}>
         <Header name="스왑"></Header>
-      </div>
+      </div> */}
       <div className="box-init box" style={{ height: "5%", justifyContent: "flex-start", flexDirection: "column" }}>
         <p style={{ color: "#E3E3E3", fontSize: "14px", width: "75%" }}>TOTAL PORTFOLIO VALUE</p>
       </div>
@@ -63,7 +75,7 @@ const Layout: React.FC = () => {
             </div>
           </div>
           <div className="box-init" style={{ marginTop: "5%", width: "90%", height: "40%" }}>
-            <IonRouterLink href="/sendkspc"> 
+            <IonRouterLink href="/sendkspc">
               <button style={{ width: "100%", height: "75%", borderRadius: "30px", border: "none", backgroundColor: "gray" }}>보내기</button>
             </IonRouterLink>
           </div>

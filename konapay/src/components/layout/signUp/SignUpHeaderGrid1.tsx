@@ -10,13 +10,10 @@ const SignUpHeaderGrid: React.FC = () => {
         // backgroundColor: "green",
         height: "100%",
         width: "100%",
-        backgroundImage: `url(${KonapayLogo}) `,
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "left",
-        backgroundSize: "60%",
+        color: "gray",
       }}
     >
-      {/* <img src={KonapayLogo} alt="KonapayLogo.png" style={{ height: "30%" }} /> */}
+      <p>KONA PAY</p>
     </div>
   );
 };
