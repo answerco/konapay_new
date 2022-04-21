@@ -83,7 +83,7 @@ const Board: React.FC = () => {
           <div>
             <div style={{ margin: "7% 0px", display: "flex", justifyContent: "space-between" }}>
               <div style={{ fontSize: "20px", color: "gray", fontWeight: "bold" }}>KONA PAY</div>
-              <IonButton onClick={() => history.push({ pathname: "/boardwrite" })}>글작성</IonButton>
+              <IonButton onClick={() => history.push({ pathname: "/board/write" })}>글작성</IonButton>
             </div>
             <IonItem>
               <IonSegment value="favorite" color="white">
@@ -113,7 +113,12 @@ const Board: React.FC = () => {
             <IonList>
               {data.map((item, index) => {
                 return (
-                  <IonItem key={index}>
+                  <IonItem
+                    key={index}
+                    onClick={() => {
+                      history.push({ pathname: `/board/page/${item.length}`, state: {} });
+                    }}
+                  >
                     <IonLabel>
                       <h2>잘 구매한 물건들 입니다.</h2>
                       <div>
