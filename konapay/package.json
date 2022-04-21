@@ -26,6 +26,7 @@
     "phonegap-plugin-barcodescanner": "^8.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-froala-wysiwyg": "^4.0.10",
     "react-qr-reader": "^3.0.0-beta-1",
     "react-quill": "^1.3.5",
     "react-router": "^5.2.0",
