@@ -119,11 +119,11 @@ const App: React.FC = () => (
           {" "}
           <Board />{" "}
         </Route>
-        <Route exact path="/boardwrite">
+        <Route exact path="/board/write">
           {" "}
           <BoardWrite />{" "}
         </Route>
-        <Route exact path="/boardread">
+        <Route exact path="/board/page/:params">
           {" "}
           <BoardRead />{" "}
         </Route>
