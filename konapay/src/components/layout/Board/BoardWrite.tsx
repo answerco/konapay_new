@@ -1,20 +1,4 @@
-import {
-  IonButton,
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonContent,
-  IonHeader,
-  IonIcon,
-  IonInput,
-  IonItem,
-  IonList,
-  IonPage,
-  IonSelect,
-  IonSelectOption,
-  IonTextarea,
-  IonTitle,
-} from "@ionic/react";
+import { IonButton, IonCard, IonCardContent, IonContent, IonHeader, IonIcon, IonInput, IonItem, IonList, IonPage, IonSelect, IonSelectOption, IonTextarea, IonTitle } from "@ionic/react";
 import { chevronBack, star } from "ionicons/icons";
 import React, { useState } from "react";
 import { useHistory } from "react-router";
