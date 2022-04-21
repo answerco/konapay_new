@@ -65,7 +65,6 @@ const BoardRead: React.FC = () => {
                 <IonInput value={title} readonly></IonInput>
               </IonItem>
               <IonItem>
-                {/* <IonTextarea rows={10} value={content} readonly></IonTextarea> */}
                 <IonText>{content}</IonText>
               </IonItem>
             </IonCardContent>
@@ -91,7 +90,6 @@ const BoardRead: React.FC = () => {
                   </IonRow>
                   <IonItem>
                     <IonCol>
-                      {/* <IonTextarea autoGrow value={content} readonly></IonTextarea> */}
                       <IonText>value={content}</IonText>
                     </IonCol>
                   </IonItem>
