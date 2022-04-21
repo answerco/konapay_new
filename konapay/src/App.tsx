@@ -60,6 +60,7 @@ import SignUpPage2 from "./components/layout/signUp/SignUpPage2";
 import SignUpPage3 from "./components/layout/signUp/SignUpPage3";
 import QrReaderPage from "./components/layout/QrReaderPage/QrReaderPage";
 import SwapPage from "./components/layout/swap/Layout";
+import ProductDetail from "./components/layout/ProductDetail/ProductDetail";
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
@@ -85,6 +86,10 @@ const App: React.FC = () => (
         <Route exact path="/scan">
           {" "}
           <QrReaderPage />{" "}
+        </Route>
+        <Route exact path="/detail/:productIdx">
+          {" "}
+          <ProductDetail />{" "}
         </Route>
         <Route exact path="/swap">
           {" "}
