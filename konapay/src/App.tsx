@@ -60,6 +60,7 @@ import SignUpPage2 from "./components/layout/signUp/SignUpPage2";
 import SignUpPage3 from "./components/layout/signUp/SignUpPage3";
 import QrReaderPage from "./components/layout/QrReaderPage/QrReaderPage";
 import SwapPage from "./components/layout/swap/Layout";
+import Login from "./components/layout/Login/Login";
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
@@ -67,6 +68,10 @@ const App: React.FC = () => (
         <Route exact path="/">
           {" "}
           <Main />{" "}
+        </Route>
+
+        <Route exact path="/login">
+          <Login></Login>
         </Route>
 
         <Route exact path="/signuppage1">

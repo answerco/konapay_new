@@ -25,11 +25,12 @@ const QrReaderPage: React.FC = () => {
         <QrReader
           onResult={(result, error) => {
             if (!!result) {
+              console.log(result.getText())
               setData(result?.getText());
-              setIsValidData(true);
-              setTimeout(() => {
-                setIsValidData(false);
-              }, 2000);
+              // setIsValidData(true);
+              // setTimeout(() => {
+              //   setIsValidData(false);
+              // }, 2000);
             }
 
             if (!!error) {
