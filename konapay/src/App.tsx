@@ -120,10 +120,6 @@ const App: React.FC = () => (
           {" "}
           <BalanceInquiry />{" "}
         </Route>
-        <Route exact path="/payment4">
-          {" "}
-          <Payment4 />{" "}
-        </Route>
 
         <Route exact path="/board">
           {" "}
