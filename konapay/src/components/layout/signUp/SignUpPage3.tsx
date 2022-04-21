@@ -5,7 +5,7 @@ import Header from "./Header";
 import SignUpHeaderGrid1 from "./SignUpHeaderGrid1";
 import SignUpHeaderGrid2 from "./SignUpHeaderGrid2";
 import SignUpInputBox from "./SignUpInputBox";
-import { IonBackButton, IonButtons, IonHeader, IonIcon, IonItem, IonRouterLink, IonTitle, IonToolbar } from "@ionic/react";
+import { IonBackButton, IonButtons, IonHeader, IonIcon, IonItem, IonRouterLink, IonTitle, IonToolbar, useIonAlert, IonCheckbox,IonLabel } from "@ionic/react";
 import { useHistory, useLocation } from "react-router";
 import { chevronBack } from "ionicons/icons";
 import Signup from "../../../model/user/signup";
@@ -16,8 +16,9 @@ meta.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-s
 document.getElementsByTagName("head")[0].appendChild(meta);
 
 const SignUpPage2: React.FC = () => {
-  const history = useHistory();
-  const location = useLocation();
+  const history = useHistory()
+  const location = useLocation()
+  const [paste] = useIonAlert()
 
   const [registInfo, setRegistInfo] = useState({
     uid: "",
@@ -28,6 +29,11 @@ const SignUpPage2: React.FC = () => {
     emailAlarm: 0,
     messageAlarm: 0,
   });
+
+ const [isDup, setIsDup] = useState({
+   id: false,
+   email: false
+ })
 
   const locationFunction = () => {
     history.push({ pathname: "/", state: {} });
@@ -44,9 +50,59 @@ const SignUpPage2: React.FC = () => {
   };
 
   const registButton = async () => {
-    if (registInfo.uid !== "" && registInfo.password !== "" && registInfo.name !== "" && registInfo.email !== "" && location.state !== undefined) {
-      await regist();
-      // locationFunction()
+    try{
+      let regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+      if(registInfo.uid === ""){
+        throw '아이디를 입력해주세요'
+      }
+      else if(!isDup.id){
+        throw '이미 사용중인 아이디입니다.'
+      }
+      else if(registInfo.password === ""){
+        throw '비밀번호를 입력해주세요'
+      }
+      else if(registInfo.password !== registInfo.passwordCheck){
+        throw '비밀번호가 다릅니다.'
+      }
+      else if(registInfo.name === "" ){
+        throw '이름을 입력해주세요'
+      }
+      else if(!regEmail.test(registInfo.email)){
+        throw '이메일을 입력해주세요'
+      }
+      else if(!isDup.email){
+        throw '이미 가입된 이메일입니다.'
+      }
+      else if(location.state === undefined){
+        paste('페이지가 만료되었습니다.')
+        locationFunction()
+      }
+      else{
+        await regist()
+        locationFunction()
+      }
+    }
+    catch(err){
+      paste(err as "")
+    }
+  }
+
+  const checkIsDup = async (part: string) => {
+    let res = await Signup[part as "uid"](registInfo[part as "uid"])
+    let text 
+    if(part === "uid"){
+      text = "아이디"
+    }
+    else {
+      text = "이메일"
+    }
+    if(res){
+      setIsDup({...isDup,[part]:true})
+      paste(`사용가능한 ${text}입니다.`)
+    }
+    else{
+      setIsDup({...isDup,[part]:false})
+      paste(`이미 사용중인 ${text}입니다.`)
     }
   };
 
@@ -70,23 +126,36 @@ const SignUpPage2: React.FC = () => {
         <SignUpHeaderGrid2 tag={"● ● ○"}></SignUpHeaderGrid2>
       </div>
       <div className="box-init box" style={{ height: "85%", flexDirection: "column", justifyContent: "start" }}>
-        <SignUpInputBox id="uid" name="아이디" checkValue={true} placeHolder="3-15 영문/숫자조합으로 입력" state={registInfo} setState={setRegistInfo}></SignUpInputBox>
-        <SignUpInputBox id="password" name="비밀번호" checkValue={false} placeHolder="3-15 영문/숫자조합으로 입력" state={registInfo} setState={setRegistInfo}></SignUpInputBox>
-        <SignUpInputBox id="passwordCheck" name="비밀번호확인" checkValue={false} placeHolder="" state={registInfo} setState={setRegistInfo}></SignUpInputBox>
-        <SignUpInputBox id="name" name="이름" checkValue={false} placeHolder="한글15자, 영어 30자 까지 가능" state={registInfo} setState={setRegistInfo}></SignUpInputBox>
-        <SignUpInputBox id="email" name="이메일" checkValue={true} placeHolder="" state={registInfo} setState={setRegistInfo}></SignUpInputBox>
-        <div className="box-init" style={{ height: "5%", width: "90%", marginTop: "2%", justifyContent: "flex-start" }}>
-          <input type="checkbox" name="" id="checkBox1" style={{ marginLeft: "1.25%" }} />
+        <SignUpInputBox id="uid" name="아이디" checkValue={true} placeHolder="3-15 영문/숫자조합으로 입력"  state={registInfo} setState={setRegistInfo} checkIsDup = {checkIsDup} ></SignUpInputBox>
+        <SignUpInputBox id="password" name="비밀번호" checkValue={false} placeHolder="3-15 영문/숫자조합으로 입력" state={registInfo} setState={setRegistInfo} ></SignUpInputBox>
+        <SignUpInputBox id="passwordCheck" name="비밀번호 확인" checkValue={false} placeHolder="" state={registInfo} setState={setRegistInfo} ></SignUpInputBox>
+        <SignUpInputBox id="name" name="이름" checkValue={false} placeHolder="한글15자, 영어 30자 까지 가능" state={registInfo} setState={setRegistInfo} ></SignUpInputBox>
+        <SignUpInputBox id="email" name="이메일" checkValue={true} placeHolder="" state={registInfo} setState={setRegistInfo} checkIsDup = {checkIsDup} ></SignUpInputBox>
+
+        <div className="box-init" style={{ height: "5%", width: "100%", marginTop: "5%", justifyContent: "flex-start" }}>
+          <IonItem className="signup_item" style={{display:'flex', width: "100%"}}>
+            <IonCheckbox name="personal" checked={!!registInfo.emailAlarm} onClick={()=>{setRegistInfo({...registInfo,emailAlarm:(registInfo.emailAlarm+1)%2})}} />
+            <IonLabel style={{marginLeft:'1%', fontSize: '65%'}}>쿠폰/이벤트/혜택 발생 시 이메일로 알림받기(선택)</IonLabel>
+          </IonItem>
+          {/* <input type="checkbox" name="" id="checkBox1" style={{ marginLeft: "1.25%" }} />
           <label htmlFor="checkBox1" style={{ color: "black", fontSize: "12px", marginLeft: "2.5%" }}>
             쿠폰/이벤트/혜택 발생 시 이메일로 알림받기(선택)
-          </label>
+          </label> */}
         </div>
-        <div className="box-init" style={{ height: "5%", width: "90%", marginTop: "2%", justifyContent: "flex-start" }}>
-          <input type="checkbox" name="" id="checkBox2" style={{ marginLeft: "1.25%" }} />
+
+        <div className="box-init" style={{ height: "5%", width: "100%", marginTop: "2%", justifyContent: "flex-start" }}>
+          <IonItem className="signup_item" style={{display:'flex', width: "100%"}}>
+            <IonCheckbox name="personal" checked={!!registInfo.messageAlarm} onClick={()=>{setRegistInfo({...registInfo,messageAlarm:(registInfo.messageAlarm+1)%2})}} />
+            <IonLabel style={{marginLeft:'1%', fontSize: '65%'}}>쿠폰/이벤트/혜택 발생 시 카카오톡/문자로 알림받기(선택)</IonLabel>
+          </IonItem>
+          {/* <input type="checkbox" name="" id="checkBox2" style={{ marginLeft: "1.25%" }} />
           <label htmlFor="checkBox2" style={{ color: "black", fontSize: "12px", marginLeft: "2.5%" }}>
             쿠폰/이벤트/혜택 발생 시 카카오톡/문자로 알림받기(선택)
-          </label>
+          </label> */}
         </div>
+        
+        {/* <div className="box-init" style={{ height: "27.5%", width: "100%", marginTop: "5%", flexDirection: "column", justifyContent: "flex-start" }}>
+          <button className="box-init" style={{ height: "50%", width: "65%", color: "gray", border: "none", fontSize: "20px" }} onClick={registButton} > */}
         <div className="box-init" style={{ height: "27.5%", width: "100%", marginTop: "10%", flexDirection: "column", justifyContent: "flex-start" }}>
           <button className="box-init" style={{ height: "25%", width: "65%", color: "gray", border: "none", fontSize: "20px" }} onClick={registButton}>
             회원가입
