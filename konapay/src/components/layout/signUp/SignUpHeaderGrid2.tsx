@@ -1,18 +1,22 @@
 // import "./Layout.css";
-import { url } from "inspector";
+
 import React from "react";
-import KonapayLogo from "../../assets/img/KonapayLogo.png";
-const SignUpHeaderGrid: React.FC = () => {
+
+interface SignUpHeaderGirdInterface {
+  tag: string | null;
+}
+const SignUpHeaderGrid: React.FC<SignUpHeaderGirdInterface> = ({ tag }) => {
   return (
     <div
       style={{
         marginRight: "5%",
-        backgroundColor: "green",
         height: "100%",
         width: "90%",
+        color: "gray",
+        textAlign: "right",
       }}
     >
-      {/* <img src={KonapayLogo} alt="KonapayLogo.png" style={{ height: "30%" }} /> */}
+      <p>{tag}</p>
     </div>
   );
 };
