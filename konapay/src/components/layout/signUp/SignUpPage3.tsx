@@ -5,8 +5,9 @@ import Header from "./Header";
 import SignUpHeaderGrid1 from "./SignUpHeaderGrid1";
 import SignUpHeaderGrid2 from "./SignUpHeaderGrid2";
 import SignUpInputBox from "./SignUpInputBox";
-import { IonCheckbox, IonItem, IonLabel, IonRouterLink, useIonAlert } from "@ionic/react";
+import { IonBackButton, IonButtons, IonHeader, IonIcon, IonItem, IonRouterLink, IonTitle, IonToolbar, useIonAlert, IonCheckbox,IonLabel } from "@ionic/react";
 import { useHistory, useLocation } from "react-router";
+import { chevronBack } from "ionicons/icons";
 import Signup from "../../../model/user/signup";
 
 const meta = document.createElement("meta");
@@ -20,14 +21,14 @@ const SignUpPage2: React.FC = () => {
   const [paste] = useIonAlert()
 
   const [registInfo, setRegistInfo] = useState({
-    uid : ""
-   ,password : ""
-   ,passwordCheck : ""
-   ,name : ""
-   ,email : ""
-   ,emailAlarm : 0
-   ,messageAlarm : 0
- })
+    uid: "",
+    password: "",
+    passwordCheck: "",
+    name: "",
+    email: "",
+    emailAlarm: 0,
+    messageAlarm: 0,
+  });
 
  const [isDup, setIsDup] = useState({
    id: false,
@@ -35,19 +36,18 @@ const SignUpPage2: React.FC = () => {
  })
 
   const locationFunction = () => {
-    history.push({pathname:"/" ,state:{}})
+    history.push({ pathname: "/", state: {} });
   };
 
   const regist = async () => {
-    try{
-      let {uid, password, name, email, emailAlarm, messageAlarm} = registInfo
-      let userType = location.state
-      await Signup.signup(uid, password, name, email, userType as "")
+    try {
+      let { uid, password, name, email, emailAlarm, messageAlarm } = registInfo;
+      let userType = location.state;
+      Signup.signup(uid, password, name, email, userType as "");
+    } catch (err) {
+      console.log(err);
     }
-    catch(err){
-      console.log(err)
-    } 
-  }
+  };
 
   const registButton = async () => {
     try{
@@ -104,16 +104,26 @@ const SignUpPage2: React.FC = () => {
       setIsDup({...isDup,[part]:false})
       paste(`이미 사용중인 ${text}입니다.`)
     }
-  }
+  };
 
   return (
     <div className="grid-init grid">
-      <div className="box-init box" style={{ height: "7.5%" }}>
-        <Header name="회원가입"></Header>
-      </div>
+      <IonHeader>
+        <IonItem>
+          <IonItem button onClick={() => history.goBack()}>
+            <IonIcon icon={chevronBack}></IonIcon>
+          </IonItem>
+          <IonTitle>회원가입</IonTitle>
+        </IonItem>
+        {/* <IonToolbar>
+          <IonButtons slot="start">
+            <IonBackButton defaultHref="/" icon={chevronBack} />
+          </IonButtons>
+        </IonToolbar> */}
+      </IonHeader>
       <div className="box-init box" style={{ height: "7.5%" }}>
         <SignUpHeaderGrid1></SignUpHeaderGrid1>
-        <SignUpHeaderGrid2></SignUpHeaderGrid2>
+        <SignUpHeaderGrid2 tag={"● ● ○"}></SignUpHeaderGrid2>
       </div>
       <div className="box-init box" style={{ height: "85%", flexDirection: "column", justifyContent: "start" }}>
         <SignUpInputBox id="uid" name="아이디" checkValue={true} placeHolder="3-15 영문/숫자조합으로 입력"  state={registInfo} setState={setRegistInfo} checkIsDup = {checkIsDup} ></SignUpInputBox>
@@ -144,8 +154,10 @@ const SignUpPage2: React.FC = () => {
           </label> */}
         </div>
         
-        <div className="box-init" style={{ height: "27.5%", width: "100%", marginTop: "5%", flexDirection: "column", justifyContent: "flex-start" }}>
-          <button className="box-init" style={{ height: "50%", width: "65%", color: "gray", border: "none", fontSize: "20px" }} onClick={registButton} >
+        {/* <div className="box-init" style={{ height: "27.5%", width: "100%", marginTop: "5%", flexDirection: "column", justifyContent: "flex-start" }}>
+          <button className="box-init" style={{ height: "50%", width: "65%", color: "gray", border: "none", fontSize: "20px" }} onClick={registButton} > */}
+        <div className="box-init" style={{ height: "27.5%", width: "100%", marginTop: "10%", flexDirection: "column", justifyContent: "flex-start" }}>
+          <button className="box-init" style={{ height: "25%", width: "65%", color: "gray", border: "none", fontSize: "20px" }} onClick={registButton}>
             회원가입
           </button>
         </div>
