@@ -88,8 +88,14 @@ const SignUpPage2: React.FC = () => {
         locationFunction()
       }
       else{
-        await regist()
-        locationHome()
+        let res = await regist()
+        if(!!res){
+          const link = document.createElement('a');
+          link.href = "/"
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+        }
       }
     }
     catch(err){
@@ -126,8 +132,8 @@ const SignUpPage2: React.FC = () => {
 
   return (
     <IonApp>
-      <IonPage>
-        <IonContent>
+      <IonPage >
+        <IonContent >
           <div className="grid-init grid">
             <IonHeader>
               <IonItem>
@@ -142,18 +148,18 @@ const SignUpPage2: React.FC = () => {
                 </IonButtons>
               </IonToolbar> */}
             </IonHeader>
-            <div className="box-init box" style={{ height: "7.5%" }}>
+            <div className="box-init box" style={{ margin:'-3% 0' }}>
               <SignUpHeaderGrid1></SignUpHeaderGrid1>
               <SignUpHeaderGrid2 tag={"● ● ○"}></SignUpHeaderGrid2>
             </div>
-            <div className="box-init box" style={{ height: "85%", flexDirection: "column", justifyContent: "start" }}>
+            <div className="box-init box" style={{ flexDirection: "column", justifyContent: "start" }}>
               <SignUpInputBox id="uid" name="아이디" checkValue={true} placeHolder="3-15 영문/숫자조합으로 입력"  state={registInfo} setState={setRegistInfo} checkIsDup = {checkIsDup} isDup = {isDup} ></SignUpInputBox>
               <SignUpInputBox id="password" name="비밀번호" checkValue={false} placeHolder="3-15 영문/숫자조합으로 입력" state={registInfo} setState={setRegistInfo} ></SignUpInputBox>
               <SignUpInputBox id="passwordCheck" name="비밀번호 확인" checkValue={false} placeHolder="" state={registInfo} setState={setRegistInfo} ></SignUpInputBox>
               <SignUpInputBox id="name" name="이름" checkValue={false} placeHolder="한글15자, 영어 30자 까지 가능" state={registInfo} setState={setRegistInfo} ></SignUpInputBox>
               <SignUpInputBox id="email" name="이메일" checkValue={true} placeHolder="" state={registInfo} setState={setRegistInfo} checkIsDup = {checkIsDup} isDup = {isDup} ></SignUpInputBox>
             
-              <div className="box-init" style={{ height: "5%", width: "100%", marginTop: "5%", justifyContent: "flex-start" }}>
+              <div className="box-init" style={{display:"flex", height: "5%", width: "100%", marginTop: "5%", justifyContent: "flex-start" }}>
                 <IonItem className="signup_item" style={{display:'flex', width: "100%"}}>
                   <IonCheckbox name="personal" checked={!!registInfo.emailAlarm} onClick={()=>{setRegistInfo({...registInfo,emailAlarm:(registInfo.emailAlarm+1)%2})}} />
                   <IonLabel style={{marginLeft:'1%', fontSize: '65%'}}>쿠폰/이벤트/혜택 발생 시 이메일로 알림받기(선택)</IonLabel>
@@ -164,7 +170,7 @@ const SignUpPage2: React.FC = () => {
                 </label> */}
               </div>
               
-              <div className="box-init" style={{ height: "5%", width: "100%", marginTop: "2%", justifyContent: "flex-start" }}>
+              <div className="box-init" style={{display:"flex", height: "5%", width: "100%", marginTop: "2%", justifyContent: "flex-start" }}>
                 <IonItem className="signup_item" style={{display:'flex', width: "100%"}}>
                   <IonCheckbox name="personal" checked={!!registInfo.messageAlarm} onClick={()=>{setRegistInfo({...registInfo,messageAlarm:(registInfo.messageAlarm+1)%2})}} />
                   <IonLabel style={{marginLeft:'1%', fontSize: '65%'}}>쿠폰/이벤트/혜택 발생 시 카카오톡/문자로 알림받기(선택)</IonLabel>
@@ -175,7 +181,7 @@ const SignUpPage2: React.FC = () => {
                 </label> */}
               </div>
               
-              <div className="box-init" style={{ height: "27.5%", width: "100%", marginTop: "5%", flexDirection: "column", justifyContent: "flex-start" }}>
+              <div className="box-init" style={{display:"flex", height: "70px", width: "100%", marginTop: "5%", flexDirection: "column", justifyContent: "flex-start" }}>
                 <button className="box-init" style={{ height: "50%", width: "65%", color: "gray", border: "none", fontSize: "20px" }} onClick={registButton} >
               {/* <div className="box-init" style={{ height: "27.5%", width: "100%", marginTop: "10%", flexDirection: "column", justifyContent: "flex-start" }}>
                 <button className="box-init" style={{ height: "25%", width: "65%", color: "gray", border: "none", fontSize: "20px" }} onClick={registButton}> */}
@@ -184,7 +190,7 @@ const SignUpPage2: React.FC = () => {
               </div>
             </div>
           </div>
-        </IonContent>
+       </IonContent>
       </IonPage>
     </IonApp>
   );
