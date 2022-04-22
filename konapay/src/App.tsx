@@ -59,6 +59,8 @@ import Board from './components/layout/Board/Board';
 import SignUpPage1 from './components/layout/signUp/SignUpPage1';
 import SignUpPage2 from './components/layout/signUp/SignUpPage2';
 import SignUpPage3 from './components/layout/signUp/SignUpPage3';
+import PurchaseList from './components/layout/TradeList/PurchaseList';
+import SellList from './components/layout/TradeList/SellList';
 
 const App: React.FC = () => (
 	<IonApp>
@@ -87,6 +89,8 @@ const App: React.FC = () => (
         <Route exact path="/payment2"> <Payment2 /> </Route>
         <Route exact path="/payment3"> <Payment3 /> </Route>
         <Route exact path="/payment4"> <Payment4 /> </Route>
+        <Route exact path="/PurchaseList"><PurchaseList/></Route>
+        <Route exact path="/SellList"><SellList/></Route>
 			</IonRouterOutlet>
 		</IonReactRouter>
 	</IonApp>

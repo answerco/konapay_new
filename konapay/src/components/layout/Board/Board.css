@@ -8,3 +8,8 @@
 .balance::part(indicator) {
     border-bottom: 3px solid lightgray;
 }
+
+.showComment{
+    color: white;
+    --border-color : white;
+}

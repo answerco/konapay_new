@@ -122,13 +122,13 @@ import './Board.css'
                 </div>
                 <IonItem>
                     <IonSegment value="favorite" color='white'>
-                        <IonSegmentButton value="call" className='balance'>
+                        <IonSegmentButton value="call" >
                             <IonLabel>공지사항</IonLabel>
                         </IonSegmentButton>
-                        <IonSegmentButton value="favorite" className='balance'>
+                        <IonSegmentButton value="favorite" >
                             <IonLabel>이벤트</IonLabel>
                         </IonSegmentButton>
-                        <IonSegmentButton value="map" className='balance'>
+                        <IonSegmentButton value="map" >
                             <IonLabel>커뮤니티</IonLabel>
                         </IonSegmentButton>
                     </IonSegment>
@@ -136,7 +136,7 @@ import './Board.css'
                 
                 <IonItem>
                     <IonSegment className='balance' value="favorite" color='white'>
-                        <IonSegmentButton value="call">
+                        <IonSegmentButton value="call" >
                             <IonLabel>인기</IonLabel>
                         </IonSegmentButton>
                         <IonSegmentButton value="favorite">
@@ -160,7 +160,7 @@ import './Board.css'
                         <IonThumbnail>
                             <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" />
                         </IonThumbnail>
-                        <IonButton slot="end">32<br/>댓글</IonButton>
+                        <IonButton style={{height:'80%', width:'15%' }} className="showComment" slot="end">32<br/>댓글</IonButton>
                       </IonItem>
                     )
                   })}
