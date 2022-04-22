@@ -62,6 +62,8 @@ import QrReaderPage from "./components/layout/QrReaderPage/QrReaderPage";
 import SwapPage from "./components/layout/swap/Layout";
 import ProductDetail from "./components/layout/ProductDetail/ProductDetail";
 import Login from "./components/layout/Login/Login";
+import SellerList from "./components/layout/List/SellerList";
+import BuyerList from "./components/layout/List/BuyerList";
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
@@ -149,6 +151,15 @@ const App: React.FC = () => (
         <Route exact path="/payment4">
           {" "}
           <Payment4 />{" "}
+        </Route>
+
+        <Route exact path="/list/sell">
+          {" "}
+          <SellerList />{" "}
+        </Route>
+        <Route exact path="/list/buy">
+          {" "}
+          <BuyerList />{" "}
         </Route>
       </IonRouterOutlet>
     </IonReactRouter>
