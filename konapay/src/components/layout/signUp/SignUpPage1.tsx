@@ -6,25 +6,7 @@ import SignUpHeaderGrid2 from "./SignUpHeaderGrid2";
 import SignUpTextArea from "./SignUpTextArea";
 import SignUpCheckBox1 from "./SignUpCheckBox1";
 import SignUpCheckBox2 from "./SignUpCheckBox2";
-import {
-  IonApp,
-  IonBackButton,
-  IonButton,
-  IonButtons,
-  IonCheckbox,
-  IonCol,
-  IonContent,
-  IonGrid,
-  IonHeader,
-  IonIcon,
-  IonItem,
-  IonLabel,
-  IonPage,
-  IonRouterLink,
-  IonRow,
-  IonTitle,
-  IonToolbar,
-} from "@ionic/react";
+import {IonApp,IonBackButton,IonButton,IonButtons,IonCheckbox,IonCol,IonContent,IonGrid,IonHeader,IonIcon,IonItem,IonLabel,IonPage,IonRouterLink,IonRow,IonTitle,IonToolbar,} from "@ionic/react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 import { chevronBack, chevronBackOutline } from "ionicons/icons";
@@ -49,14 +31,23 @@ const SignUpPage1: React.FC = () => {
   const onChange = (e: any) => {
     setCheck({ ...check, [e.target.name]: e.target.checked });
   };
+
+  const back = () => {
+    const link = document.createElement('a');
+          link.href = "/"
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+  }
+
   return (
     <IonApp>
-      <IonPage>
-        <IonContent>
+      <IonPage >
+        <IonContent >
           <div className="grid-init grid">
             <IonHeader>
               <IonItem>
-                <IonItem button onClick={() => history.push({ pathname: "/" })}>
+                <IonItem button onClick={back}>
                   <IonIcon icon={chevronBack}></IonIcon>
                 </IonItem>
                 <IonTitle>회원가입</IonTitle>
@@ -130,7 +121,7 @@ const SignUpPage1: React.FC = () => {
                 </IonRouterLink> */}
               </div>
             </div>
-          </div>     
+          </div>
         </IonContent>
       </IonPage>
     </IonApp>
