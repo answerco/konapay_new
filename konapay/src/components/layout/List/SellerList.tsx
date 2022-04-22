@@ -3,7 +3,6 @@ import {
   IonCard,
   IonCardContent,
   IonCardHeader,
-  IonCardTitle,
   IonCol,
   IonContent,
   IonGrid,
@@ -20,7 +19,6 @@ import {
   IonText,
   IonTitle,
   IonToolbar,
-  useIonAlert,
   useIonViewWillEnter,
 } from "@ionic/react";
 import { chevronBack, closeCircle, closeOutline, closeSharp, flag, qrCodeOutline } from "ionicons/icons";
