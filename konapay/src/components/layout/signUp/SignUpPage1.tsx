@@ -50,84 +50,90 @@ const SignUpPage1: React.FC = () => {
     setCheck({ ...check, [e.target.name]: e.target.checked });
   };
   return (
-    <div className="grid-init grid">
-      <IonHeader>
-        <IonItem>
-          <IonItem button onClick={() => history.push({ pathname: "/" })}>
-            <IonIcon icon={chevronBack}></IonIcon>
-          </IonItem>
-          <IonTitle>회원가입</IonTitle>
-        </IonItem>
-      </IonHeader>
-      <div className="box-init box" style={{ height: "7.5%" }}>
-        <SignUpHeaderGrid1></SignUpHeaderGrid1>
-        <SignUpHeaderGrid2 tag={"○ ● ●"}></SignUpHeaderGrid2>
-      </div>
-      <div className="box-init" style={{ height: "30%" }}>
-        <SignUpTextArea></SignUpTextArea>
-      </div>
-      <div className="box-init box" style={{ height: "55%", flexDirection: "column" }}>
-        <div
-          className="box-init"
-          style={{
-            width: "100%",
-
-            flexDirection: "column",
-            justifyContent: "flex-start",
-            height: "70%",
-          }}
-        >
-          {/* <SignUpCheckBox1></SignUpCheckBox1> */}
-
-          <IonItem style={{ display: "flex", width: "90%", marginBottom: "3%", marginRight: "5%" }}>
-            <IonCheckbox checked={check.service && check.personal && check.alarm} onClick={(e: any) => setCheck({ service: e.target.checked, personal: e.target.checked, alarm: e.target.checked })} />
-            <IonLabel style={{ marginLeft: "3%", fontSize: "100%" }}>모두 동의하기</IonLabel>
-          </IonItem>
-
-          <div style={{ display: "flex", width: "100%", justifyContent: "space-around" }}>
-            <IonItem className="signup_item" style={{ display: "flex", width: "70%" }}>
-              <IonCheckbox name="service" checked={check.service} onClick={onChange} />
-              <IonLabel style={{ marginLeft: "3%", fontSize: "85%" }}>[필수] 서비스 이용약관 동의</IonLabel>
-            </IonItem>
-            <a style={{ fontSize: "14px", textAlign: "center", marginRight: "5%", alignSelf: "center" }} href="http://www.naver.com" target="_blank">
-              [상세보기]
-            </a>
-          </div>
-
-          <div style={{ display: "flex", width: "100%", justifyContent: "space-around" }}>
-            <IonItem className="signup_item" style={{ display: "flex", width: "70%" }}>
-              <IonCheckbox name="personal" checked={check.personal} onClick={onChange} />
-              <IonLabel style={{ marginLeft: "3%", fontSize: "85%" }}>[필수] 개인정보 수집 및 이용 동의</IonLabel>
-            </IonItem>
-            <a style={{ fontSize: "14px", textAlign: "center", marginRight: "5%", alignSelf: "center" }} href="http://www.naver.com" target="_blank">
-              [상세보기]
-            </a>
-          </div>
-
-          <div style={{ display: "flex", width: "100%", justifyContent: "space-around" }}>
-            <IonItem className="signup_item" style={{ display: "flex", width: "70%" }}>
-              <IonCheckbox name="alarm" checked={check.alarm} onClick={onChange} />
-              <IonLabel style={{ marginLeft: "3%", fontSize: "85%" }}>[선택] 마케팅정보 알람 동의</IonLabel>
-            </IonItem>
-            <a style={{ fontSize: "14px", textAlign: "center", marginRight: "5%", alignSelf: "center" }} href="http://www.naver.com" target="_blank">
-              [상세보기]
-            </a>
-          </div>
-
-          {/*           
-          <SignUpCheckBox2 forId="checkBox1" check="필수" description="서비스 이용약관 동의"></SignUpCheckBox2>
-          <SignUpCheckBox2 forId="checkBox2" check="필수" description="개인정보 수집 및 이용 동의"></SignUpCheckBox2>
-          <SignUpCheckBox2 forId="checkBox3" check="선택" description="마케팅정보 알람 동의"></SignUpCheckBox2> */}
-        </div>
-        <div className="box-init" style={{ height: "40%", width: "100%", flexDirection: "column", justifyContent: "flex-start" }}>
-          <button className="box-init" style={{ height: "25%", width: "65%", color: "gray", border: "none" }} onClick={prevHistoryFunction} disabled={!(check.service && check.personal)}>
-            다음
-          </button>
-          {/* <IonRouterLink href="/signuppage2">
-          </IonRouterLink> */}
-        </div>
-      </div>
-    </div>
+    <IonApp>
+      <IonPage>
+        <IonContent>
+          <div className="grid-init grid">
+            <IonHeader>
+              <IonItem>
+                <IonItem button onClick={() => history.push({ pathname: "/" })}>
+                  <IonIcon icon={chevronBack}></IonIcon>
+                </IonItem>
+                <IonTitle>회원가입</IonTitle>
+              </IonItem>
+            </IonHeader>
+            <div className="box-init box" style={{ height: "7.5%" }}>
+              <SignUpHeaderGrid1></SignUpHeaderGrid1>
+              <SignUpHeaderGrid2 tag={"○ ● ●"}></SignUpHeaderGrid2>
+            </div>
+            <div className="box-init" style={{ height: "30%" }}>
+              <SignUpTextArea></SignUpTextArea>
+            </div>
+            <div className="box-init box" style={{ height: "55%", flexDirection: "column" }}>
+              <div
+                className="box-init"
+                style={{
+                  width: "100%",
+                
+                  flexDirection: "column",
+                  justifyContent: "flex-start",
+                  height: "70%",
+                }}
+              >
+                {/* <SignUpCheckBox1></SignUpCheckBox1> */}
+              
+                <IonItem style={{ display: "flex", width: "90%", marginBottom: "3%", marginRight: "5%" }}>
+                  <IonCheckbox checked={check.service && check.personal && check.alarm} onClick={(e: any) => setCheck({ service: e.target.checked, personal: e.target.checked, alarm: e.target.checked })} />
+                  <IonLabel style={{ marginLeft: "3%", fontSize: "100%" }}>모두 동의하기</IonLabel>
+                </IonItem>
+              
+                <div style={{ display: "flex", width: "100%", justifyContent: "space-around" }}>
+                  <IonItem className="signup_item" style={{ display: "flex", width: "70%" }}>
+                    <IonCheckbox name="service" checked={check.service} onClick={onChange} />
+                    <IonLabel style={{ marginLeft: "3%", fontSize: "85%" }}>[필수] 서비스 이용약관 동의</IonLabel>
+                  </IonItem>
+                  <a style={{ fontSize: "14px", textAlign: "center", marginRight: "5%", alignSelf: "center" }} href="http://www.naver.com" target="_blank">
+                    [상세보기]
+                  </a>
+                </div>
+              
+                <div style={{ display: "flex", width: "100%", justifyContent: "space-around" }}>
+                  <IonItem className="signup_item" style={{ display: "flex", width: "70%" }}>
+                    <IonCheckbox name="personal" checked={check.personal} onClick={onChange} />
+                    <IonLabel style={{ marginLeft: "3%", fontSize: "85%" }}>[필수] 개인정보 수집 및 이용 동의</IonLabel>
+                  </IonItem>
+                  <a style={{ fontSize: "14px", textAlign: "center", marginRight: "5%", alignSelf: "center" }} href="http://www.naver.com" target="_blank">
+                    [상세보기]
+                  </a>
+                </div>
+              
+                <div style={{ display: "flex", width: "100%", justifyContent: "space-around" }}>
+                  <IonItem className="signup_item" style={{ display: "flex", width: "70%" }}>
+                    <IonCheckbox name="alarm" checked={check.alarm} onClick={onChange} />
+                    <IonLabel style={{ marginLeft: "3%", fontSize: "85%" }}>[선택] 마케팅정보 알람 동의</IonLabel>
+                  </IonItem>
+                  <a style={{ fontSize: "14px", textAlign: "center", marginRight: "5%", alignSelf: "center" }} href="http://www.naver.com" target="_blank">
+                    [상세보기]
+                  </a>
+                </div>
+              
+                {/*           
+                <SignUpCheckBox2 forId="checkBox1" check="필수" description="서비스 이용약관 동의"></SignUpCheckBox2>
+                <SignUpCheckBox2 forId="checkBox2" check="필수" description="개인정보 수집 및 이용 동의"></SignUpCheckBox2>
+                <SignUpCheckBox2 forId="checkBox3" check="선택" description="마케팅정보 알람 동의"></SignUpCheckBox2> */}
+              </div>
+              <div className="box-init" style={{ height: "40%", width: "100%", flexDirection: "column", justifyContent: "flex-start" }}>
+                <button className="box-init" style={{ height: "25%", width: "65%", color: "gray", border: "none" }} onClick={prevHistoryFunction} disabled={!(check.service && check.personal)}>
+                  다음
+                </button>
+                {/* <IonRouterLink href="/signuppage2">
+                </IonRouterLink> */}
+              </div>
+            </div>
+          </div>     
+        </IonContent>
+      </IonPage>
+    </IonApp>
   );
 };
 

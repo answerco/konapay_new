@@ -55,8 +55,8 @@ const Payment2: React.FC = () => {
       await registPay()
       setIsOpen(true)
     }
-    catch(err: any){
-      paste(err)
+    catch(err){
+      paste(err as any)
     }
   }
 
@@ -75,8 +75,8 @@ const Payment2: React.FC = () => {
         throw '아직 거래되지 않았습니다.'
       }
     }
-    catch(err:any){
-      paste(err)
+    catch(err){
+      paste(err as any)
     }
   }
 
