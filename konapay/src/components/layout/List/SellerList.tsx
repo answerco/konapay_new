@@ -27,6 +27,8 @@ import { useHistory } from "react-router";
 import QRCode from "react-qr-code";
 import axios from "axios";
 
+import ProductManager from "./productManager";
+
 const SellerList: React.FC = () => {
   const history = useHistory();
   const [sellData, setSellData] = useState<any>([]);
@@ -45,12 +47,7 @@ const SellerList: React.FC = () => {
     try {
       const limit = sellData.length + 20;
       const offset = limit == 0 ? 0 : limit - 20;
-      const APIURL = `${process.env.REACT_APP_SERVER}/sell/list?sellerUid=${"joy"}&status=${"S"}&limit=${limit}&offset=${offset}`;
-      console.log("APIURL : ", APIURL);
-      const axiosOption = { withCredentials: true };
-
-      const sellInformation = await axios.get(APIURL);
-      const sellItem = sellInformation.data.data.rows;
+      const sellItem = await ProductManager.getSellInformation("jos", "S", limit, offset);
       console.log("sellInformation : ", sellItem);
       setSellData([...sellData, ...sellItem]);
     } catch (error) {
@@ -63,28 +60,12 @@ const SellerList: React.FC = () => {
     const axiosFunction = async () => {
       console.log("useEffect productIdx : ", productIdx);
       try {
-        const APIURL = `${process.env.REACT_APP_SERVER}/sell/select/${productIdx}`;
-        const productInformation = await axios.get(APIURL);
-        console.log("productInformation : ", productInformation);
-        console.log("productInformation.status : ", productInformation.status);
+        const htmlMapProductInformation = await ProductManager.getList(productIdx);
 
-        if (productInformation.status === 200) {
-          const item = productInformation.data.data;
-          const itemArr = Object.entries(item);
-          console.log("item : ", item);
-          console.log("itemArr : ", itemArr);
-          item[`sellDate`] = item[`sellDate`].split("T")[0];
-          const htmlMapProductInformation = [
-            ["상품번호", item.sellIdx],
-            ["상품명", item.productName],
-            ["판매가", item.productPrice],
-            ["판매자", item.buyerUid],
-            ["구매자", item.sellerUid],
-            ["판매상태", item.sellStatus],
-            ["판매글 올린 날짜", item.sellDate],
-          ];
-          console.log("htmlMapProductInformation : ", htmlMapProductInformation);
+        if (htmlMapProductInformation != null) {
           setRowItem(htmlMapProductInformation);
+        } else {
+          throw new Error("....");
         }
       } catch (error) {
         console.log(error);

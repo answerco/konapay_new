@@ -45,7 +45,7 @@ const SignUpPage2: React.FC = () => {
               <SignUpHeaderGrid2 tag={"● ○ ●"}></SignUpHeaderGrid2>
             </div>
             <div className="box-init" style={{ height: "30%" }}>
-              <SignUpTextArea id="2"></SignUpTextArea>
+              <SignUpTextArea></SignUpTextArea>
             </div>
             <div className="box-init box" style={{ height: "55%", flexDirection: "column" }}>
               <div
@@ -66,7 +66,7 @@ const SignUpPage2: React.FC = () => {
                     <IonLabel>일반유저</IonLabel>
                     <IonRadio slot="start" value="U" onClick={onChange} />
                   </IonItem>
-              
+
                   <IonItem className="box-init" style={{ marginBottom: "5%", height: "35%", border: "1px solid black" }}>
                     <IonLabel>판매자</IonLabel>
                     <IonRadio slot="start" value="S" onClick={onChange} />
@@ -80,7 +80,7 @@ const SignUpPage2: React.FC = () => {
               </div>
             </div>
           </div>
-        </IonContent>  
+        </IonContent>
       </IonPage>
     </IonApp>
   );
