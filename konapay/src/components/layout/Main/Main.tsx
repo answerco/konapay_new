@@ -302,9 +302,9 @@ const Main: React.FC = () => {
             {/* </IonList> */}
           </IonCardContent>
 
-          <IonCardSubtitle>
+          {/* <IonCardSubtitle>
             <IonLabel className="cardSub">● ○ ○ ○</IonLabel>
-          </IonCardSubtitle>
+          </IonCardSubtitle> */}
         </IonCard>
 
         <IonButton color="medium" className="pwdBtn">

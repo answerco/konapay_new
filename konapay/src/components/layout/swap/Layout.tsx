@@ -16,7 +16,13 @@ const Layout: React.FC = () => {
 
   const getPoint =  async   () => {
     let res = await Point.view(sessionStorage.uid)
-    // setPoint(res)
+    if(res === null){
+      setPoint(0)
+    }
+    else{
+      setPoint(res)
+    }
+
   }
 
   useEffect(()=>{
