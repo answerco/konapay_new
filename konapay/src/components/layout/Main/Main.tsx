@@ -277,7 +277,7 @@ const Main: React.FC = () => {
           {/* <IonImg src={MainCard}></IonImg> */}
           <IonCardContent className="background">
             {/* <IonList> */}
-            <IonLabel className="card-text1">{viewAddress}</IonLabel>
+            <IonLabel className="card-text1">{walletAddress}</IonLabel>
             <br />
             <IonLabel className="card-text2">ETH : {ethAmount}</IonLabel>
             <br />
