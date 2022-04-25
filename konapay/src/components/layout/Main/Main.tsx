@@ -103,6 +103,7 @@ const Main: React.FC = () => {
     const setAddress = `${first}...${last}`;
     setWalletAddress(user.address);
     setViewAddress(setAddress);
+    console.log(viewAddress);
   };
   useEffect(() => {
     console.log("walletAddress1 : ", walletAddress);
@@ -277,7 +278,7 @@ const Main: React.FC = () => {
           {/* <IonImg src={MainCard}></IonImg> */}
           <IonCardContent className="background">
             {/* <IonList> */}
-            <IonLabel className="card-text1">{walletAddress}</IonLabel>
+            <IonText className="card-text1">{walletAddress}</IonText>
             <br />
             <IonLabel className="card-text2">ETH : {ethAmount}</IonLabel>
             <br />
