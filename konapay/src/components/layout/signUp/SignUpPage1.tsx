@@ -58,7 +58,7 @@ const SignUpPage1: React.FC = () => {
               <SignUpHeaderGrid2 tag={"○ ● ●"}></SignUpHeaderGrid2>
             </div>
             <div className="box-init" style={{ height: "30%" }}>
-              <SignUpTextArea></SignUpTextArea>
+              <SignUpTextArea id="1"></SignUpTextArea>
             </div>
             <div className="box-init box" style={{ height: "55%", flexDirection: "column" }}>
               <div
