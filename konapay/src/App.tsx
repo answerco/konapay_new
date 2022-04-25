@@ -62,13 +62,14 @@ import QrReaderPage from "./components/layout/QrReaderPage/QrReaderPage";
 import SwapPage from "./components/layout/swap/Layout";
 import ProductDetail from "./components/layout/ProductDetail/ProductDetail";
 import Login from "./components/layout/Login/Login";
+import SellerList from "./components/layout/List/SellerList";
+import BuyerList from "./components/layout/List/BuyerList";
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
         <Route exact path="/">
-          {" "}
-          <Main />{" "}
+          <Main />
         </Route>
 
         <Route exact path="/login">
@@ -76,83 +77,80 @@ const App: React.FC = () => (
         </Route>
 
         <Route exact path="/signuppage1">
-          {" "}
-          <SignUpPage1 />{" "}
+          <SignUpPage1 />
         </Route>
         <Route exact path="/signuppage2">
-          {" "}
-          <SignUpPage2 />{" "}
+          <SignUpPage2 />
         </Route>
         <Route exact path="/signuppage3">
-          {" "}
-          <SignUpPage3 />{" "}
+          <SignUpPage3 />
         </Route>
 
         <Route exact path="/scan">
-          {" "}
-          <QrReaderPage />{" "}
+          <QrReaderPage />
         </Route>
         <Route exact path="/detail/:productIdx">
-          {" "}
-          <ProductDetail />{" "}
+          <ProductDetail />
         </Route>
         <Route exact path="/swap">
-          {" "}
-          <SwapPage />{" "}
+          <SwapPage />
         </Route>
         {/* <Route exact path="/"> < /> </Route> */}
 
         <Route exact path="/purchasehistory">
-          {" "}
-          <PurchaseHistory />{" "}
+          <PurchaseHistory />
         </Route>
 
         <Route exact path="/inout">
-          {" "}
-          <Inout />{" "}
+          <Inout />
         </Route>
         <Route exact path="/sendkspc">
-          {" "}
-          <SendKSPC />{" "}
+          <SendKSPC />
         </Route>
 
         <Route exact path="/balanceinquiry">
-          {" "}
-          <BalanceInquiry />{" "}
-        </Route>
-        <Route exact path="/payment4">
-          {" "}
-          <Payment4 />{" "}
+          <BalanceInquiry />
         </Route>
 
         <Route exact path="/board">
-          {" "}
-          <Board />{" "}
+          <Board />
         </Route>
         <Route exact path="/board/write">
-          {" "}
-          <BoardWrite />{" "}
+          <BoardWrite />
         </Route>
         <Route exact path="/board/page/:params">
-          {" "}
-          <BoardRead />{" "}
+          <BoardRead />
         </Route>
 
         <Route exact path="/payment">
-          {" "}
-          <Payment />{" "}
+          <Payment />
         </Route>
         <Route exact path="/payment2">
-          {" "}
-          <Payment2 />{" "}
+          <Payment2 />
         </Route>
         <Route exact path="/payment3">
-          {" "}
-          <Payment3 />{" "}
+          <Payment3 />
         </Route>
         <Route exact path="/payment4">
+          <Payment4 />
+        </Route>
+
+        <Route exact path="/list/sell">
           {" "}
-          <Payment4 />{" "}
+          <SellerList />{" "}
+        </Route>
+        <Route exact path="/list/buy">
+          {" "}
+          <BuyerList />{" "}
+        </Route>
+
+        <Route exact path="/list/sell">
+          {" "}
+          <SellerList />{" "}
+        </Route>
+        <Route exact path="/list/buy">
+          {" "}
+          <BuyerList />{" "}
         </Route>
       </IonRouterOutlet>
     </IonReactRouter>

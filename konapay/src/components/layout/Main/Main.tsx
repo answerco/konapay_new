@@ -24,9 +24,10 @@ import {
   IonCardSubtitle,
   //   IonBackButton,
   IonRouterLink,
+  useIonAlert,
 } from "@ionic/react";
 
-import React from "react";
+import React, { useEffect } from "react";
 // import Sidebar from "../../assets/img/sideMenu.png";
 // import Myinfo from "../../assets/img/myInfo.png";
 // import Setting from "../../assets/img/setting.png";
@@ -67,6 +68,7 @@ import {
 } from "ionicons/icons";
 
 import "./main.css";
+import { useHistory } from "react-router";
 
 const meta = document.createElement("meta");
 meta.name = "viewport";
@@ -74,6 +76,16 @@ meta.content = "width=device-width, height=device-height, initial-scale=1.0, max
 document.getElementsByTagName("head")[0].appendChild(meta);
 
 const Main: React.FC = () => {
+
+  const [paste] = useIonAlert()
+
+  const history = useHistory()
+  useEffect(()=>{
+    if(!sessionStorage.uid){
+      history.push(`/login`)
+    }
+  },[])
+
   return (
     <IonApp>
       <IonMenu content-id="main-content">
@@ -248,7 +260,7 @@ const Main: React.FC = () => {
           <IonLabel className="scanTopay">스캔으로 결제하세요</IonLabel>
         </IonRouterLink>
 
-        <IonToolbar className="mainFooter" style={{ backgroundColor: "rgb(230, 230, 230)", height: "15%", paddingTop: "3%" }}>
+        <IonToolbar className="mainFooter" style={{ backgroundColor: "rgb(230, 230, 230)", height: "15%", paddingTop: "3%" , display: 'flex'}}>
           <IonButtons slot="start" id="home" style={{ marginLeft: "10%" }}>
             <IonMenuToggle>
               <IonButton>

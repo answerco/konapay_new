@@ -70,3 +70,6 @@ ion-menu::part(container) {
     left:28%;
 }
 
+input {
+    background-color: white;
+}
