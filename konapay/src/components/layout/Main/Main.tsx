@@ -92,6 +92,16 @@ const Main: React.FC = () => {
     }
   };
 
+  useEffect(()=>{
+    if(!sessionStorage.uid){
+      const link = document.createElement("a");
+          link.href = "/login";
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+    }
+  },[])
+
   const getWalletAddressHandler = async () => {
     const uid = sessionStorage?.uid;
     const result = await userInfo.getUser(uid);
@@ -105,13 +115,20 @@ const Main: React.FC = () => {
     setViewAddress(setAddress);
   };
   useEffect(() => {
-    console.log("walletAddress1 : ", walletAddress);
-    getWalletAddressHandler();
+    if(!!sessionStorage.uid){
+      console.log("walletAddress1 : ", walletAddress);
+      getWalletAddressHandler();
+
+    }
   }, []);
 
   useEffect(() => {
-    console.log("walletAddress2 : ", walletAddress);
-    amountHandler();
+    if(!!sessionStorage.uid){
+      console.log("walletAddress2 : ", walletAddress);
+      amountHandler();
+
+    }
+
   }, [walletAddress]);
   return (
     <IonApp>
