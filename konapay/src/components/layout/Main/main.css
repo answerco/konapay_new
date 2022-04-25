@@ -22,13 +22,21 @@ ion-card-content.background {
   object-fit: contain;
   filter: brightness(70%);
 }
-ion-label.card-text1 {
+ion-text.card-text1 {
   color: white;
   width: 65%;
   position: fixed;
   left: 30%;
   top: 30%;
 }
+
+/* ion-text.selectable {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+} */
+
 ion-label.card-text2 {
   color: white;
   width: 50%;
