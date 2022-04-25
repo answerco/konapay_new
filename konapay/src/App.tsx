@@ -69,8 +69,7 @@ const App: React.FC = () => (
     <IonReactRouter>
       <IonRouterOutlet>
         <Route exact path="/">
-          {" "}
-          <Main />{" "}
+          <Main />
         </Route>
 
         <Route exact path="/login">
@@ -78,79 +77,71 @@ const App: React.FC = () => (
         </Route>
 
         <Route exact path="/signuppage1">
-          {" "}
-          <SignUpPage1 />{" "}
+          <SignUpPage1 />
         </Route>
         <Route exact path="/signuppage2">
-          {" "}
-          <SignUpPage2 />{" "}
+          <SignUpPage2 />
         </Route>
         <Route exact path="/signuppage3">
-          {" "}
-          <SignUpPage3 />{" "}
+          <SignUpPage3 />
         </Route>
 
         <Route exact path="/scan">
-          {" "}
-          <QrReaderPage />{" "}
+          <QrReaderPage />
         </Route>
         <Route exact path="/detail/:productIdx">
-          {" "}
-          <ProductDetail />{" "}
+          <ProductDetail />
         </Route>
         <Route exact path="/swap">
-          {" "}
-          <SwapPage />{" "}
+          <SwapPage />
         </Route>
         {/* <Route exact path="/"> < /> </Route> */}
 
         <Route exact path="/purchasehistory">
-          {" "}
-          <PurchaseHistory />{" "}
+          <PurchaseHistory />
         </Route>
 
         <Route exact path="/inout">
-          {" "}
-          <Inout />{" "}
+          <Inout />
         </Route>
         <Route exact path="/sendkspc">
-          {" "}
-          <SendKSPC />{" "}
+          <SendKSPC />
         </Route>
 
         <Route exact path="/balanceinquiry">
-          {" "}
-          <BalanceInquiry />{" "}
+          <BalanceInquiry />
         </Route>
 
         <Route exact path="/board">
-          {" "}
-          <Board />{" "}
+          <Board />
         </Route>
         <Route exact path="/board/write">
-          {" "}
-          <BoardWrite />{" "}
+          <BoardWrite />
         </Route>
         <Route exact path="/board/page/:params">
-          {" "}
-          <BoardRead />{" "}
+          <BoardRead />
         </Route>
 
         <Route exact path="/payment">
-          {" "}
-          <Payment />{" "}
+          <Payment />
         </Route>
         <Route exact path="/payment2">
-          {" "}
-          <Payment2 />{" "}
+          <Payment2 />
         </Route>
         <Route exact path="/payment3">
-          {" "}
-          <Payment3 />{" "}
+          <Payment3 />
         </Route>
         <Route exact path="/payment4">
+          <Payment4 />
+        </Route>
+
+        <Route exact path="/list/sell">
           {" "}
-          <Payment4 />{" "}
+          <SellerList />{" "}
+        </Route>
+        <Route exact path="/list/buy">
+          {" "}
+          <BuyerList />{" "}
         </Route>
 
         <Route exact path="/list/sell">

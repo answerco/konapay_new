@@ -37,23 +37,28 @@ const Login: React.FC = () => {
   const history = useHistory();
 
   const prevHistoryFunction = () => {
-    history.push({ pathname: "/signuppage1", state: content });
+    history.push("/signuppage1");
   };
 
   const login = async () => {
-      try{
-        const {uid, password} = content
-        let res = await Signin.signin(uid, password)
-        sessionStorage.setItem("accessToken",res.accessToken)
-        sessionStorage.setItem("checkSum",res.checkSum)
-        sessionStorage.setItem("uid",res.uid)
-        history.push('/')
-      }
-      catch{
-          paste('아이디 혹은 패스워드가 잘못되었습니다.')
-      }
+    try{
+      const {uid, password} = content
+      let res = await Signin.signin(uid, password)
+      sessionStorage.setItem("accessToken",res.accessToken)
+      sessionStorage.setItem("checkSum",res.checkSum)
+      sessionStorage.setItem("uid",res.uid)
       
-  }
+      const link = document.createElement('a');
+      link.href = "/"
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    }
+    catch{
+        paste('아이디 혹은 패스워드가 잘못되었습니다.')
+    }
+    
+}
 
 
   return (

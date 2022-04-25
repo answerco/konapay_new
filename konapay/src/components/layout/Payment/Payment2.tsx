@@ -50,11 +50,12 @@ const Payment2: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const requirePay = async () => {
-    try {
-      await registPay();
-      setIsOpen(true);
-    } catch (err) {
-      paste(err as any);
+    try{
+      await registPay()
+      setIsOpen(true)
+    }
+    catch(err){
+      paste(err as any)
     }
   };
 
