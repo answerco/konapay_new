@@ -15,19 +15,19 @@ import {
   IonButtons,
   IonButton,
   IonItem,
-  IonImg,
+  // IonImg,
   //   IonNote,
   //   IonCardContent,
   //   IonCardTitle,
   IonCardHeader,
   IonCard,
-  IonCardSubtitle,
+  // IonCardSubtitle,
   //   IonBackButton,
   IonRouterLink,
   IonCardContent,
   IonText,
-  IonThumbnail,
-  useIonAlert,
+  // IonThumbnail,
+  // useIonAlert,
   IonAlert,
 } from "@ionic/react";
 
@@ -37,7 +37,7 @@ import React, { useEffect, useState } from "react";
 // import Setting from "../../assets/img/setting.png";
 // import Home from "../../assets/img/home.png";
 // import Banner from "../../assets/img/bannerImg.png";
-import MainCard from "../../assets/img/mainCard.png";
+// import MainCard from "../../assets/img/mainCard.png";
 // import CardSelectBar from "../../assets/img/cardSelectBar.png";
 // import FooterMenu_Home from "../../assets/img/footerMenu_home.png";
 // import FooterMenu_Pay from "../../assets/img/footerMenu_pay.png";
@@ -124,6 +124,7 @@ const Main: React.FC = () => {
       console.log("지갑주소 복사 실패");
     }
   };
+
   useEffect(() => {
     if (!sessionStorage.uid) {
       const link = document.createElement("a");
@@ -135,18 +136,19 @@ const Main: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (!!sessionStorage.uid) {
-      console.log("walletAddress1 : ", walletAddress);
+    console.log(sessionStorage.uid);
+    if (!sessionStorage.uid) {
       getWalletAddressHandler();
     }
   }, []);
 
   useEffect(() => {
-    if (!!sessionStorage.uid) {
+    if (!sessionStorage.uid) {
       console.log("walletAddress2 : ", walletAddress);
       amountHandler();
     }
   }, [walletAddress]);
+
   return (
     <IonApp>
       <IonAlert
@@ -234,14 +236,14 @@ const Main: React.FC = () => {
             </IonListHeader>
 
             <IonMenuToggle auto-hide="false">
-              <IonRouterLink href="/board">
+              <IonRouterLink href="/board?key=e">
                 <IonItem button>
                   <IonIcon src={diamondOutline} slot="start" name="home"></IonIcon>
                   <IonLabel>이벤트</IonLabel>
                 </IonItem>
               </IonRouterLink>
 
-              <IonRouterLink href="/board">
+              <IonRouterLink href="/board?key=c">
                 <IonItem button>
                   <IonIcon src={chatbubblesOutline} slot="start" name="home"></IonIcon>
                   <IonLabel>게시판</IonLabel>
