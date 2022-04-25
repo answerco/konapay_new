@@ -44,7 +44,7 @@ const QrReaderPage: React.FC = () => {
           <IonButton className="background" onClick={() => history.push({ pathname: "/" })}>
             <IonIcon icon={chevronBack}></IonIcon>
           </IonButton>
-          <IonTitle>필요할까?</IonTitle>
+          <IonTitle>결제요청</IonTitle>
         </IonItem>
       </IonHeader>
       <IonContent>
