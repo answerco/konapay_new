@@ -24,10 +24,12 @@ import {
   IonCardSubtitle,
   //   IonBackButton,
   IonRouterLink,
-  useIonAlert,
+  IonCardContent,
+  IonText,
+  IonThumbnail,
 } from "@ionic/react";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 // import Sidebar from "../../assets/img/sideMenu.png";
 // import Myinfo from "../../assets/img/myInfo.png";
 // import Setting from "../../assets/img/setting.png";
@@ -68,7 +70,7 @@ import {
 } from "ionicons/icons";
 
 import "./main.css";
-import { useHistory } from "react-router";
+import userInfo from "../../../model/user/userinfo";
 
 const meta = document.createElement("meta");
 meta.name = "viewport";
@@ -76,16 +78,41 @@ meta.content = "width=device-width, height=device-height, initial-scale=1.0, max
 document.getElementsByTagName("head")[0].appendChild(meta);
 
 const Main: React.FC = () => {
+  const [walletAddress, setWalletAddress] = useState<string>("");
+  const [viewAddress, setViewAddress] = useState<string>("");
+  const [ethAmount, setEthAmount] = useState<string>("");
+  const [kspcAmount, setKspcAmount] = useState<string>("");
 
-  const [paste] = useIonAlert()
-
-  const history = useHistory()
-  useEffect(()=>{
-    if(!sessionStorage.uid){
-      history.push(`/login`)
+  const amountHandler = async () => {
+    if (walletAddress !== "") {
+      const eth = await userInfo.getkscp(walletAddress, "ETH");
+      const kspc = await userInfo.getkscp(walletAddress, "KSPC");
+      setEthAmount(eth.data.data);
+      setKspcAmount(kspc.data.data);
     }
-  },[])
+  };
 
+  const getWalletAddressHandler = async () => {
+    const uid = sessionStorage?.uid;
+    const result = await userInfo.getUser(uid);
+    const user = result.data.data;
+    console.log("user : ", user);
+    const walletAddress: string = user.address;
+    let first = walletAddress.substring(0, 8);
+    let last = walletAddress.substring(walletAddress.length - 8, walletAddress.length);
+    const setAddress = `${first}...${last}`;
+    setWalletAddress(user.address);
+    setViewAddress(setAddress);
+  };
+  useEffect(() => {
+    console.log("walletAddress1 : ", walletAddress);
+    getWalletAddressHandler();
+  }, []);
+
+  useEffect(() => {
+    console.log("walletAddress2 : ", walletAddress);
+    amountHandler();
+  }, [walletAddress]);
   return (
     <IonApp>
       <IonMenu content-id="main-content">
@@ -246,7 +273,17 @@ const Main: React.FC = () => {
           <IonCardHeader>
             <IonLabel className="cardHeader">카드선택</IonLabel>
           </IonCardHeader>
-          <IonImg src={MainCard} className="mainCard" />
+
+          {/* <IonImg src={MainCard}></IonImg> */}
+          <IonCardContent className="background">
+            {/* <IonList> */}
+            <IonLabel className="card-text1">{viewAddress}</IonLabel>
+            <br />
+            <IonLabel className="card-text2">ETH : {ethAmount}</IonLabel>
+            <br />
+            <IonLabel className="card-text3">KSPC : {kspcAmount}</IonLabel>
+            {/* </IonList> */}
+          </IonCardContent>
 
           <IonCardSubtitle>
             <IonLabel className="cardSub">● ○ ○ ○</IonLabel>
@@ -260,7 +297,7 @@ const Main: React.FC = () => {
           <IonLabel className="scanTopay">스캔으로 결제하세요</IonLabel>
         </IonRouterLink>
 
-        <IonToolbar className="mainFooter" style={{ backgroundColor: "rgb(230, 230, 230)", height: "15%", paddingTop: "3%" , display: 'flex'}}>
+        <IonToolbar className="mainFooter" style={{ backgroundColor: "rgb(230, 230, 230)", height: "15%", paddingTop: "3%" }}>
           <IonButtons slot="start" id="home" style={{ marginLeft: "10%" }}>
             <IonMenuToggle>
               <IonButton>
