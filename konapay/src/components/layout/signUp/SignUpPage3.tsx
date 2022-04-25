@@ -62,13 +62,13 @@ const SignUpPage2: React.FC = () => {
   const registButton = async () => {
     try {
       // if(!regId.test(registInfo.uid) || !onlyEn.test(registInfo.uid)){
-      if (!regId.test(registInfo.uid)) {
+      if (false) {
         throw "아이디는 글자수 3~15의 영문 숫자 조합이어야 합니다.";
       } else if (!isDup.uid) {
         throw "중복검사를 해주세요.";
       }
       // else if(!regId.test(registInfo.password) || !onlyEn.test(registInfo.password)){
-      else if (!regId.test(registInfo.password)) {
+      else if (false) {
         throw "비밀번호는 글자수 3~15의 영문 숫자 조합이어야 합니다.";
       } else if (registInfo.password !== registInfo.passwordCheck) {
         throw "비밀번호가 다릅니다.";
@@ -101,7 +101,7 @@ const SignUpPage2: React.FC = () => {
       paste("이메일을 입력해주세요");
       return;
       // } else if ((part === "uid" && !regId.test(registInfo.uid)) || !onlyEn.test(registInfo.uid)) {
-    } else if (part === "uid" && !regId.test(registInfo.uid)) {
+    } else if (part === "uid" && false) {
       paste("아이디는 글자수 3~15의 영문 숫자 조합이어야 합니다.");
       return;
     }
