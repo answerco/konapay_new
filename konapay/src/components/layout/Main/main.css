@@ -1,75 +1,103 @@
-ion-content.background{
-    --background: none;
-    background-image: url('../../assets/img/bannerImg.png');
-    size: 30%;
-    height: 30%;
-    overflow:hidden;
-    position: fixed;
-    background-size: cover;
-    -ms-overflow-style: none;
-    object-fit: contain;
-    filter: brightness(70%);
+ion-content.background {
+  --background: none;
+  background-image: url("../../assets/img/bannerImg.png");
+  size: 30%;
+  height: 30%;
+  overflow: hidden;
+  position: fixed;
+  background-size: cover;
+  -ms-overflow-style: none;
+  object-fit: contain;
+  filter: brightness(70%);
+}
+ion-card-content.background {
+  --background: none;
+  background-image: url("../../assets/img/mainCard.png");
+  width: 100%;
+  height: 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+  padding-top: 66.64%;
+  -ms-overflow-style: none;
+  object-fit: contain;
+  filter: brightness(70%);
+}
+ion-label.card-text1 {
+  color: white;
+  width: 65%;
+  position: fixed;
+  left: 30%;
+  top: 30%;
+}
+ion-label.card-text2 {
+  color: white;
+  width: 50%;
+  position: fixed;
+  left: 30%;
+  top: 45%;
+}
+ion-label.card-text3 {
+  color: white;
+  width: 50%;
+  position: fixed;
+  left: 30%;
+  top: 55%;
 }
 
-ion-toolbar.mainFooter{
-    --background: none;
+ion-toolbar.mainFooter {
+  --background: none;
 }
 ion-menu::part(container) {
-    border-radius: 0px 80px 80px 0px;
-    padding-bottom: 5%;
-    height:90%
-    }
-.bannerText{
-    color: rgb(255, 255, 255);
-    position: fixed;
-    top:10%;
-    left:10%;
-    font-size: 30px;
-    font-weight: bold;
+  border-radius: 0px 80px 80px 0px;
+  padding-bottom: 5%;
+  height: 90%;
 }
-.bannerText2{
-    color: rgb(255, 255, 255);
-    position: fixed;
-    top:20%;
-    left:10%;
-    font-size: 20px;
-    font-weight: bold;
+.bannerText {
+  color: rgb(255, 255, 255);
+  position: fixed;
+  top: 10%;
+  left: 10%;
+  font-size: 30px;
+  font-weight: bold;
 }
-.selectCard{
-    color:rgb(150, 146, 146);
-    position: fixed;
-    top:35%;
-    left:60%;
-    font-size: 15px;
+.bannerText2 {
+  color: rgb(255, 255, 255);
+  position: fixed;
+  top: 20%;
+  left: 10%;
+  font-size: 20px;
+  font-weight: bold;
 }
-.walletCard{
-    margin-top: 50%;
-    box-shadow: none;
+.selectCard {
+  color: rgb(150, 146, 146);
+  position: fixed;
+  top: 35%;
+  left: 60%;
+  font-size: 15px;
 }
-.cardHeader{
-    float: right;
+.walletCard {
+  margin-top: 50%;
+  box-shadow: none;
 }
-.mainCard{
-    position: relative;
+.cardHeader {
+  float: right;
 }
-.cardSub{
-    position: fixed;
-    color: rgb(150, 146, 146);
-    top:65%;
-    left:40% 
+.mainCard {
+  position: relative;
 }
-.pwdBtn{
-    margin-bottom: 15%;
-    width: 30%;
-    margin-left: 35%;
-    
+.cardSub {
+  position: fixed;
+  color: rgb(150, 146, 146);
+  top: 65%;
+  left: 40%;
 }
-.scanTopay{
-    position: fixed;
-    top:79%;
-    left:28%;
+.pwdBtn {
+  margin-bottom: 15%;
+  width: 30%;
+  margin-left: 35%;
 }
-
-input {
-    background-color: white;
+.scanTopay {
+  position: fixed;
+  top: 79%;
+  left: 28%;
 }

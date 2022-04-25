@@ -25,6 +25,8 @@ import {
   //   IonBackButton,
   IonRouterLink,
   IonCardContent,
+  IonText,
+  IonThumbnail,
 } from "@ionic/react";
 
 import React, { useEffect, useState } from "react";
@@ -77,6 +79,7 @@ document.getElementsByTagName("head")[0].appendChild(meta);
 
 const Main: React.FC = () => {
   const [walletAddress, setWalletAddress] = useState<string>("");
+  const [viewAddress, setViewAddress] = useState<string>("");
   const [ethAmount, setEthAmount] = useState<string>("");
   const [kspcAmount, setKspcAmount] = useState<string>("");
 
@@ -94,7 +97,12 @@ const Main: React.FC = () => {
     const result = await userInfo.getUser(uid);
     const user = result.data.data;
     console.log("user : ", user);
+    const walletAddress: string = user.address;
+    let first = walletAddress.substring(0, 8);
+    let last = walletAddress.substring(walletAddress.length - 8, walletAddress.length);
+    const setAddress = `${first}...${last}`;
     setWalletAddress(user.address);
+    setViewAddress(setAddress);
   };
   useEffect(() => {
     console.log("walletAddress1 : ", walletAddress);
@@ -265,12 +273,18 @@ const Main: React.FC = () => {
           <IonCardHeader>
             <IonLabel className="cardHeader">카드선택</IonLabel>
           </IonCardHeader>
-          <IonCardContent className="cardImg">
-            {/* <IonImg src={MainCard} className="mainCard"></IonImg> */}
-            <IonLabel color="">{walletAddress}</IonLabel>
-            <IonLabel>{ethAmount}</IonLabel>
-            <IonLabel>{kspcAmount}</IonLabel>
+
+          {/* <IonImg src={MainCard}></IonImg> */}
+          <IonCardContent className="background">
+            {/* <IonList> */}
+            <IonLabel className="card-text1">{viewAddress}</IonLabel>
+            <br />
+            <IonLabel className="card-text2">ETH : {ethAmount}</IonLabel>
+            <br />
+            <IonLabel className="card-text3">KSPC : {kspcAmount}</IonLabel>
+            {/* </IonList> */}
           </IonCardContent>
+
           <IonCardSubtitle>
             <IonLabel className="cardSub">● ○ ○ ○</IonLabel>
           </IonCardSubtitle>
