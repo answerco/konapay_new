@@ -143,6 +143,15 @@ const App: React.FC = () => (
           {" "}
           <BuyerList />{" "}
         </Route>
+
+        <Route exact path="/list/sell">
+          {" "}
+          <SellerList />{" "}
+        </Route>
+        <Route exact path="/list/buy">
+          {" "}
+          <BuyerList />{" "}
+        </Route>
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
