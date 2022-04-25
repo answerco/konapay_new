@@ -6,7 +6,25 @@ import SignUpHeaderGrid2 from "./SignUpHeaderGrid2";
 import SignUpTextArea from "./SignUpTextArea";
 import SignUpCheckBox1 from "./SignUpCheckBox1";
 import SignUpCheckBox2 from "./SignUpCheckBox2";
-import {IonApp,IonBackButton,IonButton,IonButtons,IonCheckbox,IonCol,IonContent,IonGrid,IonHeader,IonIcon,IonItem,IonLabel,IonPage,IonRouterLink,IonRow,IonTitle,IonToolbar,} from "@ionic/react";
+import {
+  IonApp,
+  IonBackButton,
+  IonButton,
+  IonButtons,
+  IonCheckbox,
+  IonCol,
+  IonContent,
+  IonGrid,
+  IonHeader,
+  IonIcon,
+  IonItem,
+  IonLabel,
+  IonPage,
+  IonRouterLink,
+  IonRow,
+  IonTitle,
+  IonToolbar,
+} from "@ionic/react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 import { chevronBack, chevronBackOutline } from "ionicons/icons";
@@ -33,17 +51,17 @@ const SignUpPage1: React.FC = () => {
   };
 
   const back = () => {
-    const link = document.createElement('a');
-          link.href = "/"
-          document.body.appendChild(link);
-          link.click();
-          link.remove();
-  }
+    const link = document.createElement("a");
+    link.href = "/";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  };
 
   return (
     <IonApp>
-      <IonPage >
-        <IonContent >
+      <IonPage>
+        <IonContent>
           <div className="grid-init grid">
             <IonHeader>
               <IonItem>
@@ -58,26 +76,29 @@ const SignUpPage1: React.FC = () => {
               <SignUpHeaderGrid2 tag={"○ ● ●"}></SignUpHeaderGrid2>
             </div>
             <div className="box-init" style={{ height: "30%" }}>
-              <SignUpTextArea id="1"></SignUpTextArea>
+              <SignUpTextArea></SignUpTextArea>
             </div>
             <div className="box-init box" style={{ height: "55%", flexDirection: "column" }}>
               <div
                 className="box-init"
                 style={{
                   width: "100%",
-                
+
                   flexDirection: "column",
                   justifyContent: "flex-start",
                   height: "70%",
                 }}
               >
                 {/* <SignUpCheckBox1></SignUpCheckBox1> */}
-              
+
                 <IonItem style={{ display: "flex", width: "90%", marginBottom: "3%", marginRight: "5%" }}>
-                  <IonCheckbox checked={check.service && check.personal && check.alarm} onClick={(e: any) => setCheck({ service: e.target.checked, personal: e.target.checked, alarm: e.target.checked })} />
+                  <IonCheckbox
+                    checked={check.service && check.personal && check.alarm}
+                    onClick={(e: any) => setCheck({ service: e.target.checked, personal: e.target.checked, alarm: e.target.checked })}
+                  />
                   <IonLabel style={{ marginLeft: "3%", fontSize: "100%" }}>모두 동의하기</IonLabel>
                 </IonItem>
-              
+
                 <div style={{ display: "flex", width: "100%", justifyContent: "space-around" }}>
                   <IonItem className="signup_item" style={{ display: "flex", width: "70%" }}>
                     <IonCheckbox name="service" checked={check.service} onClick={onChange} />
@@ -87,7 +108,7 @@ const SignUpPage1: React.FC = () => {
                     [상세보기]
                   </a>
                 </div>
-              
+
                 <div style={{ display: "flex", width: "100%", justifyContent: "space-around" }}>
                   <IonItem className="signup_item" style={{ display: "flex", width: "70%" }}>
                     <IonCheckbox name="personal" checked={check.personal} onClick={onChange} />
@@ -97,7 +118,7 @@ const SignUpPage1: React.FC = () => {
                     [상세보기]
                   </a>
                 </div>
-              
+
                 <div style={{ display: "flex", width: "100%", justifyContent: "space-around" }}>
                   <IonItem className="signup_item" style={{ display: "flex", width: "70%" }}>
                     <IonCheckbox name="alarm" checked={check.alarm} onClick={onChange} />
@@ -107,7 +128,7 @@ const SignUpPage1: React.FC = () => {
                     [상세보기]
                   </a>
                 </div>
-              
+
                 {/*           
                 <SignUpCheckBox2 forId="checkBox1" check="필수" description="서비스 이용약관 동의"></SignUpCheckBox2>
                 <SignUpCheckBox2 forId="checkBox2" check="필수" description="개인정보 수집 및 이용 동의"></SignUpCheckBox2>
