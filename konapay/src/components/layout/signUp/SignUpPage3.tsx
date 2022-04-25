@@ -1,7 +1,6 @@
 import "./SignUpPageLayout.css";
-import React, { useEffect, useState } from "react";
-import SignUpHeader from "./SignUpHeader";
-import Header from "./Header";
+import React, { useState } from "react";
+
 import SignUpHeaderGrid1 from "./SignUpHeaderGrid1";
 import SignUpHeaderGrid2 from "./SignUpHeaderGrid2";
 import SignUpInputBox from "./SignUpInputBox";
@@ -16,9 +15,9 @@ meta.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-s
 document.getElementsByTagName("head")[0].appendChild(meta);
 
 const SignUpPage2: React.FC = () => {
-  const history = useHistory()
-  const location = useLocation()
-  const [paste] = useIonAlert()
+  const history = useHistory();
+  const location = useLocation();
+  const [paste] = useIonAlert();
 
   const [registInfo, setRegistInfo] = useState({
     uid: "",
@@ -30,10 +29,10 @@ const SignUpPage2: React.FC = () => {
     messageAlarm: 0,
   });
 
- const [isDup, setIsDup] = useState({
-   uid: false,
-   email: false
- })
+  const [isDup, setIsDup] = useState({
+    uid: false,
+    email: false,
+  });
 
   const locationFunction = () => {
     history.push({ pathname: "/login", state: {} });
@@ -58,7 +57,7 @@ const SignUpPage2: React.FC = () => {
   let onlyEn = /^[A-Za-z][A-Za-z0-9]*$/;
   let regId = /^(?=.*[a-zA-z])(?=.*[0-9]).{3,15}$/;
   let regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
-  let korean = /^[가-힣]+$/
+  let korean = /^[가-힣]+$/;
 
   const registButton = async () => {
     try{
@@ -97,36 +96,32 @@ const SignUpPage2: React.FC = () => {
           link.remove();
         }
       }
+    } catch (err) {
+      paste(err as "");
     }
-    catch(err){
-      paste(err as "")
-    }
-  }
+  };
 
   const checkIsDup = async (part: string) => {
-    if(part==="email" && !regEmail.test(registInfo.email)){
-      paste('이메일을 입력해주세요')
-      return
+    if (part === "email" && !regEmail.test(registInfo.email)) {
+      paste("이메일을 입력해주세요");
+      return;
+    } else if ((part === "uid" && !regId.test(registInfo.uid)) || !onlyEn.test(registInfo.uid)) {
+      paste("아이디는 글자수 3~15의 영문 숫자 조합이어야 합니다.");
+      return;
     }
-    else if((part==="uid" && !regId.test(registInfo.uid)) || !onlyEn.test(registInfo.uid)){
-      paste('아이디는 글자수 3~15의 영문 숫자 조합이어야 합니다.')
-      return
+    let res = await Signup[part as "uid"](registInfo[part as "uid"]);
+    let text;
+    if (part === "uid") {
+      text = "아이디";
+    } else {
+      text = "이메일";
     }
-    let res = await Signup[part as "uid"](registInfo[part as "uid"])
-    let text 
-    if(part === "uid"){
-      text = "아이디"
-    }
-    else {
-      text = "이메일"
-    }
-    if(res){
-      setIsDup({...isDup,[part]:true})
-      paste(`사용가능한 ${text}입니다.`)
-    }
-    else{
-      setIsDup({...isDup,[part]:false})
-      paste(`이미 사용중인 ${text}입니다.`)
+    if (res) {
+      setIsDup({ ...isDup, [part]: true });
+      paste(`사용가능한 ${text}입니다.`);
+    } else {
+      setIsDup({ ...isDup, [part]: false });
+      paste(`이미 사용중인 ${text}입니다.`);
     }
   };
 
