@@ -54,20 +54,22 @@ const SignUpPage2: React.FC = () => {
     }
   };
 
-  let onlyEn = /^[A-Za-z][A-Za-z0-9]*$/;
+  // let onlyEn = /^[A-Za-z][A-Za-z0-9]*$/;
   let regId = /^(?=.*[a-zA-z])(?=.*[0-9]).{3,15}$/;
   let regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
   let korean = /^[가-힣]+$/;
 
   const registButton = async () => {
     try{
-      if(!regId.test(registInfo.uid) || !onlyEn.test(registInfo.uid)){
-        throw '아이디는 글자수 3~15의 영문 숫자 조합이어야 합니다.'
+      // if(!regId.test(registInfo.uid) || !onlyEn.test(registInfo.uid)){
+      if(!regId.test(registInfo.uid)){
+      throw '아이디는 글자수 3~15의 영문 숫자 조합이어야 합니다.'
       }
       else if(!isDup.uid){
         throw '중복검사를 해주세요.'
       }
-      else if(!regId.test(registInfo.password) || !onlyEn.test(registInfo.password)){
+      // else if(!regId.test(registInfo.password) || !onlyEn.test(registInfo.password)){
+      else if(!regId.test(registInfo.password)){
         throw '비밀번호는 글자수 3~15의 영문 숫자 조합이어야 합니다.'
       }
       else if(registInfo.password !== registInfo.passwordCheck){
@@ -105,7 +107,8 @@ const SignUpPage2: React.FC = () => {
     if (part === "email" && !regEmail.test(registInfo.email)) {
       paste("이메일을 입력해주세요");
       return;
-    } else if ((part === "uid" && !regId.test(registInfo.uid)) || !onlyEn.test(registInfo.uid)) {
+    // } else if ((part === "uid" && !regId.test(registInfo.uid)) || !onlyEn.test(registInfo.uid)) {
+    } else if (part === "uid" && !regId.test(registInfo.uid)) {
       paste("아이디는 글자수 3~15의 영문 숫자 조합이어야 합니다.");
       return;
     }

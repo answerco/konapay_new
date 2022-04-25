@@ -58,7 +58,7 @@ const BoardWirte: React.FC = () => {
       console.log("file : ", file);
 
       try {
-        const apiUrl = `http://localhost:3200/api/board/img`;
+        const apiUrl = `${process.env.REACT_APP_SERVER}/board/img`;
         const result = await axios.post(apiUrl, formData, { headers: { "Content-Type": `multipart/form-data` } });
         console.log("result : ", result);
         console.log("result.data.IMG_URL : ", result.data.IMG_URL);

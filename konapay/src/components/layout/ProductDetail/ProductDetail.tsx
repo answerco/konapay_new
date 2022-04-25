@@ -14,7 +14,7 @@ const ProductDetail: React.FC = () => {
   // @ts-ignore
   const { productIdx } = param;
   const purchaseConfirmation = async () => {
-    const APIURL = `http://localhost:3200/api/sell/${productIdx}/update`;
+    const APIURL = `${process.env.REACT_APP_SERVER}/sell/${productIdx}/update`;
     // @ts-ignore
     const item = Object.assign(payload);
     // @ts-ignore
@@ -28,7 +28,7 @@ const ProductDetail: React.FC = () => {
   useEffect(() => {
     const axiosFunction = async () => {
       try {
-        const APIURL = `http://localhost:3200/api/sell/select/${productIdx}`;
+        const APIURL = `${process.env.REACT_APP_SERVER}/sell/select/${productIdx}`;
         const productInformation = await axios.get(APIURL);
         console.log("productInformation : ", productInformation);
         console.log("productInformation.status : ", productInformation.status);

@@ -40,7 +40,7 @@ const BuyerList: React.FC = () => {
     const axiosFunction = async () => {
       console.log("useEffect productIdx : ", productIdx);
       try {
-        const APIURL = `http://localhost:3200/api/sell/select/${productIdx}`;
+        const APIURL = `${process.env.REACT_APP_SERVER}/sell/select/${productIdx}`;
         const productInformation = await axios.get(APIURL);
         console.log("productInformation : ", productInformation);
         console.log("productInformation.status : ", productInformation.status);
@@ -77,7 +77,7 @@ const BuyerList: React.FC = () => {
   const pushSellDataHandler = async () => {
     const limit = sellData.length + 20;
     const offset = limit == 0 ? 0 : limit - 20;
-    const APIURL = `http://localhost:3200/api/sell/list?sellerUid=${"joy"}&status=${"S"}&limit=${limit}&offset=${offset}`;
+    const APIURL = `${process.env.REACT_APP_SERVER}/sell/list?sellerUid=${"joy"}&status=${"S"}&limit=${limit}&offset=${offset}`;
     console.log("APIURL : ", APIURL);
     const axiosOption = { withCredentials: true };
 
