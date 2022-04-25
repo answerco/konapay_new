@@ -22,3 +22,7 @@
   font-family: "NanumSquare";
   src: url("./fonts/Roboto-Regular.ttf") format("truetype");
 }
+
+input {
+  background-color: white;
+}
