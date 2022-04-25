@@ -73,6 +73,8 @@ meta.name = "viewport";
 meta.content = "width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover";
 document.getElementsByTagName("head")[0].appendChild(meta);
 
+declare let window: (Window & typeof globalThis) | any;
+
 const Main: React.FC = () => {
   return (
     <IonApp>

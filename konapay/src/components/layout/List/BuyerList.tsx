@@ -24,13 +24,12 @@ import {
 import { chevronBack, closeSharp } from "ionicons/icons";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import axios from "axios";
+import ProductManager from "./productManager";
 
 const BuyerList: React.FC = () => {
   const history = useHistory();
 
   const [isInfiniteDisabled, setInfiniteDisabled] = useState(false);
-  const [modalisvalid, setModalisvalid] = useState<boolean>(false);
   const [sellData, setSellData] = useState<any>([]);
   const [productIdx, setProductIdx] = useState<number>(0);
   const [detailIsValid, setDetailIsValid] = useState<boolean>(false);
@@ -40,28 +39,12 @@ const BuyerList: React.FC = () => {
     const axiosFunction = async () => {
       console.log("useEffect productIdx : ", productIdx);
       try {
-        const APIURL = `http://localhost:3200/api/sell/select/${productIdx}`;
-        const productInformation = await axios.get(APIURL);
-        console.log("productInformation : ", productInformation);
-        console.log("productInformation.status : ", productInformation.status);
+        const htmlMapProductInformation = await ProductManager.getList(productIdx);
 
-        if (productInformation.status === 200) {
-          const item = productInformation.data.data;
-          const itemArr = Object.entries(item);
-          console.log("item : ", item);
-          console.log("itemArr : ", itemArr);
-          item[`sellDate`] = item[`sellDate`].split("T")[0];
-          const htmlMapProductInformation = [
-            ["상품번호", item.sellIdx],
-            ["상품명", item.productName],
-            ["판매가", item.productPrice],
-            ["판매자", item.buyerUid],
-            ["구매자", item.sellerUid],
-            ["판매상태", item.sellStatus],
-            ["판매글 올린 날짜", item.sellDate],
-          ];
-          console.log("htmlMapProductInformation : ", htmlMapProductInformation);
+        if (htmlMapProductInformation != null) {
           setRowItem(htmlMapProductInformation);
+        } else {
+          throw new Error("....");
         }
       } catch (error) {
         console.log(error);
@@ -77,12 +60,13 @@ const BuyerList: React.FC = () => {
   const pushSellDataHandler = async () => {
     const limit = sellData.length + 20;
     const offset = limit == 0 ? 0 : limit - 20;
-    const APIURL = `http://localhost:3200/api/sell/list?sellerUid=${"joy"}&status=${"S"}&limit=${limit}&offset=${offset}`;
-    console.log("APIURL : ", APIURL);
-    const axiosOption = { withCredentials: true };
 
-    const sellInformation = await axios.get(APIURL);
-    const sellItem = sellInformation.data.data.rows;
+    let _limit = limit;
+    let _offset = offset;
+    let sellerId = "joy";
+    let status = "S";
+
+    const sellItem = await ProductManager.getSellInformation(sellerId, status, _limit, _offset);
     console.log("sellInformation : ", sellItem);
     setSellData([...sellData, ...sellItem]);
   };
