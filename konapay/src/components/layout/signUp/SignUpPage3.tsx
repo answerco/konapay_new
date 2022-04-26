@@ -102,14 +102,13 @@ const SignUpPage2: React.FC = () => {
       paste("아이디는 글자수 3~15의 영문 숫자 조합이어야 합니다.");
       return;
     }
-    let res
-    try{
+    let res;
+    try {
       res = await Signup[part as "uid"](registInfo[part as "uid"]);
+    } catch (err) {
+      res = undefined;
     }
-    catch(err){
-     res= undefined
-    }
-    
+
     let text;
     if (part === "uid") {
       text = "아이디";
@@ -128,24 +127,19 @@ const SignUpPage2: React.FC = () => {
   return (
     <IonApp>
       <IonPage>
+        <IonHeader>
+          <IonToolbar>
+            <IonButtons slot="start">
+              <IonBackButton defaultHref="/" icon={chevronBack} />
+            </IonButtons>
+            <IonTitle>회원가입</IonTitle>
+          </IonToolbar>
+        </IonHeader>
         <IonContent>
           <div className="grid-init grid">
-            <IonHeader>
-              <IonItem>
-                <IonItem button onClick={() => history.goBack()}>
-                  <IonIcon icon={chevronBack}></IonIcon>
-                </IonItem>
-                <IonTitle>회원가입</IonTitle>
-              </IonItem>
-              {/* <IonToolbar>
-                <IonButtons slot="start">
-                  <IonBackButton defaultHref="/" icon={chevronBack} />
-                </IonButtons>
-              </IonToolbar> */}
-            </IonHeader>
             <div className="box-init box" style={{ margin: "-3% 0" }}>
               <SignUpHeaderGrid1></SignUpHeaderGrid1>
-              <SignUpHeaderGrid2 tag={"● ● ○"}></SignUpHeaderGrid2>
+              <SignUpHeaderGrid2 tag={"● ○"}></SignUpHeaderGrid2>
             </div>
             <div className="box-init box" style={{ flexDirection: "column", justifyContent: "start" }}>
               <SignUpInputBox

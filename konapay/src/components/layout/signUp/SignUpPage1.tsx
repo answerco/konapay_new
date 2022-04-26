@@ -61,19 +61,19 @@ const SignUpPage1: React.FC = () => {
   return (
     <IonApp>
       <IonPage>
+        <IonHeader>
+          <IonToolbar>
+            <IonButtons slot="start">
+              <IonBackButton defaultHref="/" icon={chevronBack} />
+            </IonButtons>
+            <IonTitle>회원가입</IonTitle>
+          </IonToolbar>
+        </IonHeader>
         <IonContent>
           <div className="grid-init grid">
-            <IonHeader>
-              <IonItem>
-                <IonItem button onClick={back}>
-                  <IonIcon icon={chevronBack}></IonIcon>
-                </IonItem>
-                <IonTitle>회원가입</IonTitle>
-              </IonItem>
-            </IonHeader>
             <div className="box-init box" style={{ height: "7.5%" }}>
               <SignUpHeaderGrid1></SignUpHeaderGrid1>
-              <SignUpHeaderGrid2 tag={"○ ● ●"}></SignUpHeaderGrid2>
+              <SignUpHeaderGrid2 tag={"○ ●"}></SignUpHeaderGrid2>
             </div>
             <div className="box-init" style={{ height: "30%" }}>
               <SignUpTextArea></SignUpTextArea>

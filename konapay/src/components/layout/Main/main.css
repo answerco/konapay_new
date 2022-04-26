@@ -26,8 +26,9 @@ ion-text.card-text1 {
   color: white;
   width: 65%;
   position: fixed;
-  left: 30%;
-  top: 30%;
+  left: 37.5%;
+  top: 35%;
+  text-align: start;
 }
 
 /* ion-text.selectable {
@@ -41,8 +42,9 @@ ion-label.card-text2 {
   color: white;
   width: 50%;
   position: fixed;
-  left: 30%;
-  top: 45%;
+  left: 37.5%;
+  top: 50%;
+  text-align: start;
 }
 ion-label.card-text3 {
   color: white;

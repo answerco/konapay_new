@@ -2,48 +2,24 @@ import {
   IonApp,
   IonHeader,
   IonToolbar,
-  IonTitle,
   IonContent,
-  //   IonFooter,
-  IonMenu,
-  IonList,
-  IonListHeader,
   IonMenuToggle,
   IonIcon,
   IonLabel,
   IonPage,
   IonButtons,
   IonButton,
-  IonItem,
-  // IonImg,
-  //   IonNote,
-  //   IonCardContent,
-  //   IonCardTitle,
-  IonCardHeader,
   IonCard,
-  // IonCardSubtitle,
-  //   IonBackButton,
   IonRouterLink,
   IonCardContent,
   IonText,
-  // IonThumbnail,
-  // useIonAlert,
   IonAlert,
   useIonAlert,
+  IonSlides,
+  IonSlide,
 } from "@ionic/react";
 
 import React, { useEffect, useState } from "react";
-// import Sidebar from "../../assets/img/sideMenu.png";
-// import Myinfo from "../../assets/img/myInfo.png";
-// import Setting from "../../assets/img/setting.png";
-// import Home from "../../assets/img/home.png";
-// import Banner from "../../assets/img/bannerImg.png";
-// import MainCard from "../../assets/img/mainCard.png";
-// import CardSelectBar from "../../assets/img/cardSelectBar.png";
-// import FooterMenu_Home from "../../assets/img/footerMenu_home.png";
-// import FooterMenu_Pay from "../../assets/img/footerMenu_pay.png";
-// import FooterMenu_Benefit from "../../assets/img/footerMenu_benefit.png";
-
 import "@ionic/react/css/normalize.css";
 import "@ionic/react/css/structure.css";
 import "@ionic/react/css/typography.css";
@@ -55,24 +31,10 @@ import "@ionic/react/css/text-transformation.css";
 import "@ionic/react/css/flex-utils.css";
 import "@ionic/react/css/display.css";
 
-import {
-  homeOutline,
-  settingsOutline,
-  personCircleOutline,
-  logoUsd,
-  giftOutline,
-  removeOutline,
-  cardOutline,
-  documentTextOutline,
-  searchCircleOutline,
-  sendOutline,
-  cashOutline,
-  diamondOutline,
-  chatbubblesOutline,
-  alertCircleOutline,
-} from "ionicons/icons";
-
 import "./main.css";
+
+import { homeOutline, personCircleOutline, logoUsd, giftOutline } from "ionicons/icons";
+
 import userInfo from "../../../model/user/userinfo";
 import SideBarMenu from "../SideBarMenu/SideBarMenu";
 
@@ -88,12 +50,14 @@ const Main: React.FC = () => {
   const [kspcAmount, setKspcAmount] = useState<string>("");
   const [copySucess, setCopySucess] = useState<boolean>(false);
 
-  const [paste] = useIonAlert()
+  const [paste] = useIonAlert();
 
   const amountHandler = async () => {
-    if (walletAddress !== "") {
+    if (!!walletAddress) {
       const eth = await userInfo.getkscp(walletAddress, "ETH");
       const kspc = await userInfo.getkscp(walletAddress, "KSPC");
+      console.log("amountHandler : ", eth);
+
       setEthAmount(eth.data.data);
       setKspcAmount(kspc.data.data);
     }
@@ -103,8 +67,9 @@ const Main: React.FC = () => {
     const uid = sessionStorage?.uid;
     const result = await userInfo.getUser(uid);
     const user = result.data.data;
-    console.log("user : ", user);
+    console.log("getWalletAddressHandler user : ", user);
     const walletAddress: string = user.address;
+    console.log("getWalletAddressHandler walletAddress : ", walletAddress);
     let first = walletAddress.substring(0, 8);
     let last = walletAddress.substring(walletAddress.length - 8, walletAddress.length);
     const setAddress = `${first}...${last}`;
@@ -141,21 +106,21 @@ const Main: React.FC = () => {
 
   useEffect(() => {
     console.log(sessionStorage.uid);
-    if (!sessionStorage.uid) {
+    if (!!sessionStorage.uid) {
       getWalletAddressHandler();
     }
   }, []);
 
   useEffect(() => {
-    if (!sessionStorage.uid) {
+    if (!!sessionStorage.uid) {
       console.log("walletAddress2 : ", walletAddress);
       amountHandler();
     }
   }, [walletAddress]);
 
   const getReady = () => {
-    paste('서비스 준비 중 입니다.')
-  } 
+    paste("서비스 준비 중 입니다.");
+  };
 
   return (
     <IonApp>
@@ -172,6 +137,7 @@ const Main: React.FC = () => {
           },
         ]}
       ></IonAlert>
+
       <SideBarMenu></SideBarMenu>
       <IonPage className="ion-page">
         <IonHeader>
@@ -185,11 +151,9 @@ const Main: React.FC = () => {
             </IonButtons>
 
             <IonButtons slot="end" id="myinfo">
-              <IonRouterLink href="/">
-                <IonButton>
-                  <IonIcon src={personCircleOutline}></IonIcon>
-                </IonButton>
-              </IonRouterLink>
+              <IonButton onClick={getReady}>
+                <IonIcon src={personCircleOutline}></IonIcon>
+              </IonButton>
             </IonButtons>
           </IonToolbar>
         </IonHeader>
@@ -199,48 +163,54 @@ const Main: React.FC = () => {
         <IonLabel className="bannerText2">언제 어디서든 간편 한 결제</IonLabel>
 
         <IonCard className="walletCard">
-          <IonCardHeader>
-            <IonLabel className="cardHeader">카드선택</IonLabel>
-          </IonCardHeader>
-
-          {/* <IonImg src={MainCard}></IonImg> */}
-          <IonCardContent className="background">
-            <IonText
-              onClick={(e) => {
-                addressCopy(e);
-              }}
-              className="card-text1 selectable"
-            >
-              {viewAddress}
-            </IonText>
-            <br />
-            <IonLabel className="card-text2">ETH : {ethAmount}</IonLabel>
-            <br />
-            <IonLabel className="card-text3">KSPC : {kspcAmount}</IonLabel>
-          </IonCardContent>
-
-          {/* <IonCardSubtitle>
-            <IonLabel className="cardSub">● ○ ○ ○</IonLabel>
-          </IonCardSubtitle> */}
+          <IonSlides>
+            <IonSlide>
+              <IonCardContent className="background">
+                <IonText
+                  onClick={(e) => {
+                    addressCopy(e);
+                  }}
+                  className="card-text1 selectable"
+                >
+                  {viewAddress}
+                </IonText>
+                <br />
+                <IonLabel className="card-text2">KSPC : {kspcAmount}</IonLabel>
+              </IonCardContent>
+            </IonSlide>
+            <IonSlide>
+              <IonCardContent className="background">
+                <IonText
+                  onClick={(e) => {
+                    addressCopy(e);
+                  }}
+                  className="card-text1 selectable"
+                >
+                  {viewAddress}
+                </IonText>
+                <br />
+                <IonLabel className="card-text2">ETH : {ethAmount}</IonLabel>
+              </IonCardContent>
+            </IonSlide>
+          </IonSlides>
         </IonCard>
 
-        <IonButton color="medium" className="pwdBtn">
-          <a style={{ color: "white" }}>비밀번호</a>
-        </IonButton>
         <IonRouterLink href="/scan">
-          <IonLabel className="scanTopay">스캔으로 결제하세요</IonLabel>
+          <IonButton color="medium" className="pwdBtn">
+            <IonLabel>스캔</IonLabel>
+          </IonButton>
         </IonRouterLink>
 
         <IonToolbar className="mainFooter" style={{ backgroundColor: "rgb(230, 230, 230)", height: "15%", paddingTop: "3%" }}>
           <IonButtons slot="start" id="home" style={{ marginLeft: "10%" }}>
-              <IonButton>
-                <a>
-                  <IonIcon src={homeOutline}></IonIcon>
-                  <div>
-                    <IonLabel>홈</IonLabel>
-                  </div>
-                </a>
-              </IonButton>
+            <IonButton>
+              <a>
+                <IonIcon src={homeOutline}></IonIcon>
+                <div>
+                  <IonLabel>홈</IonLabel>
+                </div>
+              </a>
+            </IonButton>
           </IonButtons>
 
           <IonButtons slot="start" style={{ marginLeft: "20%" }}>

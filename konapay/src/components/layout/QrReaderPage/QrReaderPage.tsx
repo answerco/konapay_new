@@ -1,5 +1,5 @@
 import "./QrReaderPage.css";
-import { IonApp, IonButton, IonCard, IonCardContent, IonCardHeader, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonItem, IonRow, IonTitle } from "@ionic/react";
+import { IonApp, IonBackButton, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCol, IonContent, IonGrid, IonHeader, IonRow, IonTitle, IonToolbar } from "@ionic/react";
 import axios from "axios";
 import { chevronBack } from "ionicons/icons";
 import React, { useEffect, useState } from "react";
@@ -40,12 +40,12 @@ const QrReaderPage: React.FC = () => {
   return (
     <IonApp>
       <IonHeader>
-        <IonItem className="background">
-          <IonButton className="background" onClick={() => history.push({ pathname: "/" })}>
-            <IonIcon icon={chevronBack}></IonIcon>
-          </IonButton>
+        <IonToolbar>
+          <IonButtons slot="start">
+            <IonBackButton defaultHref="/" icon={chevronBack} />
+          </IonButtons>
           <IonTitle>결제요청</IonTitle>
-        </IonItem>
+        </IonToolbar>
       </IonHeader>
       <IonContent>
         {/* <IonTitle color="medium">KONAPAY</IonTitle> */}
