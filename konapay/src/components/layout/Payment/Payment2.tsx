@@ -18,9 +18,10 @@ import {
   IonBackButton,
 } from "@ionic/react";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router";
 import QRCode from "react-qr-code";
+import dayjs from "dayjs";
 
 import "@ionic/react/css/normalize.css";
 import "@ionic/react/css/structure.css";
@@ -33,7 +34,7 @@ import "@ionic/react/css/text-transformation.css";
 import "@ionic/react/css/flex-utils.css";
 import "@ionic/react/css/display.css";
 import "./payment.css";
-import { chevronBack } from "ionicons/icons";
+import { chevronBack, refresh } from "ionicons/icons";
 import Sell from "../../../model/sell/sell";
 
 const meta = document.createElement("meta");
@@ -68,11 +69,13 @@ const Payment2: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const requirePay = async () => {
-    try {
-      await registPay();
-      setIsOpen(true);
-    } catch (err) {
-      paste(err as any);
+    try{
+      await registPay()
+      setEndTime(new Date().getTime() + 32 * 1000)
+      setIsOpen(true)     
+    }
+    catch(err){
+      paste(err as any)
     }
   };
 
@@ -92,6 +95,33 @@ const Payment2: React.FC = () => {
       paste(err as any);
     }
   };
+
+  const [endTime, setEndTime] = useState<number>(
+    10
+  );
+  const [timeLeft, setTimeLeft] = useState<number>(30);
+
+  useEffect(() => {
+    if(isOpen){
+        setTimeout(() => {
+        setTimeLeft(calculateTimeLeft());
+      }, 1000);
+    }
+  });
+
+  useEffect(() => {
+    if (timeLeft <= 0) {
+      prevHistoryFunction()
+    }
+  }, [timeLeft]);
+
+  const calculateTimeLeft = () => {
+    const currTime = new Date().getTime();
+    return endTime - currTime;
+  };
+
+
+
 
   return (
     <IonApp>
@@ -126,7 +156,7 @@ const Payment2: React.FC = () => {
 
             <IonGrid className="total_text">
               <IonRow className="table_total">
-                <IonCol>합 계</IonCol>
+                <IonCol>합 계 금 액</IonCol>
               </IonRow>
               <IonRow>
                 <IonCol>{location.state && location.state.price}</IonCol>
@@ -146,9 +176,12 @@ const Payment2: React.FC = () => {
               <IonModal isOpen={isOpen}>
                 <IonContent>
                   <div style={{ display: "flex", justifyContent: "center", alignContent: "center", alignItems: "center", height: "100vh", flexDirection: "column" }}>
-                    {/* {sellIdx.map((el: any) => {
-                     console.log(el,222222)
-                     return ( */}
+                    <div style={{display:"flex"}}>
+                      <div style={{ height:"30px", margin:"4%", fontSize:"20px"}}>
+                        {dayjs(timeLeft).format("mm:ss")}
+                      </div>
+                      <IonIcon style={{width:"30px", height:"30px"}} icon={refresh} onClick={()=>{setEndTime(new Date().getTime() + 32 * 1000)}}/>
+                    </div>
                     <QRCode style={{ margin: "10%" }} value={sellIdx.toString()}></QRCode>
                     <div style={{ width: "100%", display: "flex", justifyContent: "center", height: "8%" }}>
                       <IonButton style={{ width: "40%", height: "100%", fontSize: "130%" }} color="warning" onClick={prevHistoryFunction}>
