@@ -52,8 +52,10 @@ import Payment4 from "./components/layout/Payment/Payment4";
 import PurchaseHistory from "./components/layout/PurchaseHistory/PurchaseHistory";
 import Inout from "./components/layout/inout/Layout";
 import SendKSPC from "./components/layout/SendKSPC/SendKSPC";
-import BalanceInquiry from "./components/layout/BalanceInquiry/BalanceInquiry";
+import MyWallet from "./components/layout/MyWallet/MyWallet";
 import Board from "./components/layout/Board/Board";
+import Notice from "./components/layout/Board/Notice";
+import Event from "./components/layout/Board/Event";
 import BoardWrite from "./components/layout/Board/BoardWrite";
 import BoardRead from "./components/layout/Board/BoardRead";
 import SignUpPage1 from "./components/layout/signUp/SignUpPage1";
@@ -116,12 +118,18 @@ const App: React.FC = () => {
           <SendKSPC />
         </Route>
 
-        <Route exact path="/balanceinquiry">
-          <BalanceInquiry />
+        <Route exact path="/mywallet">
+          <MyWallet />
         </Route>
 
         <Route exact path="/board">
           <Board />
+        </Route>
+        <Route exact path="/notice">
+          <Notice />
+        </Route>
+        <Route exact path="/event">
+          <Event />
         </Route>
         <Route exact path="/board/write">
           <BoardWrite />

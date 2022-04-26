@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import SignUpHeaderGrid1 from "./SignUpHeaderGrid1";
 import SignUpHeaderGrid2 from "./SignUpHeaderGrid2";
 import SignUpInputBox from "./SignUpInputBox";
-import { IonBackButton, IonButtons, IonHeader, IonIcon, IonItem, IonRouterLink, IonTitle, IonToolbar, useIonAlert, IonCheckbox, IonLabel, IonApp, IonPage, IonContent } from "@ionic/react";
+import { IonBackButton, IonButtons, IonHeader, IonIcon, IonItem, IonRouterLink, IonTitle, IonToolbar, useIonAlert, IonCheckbox, IonLabel, IonApp, IonPage, IonContent, useIonToast } from "@ionic/react";
 import { useHistory, useLocation } from "react-router";
 import { chevronBack } from "ionicons/icons";
 import Signup from "../../../model/user/signup";
@@ -18,6 +18,9 @@ const SignUpPage2: React.FC = () => {
   const history = useHistory();
   const location = useLocation();
   const [paste] = useIonAlert();
+  const [present, dismiss] = useIonToast();
+
+  
 
   const [registInfo, setRegistInfo] = useState({
     uid: "",
@@ -82,11 +85,14 @@ const SignUpPage2: React.FC = () => {
         let res = await regist();
         if (!!res) {
           paste('회원가입이 완료되었습니다.')
-          const link = document.createElement("a");
-          link.href = "/";
-          document.body.appendChild(link);
-          link.click();
-          link.remove();
+          present('회원가입이 완료되었습니다.',2000)
+          setTimeout(()=>{
+            const link = document.createElement("a");
+            link.href = "/";
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+          },2000)
         }
       }
     } catch (err) {

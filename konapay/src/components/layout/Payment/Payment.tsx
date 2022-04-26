@@ -66,7 +66,7 @@ const Payment: React.FC = () => {
             <IonButtons slot="start">
               <IonBackButton defaultHref="/" icon={chevronBack} />
             </IonButtons>
-            <IonTitle>결제요청</IonTitle>
+            <IonTitle>판매</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonContent className="ion-padding">

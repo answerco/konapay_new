@@ -42,7 +42,7 @@ meta.name = "viewport";
 meta.content = "width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover";
 document.getElementsByTagName("head")[0].appendChild(meta);
 
-const Board: React.FC = () => {
+const Notice: React.FC = () => {
   const queryString = useLocation();
   const history = useHistory();
   const [data, setData] = useState<string[]>([]);
@@ -84,8 +84,7 @@ const Board: React.FC = () => {
     const offset = limit == 0 ? 0 : limit - 20;
     // const APIURL = `http://localhost:3200/api/board/list?sellerUid=${"joy"}&status=${"S"}&limit=${limit}&offset=${offset}`;
     // const APIURL = `http://localhost:3200/api/board/list?key=${"C"}&value=${""}&limit=${""}&offset=${""}`;
-    // const APIURL = `http://localhost:3200/api/board/list${queryString.search}&limit=${limit}&offset=${offset}`;
-    const APIURL = `http://localhost:3200/api/board/list?key=c&limit=${limit}&offset=${offset}`;
+    const APIURL = `http://localhost:3200/api/board/list?key=a&limit=${limit}&offset=${offset}`;
     console.log("queryString.search : ", queryString.search);
     console.log("APIURL : ", APIURL);
     const axiosOption = { withCredentials: true };
@@ -122,27 +121,15 @@ const Board: React.FC = () => {
             <IonButtons slot="start">
               <IonBackButton defaultHref="/" icon={chevronBack} />
             </IonButtons>
-            <IonTitle>게시판</IonTitle>
+            <IonTitle>공지사항</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonContent className="ion-padding">
           <div>
             <div style={{ margin: "7% 0px", display: "flex", justifyContent: "space-between" }}>
               <div style={{ fontSize: "20px", color: "gray", fontWeight: "bold" }}>KONA PAY</div>
-              <IonButton onClick={() => history.push({ pathname: "/board/write" })}>글작성</IonButton>
+              {/* <IonButton onClick={() => history.push({ pathname: "/board/write" })}>글작성</IonButton> */}
             </div>
-
-            <IonItem>
-              <IonSegment className="balance" value="favorite" color="white">
-                <IonSegmentButton value="call">
-                  <IonLabel>인기</IonLabel>
-                </IonSegmentButton>
-                <IonSegmentButton value="favorite">
-                  <IonLabel>인기댓글</IonLabel>
-                </IonSegmentButton>
-              </IonSegment>
-            </IonItem>
-
             <IonList>
               {boardData.map((item: any) => {
                 // item[`sellDate`] = item[`sellDate`].split("T")[0];
@@ -212,4 +199,4 @@ const Board: React.FC = () => {
   );
 };
 
-export default Board;
+export default Notice;
