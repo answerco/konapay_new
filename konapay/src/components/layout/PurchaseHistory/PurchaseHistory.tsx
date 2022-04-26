@@ -1,39 +1,6 @@
-import {
-  IonApp,
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-  IonContent,
-  IonFooter,
-  IonMenu,
-  IonList,
-  IonListHeader,
-  IonMenuToggle,
-  IonIcon,
-  IonLabel,
-  IonPage,
-  IonButtons,
-  IonButton,
-  IonItem,
-  IonItemDivider,
-  IonInput,
-  IonBackButton,
-  IonGrid,
-  IonRow,
-  IonCol,
-} from "@ionic/react";
+import { IonApp, IonHeader, IonToolbar, IonTitle, IonContent, IonLabel, IonPage, IonButtons, IonBackButton, IonGrid, IonRow, IonCol } from "@ionic/react";
 
 import React from "react";
-import Sidebar from "../../assets/img/sideMenu.png";
-import Myinfo from "../../assets/img/myInfo.png";
-import Setting from "../../assets/img/setting.png";
-import Home from "../../assets/img/home.png";
-import Banner from "../../assets/img/bannerImg.png";
-import MainCard from "../../assets/img/mainCard.png";
-import CardSelectBar from "../../assets/img/cardSelectBar.png";
-import FooterMenu_Home from "../../assets/img/footerMenu_home.png";
-import FooterMenu_Pay from "../../assets/img/footerMenu_pay.png";
-import FooterMenu_Benefit from "../../assets/img/footerMenu_benefit.png";
 
 import "@ionic/react/css/normalize.css";
 import "@ionic/react/css/structure.css";
@@ -73,9 +40,9 @@ const PurchaseHistory: React.FC = () => {
               <div style={{ fontSize: "20px", color: "gray", fontWeight: "bold" }}>KONA PAY</div>
             </div>
 
-            <div style={{ display: "flex", justifyContent: "center" }}>
+            {/* <div style={{ display: "flex", justifyContent: "center" }}>
               <span style={{ border: "1px solid gray", padding: "7px", borderRadius: "10px" }}>2022.08-01</span>
-            </div>
+            </div> */}
 
             <div style={{ margin: "10% 0" }}>
               <IonLabel>발생건수/금액통계</IonLabel>
@@ -94,24 +61,6 @@ const PurchaseHistory: React.FC = () => {
                   <IonCol>발생금액</IonCol>
                   <IonCol>1,6600</IonCol>
                   <IonCol>1,6600</IonCol>
-                </IonRow>
-              </IonGrid>
-            </div>
-
-            <div style={{ margin: "10% 0" }}>
-              <IonLabel>상품별 통계</IonLabel>
-              <IonGrid className="payment_table_text">
-                <IonRow className="table_th">
-                  <IonCol>브랜드명</IonCol>
-                  <IonCol>상품명</IonCol>
-                  <IonCol>건수</IonCol>
-                  <IonCol>금액</IonCol>
-                </IonRow>
-                <IonRow>
-                  <IonCol>이마트</IonCol>
-                  <IonCol>소스</IonCol>
-                  <IonCol>1</IonCol>
-                  <IonCol>33,000</IonCol>
                 </IonRow>
               </IonGrid>
             </div>
