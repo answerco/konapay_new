@@ -2,47 +2,23 @@ import {
   IonApp,
   IonHeader,
   IonToolbar,
-  IonTitle,
   IonContent,
-  //   IonFooter,
-  IonMenu,
-  IonList,
-  IonListHeader,
   IonMenuToggle,
   IonIcon,
   IonLabel,
   IonPage,
   IonButtons,
   IonButton,
-  IonItem,
-  // IonImg,
-  //   IonNote,
-  //   IonCardContent,
-  //   IonCardTitle,
   IonCardHeader,
   IonCard,
-  // IonCardSubtitle,
-  //   IonBackButton,
   IonRouterLink,
   IonCardContent,
   IonText,
-  // IonThumbnail,
-  // useIonAlert,
   IonAlert,
   useIonAlert,
 } from "@ionic/react";
 
 import React, { useEffect, useState } from "react";
-// import Sidebar from "../../assets/img/sideMenu.png";
-// import Myinfo from "../../assets/img/myInfo.png";
-// import Setting from "../../assets/img/setting.png";
-// import Home from "../../assets/img/home.png";
-// import Banner from "../../assets/img/bannerImg.png";
-// import MainCard from "../../assets/img/mainCard.png";
-// import CardSelectBar from "../../assets/img/cardSelectBar.png";
-// import FooterMenu_Home from "../../assets/img/footerMenu_home.png";
-// import FooterMenu_Pay from "../../assets/img/footerMenu_pay.png";
-// import FooterMenu_Benefit from "../../assets/img/footerMenu_benefit.png";
 
 import "@ionic/react/css/normalize.css";
 import "@ionic/react/css/structure.css";
@@ -55,7 +31,7 @@ import "@ionic/react/css/text-transformation.css";
 import "@ionic/react/css/flex-utils.css";
 import "@ionic/react/css/display.css";
 
-import { homeOutline, settingsOutline, personCircleOutline, logoUsd, giftOutline } from "ionicons/icons";
+import { homeOutline, personCircleOutline, logoUsd, giftOutline } from "ionicons/icons";
 
 import "./main.css";
 import userInfo from "../../../model/user/userinfo";
@@ -187,9 +163,7 @@ const Main: React.FC = () => {
         <IonLabel className="bannerText2">언제 어디서든 간편 한 결제</IonLabel>
 
         <IonCard className="walletCard">
-          <IonCardHeader>
-            <IonLabel className="cardHeader">카드선택</IonLabel>
-          </IonCardHeader>
+          <IonCardHeader></IonCardHeader>
 
           <IonCardContent className="background">
             <IonText
