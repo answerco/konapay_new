@@ -1,7 +1,27 @@
-import { IonApp, IonCard, IonCardContent, IonCardHeader, IonCol, IonContent, IonFooter, IonGrid, IonHeader, IonIcon, IonInput, IonItem, IonPage, IonRow, IonText, IonTitle } from "@ionic/react";
+import {
+  IonApp,
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCol,
+  IonContent,
+  IonFooter,
+  IonGrid,
+  IonHeader,
+  IonIcon,
+  IonInput,
+  IonItem,
+  IonLabel,
+  IonPage,
+  IonRow,
+  IonText,
+  IonTextarea,
+  IonTitle,
+} from "@ionic/react";
 import { chevronBack, heart } from "ionicons/icons";
-import React, { useState } from "react";
-import { useHistory } from "react-router";
+import React, { useEffect, useState } from "react";
+import { useHistory, useParams } from "react-router";
+import Board from "../../../model/board/board";
 import Menu from "./menu";
 interface BoardReadInterface {
   boderId: number | string;
@@ -26,12 +46,35 @@ interface LikeInformationInterface {
 // const BoardRead: React.FC<BoardReadInterface> = ({ boderId, category, content, like, reply, title }) => {
 const BoardRead: React.FC = () => {
   const history = useHistory();
-  const category = "test category";
-  const title = "test title";
-  const content = `조금 긴 글을 쓰고 싶은데 할말은 없고 퍼블리싱은 어렵고 집갈 생각하니 벌써부터 토가나오네 어휴 ,, 이거 어떻게 해야하나...조금 긴 글을 쓰고 싶은데 할말은 없고 퍼블리싱은 어렵고 집갈 생각하니 벌써부터 토가나오네 어휴 ,, 이거 어떻게 해야하나...조금 긴 글을 쓰고 싶은데 할말은 없고 퍼블리싱은 어렵고 집갈 생각하니 벌써부터 토가나오네 어휴 ,, 이거 어떻게 해야하나...조금 긴 글을 쓰고 싶은데 할말은 없고 퍼블리싱은 어렵고 집갈 생각하니 벌써부터 토가나오네 어휴 ,, 이거 어떻게 해야하나...조금 긴 글을 쓰고 싶은데 할말은 없고 퍼블리싱은 어렵고 집갈 생각하니 벌써부터 토가나오네 어휴 ,, 이거 어떻게 해야하나...조금 긴 글을 쓰고 싶은데 할말은 없고 퍼블리싱은 어렵고 집갈 생각하니 벌써부터 토가나오네 어휴 ,, 이거 어떻게 해야하나...`;
+  const params = useParams();
+
   const date = "2022-04-20T10:47:20Z";
   const count = 2;
   const [likeCount, setLikeCount] = useState(0);
+  const [postCategory, setPostCategory] = useState<string>("");
+  const [postUid, setPostUid] = useState<string>("");
+  const [postTitle, setPostTitle] = useState<string>("");
+  const [postContent, setPostContent] = useState<string>("");
+  const [postUpdatedAt, setPostUpdatedAt] = useState<string>("");
+  const [postView, setPostView] = useState<number>(0);
+  const setBoardData = async () => {
+    // @ts-ignore
+    const boardIdx: number = params["boardIdx"] as number;
+    console.log("boardIdx : ", boardIdx);
+    const boardData = await Board.getBoard(boardIdx);
+    // boardData[`postUpdatedAt`] = `${boardData[`postUpdatedAt`].split("T")[0]} ${boardData[`postUpdatedAt`].split("T")[1].split(".")[0]}`;
+    console.log(boardData);
+    setPostCategory(boardData?.postType);
+    setPostUid(boardData?.uid);
+    setPostUpdatedAt(boardData?.postUpdatedAt);
+    setPostTitle(boardData?.postTitle);
+    setPostContent(boardData?.postContent);
+    setPostView(boardData?.view);
+  };
+
+  useEffect(() => {
+    setBoardData();
+  }, []);
   return (
     <IonApp>
       <Menu></Menu>
@@ -47,7 +90,7 @@ const BoardRead: React.FC = () => {
           </IonHeader>
           <IonCard>
             <IonCardHeader>
-              <IonItem>{category}</IonItem>
+              <IonItem>{postCategory}</IonItem>
             </IonCardHeader>
             <IonCardContent>
               <IonItem>
@@ -55,17 +98,18 @@ const BoardRead: React.FC = () => {
                   <IonRow>
                     <div style={{ width: "60px", height: "60px", backgroundColor: "black", borderRadius: "50%" }} />
                     <IonCol>
-                      <IonRow>작성자</IonRow>
-                      <IonRow>{date}</IonRow>
+                      <IonRow>작성자 : {postUid}</IonRow>
+                      <IonRow>수정일 : {postUpdatedAt}</IonRow>
+                      <IonRow>조회수 : {postView}</IonRow>
                     </IonCol>
                   </IonRow>
                 </IonGrid>
               </IonItem>
               <IonItem>
-                <IonInput value={title} readonly></IonInput>
+                <IonInput value={postTitle} readonly></IonInput>
               </IonItem>
               <IonItem>
-                <IonText>{content}</IonText>
+                <div dangerouslySetInnerHTML={{ __html: postContent }}></div>
               </IonItem>
             </IonCardContent>
             <IonFooter>
@@ -90,7 +134,7 @@ const BoardRead: React.FC = () => {
                   </IonRow>
                   <IonItem>
                     <IonCol>
-                      <IonText>value={content}</IonText>
+                      <IonText>value={postContent}</IonText>
                     </IonCol>
                   </IonItem>
                 </IonGrid>
