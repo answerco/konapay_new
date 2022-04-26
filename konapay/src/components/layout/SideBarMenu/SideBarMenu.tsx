@@ -130,13 +130,13 @@ const SideBarMenu: React.FC = () => {
                 <IonLabel>공지사항</IonLabel>
               </IonItem>
             </IonRouterLink>
-            <IonRouterLink href="/board">
+            <IonRouterLink href="/board?key=e">
               <IonItem button>
                 <IonIcon src={chatbubblesOutline} slot="start" name="home"></IonIcon>
                 <IonLabel>이벤트</IonLabel>
               </IonItem>
             </IonRouterLink>
-            <IonRouterLink href="/board">
+            <IonRouterLink href="/board?key=c">
               <IonItem button>
                 <IonIcon src={chatbubblesOutline} slot="start" name="home"></IonIcon>
                 <IonLabel>자유 게시판</IonLabel>
