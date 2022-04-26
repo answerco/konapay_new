@@ -24,61 +24,56 @@ import {
   IonToolbar,
   useIonViewWillEnter,
 } from "@ionic/react";
-import { chevronBack, closeSharp } from "ionicons/icons";
+import { chevronBack, closeSharp, personCircle, search } from "ionicons/icons";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import ProductManager from "./productManager";
+import BuySellList from "../../../model/buySell/seller";
 
 const BuyerList: React.FC = () => {
   const history = useHistory();
 
   const [isInfiniteDisabled, setInfiniteDisabled] = useState(false);
-  const [sellData, setSellData] = useState<any>([]);
+  const [buyData, setBuyData] = useState<any>([]);
   const [productIdx, setProductIdx] = useState<number>(0);
   const [detailIsValid, setDetailIsValid] = useState<boolean>(false);
-  const [rowItem, setRowItem] = useState<any[][]>();
 
-  useEffect(() => {
-    const axiosFunction = async () => {
-      console.log("useEffect productIdx : ", productIdx);
-      try {
-        const htmlMapProductInformation = await ProductManager.getList(productIdx);
-
-        if (htmlMapProductInformation != null) {
-          setRowItem(htmlMapProductInformation);
-        } else {
-          throw new Error("....");
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    axiosFunction();
-  }, [detailIsValid]);
-  // Axios sellListGetHandler
-  /*
-        로그인 이후 아이디값 sellerUid 값으로 변경 필요
-  */
-  const pushSellDataHandler = async () => {
-    const limit = sellData.length + 20;
+  const pushBuyDataHandler = async () => {
+    const limit = buyData.length + 20;
     const offset = limit == 0 ? 0 : limit - 20;
-    const APIURL = `${process.env.REACT_APP_SERVER}/sell/list?sellerUid=${"joy"}&status=${"S"}&limit=${limit}&offset=${offset}`;
-    console.log("APIURL : ", APIURL);
-    const axiosOption = { withCredentials: true };
-
     let _limit = limit;
     let _offset = offset;
-    let sellerId = "joy";
-    let status = "S";
-
-    const sellItem = await ProductManager.getSellInformation(sellerId, status, _limit, _offset);
-    console.log("sellInformation : ", sellItem);
-    setSellData([...sellData, ...sellItem]);
+    const buyerUid = window.sessionStorage.uid;
+    let status = "";
+    const buyList = await BuySellList.buyList(buyerUid, status, _limit, _offset);
+    setSellStatusFormatingHandler(buyList);
+    console.log("buyList : ", buyList);
+    setBuyData([...buyData, ...buyList]);
   };
 
+  const setSellStatusFormatingHandler = (sellList: any) => {
+    for (let sellItem of sellList) {
+      switch (sellItem[`sellStatus`]) {
+        case "S":
+          sellItem[`sellStatus`] = "구매요청";
+          break;
+        case "F":
+          sellItem[`sellStatus`] = "판매완료";
+          break;
+        case "C":
+          sellItem[`sellStatus`] = "판매취소";
+          break;
+        case "R":
+          sellItem[`sellStatus`] = "구매요청 거절";
+          break;
+      }
+    }
+  };
+
+  const cancelPurchaseHandler = () => {};
+  const r = () => {};
+
   useIonViewWillEnter(() => {
-    pushSellDataHandler();
+    pushBuyDataHandler();
   });
 
   const openDetailModal = (idx: any) => {
@@ -99,32 +94,80 @@ const BuyerList: React.FC = () => {
             </IonButton>
           </IonHeader>
 
-          <IonCard>
+          {/* <IonCard>
             <IonCardHeader>상품 사진</IonCardHeader>
             <IonCardContent>
               <IonImg src="https://placeimg.com/320/100/any/grayscale"></IonImg>
             </IonCardContent>
-          </IonCard>
+          </IonCard> */}
           <IonCard>
             <IonCardHeader>
               <IonTitle>상품 확인서</IonTitle>
             </IonCardHeader>
-            <IonCardContent>
-              <IonGrid>
-                {detailIsValid ? (
-                  rowItem?.map((item, index) => {
-                    return (
-                      <IonRow key={index}>
-                        <IonCol size="4">{item[0]}</IonCol>
-                        <IonCol>{item[1]}</IonCol>
+            {buyData
+              .filter((item: any) => {
+                return item[`sellIdx`] === productIdx;
+              })
+              .map((item: any) => {
+                console.log("detail Item : ", item);
+                return (
+                  <IonCardContent key={item[`sellIdx`]}>
+                    <IonGrid key={item[`sellIdx`]}>
+                      <IonRow>
+                        <IonCol>상품번호</IonCol>
+                        <IonCol>{item[`sellIdx`]}</IonCol>
                       </IonRow>
-                    );
-                  })
-                ) : (
-                  <IonTitle>상품을 불러오지 못했습니다.</IonTitle>
-                )}
-              </IonGrid>
-            </IonCardContent>
+                      <IonRow>
+                        <IonCol>판매상태</IonCol>
+                        <IonCol>{item[`sellStatus`]}</IonCol>
+                      </IonRow>
+                      <IonRow>
+                        <IonCol>상품명</IonCol>
+                        <IonCol>{item[`productName`]}</IonCol>
+                      </IonRow>
+                      <IonRow>
+                        <IonCol>판매자</IonCol>
+                        <IonCol>{item[`sellerUid`]}</IonCol>
+                      </IonRow>
+                      <IonRow>
+                        <IonCol>판매가격</IonCol>
+                        <IonCol>{item[`productPrice`]}</IonCol>
+                      </IonRow>
+                      <IonRow>
+                        <IonCol>판매시작일</IonCol>
+                        <IonCol>{item[`sellDate`]}</IonCol>
+                      </IonRow>
+                      <IonRow>
+                        <IonCol>구매일</IonCol>
+                        <IonCol>{item[`buyDate`]}</IonCol>
+                      </IonRow>
+                      <IonRow>
+                        <IonCol>txHash</IonCol>
+                        <IonCol>{item[`txHash`]}</IonCol>
+                      </IonRow>
+                      {item[`sellStatus`] === "구매요청" ? (
+                        <IonRow>
+                          <IonCol>
+                            <IonButton>구매취소</IonButton>
+                          </IonCol>
+                          <IonCol>
+                            <IonButton>구매진행</IonButton>
+                          </IonCol>
+                        </IonRow>
+                      ) : (
+                        <IonRow>
+                          <IonCol>
+                            <IonButton disabled>구매취소</IonButton>
+                          </IonCol>
+                          <IonCol>
+                            <IonButton disabled>구매진행</IonButton>
+                          </IonCol>
+                        </IonRow>
+                      )}
+                    </IonGrid>
+                  </IonCardContent>
+                );
+              })}
           </IonCard>
         </IonContent>
       </IonModal>
@@ -157,7 +200,7 @@ const BuyerList: React.FC = () => {
             <IonList>
               {
                 // @ts-expect-error
-                sellData.map((item) => {
+                buyData.map((item) => {
                   item[`sellDate`] = item[`sellDate`].split("T")[0];
                   return (
                     <IonItem key={item[`sellIdx`]}>
@@ -183,7 +226,7 @@ const BuyerList: React.FC = () => {
               }
             </IonList>
 
-            <IonInfiniteScroll onIonInfinite={pushSellDataHandler} threshold="100px" disabled={isInfiniteDisabled}>
+            <IonInfiniteScroll onIonInfinite={pushBuyDataHandler} threshold="100px" disabled={isInfiniteDisabled}>
               <IonInfiniteScrollContent loadingSpinner="bubbles" loadingText="Loading more data..."></IonInfiniteScrollContent>
             </IonInfiniteScroll>
           </IonContent>
