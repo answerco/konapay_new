@@ -8,11 +8,16 @@ import {
   diamondOutline,
   documentTextOutline,
   logoUsd,
+  logOutOutline,
+  newspaperOutline,
   personCircleOutline,
+  qrCodeOutline,
+  receiptOutline,
   removeOutline,
   searchCircleOutline,
   sendOutline,
   settingsOutline,
+  statsChart,
 } from "ionicons/icons";
 
 const SideBarMenu: React.FC = () => {
@@ -30,39 +35,47 @@ const SideBarMenu: React.FC = () => {
             <a style={{ fontWeight: "bold", color: "black" }}>지갑</a>
             <IonIcon src={removeOutline}></IonIcon>
           </IonListHeader>
-
           <IonMenuToggle auto-hide="false">
-            <IonItem button>
-              <IonIcon src={cardOutline} slot="start" name="home"></IonIcon>
-              <IonLabel>결제</IonLabel>
-            </IonItem>
-            <IonItem button>
-              <IonIcon src={cardOutline} slot="start" name="home"></IonIcon>
-              <IonLabel>결제</IonLabel>
-            </IonItem>
-            <IonItem button>
-              <IonIcon src={cardOutline} slot="start" name="home"></IonIcon>
-              <IonLabel>결제</IonLabel>
-            </IonItem>
-            <IonItem button>
-              <IonIcon src={cardOutline} slot="start" name="home"></IonIcon>
-              <IonLabel>결제</IonLabel>
-            </IonItem>
-            <IonItem button>
-              <IonIcon src={cardOutline} slot="start" name="home"></IonIcon>
-              <IonLabel>결제</IonLabel>
-            </IonItem>
-            <IonItem button>
-              <IonIcon src={cardOutline} slot="start" name="home"></IonIcon>
-              <IonLabel>결제</IonLabel>
-            </IonItem>
-
             <IonRouterLink href="/purchasehistory">
               <IonItem button>
-                <IonIcon src={documentTextOutline} slot="start" name="home"></IonIcon>
+                <IonIcon src={cardOutline} slot="start" name="home"></IonIcon>
+                <IonLabel>내지갑</IonLabel>
+              </IonItem>
+            </IonRouterLink>
+            <IonRouterLink href="/purchasehistory">
+              <IonItem button>
+                <IonIcon src={newspaperOutline} slot="start" name="home"></IonIcon>
+                <IonLabel>판매</IonLabel>
+              </IonItem>
+            </IonRouterLink>
+            <IonRouterLink href="/purchasehistory">
+              <IonItem button>
+                <IonIcon src={receiptOutline} slot="start" name="home"></IonIcon>
+                <IonLabel>판매내역</IonLabel>
+              </IonItem>
+            </IonRouterLink>
+            <IonRouterLink href="/purchasehistory">
+              <IonItem button>
+                <IonIcon src={statsChart} slot="start" name="home"></IonIcon>
+                <IonLabel>판매집계</IonLabel>
+              </IonItem>
+            </IonRouterLink>
+            <IonRouterLink href="/purchasehistory">
+              <IonItem button>
+                <IonIcon src={qrCodeOutline} slot="start" name="home"></IonIcon>
+                <IonLabel>구매</IonLabel>
+              </IonItem>
+            </IonRouterLink>
+            <IonRouterLink href="/purchasehistory">
+              <IonItem button>
+                <IonIcon src={receiptOutline} slot="start" name="home"></IonIcon>
                 <IonLabel>구매내역</IonLabel>
               </IonItem>
             </IonRouterLink>
+            <IonItem button>
+              <IonIcon src={statsChart} slot="start" name="home"></IonIcon>
+              <IonLabel>구매집계</IonLabel>
+            </IonItem>
           </IonMenuToggle>
         </IonList>
 
@@ -71,7 +84,6 @@ const SideBarMenu: React.FC = () => {
             <a style={{ fontWeight: "bold", color: "black" }}>금융</a>
             <IonIcon src={removeOutline}></IonIcon>
           </IonListHeader>
-
           <IonMenuToggle auto-hide="false">
             {/* <IonRouterLink href="/payment4"> */}
             <IonRouterLink href="/balanceinquiry">
@@ -80,21 +92,18 @@ const SideBarMenu: React.FC = () => {
                 <IonLabel>매출조회</IonLabel>
               </IonItem>
             </IonRouterLink>
-
             <IonRouterLink href="/swap">
               <IonItem button>
                 <IonIcon src={logoUsd} slot="start" name="home"></IonIcon>
                 <IonLabel>환전</IonLabel>
               </IonItem>
             </IonRouterLink>
-
             <IonRouterLink href="/inout">
               <IonItem button>
                 <IonIcon src={sendOutline} slot="start" name="home"></IonIcon>
                 <IonLabel>송금</IonLabel>
               </IonItem>
             </IonRouterLink>
-
             <IonItem button>
               <IonIcon src={cashOutline} slot="start" name="home"></IonIcon>
               <IonLabel>적립</IonLabel>
@@ -107,7 +116,6 @@ const SideBarMenu: React.FC = () => {
             <a style={{ fontWeight: "bold", color: "black" }}>생활</a>
             <IonIcon src={removeOutline}></IonIcon>
           </IonListHeader>
-
           <IonMenuToggle auto-hide="false">
             <IonRouterLink href="/board">
               <IonItem button>
@@ -115,7 +123,12 @@ const SideBarMenu: React.FC = () => {
                 <IonLabel>이벤트</IonLabel>
               </IonItem>
             </IonRouterLink>
-
+            <IonRouterLink href="/board">
+              <IonItem button>
+                <IonIcon src={chatbubblesOutline} slot="start" name="home"></IonIcon>
+                <IonLabel>게시판</IonLabel>
+              </IonItem>
+            </IonRouterLink>
             <IonRouterLink href="/board">
               <IonItem button>
                 <IonIcon src={chatbubblesOutline} slot="start" name="home"></IonIcon>
@@ -124,6 +137,7 @@ const SideBarMenu: React.FC = () => {
             </IonRouterLink>
           </IonMenuToggle>
         </IonList>
+
         <IonList>
           <IonListHeader>
             <a style={{ fontWeight: "bold", color: "black" }}></a>
@@ -133,7 +147,7 @@ const SideBarMenu: React.FC = () => {
           <IonMenuToggle auto-hide="false">
             <IonRouterLink href="/board">
               <IonItem button>
-                <IonIcon src={chatbubblesOutline} slot="start" name="home"></IonIcon>
+                <IonIcon src={logOutOutline} slot="start" name="home"></IonIcon>
                 <IonLabel>로그아웃</IonLabel>
               </IonItem>
             </IonRouterLink>
