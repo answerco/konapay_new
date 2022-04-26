@@ -130,19 +130,6 @@ const Board: React.FC = () => {
               <div style={{ fontSize: "20px", color: "gray", fontWeight: "bold" }}>KONA PAY</div>
               <IonButton onClick={() => history.push({ pathname: "/board/write" })}>글작성</IonButton>
             </div>
-            <IonItem>
-              <IonSegment value="favorite" color="white">
-                <IonSegmentButton value="call" className="balance">
-                  <IonLabel>공지사항</IonLabel>
-                </IonSegmentButton>
-                <IonSegmentButton value="favorite" className="balance">
-                  <IonLabel>이벤트</IonLabel>
-                </IonSegmentButton>
-                <IonSegmentButton value="map" className="balance">
-                  <IonLabel>커뮤니티</IonLabel>
-                </IonSegmentButton>
-              </IonSegment>
-            </IonItem>
 
             <IonItem>
               <IonSegment className="balance" value="favorite" color="white">
