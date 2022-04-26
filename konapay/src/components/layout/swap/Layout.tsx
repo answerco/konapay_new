@@ -11,23 +11,20 @@ meta.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-s
 document.getElementsByTagName("head")[0].appendChild(meta);
 
 const Layout: React.FC = () => {
+  const [point, setPoint]: any = useState(0);
 
-  const [point, setPoint]: any = useState(0)
-
-  const getPoint =  async   () => {
-    let res = await Point.view(sessionStorage.uid)
-    if(res === null){
-      setPoint(0)
+  const getPoint = async () => {
+    let res = await Point.view(sessionStorage.uid);
+    if (res === null) {
+      setPoint(0);
+    } else {
+      setPoint(res);
     }
-    else{
-      setPoint(res)
-    }
+  };
 
-  }
-
-  useEffect(()=>{
-    getPoint()
-  },[])
+  useEffect(() => {
+    getPoint();
+  }, []);
 
   return (
     <div className="grid-init grid">
@@ -40,9 +37,7 @@ const Layout: React.FC = () => {
         </IonToolbar>
       </IonHeader>
 
-      <div className="box-init box" style={{ height: "7.5%", justifyContent: "flex-start", flexDirection: "column" }}>
-        <p style={{ color: "#E3E3E3", fontSize: "14px", width: "75%" }}>TOTAL PORTFOLIO VALUE</p>
-      </div>
+      <div className="box-init box" style={{ height: "7.5%", justifyContent: "flex-start", flexDirection: "column" }}></div>
       <div className="box-init box" style={{ height: "22.5%" }}>
         <div
           className="box-init card"
