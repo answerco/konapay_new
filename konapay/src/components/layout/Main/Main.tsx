@@ -9,17 +9,17 @@ import {
   IonPage,
   IonButtons,
   IonButton,
-  IonCardHeader,
   IonCard,
   IonRouterLink,
   IonCardContent,
   IonText,
   IonAlert,
   useIonAlert,
+  IonSlides,
+  IonSlide,
 } from "@ionic/react";
 
 import React, { useEffect, useState } from "react";
-
 import "@ionic/react/css/normalize.css";
 import "@ionic/react/css/structure.css";
 import "@ionic/react/css/typography.css";
@@ -31,9 +31,10 @@ import "@ionic/react/css/text-transformation.css";
 import "@ionic/react/css/flex-utils.css";
 import "@ionic/react/css/display.css";
 
+import "./main.css";
+
 import { homeOutline, personCircleOutline, logoUsd, giftOutline } from "ionicons/icons";
 
-import "./main.css";
 import userInfo from "../../../model/user/userinfo";
 import SideBarMenu from "../SideBarMenu/SideBarMenu";
 
@@ -136,6 +137,7 @@ const Main: React.FC = () => {
           },
         ]}
       ></IonAlert>
+
       <SideBarMenu></SideBarMenu>
       <IonPage className="ion-page">
         <IonHeader>
@@ -149,11 +151,9 @@ const Main: React.FC = () => {
             </IonButtons>
 
             <IonButtons slot="end" id="myinfo">
-              <IonRouterLink href="/">
-                <IonButton>
-                  <IonIcon src={personCircleOutline}></IonIcon>
-                </IonButton>
-              </IonRouterLink>
+              <IonButton onClick={getReady}>
+                <IonIcon src={personCircleOutline}></IonIcon>
+              </IonButton>
             </IonButtons>
           </IonToolbar>
         </IonHeader>
@@ -163,22 +163,36 @@ const Main: React.FC = () => {
         <IonLabel className="bannerText2">언제 어디서든 간편 한 결제</IonLabel>
 
         <IonCard className="walletCard">
-          <IonCardHeader></IonCardHeader>
-
-          <IonCardContent className="background">
-            <IonText
-              onClick={(e) => {
-                addressCopy(e);
-              }}
-              className="card-text1 selectable"
-            >
-              {viewAddress}
-            </IonText>
-            <br />
-            <IonLabel className="card-text2">ETH : {ethAmount}</IonLabel>
-            <br />
-            <IonLabel className="card-text3">KSPC : {kspcAmount}</IonLabel>
-          </IonCardContent>
+          <IonSlides>
+            <IonSlide>
+              <IonCardContent className="background">
+                <IonText
+                  onClick={(e) => {
+                    addressCopy(e);
+                  }}
+                  className="card-text1 selectable"
+                >
+                  {viewAddress}
+                </IonText>
+                <br />
+                <IonLabel className="card-text2">KSPC : {kspcAmount}</IonLabel>
+              </IonCardContent>
+            </IonSlide>
+            <IonSlide>
+              <IonCardContent className="background">
+                <IonText
+                  onClick={(e) => {
+                    addressCopy(e);
+                  }}
+                  className="card-text1 selectable"
+                >
+                  {viewAddress}
+                </IonText>
+                <br />
+                <IonLabel className="card-text2">ETH : {ethAmount}</IonLabel>
+              </IonCardContent>
+            </IonSlide>
+          </IonSlides>
         </IonCard>
 
         <IonRouterLink href="/scan">
