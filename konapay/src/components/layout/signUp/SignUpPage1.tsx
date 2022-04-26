@@ -118,21 +118,6 @@ const SignUpPage1: React.FC = () => {
                     [상세보기]
                   </a>
                 </div>
-
-                <div style={{ display: "flex", width: "100%", justifyContent: "space-around" }}>
-                  <IonItem className="signup_item" style={{ display: "flex", width: "70%" }}>
-                    <IonCheckbox name="alarm" checked={check.alarm} onClick={onChange} />
-                    <IonLabel style={{ marginLeft: "3%", fontSize: "85%" }}>[선택] 마케팅정보 알람 동의</IonLabel>
-                  </IonItem>
-                  <a style={{ fontSize: "14px", textAlign: "center", marginRight: "5%", alignSelf: "center" }} href="http://www.naver.com" target="_blank">
-                    [상세보기]
-                  </a>
-                </div>
-
-                {/*           
-                <SignUpCheckBox2 forId="checkBox1" check="필수" description="서비스 이용약관 동의"></SignUpCheckBox2>
-                <SignUpCheckBox2 forId="checkBox2" check="필수" description="개인정보 수집 및 이용 동의"></SignUpCheckBox2>
-                <SignUpCheckBox2 forId="checkBox3" check="선택" description="마케팅정보 알람 동의"></SignUpCheckBox2> */}
               </div>
               <div className="box-init" style={{ height: "40%", width: "100%", flexDirection: "column", justifyContent: "flex-start" }}>
                 <button className="box-init" style={{ height: "25%", width: "65%", color: "gray", border: "none" }} onClick={prevHistoryFunction} disabled={!(check.service && check.personal)}>

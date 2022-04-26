@@ -29,6 +29,7 @@ import {
   // IonThumbnail,
   // useIonAlert,
   IonAlert,
+  useIonAlert,
 } from "@ionic/react";
 
 import React, { useEffect, useState } from "react";
@@ -85,6 +86,8 @@ const Main: React.FC = () => {
   const [ethAmount, setEthAmount] = useState<string>("");
   const [kspcAmount, setKspcAmount] = useState<string>("");
   const [copySucess, setCopySucess] = useState<boolean>(false);
+
+  const [paste] = useIonAlert()
 
   const amountHandler = async () => {
     if (walletAddress !== "") {
@@ -148,6 +151,10 @@ const Main: React.FC = () => {
       amountHandler();
     }
   }, [walletAddress]);
+
+  const getReady = () => {
+    paste('서비스 준비 중 입니다.')
+  } 
 
   return (
     <IonApp>
@@ -289,27 +296,11 @@ const Main: React.FC = () => {
             </IonButtons>
 
             <IonButtons slot="end" id="myinfo">
-              <IonRouterLink href="/signuppage1">
+              <IonRouterLink href="/">
                 <IonButton>
                   <IonIcon src={personCircleOutline}></IonIcon>
                 </IonButton>
               </IonRouterLink>
-            </IonButtons>
-
-            <IonButtons slot="end" id="setting">
-              <IonMenuToggle>
-                <IonButton>
-                  <IonIcon src={settingsOutline}></IonIcon>
-                </IonButton>
-              </IonMenuToggle>
-            </IonButtons>
-
-            <IonButtons slot="end" id="home">
-              <IonMenuToggle>
-                <IonButton>
-                  <IonIcon src={homeOutline}></IonIcon>
-                </IonButton>
-              </IonMenuToggle>
             </IonButtons>
           </IonToolbar>
         </IonHeader>
@@ -353,7 +344,6 @@ const Main: React.FC = () => {
 
         <IonToolbar className="mainFooter" style={{ backgroundColor: "rgb(230, 230, 230)", height: "15%", paddingTop: "3%" }}>
           <IonButtons slot="start" id="home" style={{ marginLeft: "10%" }}>
-            <IonMenuToggle>
               <IonButton>
                 <a>
                   <IonIcon src={homeOutline}></IonIcon>
@@ -362,7 +352,6 @@ const Main: React.FC = () => {
                   </div>
                 </a>
               </IonButton>
-            </IonMenuToggle>
           </IonButtons>
 
           <IonButtons slot="start" style={{ marginLeft: "20%" }}>
@@ -377,16 +366,14 @@ const Main: React.FC = () => {
           </IonButtons>
 
           <IonButtons slot="start" style={{ marginLeft: "20%" }}>
-            <IonMenuToggle>
-              <IonButton>
-                <a>
-                  <IonIcon src={giftOutline}></IonIcon>
-                  <div>
-                    <IonLabel>혜택</IonLabel>
-                  </div>
-                </a>
-              </IonButton>
-            </IonMenuToggle>
+            <IonButton onClick={getReady}>
+              <a>
+                <IonIcon src={giftOutline}></IonIcon>
+                <div>
+                  <IonLabel>혜택</IonLabel>
+                </div>
+              </a>
+            </IonButton>
           </IonButtons>
         </IonToolbar>
       </IonPage>

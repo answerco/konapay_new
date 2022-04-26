@@ -45,8 +45,8 @@ const SignUpPage2: React.FC = () => {
   const regist = async () => {
     try {
       let { uid, password, name, email, emailAlarm, messageAlarm } = registInfo;
-      let userType = location.state;
-      let res = await Signup.signup(uid, password, name, email, userType as "");
+      let userType = "B";
+      let res = await Signup.signup(uid, password, name, email, userType);
       return res;
     } catch (err) {
       paste(err as any);
@@ -78,9 +78,6 @@ const SignUpPage2: React.FC = () => {
         throw "이메일을 입력해주세요";
       } else if (!isDup.email) {
         throw "중복검사를 해주세요.";
-      } else if (location.state === undefined) {
-        paste("페이지가 만료되었습니다.");
-        locationFunction();
       } else {
         let res = await regist();
         if (!!res) {
@@ -105,7 +102,14 @@ const SignUpPage2: React.FC = () => {
       paste("아이디는 글자수 3~15의 영문 숫자 조합이어야 합니다.");
       return;
     }
-    let res = await Signup[part as "uid"](registInfo[part as "uid"]);
+    let res
+    try{
+      res = await Signup[part as "uid"](registInfo[part as "uid"]);
+    }
+    catch(err){
+     res= undefined
+    }
+    
     let text;
     if (part === "uid") {
       text = "아이디";
@@ -117,7 +121,7 @@ const SignUpPage2: React.FC = () => {
       paste(`사용가능한 ${text}입니다.`);
     } else {
       setIsDup({ ...isDup, [part]: false });
-      paste(`이미 사용중인 ${text}입니다.`);
+      paste(`사용이 불가능한 ${text}입니다.`);
     }
   };
 
@@ -159,7 +163,7 @@ const SignUpPage2: React.FC = () => {
               <SignUpInputBox id="name" name="이름" checkValue={false} placeHolder="한글15자, 영어 30자 까지 가능" state={registInfo} setState={setRegistInfo}></SignUpInputBox>
               <SignUpInputBox id="email" name="이메일" checkValue={true} placeHolder="" state={registInfo} setState={setRegistInfo} checkIsDup={checkIsDup} isDup={isDup}></SignUpInputBox>
 
-              <div className="box-init" style={{ display: "flex", height: "5%", width: "100%", marginTop: "5%", justifyContent: "flex-start" }}>
+              {/* <div className="box-init" style={{ display: "flex", height: "5%", width: "100%", marginTop: "5%", justifyContent: "flex-start" }}>
                 <IonItem className="signup_item" style={{ display: "flex", width: "100%" }}>
                   <IonCheckbox
                     name="personal"
@@ -170,13 +174,10 @@ const SignUpPage2: React.FC = () => {
                   />
                   <IonLabel style={{ marginLeft: "1%", fontSize: "65%" }}>쿠폰/이벤트/혜택 발생 시 이메일로 알림받기(선택)</IonLabel>
                 </IonItem>
-                {/* <input type="checkbox" name="" id="checkBox1" style={{ marginLeft: "1.25%" }} />
-                <label htmlFor="checkBox1" style={{ color: "black", fontSize: "12px", marginLeft: "2.5%" }}>
-                  쿠폰/이벤트/혜택 발생 시 이메일로 알림받기(선택)
-                </label> */}
-              </div>
+                
+              </div> */}
 
-              <div className="box-init" style={{ display: "flex", height: "5%", width: "100%", marginTop: "2%", justifyContent: "flex-start" }}>
+              {/* <div className="box-init" style={{ display: "flex", height: "5%", width: "100%", marginTop: "2%", justifyContent: "flex-start" }}>
                 <IonItem className="signup_item" style={{ display: "flex", width: "100%" }}>
                   <IonCheckbox
                     name="personal"
@@ -187,11 +188,7 @@ const SignUpPage2: React.FC = () => {
                   />
                   <IonLabel style={{ marginLeft: "1%", fontSize: "65%" }}>쿠폰/이벤트/혜택 발생 시 카카오톡/문자로 알림받기(선택)</IonLabel>
                 </IonItem>
-                {/* <input type="checkbox" name="" id="checkBox2" style={{ marginLeft: "1.25%" }} />
-                <label htmlFor="checkBox2" style={{ color: "black", fontSize: "12px", marginLeft: "2.5%" }}>
-                  쿠폰/이벤트/혜택 발생 시 카카오톡/문자로 알림받기(선택)
-                </label> */}
-              </div>
+              </div> */}
 
               <div className="box-init" style={{ display: "flex", height: "70px", width: "100%", marginTop: "5%", flexDirection: "column", justifyContent: "flex-start" }}>
                 <button className="box-init" style={{ height: "50%", width: "65%", color: "gray", border: "none", fontSize: "20px" }} onClick={registButton}>
