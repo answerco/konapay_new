@@ -1,4 +1,4 @@
-import { IonIcon, IonRouterLink, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonRow, IonItem } from "@ionic/react";
+import { IonIcon, IonRouterLink, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonRow, IonItem, IonApp } from "@ionic/react";
 import { addOutline, chevronBack, searchOutline, statsChartOutline } from "ionicons/icons";
 import "./Layout.css";
 import React from "react";
@@ -14,18 +14,12 @@ const Layout: React.FC = () => {
   return (
     <div className="grid-init grid">
       <IonHeader>
-        <IonItem>
-          <IonItem button onClick={() => history.push({ pathname: "/" })}>
-            <IonIcon icon={chevronBack}></IonIcon>
-          </IonItem>
-          <IonTitle>송금</IonTitle>
-        </IonItem>
-        {/* <IonToolbar>
+        <IonToolbar>
           <IonButtons slot="start">
             <IonBackButton defaultHref="/" icon={chevronBack} />
           </IonButtons>
           <IonTitle>송금</IonTitle>
-        </IonToolbar> */}
+        </IonToolbar>
       </IonHeader>
 
       {/* <div className="box-init box" style={{ height: "7.5%" }}>
