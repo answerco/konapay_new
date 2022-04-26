@@ -96,30 +96,23 @@ const Board: React.FC = () => {
     setBoardData([...boardData, ...boardItem]);
   };
 
-  const pushData = () => {
-    pushSellDataHandler();
-    const max = data.length + 20;
-    const min = max - 20;
-    const newData = [];
-    for (let i = min; i < max; i++) {
-      newData.push("Item" + i);
-    }
-
-    setData([...data, ...newData]);
-  };
-
   const loadData = (ev: any) => {
     setTimeout(() => {
-      pushData();
+      pushSellDataHandler();
       console.log("Loaded data");
       ev.target.complete();
     }, 500);
   };
 
   useIonViewWillEnter(() => {
-    pushData();
+    pushSellDataHandler();
   });
 
+  const pageMove = async (postIdx: number) => {
+    console.log(postIdx);
+
+    history.push({ pathname: `/board/page/${postIdx}` });
+  };
   return (
     <IonApp>
       <IonPage className="ion-page" id="main-content">
@@ -166,9 +159,16 @@ const Board: React.FC = () => {
             <IonList>
               {boardData.map((item: any) => {
                 // item[`sellDate`] = item[`sellDate`].split("T")[0];
+                console.log(item);
+
                 item[`postUpdatedAt`] = item[`postUpdatedAt`].split("T")[0];
                 return (
-                  <IonItem>
+                  <IonItem
+                    key={item.postIdx}
+                    onClick={() => {
+                      pageMove(item.postIdx);
+                    }}
+                  >
                     <IonLabel>
                       <h2>{item.postTitle}</h2>
                       <div>
@@ -177,7 +177,7 @@ const Board: React.FC = () => {
                       </div>
                     </IonLabel>
                     <IonThumbnail>
-                      <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" />
+                      {item.postThumnail === "" ? <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" /> : <img src={item.postThumnail}></img>}
                     </IonThumbnail>
                     <IonButton slot="end">
                       {item.totalCommentCount}
