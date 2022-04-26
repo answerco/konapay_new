@@ -1,5 +1,5 @@
 {
-  "proxy": "http://localhost:3200/",
+  "proxy":"http://localhost:3200/",
   "name": "ionic-react-routing",
   "version": "0.1.0",
   "private": true,
@@ -33,7 +33,6 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.3.1",
     "react-scripts": "^3.4.1",
-    "swiper": "^8.1.4",
     "typescript": "^3.9.2",
     "web-vitals": "^2.1.4",
     "webpack": "^4.42.0"
@@ -59,4 +58,5 @@
       "last 1 safari version"
     ]
   }
+  
 }
