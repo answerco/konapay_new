@@ -7,6 +7,7 @@ import {
   diamondOutline,
   logoUsd,
   logOutOutline,
+  megaphoneOutline,
   newspaperOutline,
   qrCodeOutline,
   receiptOutline,
@@ -124,19 +125,19 @@ const SideBarMenu: React.FC = () => {
             <IonIcon src={removeOutline}></IonIcon>
           </IonListHeader>
           <IonMenuToggle auto-hide="false">
-            <IonRouterLink href="/board">
+            <IonRouterLink href="/notice">
               <IonItem button>
-                <IonIcon src={diamondOutline} slot="start" name="home"></IonIcon>
+                <IonIcon src={megaphoneOutline} slot="start" name="home"></IonIcon>
                 <IonLabel>공지사항</IonLabel>
               </IonItem>
             </IonRouterLink>
-            <IonRouterLink href="/board?key=e">
+            <IonRouterLink href="/event">
               <IonItem button>
-                <IonIcon src={chatbubblesOutline} slot="start" name="home"></IonIcon>
+                <IonIcon src={diamondOutline} slot="start" name="home"></IonIcon>
                 <IonLabel>이벤트</IonLabel>
               </IonItem>
             </IonRouterLink>
-            <IonRouterLink href="/board?key=c">
+            <IonRouterLink href="/board">
               <IonItem button>
                 <IonIcon src={chatbubblesOutline} slot="start" name="home"></IonIcon>
                 <IonLabel>자유 게시판</IonLabel>

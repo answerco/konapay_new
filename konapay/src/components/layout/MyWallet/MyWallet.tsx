@@ -12,7 +12,7 @@ import "@ionic/react/css/text-alignment.css";
 import "@ionic/react/css/text-transformation.css";
 import "@ionic/react/css/flex-utils.css";
 import "@ionic/react/css/display.css";
-import "./BalanceInquiry.css";
+import "./MyWallet.css";
 import { useHistory } from "react-router";
 import { chevronBack } from "ionicons/icons";
 
@@ -21,7 +21,7 @@ meta.name = "viewport";
 meta.content = "width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover";
 document.getElementsByTagName("head")[0].appendChild(meta);
 
-const BalanceInquiry: React.FC = () => {
+const MyWallet: React.FC = () => {
   const history = useHistory();
   return (
     <IonApp>
@@ -31,7 +31,7 @@ const BalanceInquiry: React.FC = () => {
             <IonButtons slot="start">
               <IonBackButton defaultHref="/" icon={chevronBack} />
             </IonButtons>
-            <IonTitle>구매내역</IonTitle>
+            <IonTitle>내지갑</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonContent className="ion-padding">
@@ -62,4 +62,4 @@ const BalanceInquiry: React.FC = () => {
   );
 };
 
-export default BalanceInquiry;
+export default MyWallet;
