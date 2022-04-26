@@ -1,26 +1,31 @@
 import React from "react";
-import { IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonListHeader, IonMenu, IonMenuToggle, IonRouterLink, IonTitle, IonToolbar } from "@ionic/react";
+import { IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonListHeader, IonMenu, IonMenuToggle, IonRouterLink, IonTitle, IonToolbar, useIonAlert } from "@ionic/react";
 import {
-  alertCircleOutline,
   cardOutline,
   cashOutline,
   chatbubblesOutline,
   diamondOutline,
-  documentTextOutline,
   logoUsd,
   logOutOutline,
   newspaperOutline,
-  personCircleOutline,
   qrCodeOutline,
   receiptOutline,
   removeOutline,
   searchCircleOutline,
   sendOutline,
-  settingsOutline,
   statsChart,
 } from "ionicons/icons";
 
 const SideBarMenu: React.FC = () => {
+  const [present] = useIonAlert();
+  const logout = () => {
+    window.localStorage.clear();
+    window.sessionStorage.clear();
+    window.location.replace("/");
+  };
+  const logoutAlert = () => {
+    present({ header: "로그아웃", message: "정말로 로그아웃 하시겠습니까?", buttons: ["취소", { text: "확인", handler: logout }] });
+  };
   return (
     <IonMenu content-id="main-content">
       <IonHeader>
@@ -36,19 +41,19 @@ const SideBarMenu: React.FC = () => {
             <IonIcon src={removeOutline}></IonIcon>
           </IonListHeader>
           <IonMenuToggle auto-hide="false">
-            <IonRouterLink href="/purchasehistory">
+            <IonRouterLink href="/mywallet">
               <IonItem button>
                 <IonIcon src={cardOutline} slot="start" name="home"></IonIcon>
                 <IonLabel>내지갑</IonLabel>
               </IonItem>
             </IonRouterLink>
-            <IonRouterLink href="/purchasehistory">
+            <IonRouterLink href="/payment">
               <IonItem button>
                 <IonIcon src={newspaperOutline} slot="start" name="home"></IonIcon>
                 <IonLabel>판매</IonLabel>
               </IonItem>
             </IonRouterLink>
-            <IonRouterLink href="/purchasehistory">
+            <IonRouterLink href="/list/sell">
               <IonItem button>
                 <IonIcon src={receiptOutline} slot="start" name="home"></IonIcon>
                 <IonLabel>판매내역</IonLabel>
@@ -60,22 +65,24 @@ const SideBarMenu: React.FC = () => {
                 <IonLabel>판매집계</IonLabel>
               </IonItem>
             </IonRouterLink>
-            <IonRouterLink href="/purchasehistory">
+            <IonRouterLink href="/scan">
               <IonItem button>
                 <IonIcon src={qrCodeOutline} slot="start" name="home"></IonIcon>
                 <IonLabel>구매</IonLabel>
               </IonItem>
             </IonRouterLink>
-            <IonRouterLink href="/purchasehistory">
+            <IonRouterLink href="/list/buy">
               <IonItem button>
                 <IonIcon src={receiptOutline} slot="start" name="home"></IonIcon>
                 <IonLabel>구매내역</IonLabel>
               </IonItem>
             </IonRouterLink>
-            <IonItem button>
-              <IonIcon src={statsChart} slot="start" name="home"></IonIcon>
-              <IonLabel>구매집계</IonLabel>
-            </IonItem>
+            <IonRouterLink href="/purchasehistory">
+              <IonItem button>
+                <IonIcon src={statsChart} slot="start" name="home"></IonIcon>
+                <IonLabel>구매집계</IonLabel>
+              </IonItem>
+            </IonRouterLink>
           </IonMenuToggle>
         </IonList>
 
@@ -120,19 +127,19 @@ const SideBarMenu: React.FC = () => {
             <IonRouterLink href="/board">
               <IonItem button>
                 <IonIcon src={diamondOutline} slot="start" name="home"></IonIcon>
+                <IonLabel>공지사항</IonLabel>
+              </IonItem>
+            </IonRouterLink>
+            <IonRouterLink href="/board">
+              <IonItem button>
+                <IonIcon src={chatbubblesOutline} slot="start" name="home"></IonIcon>
                 <IonLabel>이벤트</IonLabel>
               </IonItem>
             </IonRouterLink>
             <IonRouterLink href="/board">
               <IonItem button>
                 <IonIcon src={chatbubblesOutline} slot="start" name="home"></IonIcon>
-                <IonLabel>게시판</IonLabel>
-              </IonItem>
-            </IonRouterLink>
-            <IonRouterLink href="/board">
-              <IonItem button>
-                <IonIcon src={chatbubblesOutline} slot="start" name="home"></IonIcon>
-                <IonLabel>게시판</IonLabel>
+                <IonLabel>자유 게시판</IonLabel>
               </IonItem>
             </IonRouterLink>
           </IonMenuToggle>
@@ -145,12 +152,10 @@ const SideBarMenu: React.FC = () => {
           </IonListHeader>
 
           <IonMenuToggle auto-hide="false">
-            <IonRouterLink href="/board">
-              <IonItem button>
-                <IonIcon src={logOutOutline} slot="start" name="home"></IonIcon>
-                <IonLabel>로그아웃</IonLabel>
-              </IonItem>
-            </IonRouterLink>
+            <IonItem button onClick={logoutAlert}>
+              <IonIcon src={logOutOutline} slot="start" name="home"></IonIcon>
+              <IonLabel>로그아웃</IonLabel>
+            </IonItem>
           </IonMenuToggle>
         </IonList>
       </IonContent>
