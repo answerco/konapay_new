@@ -84,7 +84,7 @@ const Notice: React.FC = () => {
     const offset = limit == 0 ? 0 : limit - 20;
     // const APIURL = `http://localhost:3200/api/board/list?sellerUid=${"joy"}&status=${"S"}&limit=${limit}&offset=${offset}`;
     // const APIURL = `http://localhost:3200/api/board/list?key=${"C"}&value=${""}&limit=${""}&offset=${""}`;
-    const APIURL = `http://localhost:3200/api/board/list${queryString.search}&limit=${limit}&offset=${offset}`;
+    const APIURL = `http://localhost:3200/api/board/list?key=a&limit=${limit}&offset=${offset}`;
     console.log("queryString.search : ", queryString.search);
     console.log("APIURL : ", APIURL);
     const axiosOption = { withCredentials: true };
