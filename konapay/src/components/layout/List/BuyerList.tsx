@@ -1,5 +1,8 @@
 import {
+  IonApp,
+  IonBackButton,
   IonButton,
+  IonButtons,
   IonCard,
   IonCardContent,
   IonCardHeader,
@@ -125,71 +128,67 @@ const BuyerList: React.FC = () => {
           </IonCard>
         </IonContent>
       </IonModal>
-      <IonPage>
-        <IonHeader>
-          <IonItem>
-            <IonItem button onClick={() => history.goBack()}>
-              <IonIcon icon={chevronBack}></IonIcon>
-            </IonItem>
-            <IonTitle>구매 리스트</IonTitle>
-          </IonItem>
-        </IonHeader>
-        <IonContent fullscreen>
-          <IonHeader collapse="condense">
+      <IonApp>
+        <IonPage>
+          <IonHeader>
             <IonToolbar>
-              <IonTitle size="large">Blank</IonTitle>
+              <IonButtons slot="start">
+                <IonBackButton defaultHref="/" icon={chevronBack} />
+              </IonButtons>
+              <IonTitle>구매내역</IonTitle>
             </IonToolbar>
           </IonHeader>
-
-          {/* <IonButton onClick={() => setInfiniteDisabled(!isInfiniteDisabled)} expand="block">
+          <IonContent fullscreen>
+            {/* <IonButton onClick={() => setInfiniteDisabled(!isInfiniteDisabled)} expand="block">
               Toggle Infinite Scroll
             </IonButton> */}
-          <IonList>
-            <IonItem>
-              <IonGrid>
-                <IonRow>
-                  <IonCol size="4">구매상품</IonCol>
-                  <IonCol>구매일자</IonCol>
-                  <IonCol>판매자</IonCol>
-                  <IonCol>구매가격</IonCol>
-                </IonRow>
-              </IonGrid>
-            </IonItem>
-          </IonList>
-          <IonList>
-            {
-              // @ts-expect-error
-              sellData.map((item) => {
-                item[`sellDate`] = item[`sellDate`].split("T")[0];
-                return (
-                  <IonItem key={item[`sellIdx`]}>
-                    <IonGrid>
-                      <IonRow>
-                        <IonCol size="4">
-                          <IonText
-                            onClick={() => {
-                              openDetailModal(item[`sellIdx`]);
-                            }}
-                          >
-                            {item[`productName`]}
-                          </IonText>
-                        </IonCol>
-                        <IonCol>{item[`sellDate`]}</IonCol>
-                        <IonCol>{item[`sellerUid`]}</IonCol>
-                        <IonCol>{item[`productPrice`]}</IonCol>
-                      </IonRow>
-                    </IonGrid>
-                  </IonItem>
-                );
-              })
-            }
-          </IonList>
+            <IonList>
+              <IonItem>
+                <IonGrid>
+                  <IonRow>
+                    <IonCol size="4">구매상품</IonCol>
+                    <IonCol>구매일자</IonCol>
+                    <IonCol>판매자</IonCol>
+                    <IonCol>구매가격</IonCol>
+                  </IonRow>
+                </IonGrid>
+              </IonItem>
+            </IonList>
+            <IonList>
+              {
+                // @ts-expect-error
+                sellData.map((item) => {
+                  item[`sellDate`] = item[`sellDate`].split("T")[0];
+                  return (
+                    <IonItem key={item[`sellIdx`]}>
+                      <IonGrid>
+                        <IonRow>
+                          <IonCol size="4">
+                            <IonText
+                              onClick={() => {
+                                openDetailModal(item[`sellIdx`]);
+                              }}
+                            >
+                              {item[`productName`]}
+                            </IonText>
+                          </IonCol>
+                          <IonCol>{item[`sellDate`]}</IonCol>
+                          <IonCol>{item[`sellerUid`]}</IonCol>
+                          <IonCol>{item[`productPrice`]}</IonCol>
+                        </IonRow>
+                      </IonGrid>
+                    </IonItem>
+                  );
+                })
+              }
+            </IonList>
 
-          <IonInfiniteScroll onIonInfinite={pushSellDataHandler} threshold="100px" disabled={isInfiniteDisabled}>
-            <IonInfiniteScrollContent loadingSpinner="bubbles" loadingText="Loading more data..."></IonInfiniteScrollContent>
-          </IonInfiniteScroll>
-        </IonContent>
-      </IonPage>
+            <IonInfiniteScroll onIonInfinite={pushSellDataHandler} threshold="100px" disabled={isInfiniteDisabled}>
+              <IonInfiniteScrollContent loadingSpinner="bubbles" loadingText="Loading more data..."></IonInfiniteScrollContent>
+            </IonInfiniteScroll>
+          </IonContent>
+        </IonPage>
+      </IonApp>
     </>
   );
 };

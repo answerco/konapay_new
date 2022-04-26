@@ -154,6 +154,9 @@ const Main: React.FC = () => {
               <IonButton onClick={getReady}>
                 <IonIcon src={personCircleOutline}></IonIcon>
               </IonButton>
+              <IonButton onClick={getReady}>
+                <IonIcon src={giftOutline}></IonIcon>
+              </IonButton>
             </IonButtons>
           </IonToolbar>
         </IonHeader>
@@ -201,7 +204,7 @@ const Main: React.FC = () => {
           </IonButton>
         </IonRouterLink>
 
-        <IonToolbar className="mainFooter" style={{ backgroundColor: "rgb(230, 230, 230)", height: "15%", paddingTop: "3%" }}>
+        {/* <IonToolbar className="mainFooter" style={{ backgroundColor: "rgb(230, 230, 230)", height: "15%", paddingTop: "3%" }}>
           <IonButtons slot="start" id="home" style={{ marginLeft: "10%" }}>
             <IonButton>
               <a>
@@ -234,7 +237,7 @@ const Main: React.FC = () => {
               </a>
             </IonButton>
           </IonButtons>
-        </IonToolbar>
+        </IonToolbar> */}
       </IonPage>
     </IonApp>
   );

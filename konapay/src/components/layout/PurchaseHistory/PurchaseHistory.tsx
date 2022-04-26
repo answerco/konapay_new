@@ -64,7 +64,7 @@ const PurchaseHistory: React.FC = () => {
             <IonButtons slot="start">
               <IonBackButton defaultHref="/" icon={chevronBack} />
             </IonButtons>
-            <IonTitle>구매내역</IonTitle>
+            <IonTitle>집계</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonContent className="ion-padding">
