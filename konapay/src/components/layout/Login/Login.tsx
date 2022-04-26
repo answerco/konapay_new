@@ -15,6 +15,7 @@ import "@ionic/react/css/display.css";
 import { useHistory } from "react-router";
 import { chevronBack, personCircle } from "ionicons/icons";
 import Signin from "../../../model/user/signin";
+import konaPayLogo from "../../../assets/icon/konaPay_Logo.png"
 
 const meta = document.createElement("meta");
 meta.name = "viewport";
@@ -73,9 +74,14 @@ const Login: React.FC = () => {
 
             <IonRow>
               <IonCol>
+                <div style={{display:'flex', justifyContent:'center', marginTop:'15%'}}>
+                  <img src={konaPayLogo} alt="" style={{ width:"70px" }}/>
+                </div>
+                
                 <IonIcon
-                  style={{ fontSize: "70px", color: "#0040ff" , margin:'10% 0 0 40%' }}
-                  icon={personCircle}
+                  src={konaPayLogo}
+                  
+                  icon={konaPayLogo}
                 />
               </IonCol>
             </IonRow>
