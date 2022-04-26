@@ -26,15 +26,15 @@ const BalanceInquiry: React.FC = () => {
   return (
     <IonApp>
       <IonPage className="ion-page" id="main-content">
+        <IonHeader>
+          <IonToolbar>
+            <IonButtons slot="start">
+              <IonBackButton defaultHref="/" icon={chevronBack} />
+            </IonButtons>
+            <IonTitle>구매내역</IonTitle>
+          </IonToolbar>
+        </IonHeader>
         <IonContent className="ion-padding">
-          <IonHeader>
-            <IonItem>
-              <IonItem button onClick={() => history.goBack()}>
-                <IonIcon icon={chevronBack}></IonIcon>
-              </IonItem>
-              <IonTitle>구매내역</IonTitle>
-            </IonItem>
-          </IonHeader>
           <div style={{ padding: "0px 2%" }}>
             <div className="balance_subtitle">TOTAL PORTFOUO VALUE</div>
 

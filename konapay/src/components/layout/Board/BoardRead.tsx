@@ -1,5 +1,7 @@
 import {
   IonApp,
+  IonBackButton,
+  IonButtons,
   IonCard,
   IonCardContent,
   IonCardHeader,
@@ -17,6 +19,7 @@ import {
   IonText,
   IonTextarea,
   IonTitle,
+  IonToolbar,
 } from "@ionic/react";
 import { chevronBack, heart } from "ionicons/icons";
 import React, { useEffect, useState } from "react";
@@ -77,17 +80,16 @@ const BoardRead: React.FC = () => {
   }, []);
   return (
     <IonApp>
-      <Menu></Menu>
       <IonPage>
+        <IonHeader>
+          <IonToolbar>
+            <IonButtons slot="start">
+              <IonBackButton defaultHref="/" icon={chevronBack} />
+            </IonButtons>
+            <IonTitle>게시판</IonTitle>
+          </IonToolbar>
+        </IonHeader>
         <IonContent>
-          <IonHeader>
-            <IonItem>
-              <IonItem button onClick={() => history.goBack()}>
-                <IonIcon icon={chevronBack}></IonIcon>
-              </IonItem>
-              <IonTitle>게시판</IonTitle>
-            </IonItem>
-          </IonHeader>
           <IonCard>
             <IonCardHeader>
               <IonItem>{postCategory}</IonItem>

@@ -1,5 +1,23 @@
 import "./ProductDetail.css";
-import { IonApp, IonButton, IonCard, IonCardContent, IonCardHeader, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonImg, IonItem, IonPage, IonRow, IonTitle, useIonAlert } from "@ionic/react";
+import {
+  IonApp,
+  IonBackButton,
+  IonButton,
+  IonButtons,
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCol,
+  IonContent,
+  IonGrid,
+  IonHeader,
+  IonImg,
+  IonPage,
+  IonRow,
+  IonTitle,
+  IonToolbar,
+  useIonAlert,
+} from "@ionic/react";
 import axios from "axios";
 import { chevronBack, chevronForward } from "ionicons/icons";
 import React, { useEffect, useState } from "react";
@@ -62,12 +80,12 @@ const ProductDetail: React.FC = () => {
     <IonApp>
       <IonPage>
         <IonHeader>
-          <IonItem className="background">
-            <IonButton className="background" onClick={() => history.goBack()}>
-              <IonIcon icon={chevronBack}></IonIcon>
-            </IonButton>
-            <IonTitle>필요할까?</IonTitle>
-          </IonItem>
+          <IonToolbar>
+            <IonButtons slot="start">
+              <IonBackButton defaultHref="/" icon={chevronBack} />
+            </IonButtons>
+            <IonTitle>디테일</IonTitle>
+          </IonToolbar>
         </IonHeader>
         <IonContent>
           <IonCard>

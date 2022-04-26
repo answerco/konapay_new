@@ -1,5 +1,22 @@
 import "./Board.css";
-import { IonButton, IonButtons, IonCard, IonCardContent, IonContent, IonHeader, IonIcon, IonInput, IonItem, IonPage, IonSelect, IonSelectOption, IonTitle, useIonAlert } from "@ionic/react";
+import {
+  IonBackButton,
+  IonButton,
+  IonButtons,
+  IonCard,
+  IonCardContent,
+  IonContent,
+  IonHeader,
+  IonIcon,
+  IonInput,
+  IonItem,
+  IonPage,
+  IonSelect,
+  IonSelectOption,
+  IonTitle,
+  IonToolbar,
+  useIonAlert,
+} from "@ionic/react";
 import { chevronBack, chevronForward } from "ionicons/icons";
 import React, { useMemo, useRef, useState } from "react";
 import ReactQuill from "react-quill";
@@ -102,13 +119,12 @@ const BoardWirte: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonItem>
-          <IonItem button onClick={() => history.goBack()}>
-            <IonIcon icon={chevronBack}></IonIcon>
-          </IonItem>
-          <IonIcon slot="end" icon={chevronForward}></IonIcon>
-          <IonTitle>게시물 작성</IonTitle>
-        </IonItem>
+        <IonToolbar>
+          <IonButtons slot="start">
+            <IonBackButton defaultHref="/" icon={chevronBack} />
+          </IonButtons>
+          <IonTitle>게시글 작성</IonTitle>
+        </IonToolbar>
       </IonHeader>
       <IonContent>
         <IonCard>

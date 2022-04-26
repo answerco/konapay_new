@@ -116,16 +116,15 @@ const Board: React.FC = () => {
   return (
     <IonApp>
       <IonPage className="ion-page" id="main-content">
+        <IonHeader>
+          <IonToolbar>
+            <IonButtons slot="start">
+              <IonBackButton defaultHref="/" icon={chevronBack} />
+            </IonButtons>
+            <IonTitle>게시판</IonTitle>
+          </IonToolbar>
+        </IonHeader>
         <IonContent className="ion-padding">
-          <IonHeader>
-            <IonItem>
-              <IonItem button onClick={() => history.push({ pathname: "/" })}>
-                <IonIcon icon={chevronBack}></IonIcon>
-              </IonItem>
-              <IonTitle>구매내역</IonTitle>
-            </IonItem>
-          </IonHeader>
-
           <div>
             <div style={{ margin: "7% 0px", display: "flex", justifyContent: "space-between" }}>
               <div style={{ fontSize: "20px", color: "gray", fontWeight: "bold" }}>KONA PAY</div>

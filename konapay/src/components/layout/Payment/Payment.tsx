@@ -39,16 +39,15 @@ const Payment: React.FC = () => {
   return (
     <IonApp>
       <IonPage className="ion-page" id="main-content">
+        <IonHeader>
+          <IonToolbar>
+            <IonButtons slot="start">
+              <IonBackButton defaultHref="/" icon={chevronBack} />
+            </IonButtons>
+            <IonTitle>결제요청</IonTitle>
+          </IonToolbar>
+        </IonHeader>
         <IonContent className="ion-padding">
-          <IonHeader>
-            <IonItem>
-              <IonItem button onClick={() => history.push({ pathname: "/" })}>
-                <IonIcon icon={chevronBack}></IonIcon>
-              </IonItem>
-              <IonTitle>결제요청</IonTitle>
-            </IonItem>
-          </IonHeader>
-
           <div style={{ padding: "0px 2%" }}>
             <div style={{ margin: "7% 0px", display: "flex", justifyContent: "space-between" }}>
               <div style={{ fontSize: "20px", color: "gray", fontWeight: "bold" }}>KONA PAY</div>
