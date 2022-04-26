@@ -81,6 +81,7 @@ const SignUpPage2: React.FC = () => {
       } else {
         let res = await regist();
         if (!!res) {
+          paste('회원가입이 완료되었습니다.')
           const link = document.createElement("a");
           link.href = "/";
           document.body.appendChild(link);
