@@ -15,18 +15,20 @@ import {
   IonButtons,
   IonButton,
   IonItem,
-  IonImg,
+  // IonImg,
   //   IonNote,
   //   IonCardContent,
   //   IonCardTitle,
   IonCardHeader,
   IonCard,
-  IonCardSubtitle,
+  // IonCardSubtitle,
   //   IonBackButton,
   IonRouterLink,
   IonCardContent,
   IonText,
-  IonThumbnail,
+  // IonThumbnail,
+  // useIonAlert,
+  IonAlert,
 } from "@ionic/react";
 
 import React, { useEffect, useState } from "react";
@@ -35,7 +37,7 @@ import React, { useEffect, useState } from "react";
 // import Setting from "../../assets/img/setting.png";
 // import Home from "../../assets/img/home.png";
 // import Banner from "../../assets/img/bannerImg.png";
-import MainCard from "../../assets/img/mainCard.png";
+// import MainCard from "../../assets/img/mainCard.png";
 // import CardSelectBar from "../../assets/img/cardSelectBar.png";
 // import FooterMenu_Home from "../../assets/img/footerMenu_home.png";
 // import FooterMenu_Pay from "../../assets/img/footerMenu_pay.png";
@@ -82,6 +84,7 @@ const Main: React.FC = () => {
   const [viewAddress, setViewAddress] = useState<string>("");
   const [ethAmount, setEthAmount] = useState<string>("");
   const [kspcAmount, setKspcAmount] = useState<string>("");
+  const [copySucess, setCopySucess] = useState<boolean>(false);
 
   const amountHandler = async () => {
     if (walletAddress !== "") {
@@ -103,18 +106,64 @@ const Main: React.FC = () => {
     const setAddress = `${first}...${last}`;
     setWalletAddress(user.address);
     setViewAddress(setAddress);
+    console.log(viewAddress);
   };
+
+  const addressCopy = async (e: any) => {
+    console.log(walletAddress);
+    let clipboardText;
+    // @ts-ignore
+    const writePermission = await navigator.permissions.query({ name: "clipboard-write" });
+    console.log("writePermission : ", writePermission);
+    if (writePermission.state == "granted") {
+      clipboardText = await navigator.clipboard.writeText(walletAddress);
+      setCopySucess(true);
+    } else {
+      // 권한 거절 'denied'
+      // 권한 요청 중 'prompt'
+      console.log("지갑주소 복사 실패");
+    }
+  };
+
   useEffect(() => {
-    console.log("walletAddress1 : ", walletAddress);
-    getWalletAddressHandler();
+    if (!sessionStorage.uid) {
+      const link = document.createElement("a");
+      link.href = "/login";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    }
   }, []);
 
   useEffect(() => {
-    console.log("walletAddress2 : ", walletAddress);
-    amountHandler();
+    console.log(sessionStorage.uid);
+    if (!sessionStorage.uid) {
+      getWalletAddressHandler();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!sessionStorage.uid) {
+      console.log("walletAddress2 : ", walletAddress);
+      amountHandler();
+    }
   }, [walletAddress]);
+
   return (
     <IonApp>
+      <IonAlert
+        isOpen={copySucess}
+        subHeader={"지갑주소 복사"}
+        message={walletAddress}
+        buttons={[
+          {
+            text: "확인",
+            handler: () => {
+              setCopySucess(false);
+            },
+          },
+        ]}
+      ></IonAlert>
       <IonMenu content-id="main-content">
         <IonHeader>
           <IonToolbar color="light">
@@ -187,14 +236,14 @@ const Main: React.FC = () => {
             </IonListHeader>
 
             <IonMenuToggle auto-hide="false">
-              <IonRouterLink href="/board">
+              <IonRouterLink href="/board?key=e">
                 <IonItem button>
                   <IonIcon src={diamondOutline} slot="start" name="home"></IonIcon>
                   <IonLabel>이벤트</IonLabel>
                 </IonItem>
               </IonRouterLink>
 
-              <IonRouterLink href="/board">
+              <IonRouterLink href="/board?key=c">
                 <IonItem button>
                   <IonIcon src={chatbubblesOutline} slot="start" name="home"></IonIcon>
                   <IonLabel>게시판</IonLabel>
@@ -276,18 +325,23 @@ const Main: React.FC = () => {
 
           {/* <IonImg src={MainCard}></IonImg> */}
           <IonCardContent className="background">
-            {/* <IonList> */}
-            <IonLabel className="card-text1">{viewAddress}</IonLabel>
+            <IonText
+              onClick={(e) => {
+                addressCopy(e);
+              }}
+              className="card-text1 selectable"
+            >
+              {viewAddress}
+            </IonText>
             <br />
             <IonLabel className="card-text2">ETH : {ethAmount}</IonLabel>
             <br />
             <IonLabel className="card-text3">KSPC : {kspcAmount}</IonLabel>
-            {/* </IonList> */}
           </IonCardContent>
 
-          <IonCardSubtitle>
+          {/* <IonCardSubtitle>
             <IonLabel className="cardSub">● ○ ○ ○</IonLabel>
-          </IonCardSubtitle>
+          </IonCardSubtitle> */}
         </IonCard>
 
         <IonButton color="medium" className="pwdBtn">

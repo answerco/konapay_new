@@ -14,6 +14,8 @@ const BoardWirte: React.FC = () => {
   const [category, setCategory] = useState<string>();
   const [title, setTitle] = useState<string>();
   const [content, setContent] = useState<string>("");
+  const [thumnail, setThumnail] = useState<string>("");
+  const [imgCheck, setImgCheck] = useState<boolean>(false);
 
   // Axios boardUpload
   const boardUploadHandler = async () => {
@@ -33,12 +35,13 @@ const BoardWirte: React.FC = () => {
         postType: category,
         postTitle: title,
         postContent: content,
+        postThumnail: thumnail,
       };
       const axiosOption = { withCredentials: true };
       console.log(payload);
       const result = await axios.post(APIURL, payload);
       console.log("boardUpload Sucess : ", result);
-      history.push({ pathname: "/board" });
+      history.push({ pathname: "/board?key=c" });
     } catch (error) {
       console.error(error);
     }
@@ -72,6 +75,10 @@ const BoardWirte: React.FC = () => {
         const editor = quillRef.current?.getEditor();
         const range = editor?.getSelection();
         editor?.insertEmbed(range?.index as any, "image", IMG_URL);
+        if (!imgCheck) {
+          setThumnail(IMG_URL);
+          setImgCheck(true);
+        }
       } catch {
         console.error("reactQuill IMG URL FORMATTING ERROR");
         console.trace();

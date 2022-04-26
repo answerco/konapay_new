@@ -38,7 +38,7 @@ const SignUpPage1: React.FC = () => {
   const history = useHistory();
 
   const prevHistoryFunction = () => {
-    history.push({ pathname: "/signuppage2", state: {} });
+    history.push({ pathname: "/signuppage3", state: {} });
   };
   const [check, setCheck] = useState({
     service: false,

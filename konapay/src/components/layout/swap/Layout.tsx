@@ -1,8 +1,9 @@
 import "./Layout.css";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import { IonBackButton, IonButton, IonButtons, IonHeader, IonRow, IonTitle, IonToolbar } from "@ionic/react";
 import { chevronBack } from "ionicons/icons";
+import Point from "../../../model/user/point";
 
 const meta = document.createElement("meta");
 meta.name = "viewport";
@@ -10,6 +11,24 @@ meta.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-s
 document.getElementsByTagName("head")[0].appendChild(meta);
 
 const Layout: React.FC = () => {
+
+  const [point, setPoint]: any = useState(0)
+
+  const getPoint =  async   () => {
+    let res = await Point.view(sessionStorage.uid)
+    if(res === null){
+      setPoint(0)
+    }
+    else{
+      setPoint(res)
+    }
+
+  }
+
+  useEffect(()=>{
+    getPoint()
+  },[])
+
   return (
     <div className="grid-init grid">
       <IonHeader>
@@ -31,7 +50,7 @@ const Layout: React.FC = () => {
         >
           <div style={{ width: "100%", textAlign: "center" }}>
             <p style={{ width: "100%", height: "100%", color: "gray" }}>
-              <span style={{ color: "black", marginRight: "5%" }}>33,000</span>KSP POINT
+              <span style={{ color: "black", marginRight: "5%" }}>{point}</span>KSP POINT
             </p>
           </div>
         </div>
@@ -52,7 +71,7 @@ const Layout: React.FC = () => {
       </div>
       <div className="box-init box" style={{ height: "15%" }}>
         {/* <button style={{ width: "80%", height: "50%", border: "none", backgroundColor: "GrayText", borderRadius: "5px" }}>포인트 전환</button> */}
-        <IonButton key={""} size="large" color="middle">
+        <IonButton key={""} size="large">
           포인트 변환
         </IonButton>
       </div>
