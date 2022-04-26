@@ -81,15 +81,15 @@ const Payment: React.FC = () => {
             </div>
             <div style={{ border: "2px solid lightgray", padding: "15px 20px", borderRadius: "10px", margin: "1.5% 0px" }}>
               <div style={{ margin: "0px 0px 10px 0px" }}>가격</div>
-              <div style={{ display: "flex", width: "100%", height: "30px", border:"1px solid "}}>
-                <input style={{ border:"none", flex:5}} type="number" name="price" value={content.price} onChange={onChange}></input>
+              <div style={{ display: "flex", width: "100%", height: "30px", border:"2px solid "}}>
+                <input style={{ border:"none", width: '75%'}} type="number" name="price" value={content.price} onChange={onChange}></input>
                 <div style={{margin: "1% 5%"}}>KSPC</div>
               </div>
             </div>
             <div style={{ border: "2px solid lightgray", padding: "15px 20px", borderRadius: "10px", margin: "1.5% 0px" }}>
               <div style={{display:'flex', justifyContent:'space-between'}}>
                 <div style={{ margin: "0px 0px 10px 0px" }}>구매자 아이디</div>
-                <IonButton style={{height:"100%"}} onClick={checkIsValid}>아이디 확인</IonButton>
+                <a onClick={checkIsValid}>[아이디 확인]</a>
               </div>
               <input style={{ width: "100%", height: "30px" }} type="text" name="id" value={content.id} onChange={onChange} disabled={content.valid} ></input>
             </div>

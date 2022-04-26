@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   IonApp,
   IonHeader,
@@ -17,10 +17,11 @@ import {
   IonButton,
   IonItem,
   IonRouterOutlet,
+  useIonAlert,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { Redirect, Route } from "react-router-dom";
-
+import { setupConfig } from '@ionic/react'
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
@@ -64,7 +65,14 @@ import ProductDetail from "./components/layout/ProductDetail/ProductDetail";
 import Login from "./components/layout/Login/Login";
 import SellerList from "./components/layout/List/SellerList";
 import BuyerList from "./components/layout/List/BuyerList";
-const App: React.FC = () => (
+
+
+const App: React.FC = () => {
+  const [paste] = useIonAlert()
+  setupConfig({
+    hardwareBackButton: false
+  })
+  return(
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
@@ -108,7 +116,7 @@ const App: React.FC = () => (
           <SendKSPC />
         </Route>
 
-        <Route exact path="/mywallet">
+        <Route exact path="/balanceinquiry">
           <BalanceInquiry />
         </Route>
 
@@ -118,7 +126,7 @@ const App: React.FC = () => (
         <Route exact path="/board/write">
           <BoardWrite />
         </Route>
-        <Route exact path="/board/page/:boardIdx">
+        <Route exact path="/board/page/:params">
           <BoardRead />
         </Route>
 
@@ -136,23 +144,25 @@ const App: React.FC = () => (
         </Route>
 
         <Route exact path="/list/sell">
-          <SellerList />
+          {" "}
+          <SellerList />{" "}
         </Route>
         <Route exact path="/list/buy">
-          <BuyerList />
+          {" "}
+          <BuyerList />{" "}
         </Route>
 
-        {/* <Route exact path="/list/sell">
-          
-          <SellerList />
+        <Route exact path="/list/sell">
+          {" "}
+          <SellerList />{" "}
         </Route>
         <Route exact path="/list/buy">
-          
-          <BuyerList />
-        </Route> */}
+          {" "}
+          <BuyerList />{" "}
+        </Route>
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
-);
+);}
 
 export default App;
