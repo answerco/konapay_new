@@ -55,22 +55,7 @@ import "@ionic/react/css/text-transformation.css";
 import "@ionic/react/css/flex-utils.css";
 import "@ionic/react/css/display.css";
 
-import {
-  homeOutline,
-  settingsOutline,
-  personCircleOutline,
-  logoUsd,
-  giftOutline,
-  removeOutline,
-  cardOutline,
-  documentTextOutline,
-  searchCircleOutline,
-  sendOutline,
-  cashOutline,
-  diamondOutline,
-  chatbubblesOutline,
-  alertCircleOutline,
-} from "ionicons/icons";
+import { homeOutline, settingsOutline, personCircleOutline, logoUsd, giftOutline } from "ionicons/icons";
 
 import "./main.css";
 import userInfo from "../../../model/user/userinfo";
@@ -91,9 +76,11 @@ const Main: React.FC = () => {
   const [paste] = useIonAlert()
 
   const amountHandler = async () => {
-    if (walletAddress !== "") {
+    if (!!walletAddress) {
       const eth = await userInfo.getkscp(walletAddress, "ETH");
       const kspc = await userInfo.getkscp(walletAddress, "KSPC");
+      console.log("amountHandler : ", eth);
+
       setEthAmount(eth.data.data);
       setKspcAmount(kspc.data.data);
     }
@@ -103,8 +90,9 @@ const Main: React.FC = () => {
     const uid = sessionStorage?.uid;
     const result = await userInfo.getUser(uid);
     const user = result.data.data;
-    console.log("user : ", user);
+    console.log("getWalletAddressHandler user : ", user);
     const walletAddress: string = user.address;
+    console.log("getWalletAddressHandler walletAddress : ", walletAddress);
     let first = walletAddress.substring(0, 8);
     let last = walletAddress.substring(walletAddress.length - 8, walletAddress.length);
     const setAddress = `${first}...${last}`;
@@ -141,13 +129,13 @@ const Main: React.FC = () => {
 
   useEffect(() => {
     console.log(sessionStorage.uid);
-    if (!sessionStorage.uid) {
+    if (!!sessionStorage.uid) {
       getWalletAddressHandler();
     }
   }, []);
 
   useEffect(() => {
-    if (!sessionStorage.uid) {
+    if (!!sessionStorage.uid) {
       console.log("walletAddress2 : ", walletAddress);
       amountHandler();
     }

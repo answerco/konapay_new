@@ -36,6 +36,26 @@ const SideBarMenu: React.FC = () => {
               <IonIcon src={cardOutline} slot="start" name="home"></IonIcon>
               <IonLabel>결제</IonLabel>
             </IonItem>
+            <IonItem button>
+              <IonIcon src={cardOutline} slot="start" name="home"></IonIcon>
+              <IonLabel>결제</IonLabel>
+            </IonItem>
+            <IonItem button>
+              <IonIcon src={cardOutline} slot="start" name="home"></IonIcon>
+              <IonLabel>결제</IonLabel>
+            </IonItem>
+            <IonItem button>
+              <IonIcon src={cardOutline} slot="start" name="home"></IonIcon>
+              <IonLabel>결제</IonLabel>
+            </IonItem>
+            <IonItem button>
+              <IonIcon src={cardOutline} slot="start" name="home"></IonIcon>
+              <IonLabel>결제</IonLabel>
+            </IonItem>
+            <IonItem button>
+              <IonIcon src={cardOutline} slot="start" name="home"></IonIcon>
+              <IonLabel>결제</IonLabel>
+            </IonItem>
 
             <IonRouterLink href="/purchasehistory">
               <IonItem button>
@@ -100,6 +120,21 @@ const SideBarMenu: React.FC = () => {
               <IonItem button>
                 <IonIcon src={chatbubblesOutline} slot="start" name="home"></IonIcon>
                 <IonLabel>게시판</IonLabel>
+              </IonItem>
+            </IonRouterLink>
+          </IonMenuToggle>
+        </IonList>
+        <IonList>
+          <IonListHeader>
+            <a style={{ fontWeight: "bold", color: "black" }}></a>
+            <IonIcon src={removeOutline}></IonIcon>
+          </IonListHeader>
+
+          <IonMenuToggle auto-hide="false">
+            <IonRouterLink href="/board">
+              <IonItem button>
+                <IonIcon src={chatbubblesOutline} slot="start" name="home"></IonIcon>
+                <IonLabel>로그아웃</IonLabel>
               </IonItem>
             </IonRouterLink>
           </IonMenuToggle>
