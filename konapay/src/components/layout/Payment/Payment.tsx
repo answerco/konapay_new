@@ -1,4 +1,4 @@
-import { IonApp, IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonButtons, IonBackButton, IonItem, IonIcon } from "@ionic/react";
+import { IonApp, IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonButtons, IonBackButton, IonItem, IonIcon, useIonAlert, IonButton } from "@ionic/react";
 
 import React, { useState } from "react";
 
@@ -14,6 +14,7 @@ import "@ionic/react/css/flex-utils.css";
 import "@ionic/react/css/display.css";
 import { useHistory } from "react-router";
 import { chevronBack } from "ionicons/icons";
+import Signup from "../../../model/user/signup";
 
 const meta = document.createElement("meta");
 meta.name = "viewport";
@@ -25,6 +26,7 @@ const Payment: React.FC = () => {
     product: "",
     price: "",
     id: "",
+    valid:false
   });
 
   const onChange = (e: any) => {
@@ -36,6 +38,26 @@ const Payment: React.FC = () => {
   const prevHistoryFunction = () => {
     history.push({ pathname: "/payment2", state: content });
   };
+
+  const [paste] = useIonAlert()
+
+  const checkIsValid = async () => {
+    let res
+    try{
+      res = await Signup.uid(content.id);
+    }
+    catch(err){
+     res= true
+    }
+    if(res){
+      paste(`유효하지 않은 아이디입니다.`);
+    }
+    else{
+      paste(`유효한 아이디입니다.`);
+      setContent({...content, valid:true})
+    }
+  };
+
   return (
     <IonApp>
       <IonPage className="ion-page" id="main-content">
@@ -55,16 +77,22 @@ const Payment: React.FC = () => {
               <div style={{ fontWeight: "bold", color: "lightgray" }}>○ ● ● ●</div>
             </div>
             <div style={{ border: "2px solid lightgray", padding: "15px 20px", borderRadius: "10px", margin: "1.5% 0px" }}>
-              <div style={{ margin: "0px 0px 10px 0px" }}>상품</div>
+              <div style={{ margin: "0px 0px 10px 0px" }}>상품명</div>
               <input style={{ width: "100%", height: "30px" }} type="text" name="product" value={content.product} onChange={onChange}></input>
             </div>
             <div style={{ border: "2px solid lightgray", padding: "15px 20px", borderRadius: "10px", margin: "1.5% 0px" }}>
               <div style={{ margin: "0px 0px 10px 0px" }}>가격</div>
-              <input style={{ width: "100%", height: "30px" }} type="number" name="price" value={content.price} onChange={onChange}></input>
+              <div style={{ display: "flex", width: "100%", height: "30px", border:"1px solid "}}>
+                <input style={{ border:"none", flex:5}} type="number" name="price" value={content.price} onChange={onChange}></input>
+                <div style={{margin: "1% 5%"}}>KSPC</div>
+              </div>
             </div>
             <div style={{ border: "2px solid lightgray", padding: "15px 20px", borderRadius: "10px", margin: "1.5% 0px" }}>
-              <div style={{ margin: "0px 0px 10px 0px" }}>구매자 아이디</div>
-              <input style={{ width: "100%", height: "30px" }} type="text" name="id" value={content.id} onChange={onChange}></input>
+              <div style={{display:'flex', justifyContent:'space-between'}}>
+                <div style={{ margin: "0px 0px 10px 0px" }}>구매자 아이디</div>
+                <IonButton style={{height:"100%"}} onClick={checkIsValid}>아이디 확인</IonButton>
+              </div>
+              <input style={{ width: "100%", height: "30px" }} type="text" name="id" value={content.id} onChange={onChange} disabled={content.valid} ></input>
             </div>
             <div style={{ fontSize: "80%", margin: "15% 0px" }}>
               [유의사항]
@@ -81,7 +109,7 @@ const Payment: React.FC = () => {
             <div style={{ display: "flex", justifyContent: "center" }}>
               <button
                 style={{ width: "75%", fontSize: "18px", padding: "10px", borderRadius: "10px" }}
-                disabled={content.product === "" || content.price === "" || content.id === ""}
+                disabled={content.product === "" || content.price === "" || content.id === "" || !content.valid}
                 onClick={prevHistoryFunction}
               >
                 승인 요청

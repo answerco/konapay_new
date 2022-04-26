@@ -45,7 +45,6 @@ const Payment3: React.FC = () => {
               <div style={{ fontSize: "20px", color: "gray", fontWeight: "bold" }}>KONA PAY</div>
               <div style={{ fontWeight: "bold", color: "lightgray" }}>● ● ○ ●</div>
             </div>
-
             <div>지불 승인이 완료 되었습니다.</div>
 
             <IonGrid className="total_text">
