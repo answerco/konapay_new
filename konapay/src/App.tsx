@@ -108,7 +108,7 @@ const App: React.FC = () => (
           <SendKSPC />
         </Route>
 
-        <Route exact path="/balanceinquiry">
+        <Route exact path="/mywallet">
           <BalanceInquiry />
         </Route>
 
@@ -136,22 +136,20 @@ const App: React.FC = () => (
         </Route>
 
         <Route exact path="/list/sell">
-          {" "}
-          <SellerList />{" "}
+          <SellerList />
         </Route>
         <Route exact path="/list/buy">
-          {" "}
-          <BuyerList />{" "}
+          <BuyerList />
         </Route>
 
-        <Route exact path="/list/sell">
-          {" "}
-          <SellerList />{" "}
+        {/* <Route exact path="/list/sell">
+          
+          <SellerList />
         </Route>
         <Route exact path="/list/buy">
-          {" "}
-          <BuyerList />{" "}
-        </Route>
+          
+          <BuyerList />
+        </Route> */}
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
