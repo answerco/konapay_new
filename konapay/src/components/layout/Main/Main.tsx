@@ -73,7 +73,7 @@ const Main: React.FC = () => {
   const [kspcAmount, setKspcAmount] = useState<string>("");
   const [copySucess, setCopySucess] = useState<boolean>(false);
 
-  const [paste] = useIonAlert()
+  const [paste] = useIonAlert();
 
   const amountHandler = async () => {
     if (!!walletAddress) {
@@ -142,8 +142,8 @@ const Main: React.FC = () => {
   }, [walletAddress]);
 
   const getReady = () => {
-    paste('서비스 준비 중 입니다.')
-  } 
+    paste("서비스 준비 중 입니다.");
+  };
 
   return (
     <IonApp>
@@ -191,7 +191,6 @@ const Main: React.FC = () => {
             <IonLabel className="cardHeader">카드선택</IonLabel>
           </IonCardHeader>
 
-          {/* <IonImg src={MainCard}></IonImg> */}
           <IonCardContent className="background">
             <IonText
               onClick={(e) => {
@@ -206,29 +205,24 @@ const Main: React.FC = () => {
             <br />
             <IonLabel className="card-text3">KSPC : {kspcAmount}</IonLabel>
           </IonCardContent>
-
-          {/* <IonCardSubtitle>
-            <IonLabel className="cardSub">● ○ ○ ○</IonLabel>
-          </IonCardSubtitle> */}
         </IonCard>
 
-        <IonButton color="medium" className="pwdBtn">
-          <a style={{ color: "white" }}>비밀번호</a>
-        </IonButton>
         <IonRouterLink href="/scan">
-          <IonLabel className="scanTopay">스캔으로 결제하세요</IonLabel>
+          <IonButton color="medium" className="pwdBtn">
+            <IonLabel>스캔</IonLabel>
+          </IonButton>
         </IonRouterLink>
 
         <IonToolbar className="mainFooter" style={{ backgroundColor: "rgb(230, 230, 230)", height: "15%", paddingTop: "3%" }}>
           <IonButtons slot="start" id="home" style={{ marginLeft: "10%" }}>
-              <IonButton>
-                <a>
-                  <IonIcon src={homeOutline}></IonIcon>
-                  <div>
-                    <IonLabel>홈</IonLabel>
-                  </div>
-                </a>
-              </IonButton>
+            <IonButton>
+              <a>
+                <IonIcon src={homeOutline}></IonIcon>
+                <div>
+                  <IonLabel>홈</IonLabel>
+                </div>
+              </a>
+            </IonButton>
           </IonButtons>
 
           <IonButtons slot="start" style={{ marginLeft: "20%" }}>
