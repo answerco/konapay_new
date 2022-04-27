@@ -10,7 +10,7 @@ export default class userInfo {
   public static getUser = async (uid: string) => {
     // let payload = { uid };
     let res = await CustomAxios.get(`/user/select/${uid}`);
-    return res;
+    return res.data.data;
   };
   public static getCoin = async (wallet: string, symbol: string) => {
     // let payload = { uid };
