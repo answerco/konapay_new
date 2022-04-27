@@ -87,7 +87,7 @@ const App: React.FC = () => {
         </Route>
         <Route exact path="/signuppage2">
           <SignUpPage2 />
-        </Route> */}
+        </Route>
           <Route exact path="/signuppage3">
             <SignUpPage3 />
           </Route>
