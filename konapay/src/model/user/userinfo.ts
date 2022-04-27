@@ -17,4 +17,10 @@ export default class userInfo {
     let res = await CustomAxios.get(`/${wallet}/getbalance/${symbol}`);
     return res;
   };
+
+  public static getPoint = async (uid: string) => {
+    let res = await CustomAxios.get(`point/balance/${uid}`);
+
+    return res;
+  };
 }

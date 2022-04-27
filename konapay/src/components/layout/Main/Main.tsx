@@ -37,6 +37,7 @@ import { homeOutline, personCircleOutline, logoUsd, giftOutline } from "ionicons
 
 import userInfo from "../../../model/user/userinfo";
 import SideBarMenu from "../SideBarMenu/SideBarMenu";
+import axios from "axios";
 
 const meta = document.createElement("meta");
 meta.name = "viewport";
@@ -48,6 +49,7 @@ const Main: React.FC = () => {
   const [viewAddress, setViewAddress] = useState<string>("");
   const [ethAmount, setEthAmount] = useState<string>("");
   const [kspcAmount, setKspcAmount] = useState<string>("");
+  const [pointAmount, setPointAmount] = useState<string>("");
   const [copySucess, setCopySucess] = useState<boolean>(false);
 
   const [paste] = useIonAlert();
@@ -56,10 +58,16 @@ const Main: React.FC = () => {
     if (!!walletAddress) {
       const eth = await userInfo.getkscp(walletAddress, "ETH");
       const kspc = await userInfo.getkscp(walletAddress, "KSPC");
+      const uid = sessionStorage?.uid;
+      const point = await userInfo.getPoint(uid);
+
       console.log("amountHandler : ", eth);
+      console.log("amountHandler : ", kspc);
+      console.log("amountHandler : ", point);
 
       setEthAmount(eth.data.data);
       setKspcAmount(kspc.data.data);
+      setPointAmount(point.data.data.totalPoint);
     }
   };
 
@@ -145,17 +153,17 @@ const Main: React.FC = () => {
             <IonButtons slot="start" id="main-content">
               <IonMenuToggle>
                 <IonButton>
-                  <IonIcon name="menu-sharp" slot="start"  color='dark'></IonIcon>
+                  <IonIcon name="menu-sharp" slot="start" color="dark"></IonIcon>
                 </IonButton>
               </IonMenuToggle>
             </IonButtons>
 
             <IonButtons slot="end" id="myinfo">
               <IonButton onClick={getReady}>
-                <IonIcon src={personCircleOutline}  color='dark'></IonIcon>
+                <IonIcon src={personCircleOutline} color="dark"></IonIcon>
               </IonButton>
               <IonButton onClick={getReady}>
-                <IonIcon src={giftOutline}  color='dark'></IonIcon>
+                <IonIcon src={giftOutline} color="dark"></IonIcon>
               </IonButton>
             </IonButtons>
           </IonToolbar>
@@ -193,6 +201,20 @@ const Main: React.FC = () => {
                 </IonText>
                 <br />
                 <IonLabel className="card-text2">ETH : {ethAmount}</IonLabel>
+              </IonCardContent>
+            </IonSlide>
+            <IonSlide>
+              <IonCardContent className="background">
+                <IonText
+                  onClick={(e) => {
+                    addressCopy(e);
+                  }}
+                  className="card-text1 selectable"
+                >
+                  {viewAddress}
+                </IonText>
+                <br />
+                <IonLabel className="card-text2">Point : {pointAmount}</IonLabel>
               </IonCardContent>
             </IonSlide>
           </IonSlides>
