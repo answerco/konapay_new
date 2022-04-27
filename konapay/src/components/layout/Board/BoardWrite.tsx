@@ -82,8 +82,10 @@ const BoardWirte: React.FC = () => {
         const result = await axios.post(apiUrl, formData, { headers: { "Content-Type": `multipart/form-data` } });
         console.log("result : ", result);
         console.log("result.data.IMG_URL : ", result.data.IMG_URL);
-
-        const IMG_URL = result.data.IMG_URL;
+        const tmp = `${process.env.REACT_APP_SERVER}`;
+        const serverUrl = tmp.substring(0, tmp.length - 3);
+        console.log("serverUrl : ", serverUrl?.substring(0, serverUrl.length - 3));
+        const IMG_URL = `${serverUrl}${result.data.IMG_URL}`;
         console.log("IMG_URL : ", IMG_URL);
         console.log("quillRef : ", quillRef.current);
         console.log("quillRef.editor : ", quillRef.current?.getEditor());
