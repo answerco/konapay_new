@@ -1,5 +1,4 @@
 {
-  "proxy": "http://localhost:3200/",
   "name": "ionic-react-routing",
   "version": "0.1.0",
   "private": true,

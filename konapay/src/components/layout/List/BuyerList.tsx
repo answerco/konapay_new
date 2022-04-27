@@ -28,6 +28,7 @@ import { chevronBack, closeSharp } from "ionicons/icons";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import BuySellList from "../../../model/buySell/seller";
+import userInfo from "../../../model/user/userinfo";
 
 import "./list.css";
 
@@ -96,6 +97,34 @@ const BuyerList: React.FC = () => {
     }
   };
 
+  const buyProduct = (sellItem: any) => {
+    const header = "상품 구매";
+    const message = "구매를 진행 하시겠습니까?";
+    present({
+      header,
+      message,
+      buttons: [
+        "아니오",
+        {
+          text: "네",
+          handler: () => {
+            buyProductHandler(sellItem);
+          },
+        },
+      ],
+    });
+  };
+
+  const buyProductHandler = async (sellItem: any) => {
+    const { sellIdx, buyerUid, sellerUid, symbol, productPrice } = sellItem;
+
+    const result = await BuySellList.buyProduct(sellIdx, sellerUid, buyerUid, symbol, productPrice);
+    if (result.status === 200) {
+      present("구매 완료 되었습니다.");
+      window.location.replace("/list/buy");
+    }
+  };
+
   const qrRedirect = () => {
     const header = "페이지 이동";
     const message = "구매 페이지로 이동하시겠습니까?";
@@ -123,14 +152,27 @@ const BuyerList: React.FC = () => {
       <IonModal isOpen={detailIsValid}>
         <IonContent>
           <IonHeader>
+            <IonToolbar>
+              <IonButtons
+                slot="start"
+                onClick={() => {
+                  setDetailIsValid(false);
+                }}
+              >
+                <IonBackButton defaultHref="/" text={""} color="dark" />
+              </IonButtons>
+              <IonTitle></IonTitle>
+            </IonToolbar>
+          </IonHeader>
+          {/* <IonHeader>
             <IonButton
               onClick={() => {
                 setDetailIsValid(false);
               }}
             >
-              <IonIcon icon={closeSharp}  color='dark'></IonIcon>
+              <IonIcon icon={closeSharp} color="dark"></IonIcon>
             </IonButton>
-          </IonHeader>
+          </IonHeader> */}
 
           {/* <IonCard>
             <IonCardHeader>상품 사진</IonCardHeader>
@@ -195,7 +237,13 @@ const BuyerList: React.FC = () => {
                             </IonButton>
                           </IonCol>
                           <IonCol>
-                            <IonButton onClick={qrRedirect}>구매진행</IonButton>
+                            <IonButton
+                              onClick={() => {
+                                buyProduct(item);
+                              }}
+                            >
+                              구매진행
+                            </IonButton>
                           </IonCol>
                         </IonRow>
                       ) : (
@@ -220,7 +268,7 @@ const BuyerList: React.FC = () => {
           <IonHeader>
             <IonToolbar>
               <IonButtons slot="start">
-                <IonBackButton defaultHref="/"  text={''} color='dark'  />
+                <IonBackButton defaultHref="/" text={""} color="dark" />
               </IonButtons>
               <IonTitle>구매내역</IonTitle>
             </IonToolbar>
