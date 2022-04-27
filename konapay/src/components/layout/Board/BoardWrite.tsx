@@ -46,7 +46,7 @@ const BoardWirte: React.FC = () => {
       return;
     }
     try {
-      const APIURL = `/api/board/post`;
+      const APIURL = `${process.env.REACT_APP_SERVER}/board/post`;
       const payload = {
         uid: "",
         postType: category,
@@ -58,7 +58,7 @@ const BoardWirte: React.FC = () => {
       console.log(payload);
       const result = await axios.post(APIURL, payload);
       console.log("boardUpload Sucess : ", result);
-      history.push({ pathname: "/board?key=c" });
+      history.push({ pathname: "/board" });
     } catch (error) {
       console.error(error);
     }
@@ -82,8 +82,10 @@ const BoardWirte: React.FC = () => {
         const result = await axios.post(apiUrl, formData, { headers: { "Content-Type": `multipart/form-data` } });
         console.log("result : ", result);
         console.log("result.data.IMG_URL : ", result.data.IMG_URL);
-
-        const IMG_URL = result.data.IMG_URL;
+        const tmp = `${process.env.REACT_APP_SERVER}`;
+        const serverUrl = tmp.substring(0, tmp.length - 3);
+        console.log("serverUrl : ", serverUrl?.substring(0, serverUrl.length - 3));
+        const IMG_URL = `${serverUrl}${result.data.IMG_URL}`;
         console.log("IMG_URL : ", IMG_URL);
         console.log("quillRef : ", quillRef.current);
         console.log("quillRef.editor : ", quillRef.current?.getEditor());
@@ -121,7 +123,7 @@ const BoardWirte: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonBackButton defaultHref="/"  text={''} color='dark'  />
+            <IonBackButton defaultHref="/" text={""} color="dark" />
           </IonButtons>
           <IonTitle>게시글 작성</IonTitle>
         </IonToolbar>
