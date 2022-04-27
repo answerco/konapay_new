@@ -147,3 +147,7 @@ input {
 textarea {
   background-color: white;
 }
+
+.main_toast {
+  text-align: center;
+}
