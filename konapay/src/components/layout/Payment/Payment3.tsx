@@ -50,7 +50,7 @@ const Payment3: React.FC = () => {
                 <IonCol>판매 물품</IonCol>
               </IonRow>
               <IonRow>
-                <IonCol>{location.state  && (location.state as any).product}</IonCol>
+                <IonCol>{location.state && (location.state as any).product}</IonCol>
               </IonRow>
             </IonGrid>
 
@@ -59,16 +59,16 @@ const Payment3: React.FC = () => {
                 <IonCol>판매 금액</IonCol>
               </IonRow>
               <IonRow>
-                <IonCol>{location.state  && (location.state as any).price}</IonCol>
+                <IonCol>{location.state && (location.state as any).price}</IonCol>
               </IonRow>
             </IonGrid>
-            <IonRouterLink href="/payment4">
-              <div style={{ display: "flex", justifyContent: "center" }}>
-                <button style={{ width: "75%", fontSize: "18px", padding: "10px", borderRadius: "10px" }} onClick={prevHistoryFunction}>
-                  홈으로
-                </button>
-              </div>
-            </IonRouterLink>
+            {/* <IonRouterLink href="/payment4"> */}
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <button style={{ width: "75%", fontSize: "18px", padding: "10px", borderRadius: "10px" }} onClick={prevHistoryFunction}>
+                홈으로
+              </button>
+            </div>
+            {/* </IonRouterLink> */}
           </div>
         </IonContent>
       </IonPage>
