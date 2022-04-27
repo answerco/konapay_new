@@ -46,7 +46,7 @@ const BoardWirte: React.FC = () => {
       return;
     }
     try {
-      const APIURL = `/api/board/post`;
+      const APIURL = `${process.env.REACT_APP_SERVER}/board/post`;
       const payload = {
         uid: "",
         postType: category,
@@ -58,7 +58,7 @@ const BoardWirte: React.FC = () => {
       console.log(payload);
       const result = await axios.post(APIURL, payload);
       console.log("boardUpload Sucess : ", result);
-      history.push({ pathname: "/board?key=c" });
+      history.push({ pathname: "/board" });
     } catch (error) {
       console.error(error);
     }
@@ -121,7 +121,7 @@ const BoardWirte: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonBackButton defaultHref="/"  text={''} color='dark'  />
+            <IonBackButton defaultHref="/" text={""} color="dark" />
           </IonButtons>
           <IonTitle>게시글 작성</IonTitle>
         </IonToolbar>
