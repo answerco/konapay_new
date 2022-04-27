@@ -58,8 +58,8 @@ const Main: React.FC = () => {
 
   const amountHandler = async () => {
     if (!!walletAddress) {
-      const eth = await userInfo.getkscp(walletAddress, "ETH");
-      const kspc = await userInfo.getkscp(walletAddress, "KSPC");
+      const eth = await userInfo.getCoin(walletAddress, "ETH");
+      const kspc = await userInfo.getCoin(walletAddress, "KSPC");
       const uid = sessionStorage?.uid;
       const point = await userInfo.getPoint(uid);
 
@@ -67,9 +67,9 @@ const Main: React.FC = () => {
       console.log("amountHandler : ", kspc);
       console.log("amountHandler : ", point);
 
-      setEthAmount(eth.data.data);
-      setKspcAmount(kspc.data.data);
-      setPointAmount(point.data.data.totalPoint);
+      setEthAmount(eth);
+      setKspcAmount(kspc);
+      setPointAmount(point);
     }
   };
 

@@ -56,7 +56,7 @@ const Payment2: React.FC = () => {
 
   const successPayment = () => {
     setIsOpen(false);
-    history.push({ pathname: "/payment3", state: { product : location.state.product , price: location.state.price} });
+    history.push({ pathname: "/payment3", state: { product: location.state.product, price: location.state.price } });
   };
 
   const registPay = async () => {
@@ -124,7 +124,7 @@ const Payment2: React.FC = () => {
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start">
-              <IonBackButton defaultHref="/"  text={''} color='dark'  />
+              <IonBackButton defaultHref="/" text={""} color="dark" />
             </IonButtons>
             <IonTitle>판매</IonTitle>
           </IonToolbar>
@@ -160,7 +160,8 @@ const Payment2: React.FC = () => {
 
             <IonItem lines="none" className="payment_check">
               <IonCheckbox slot="start" color="dark" checked={check} onClick={(e) => setCheck(!check)} />
-              <IonLabel>결제 정보를 구매자에게 발송</IonLabel>
+              {/* <IonLabel>결제 정보를 구매자에게 발송</IonLabel> */}
+              <IonLabel>판매 상품 확인 완료</IonLabel>
             </IonItem>
             <div style={{ display: "flex", justifyContent: "center" }}>
               {/* <IonButton className='payment_button' color="light" size='large'>결제 요청</IonButton> */}
@@ -169,18 +170,24 @@ const Payment2: React.FC = () => {
               </button>
 
               <IonModal isOpen={isOpen}>
+                {/* <IonModal isOpen={true}> */}
                 {/* <IonIcon icon={home} style={{ width:'10%', height:'10%',  margin:'10%' }} /> */}
-                <div style={{ width:'30%', height:'10%',  margin:'10%', display:'flex', alignItems:'center' }} onClick={prevHistoryFunction} >
-                  <IonIcon icon={home} style={{ width:'30%', height:'50%',  margin:'3%' }}  color='dark' />
-                  <IonLabel style={{fontSize:'150%'}}>홈으로</IonLabel>
+                <div style={{ width: "90%", height: "10%", margin: "10%", display: "flex", alignItems: "left", justifyContent: "flex-end" }} onClick={prevHistoryFunction}>
+                  <IonIcon icon={home} style={{ width: "30%", height: "50%", margin: "3%" }} color="dark" />
+                  {/* <IonLabel style={{ fontSize: "150%" }}>홈으로</IonLabel> */}
                 </div>
                 <IonContent>
                   <div style={{ display: "flex", justifyContent: "center", alignContent: "center", alignItems: "center", height: "60vh", flexDirection: "column" }}>
-                    <div style={{display:"flex"}}>
-                      <div style={{ height:"30px", margin:"4%", fontSize:"20px"}}>
-                        {dayjs(timeLeft).format("mm:ss")}
-                      </div>
-                      <IonIcon style={{width:"30px", height:"30px"}} icon={refresh} onClick={()=>{setEndTime(new Date().getTime() + 32 * 1000)}}  color='dark'/>
+                    <div style={{ display: "flex" }}>
+                      <div style={{ height: "30px", margin: "4%", fontSize: "20px" }}>{dayjs(timeLeft).format("mm:ss")}</div>
+                      <IonIcon
+                        style={{ width: "30px", height: "30px" }}
+                        icon={refresh}
+                        onClick={() => {
+                          setEndTime(new Date().getTime() + 32 * 1000);
+                        }}
+                        color="dark"
+                      />
                     </div>
                     <QRCode style={{ margin: "10%" }} value={sellIdx.toString()}></QRCode>
                     <div style={{ width: "100%", display: "flex", justifyContent: "center", height: "8%" }}>
