@@ -31,6 +31,16 @@ export default class BuySellList {
     return res;
   };
 
+  static buyProduct = async (sellIdx: number, sellerUid: string, buyerUid: string, symbol: string, quantity: number) => {
+    const payload = { sellerUid, buyerUid, symbol, quantity };
+    console.log("selleIdx : ", sellIdx);
+    console.log("paylaod : ", payload);
+    let res = await CustomAxios.post(`/buy/pay/${sellIdx}`, payload);
+    console.log("buyProduct res : ", res);
+
+    return res;
+  };
+
   // ???
   public static async getSellInformation(sellerId: string, status: string, _limit: any, _offset: number) {
     let payload = { sellerId, status, _limit, _offset };
