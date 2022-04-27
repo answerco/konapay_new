@@ -133,7 +133,7 @@ const App: React.FC = () => {
           <Route exact path="/board/write">
             <BoardWrite />
           </Route>
-          <Route exact path="/board/page/:params">
+          <Route exact path="/board/page/:boardIdx">
             <BoardRead />
           </Route>
 
