@@ -11,7 +11,6 @@ import {
   IonGrid,
   IonHeader,
   IonIcon,
-  IonImg,
   IonInfiniteScroll,
   IonInfiniteScrollContent,
   IonItem,
@@ -22,9 +21,10 @@ import {
   IonText,
   IonTitle,
   IonToolbar,
+  useIonAlert,
   useIonViewWillEnter,
 } from "@ionic/react";
-import { chevronBack, closeSharp, personCircle, search } from "ionicons/icons";
+import { chevronBack, closeSharp } from "ionicons/icons";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import BuySellList from "../../../model/buySell/seller";
@@ -36,15 +36,14 @@ const BuyerList: React.FC = () => {
   const [buyData, setBuyData] = useState<any>([]);
   const [productIdx, setProductIdx] = useState<number>(0);
   const [detailIsValid, setDetailIsValid] = useState<boolean>(false);
+  const [status, setStatus] = useState<string>("");
 
+  const [present] = useIonAlert();
+  const buyerUid = window.sessionStorage.uid;
   const pushBuyDataHandler = async () => {
     const limit = buyData.length + 20;
     const offset = limit == 0 ? 0 : limit - 20;
-    let _limit = limit;
-    let _offset = offset;
-    const buyerUid = window.sessionStorage.uid;
-    let status = "";
-    const buyList = await BuySellList.buyList(buyerUid, status, _limit, _offset);
+    const buyList = await BuySellList.buyList(buyerUid, status, limit, offset);
     setSellStatusFormatingHandler(buyList);
     console.log("buyList : ", buyList);
     setBuyData([...buyData, ...buyList]);
@@ -63,14 +62,51 @@ const BuyerList: React.FC = () => {
           sellItem[`sellStatus`] = "판매취소";
           break;
         case "R":
-          sellItem[`sellStatus`] = "구매요청 거절";
+          sellItem[`sellStatus`] = "구매취소";
           break;
       }
     }
   };
 
-  const cancelPurchaseHandler = () => {};
-  const r = () => {};
+  const cancelAlert = (sellIdx: number) => {
+    const header = "구매 취소";
+    const message = "상품 구매를 취소하시겠습니까?";
+    present({
+      header,
+      message,
+      buttons: [
+        "아니오",
+        {
+          text: "네",
+          handler: () => {
+            cancelPurchaseHandler(sellIdx);
+          },
+        },
+      ],
+    });
+  };
+
+  const cancelPurchaseHandler = async (sellIdx: number) => {
+    const result = await BuySellList.buyUpdate(sellIdx);
+    console.log("buyUpdate : ", result);
+    if (result) {
+      window.location.replace("/list/buy");
+    }
+  };
+
+  const qrRedirect = () => {
+    const header = "페이지 이동";
+    const message = "구매 페이지로 이동하시겠습니까?";
+    present({
+      header,
+      message,
+      buttons: ["아니오", { text: "네", handler: QRredirect }],
+    });
+  };
+
+  const QRredirect = () => {
+    window.location.replace("/scan");
+  };
 
   useIonViewWillEnter(() => {
     pushBuyDataHandler();
@@ -148,10 +184,16 @@ const BuyerList: React.FC = () => {
                       {item[`sellStatus`] === "구매요청" ? (
                         <IonRow>
                           <IonCol>
-                            <IonButton>구매취소</IonButton>
+                            <IonButton
+                              onClick={() => {
+                                cancelAlert(item[`sellIdx`]);
+                              }}
+                            >
+                              구매취소
+                            </IonButton>
                           </IonCol>
                           <IonCol>
-                            <IonButton>구매진행</IonButton>
+                            <IonButton onClick={qrRedirect}>구매진행</IonButton>
                           </IonCol>
                         </IonRow>
                       ) : (
@@ -192,6 +234,7 @@ const BuyerList: React.FC = () => {
                     <IonCol size="4">구매상품</IonCol>
                     <IonCol>구매일자</IonCol>
                     <IonCol>판매자</IonCol>
+                    <IonCol>상태</IonCol>
                     <IonCol>구매가격</IonCol>
                   </IonRow>
                 </IonGrid>
@@ -206,17 +249,17 @@ const BuyerList: React.FC = () => {
                     <IonItem key={item[`sellIdx`]}>
                       <IonGrid>
                         <IonRow>
-                          <IonCol size="4">
-                            <IonText
-                              onClick={() => {
-                                openDetailModal(item[`sellIdx`]);
-                              }}
-                            >
-                              {item[`productName`]}
-                            </IonText>
+                          <IonCol
+                            size="4"
+                            onClick={() => {
+                              openDetailModal(item[`sellIdx`]);
+                            }}
+                          >
+                            {item[`productName`]}
                           </IonCol>
                           <IonCol>{item[`sellDate`]}</IonCol>
                           <IonCol>{item[`sellerUid`]}</IonCol>
+                          <IonCol>{item[`sellStatus`]}</IonCol>
                           <IonCol>{item[`productPrice`]}</IonCol>
                         </IonRow>
                       </IonGrid>
