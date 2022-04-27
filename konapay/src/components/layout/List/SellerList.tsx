@@ -22,13 +22,13 @@ import {
   IonText,
   IonTitle,
   IonToolbar,
+  useIonAlert,
   useIonViewWillEnter,
 } from "@ionic/react";
 import { chevronBack, closeCircle, closeOutline, closeSharp, flag, qrCodeOutline } from "ionicons/icons";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import QRCode from "react-qr-code";
-import axios from "axios";
 
 import BuySellList from "../../../model/buySell/seller";
 
@@ -40,6 +40,7 @@ const SellerList: React.FC = () => {
   const [isInfiniteDisabled, setInfiniteDisabled] = useState(false);
   const [qrIsValid, setQrIsValid] = useState<boolean>(false);
   const [detailIsValid, setDetailIsValid] = useState<boolean>(false);
+  const [present] = useIonAlert();
 
   const setSellDataHandler = async () => {
     const limit = sellData.length + 20;
@@ -67,9 +68,37 @@ const SellerList: React.FC = () => {
           sellItem[`sellStatus`] = "판매취소";
           break;
         case "R":
-          sellItem[`sellStatus`] = "구매요청 거절";
+          sellItem[`sellStatus`] = "구매자취소";
           break;
       }
+    }
+  };
+
+  const cancelAlert = (payload: object) => {
+    const header = "판매 취소";
+    const message = "상품 판매를 취소하시겠습니까?";
+    present({
+      header,
+      message,
+      buttons: [
+        "아니오",
+        {
+          text: "네",
+          handler: () => {
+            cancelPurchaseHandler(payload);
+          },
+        },
+      ],
+    });
+  };
+
+  const cancelPurchaseHandler = async (payload: any) => {
+    payload[`sellStatus`] = "C";
+    console.log("payload : ", payload);
+    const result = await BuySellList.sellUpdate(payload);
+    console.log("sellUpdate : ", result);
+    if (result) {
+      window.location.replace("/list/sell");
     }
   };
 
@@ -149,7 +178,17 @@ const SellerList: React.FC = () => {
                         <IonCol>{item[`txHash`]}</IonCol>
                       </IonRow>
                     </IonGrid>
-                    {item[`sellStatus`] === "구매요청" ? <IonButton>판매취소</IonButton> : <IonButton disabled>판매취소</IonButton>}
+                    {item[`sellStatus`] === "구매요청" ? (
+                      <IonButton
+                        onClick={() => {
+                          cancelAlert(item);
+                        }}
+                      >
+                        판매취소
+                      </IonButton>
+                    ) : (
+                      <IonButton disabled>판매취소</IonButton>
+                    )}
                   </IonCardContent>
                 );
               })}
@@ -192,13 +231,13 @@ const SellerList: React.FC = () => {
             Toggle Infinite Scroll
           </IonButton> */}
             <IonList>
-              <IonItem>
+              <IonItem className="fontWeight-bold fontSize-small textAlign-center">
                 <IonGrid>
                   <IonRow>
-                    <IonCol size="4">판매상품</IonCol>
-                    <IonCol size="3">판매상태</IonCol>
-                    <IonCol size="3">판매가격</IonCol>
-                    <IonCol size="2">QR</IonCol>
+                    <IonCol>판매상품</IonCol>
+                    <IonCol>판매상태</IonCol>
+                    <IonCol>판매가격</IonCol>
+                    <IonCol>QR</IonCol>
                   </IonRow>
                 </IonGrid>
               </IonItem>
@@ -207,24 +246,22 @@ const SellerList: React.FC = () => {
               {
                 // @ts-expect-error
                 sellData.map((item) => {
-                  item[`sellDate`] = item[`sellDate`].split("T")[0];
-
+                  item[`sellDate`] = item[`sellDate`].split("T")[0].split("-").join("/");
                   return (
-                    <IonItem key={item[`sellIdx`]}>
+                    <IonItem className="fontSize-small textAlign-center" key={item[`sellIdx`]}>
                       <IonGrid>
                         <IonRow>
-                          <IonCol size="4">
-                            <IonText
-                              onClick={() => {
-                                openDetailModal(item[`sellIdx`]);
-                              }}
-                            >
-                              {item[`productName`]}
-                            </IonText>
+                          <IonCol
+                            className="fontWeight-bold"
+                            onClick={() => {
+                              openDetailModal(item[`sellIdx`]);
+                            }}
+                          >
+                            {item[`productName`]}
                           </IonCol>
-                          <IonCol size="3">{item[`sellStatus`]}</IonCol>
-                          <IonCol size="3">{item[`productPrice`]}</IonCol>
-                          <IonCol size="2">
+                          <IonCol>{item[`sellStatus`]}</IonCol>
+                          <IonCol>{item[`productPrice`]}</IonCol>
+                          <IonCol>
                             {item[`sellStatus`] !== "F" ? (
                               <IonButton
                                 onClick={() => {
