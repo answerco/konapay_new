@@ -34,7 +34,7 @@ import "@ionic/react/css/display.css";
 
 import "./main.css";
 
-import { homeOutline, personCircleOutline, logoUsd, giftOutline } from "ionicons/icons";
+import { homeOutline, giftOutline, cardOutline } from "ionicons/icons";
 
 import userInfo from "../../../model/user/userinfo";
 import SideBarMenu from "../SideBarMenu/SideBarMenu";
@@ -166,9 +166,11 @@ const Main: React.FC = () => {
             </IonButtons>
 
             <IonButtons slot="end" id="myinfo">
-              <IonButton onClick={getReady}>
-                <IonIcon src={personCircleOutline} color="dark"></IonIcon>
-              </IonButton>
+              <IonRouterLink href="/mywallet">
+                <IonButton>
+                  <IonIcon src={cardOutline} color="dark"></IonIcon>
+                </IonButton>
+              </IonRouterLink>
               <IonButton onClick={getReady}>
                 <IonIcon src={giftOutline} color="dark"></IonIcon>
               </IonButton>
