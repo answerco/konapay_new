@@ -11,4 +11,9 @@ export default class Sell {
         let res = await CustomAxios.get(`/sell/select/${sellIdx}`)
         return res.data.data.sellStatus
     }
+
+    public static totalSell = async (sellerUid: string) => {
+        let res = await CustomAxios.get(`/sell/total/${sellerUid}`)
+        return res.data.data
+    }
 }

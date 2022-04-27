@@ -76,7 +76,7 @@ const Main: React.FC = () => {
   const getWalletAddressHandler = async () => {
     const uid = sessionStorage?.uid;
     const result = await userInfo.getUser(uid);
-    const user = result;
+    const user: any = result;
     console.log("getWalletAddressHandler user : ", user);
     const walletAddress: string = user.address;
     console.log("getWalletAddressHandler walletAddress : ", walletAddress);

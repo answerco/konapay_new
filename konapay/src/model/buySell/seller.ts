@@ -47,4 +47,10 @@ export default class BuySellList {
 
     return res;
   };
+
+  public static totalBuy = async (buyerUid: string) => {
+    let res = await CustomAxios.get(`/buy/total/${buyerUid}`)
+    return res.data.data
+}
+
 }

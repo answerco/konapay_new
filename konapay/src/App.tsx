@@ -106,8 +106,12 @@ const App: React.FC = () => {
           </Route>
           {/* <Route exact path="/"> < /> </Route> */}
 
-          <Route exact path="/purchasehistory">
-            <PurchaseHistory />
+          <Route exact path="/purchasehistorybuy">
+            <PurchaseHistory type='buy' />
+          </Route>
+
+          <Route exact path="/purchasehistorysell">
+            <PurchaseHistory type='sell' />
           </Route>
 
           <Route exact path="/inout">

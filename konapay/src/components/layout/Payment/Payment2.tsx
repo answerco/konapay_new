@@ -133,7 +133,7 @@ const Payment2: React.FC = () => {
           <div style={{ padding: "0px 2%" }}>
             <div style={{ margin: "7% 0px", display: "flex", justifyContent: "space-between" }}>
               <div style={{ fontSize: "20px", color: "gray", fontWeight: "bold" }}>KONA PAY</div>
-              <div style={{ fontWeight: "bold", color: "lightgray" }}>● ○ ● ●</div>
+              <div style={{ fontWeight: "bold", color: "lightgray" }}>● ○ ● </div>
             </div>
 
             <IonGrid className="table_text">
@@ -165,9 +165,9 @@ const Payment2: React.FC = () => {
             </IonItem>
             <div style={{ display: "flex", justifyContent: "center" }}>
               {/* <IonButton className='payment_button' color="light" size='large'>결제 요청</IonButton> */}
-              <button style={{ width: "75%", fontSize: "18px", padding: "10px", borderRadius: "10px" }} onClick={requirePay} disabled={!check}>
+              <IonButton style={{ height:'70px', width: "75%", fontSize: "18px", padding: "10px", borderRadius: "10px" }} onClick={requirePay} disabled={!check}>
                 결제 요청
-              </button>
+              </IonButton>
 
               <IonModal isOpen={isOpen}>
                 {/* <IonModal isOpen={true}> */}

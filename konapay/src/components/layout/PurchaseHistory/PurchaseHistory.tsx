@@ -1,6 +1,6 @@
 import { IonApp, IonHeader, IonToolbar, IonTitle, IonContent, IonLabel, IonPage, IonButtons, IonBackButton, IonGrid, IonRow, IonCol } from "@ionic/react";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import "@ionic/react/css/normalize.css";
 import "@ionic/react/css/structure.css";
@@ -15,13 +15,53 @@ import "@ionic/react/css/display.css";
 import "../Payment/payment.css";
 import { chevronBack } from "ionicons/icons";
 import { useHistory } from "react-router";
+import BuySellList from "../../../model/buySell/seller";
+import Sell from "../../../model/sell/sell";
 
 const meta = document.createElement("meta");
 meta.name = "viewport";
 meta.content = "width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover";
 document.getElementsByTagName("head")[0].appendChild(meta);
 
-const PurchaseHistory: React.FC = () => {
+interface PurchaseHistoryProps {
+  type: string;
+}
+
+const PurchaseHistory = (props: PurchaseHistoryProps) => {
+
+  const [data,setData] : any = useState()
+
+  const [totalSum, setTotalSum] = useState(0)
+  const [monthSum, setMonthSum] = useState(0)
+  const [totalCount, setTotalCount] = useState(0)
+  const [monthCount, setMonthCount] = useState(0)
+
+  const getTotal = async () => {
+    let uid = sessionStorage.uid
+
+    if(props.type === "buy"){
+      let res = await BuySellList.totalBuy(uid)
+      setData(res)
+    }
+    else{
+      let res = await Sell.totalSell(uid)
+      setData(res)
+    }
+  }
+  
+  useEffect(()=>{
+    getTotal()
+  },[])
+
+  useEffect(()=>{
+    if(Array.isArray(data)){
+      setTotalSum(data[2][0].sum || 0)
+      setMonthSum(data[0][0].sum || 0)
+      setTotalCount(data[3][0].totalCount || 0)
+      setMonthCount(data[1][0].totalCount || 0)
+    }
+  },[data])
+  
   const history = useHistory();
   return (
     <IonApp>
@@ -54,18 +94,18 @@ const PurchaseHistory: React.FC = () => {
                 </IonRow>
                 <IonRow>
                   <IonCol>발생건수</IonCol>
-                  <IonCol>1</IonCol>
-                  <IonCol>2</IonCol>
+                  <IonCol>{monthCount}</IonCol>
+                  <IonCol>{totalCount}</IonCol>
                 </IonRow>
                 <IonRow>
                   <IonCol>발생금액</IonCol>
-                  <IonCol>1,6600</IonCol>
-                  <IonCol>1,6600</IonCol>
+                  <IonCol>{monthSum}</IonCol>
+                  <IonCol>{totalSum}</IonCol>
                 </IonRow>
               </IonGrid>
             </div>
 
-            <div style={{ margin: "10% 0" }}>
+            {/* <div style={{ margin: "10% 0" }}>
               <IonLabel>결제수단별 통계</IonLabel>
               <IonGrid className="payment_table_text">
                 <IonRow className="table_th">
@@ -79,7 +119,7 @@ const PurchaseHistory: React.FC = () => {
                   <IonCol>33,000</IonCol>
                 </IonRow>
               </IonGrid>
-            </div>
+            </div> */}
           </div>
         </IonContent>
       </IonPage>
