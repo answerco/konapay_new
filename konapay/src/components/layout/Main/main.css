@@ -27,7 +27,6 @@ ion-card-content.background {
 @media ( min-width: 430px ){
   ion-card-content.background {
     --background: none;
-    ;
     background-image: url("../../assets/img/mainCard.png");
     min-height: 286px;
     min-width: 400px;
@@ -100,7 +99,7 @@ ion-menu::part(container) {
   font-weight: bold;
 }
 .selectCard {
-  color: white;
+  color: rgb(150, 146, 146);
   position: fixed;
   top: 35%;
   left: 60%;
