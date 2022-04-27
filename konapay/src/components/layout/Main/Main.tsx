@@ -177,8 +177,8 @@ const Main: React.FC = () => {
         </IonHeader>
 
         <IonContent className="background"></IonContent>
-        <IonLabel className="bannerText">KONA PAY</IonLabel>
-        <IonLabel className="bannerText2">언제 어디서든 간편 한 결제</IonLabel>
+        {/* <IonLabel className="bannerText">KONA PAY</IonLabel>
+        <IonLabel className="bannerText2">언제 어디서든 간편 한 결제</IonLabel> */}
           <div>
           <IonCard className="walletCard">
             <IonSlides>

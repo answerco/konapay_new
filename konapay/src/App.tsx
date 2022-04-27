@@ -70,10 +70,7 @@ import BuyerList from "./components/layout/List/BuyerList";
 
 
 const App: React.FC = () => {
-  const [paste] = useIonAlert()
-  setupConfig({
-    hardwareBackButton: false
-  })
+
   return(
   <IonApp>
     <IonReactRouter>
