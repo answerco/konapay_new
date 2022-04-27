@@ -1,7 +1,7 @@
 import { IonApp, IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonButtons, IonBackButton, IonGrid, IonRow, IonCol, IonRouterLink, IonItem, IonIcon } from "@ionic/react";
 
 import React from "react";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 
 import "@ionic/react/css/normalize.css";
 import "@ionic/react/css/structure.css";
@@ -23,9 +23,10 @@ document.getElementsByTagName("head")[0].appendChild(meta);
 
 const Payment3: React.FC = () => {
   const history = useHistory();
+  const location = useLocation();
 
   const prevHistoryFunction = () => {
-    history.push({ pathname: "/payment4", state: {} });
+    history.push({ pathname: "/", state: {} });
   };
 
   return (
@@ -33,9 +34,6 @@ const Payment3: React.FC = () => {
       <IonPage className="ion-page" id="main-content">
         <IonHeader>
           <IonToolbar>
-            <IonButtons slot="start">
-              <IonBackButton defaultHref="/" icon={chevronBack} />
-            </IonButtons>
             <IonTitle>판매</IonTitle>
           </IonToolbar>
         </IonHeader>
@@ -49,25 +47,25 @@ const Payment3: React.FC = () => {
 
             <IonGrid className="total_text">
               <IonRow className="table_total">
-                <IonCol>사용금액</IonCol>
+                <IonCol>판매 물품</IonCol>
               </IonRow>
               <IonRow>
-                <IonCol>33,000</IonCol>
+                <IonCol>{location.state  && (location.state as any).product}</IonCol>
               </IonRow>
             </IonGrid>
 
             <IonGrid className="total_text">
               <IonRow className="table_total">
-                <IonCol>사용가능 금액</IonCol>
+                <IonCol>판매 금액</IonCol>
               </IonRow>
               <IonRow>
-                <IonCol>0</IonCol>
+                <IonCol>{location.state  && (location.state as any).price}</IonCol>
               </IonRow>
             </IonGrid>
             <IonRouterLink href="/payment4">
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <button style={{ width: "75%", fontSize: "18px", padding: "10px", borderRadius: "10px" }} onClick={prevHistoryFunction}>
-                  매출조회
+                  홈으로
                 </button>
               </div>
             </IonRouterLink>

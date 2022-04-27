@@ -64,7 +64,7 @@ const SignUpPage1: React.FC = () => {
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start">
-              <IonBackButton defaultHref="/" icon={chevronBack} />
+              <IonBackButton defaultHref="/"  text={''} color='dark' />
             </IonButtons>
             <IonTitle>회원가입</IonTitle>
           </IonToolbar>
@@ -120,9 +120,9 @@ const SignUpPage1: React.FC = () => {
                 </div>
               </div>
               <div className="box-init" style={{ height: "40%", width: "100%", flexDirection: "column", justifyContent: "flex-start" }}>
-                <button className="box-init" style={{ height: "25%", width: "65%", color: "gray", border: "none" }} onClick={prevHistoryFunction} disabled={!(check.service && check.personal)}>
+                <IonButton className="box-init" style={{ height: "25%", width: "65%" }} onClick={prevHistoryFunction} disabled={!(check.service && check.personal)}>
                   다음
-                </button>
+                </IonButton>
                 {/* <IonRouterLink href="/signuppage2">
                 </IonRouterLink> */}
               </div>

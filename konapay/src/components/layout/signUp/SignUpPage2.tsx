@@ -35,7 +35,7 @@ const SignUpPage2: React.FC = () => {
             <IonHeader>
               <IonItem>
                 <IonItem button onClick={() => history.goBack()}>
-                  <IonIcon icon={chevronBack}></IonIcon>
+                  <IonIcon icon={chevronBack}  color='dark'></IonIcon>
                 </IonItem>
                 <IonTitle>회원가입</IonTitle>
               </IonItem>

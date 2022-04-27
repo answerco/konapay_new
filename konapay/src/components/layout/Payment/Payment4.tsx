@@ -45,7 +45,7 @@ const Payment4: React.FC = () => {
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start">
-              <IonBackButton defaultHref="/" icon={chevronBack} />
+              <IonBackButton defaultHref="/"  text={''} color='dark'  />
             </IonButtons>
             <IonTitle>판매</IonTitle>
           </IonToolbar>

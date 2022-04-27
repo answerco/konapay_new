@@ -84,7 +84,7 @@ const BoardRead: React.FC = () => {
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start">
-              <IonBackButton defaultHref="/" icon={chevronBack} />
+              <IonBackButton defaultHref="/"  text={''} color='dark'  />
             </IonButtons>
             <IonTitle>게시판</IonTitle>
           </IonToolbar>

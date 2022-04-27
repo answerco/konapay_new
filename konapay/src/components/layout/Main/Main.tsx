@@ -145,17 +145,17 @@ const Main: React.FC = () => {
             <IonButtons slot="start" id="main-content">
               <IonMenuToggle>
                 <IonButton>
-                  <IonIcon name="menu-sharp" slot="start"></IonIcon>
+                  <IonIcon name="menu-sharp" slot="start"  color='dark'></IonIcon>
                 </IonButton>
               </IonMenuToggle>
             </IonButtons>
 
             <IonButtons slot="end" id="myinfo">
               <IonButton onClick={getReady}>
-                <IonIcon src={personCircleOutline}></IonIcon>
+                <IonIcon src={personCircleOutline}  color='dark'></IonIcon>
               </IonButton>
               <IonButton onClick={getReady}>
-                <IonIcon src={giftOutline}></IonIcon>
+                <IonIcon src={giftOutline}  color='dark'></IonIcon>
               </IonButton>
             </IonButtons>
           </IonToolbar>
@@ -199,7 +199,7 @@ const Main: React.FC = () => {
         </IonCard>
 
         <IonRouterLink href="/scan">
-          <IonButton color="medium" className="pwdBtn">
+          <IonButton className="pwdBtn">
             <IonLabel>스캔</IonLabel>
           </IonButton>
         </IonRouterLink>

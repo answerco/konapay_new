@@ -29,7 +29,7 @@ const PurchaseHistory: React.FC = () => {
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start">
-              <IonBackButton defaultHref="/" icon={chevronBack} />
+              <IonBackButton defaultHref="/"  text={''} color='dark'  />
             </IonButtons>
             <IonTitle>집계</IonTitle>
           </IonToolbar>
