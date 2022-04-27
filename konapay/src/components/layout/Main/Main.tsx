@@ -19,7 +19,7 @@ import {
   IonSlide,
   useIonToast,
 } from "@ionic/react";
-import {CopyToClipboard} from  'react-copy-to-clipboard'
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import React, { useEffect, useState } from "react";
 import "@ionic/react/css/normalize.css";
 import "@ionic/react/css/structure.css";
@@ -58,9 +58,9 @@ const Main: React.FC = () => {
 
   const amountHandler = async () => {
     if (!!walletAddress) {
+      const uid = sessionStorage?.uid;
       const eth = await userInfo.getCoin(walletAddress, "ETH");
       const kspc = await userInfo.getCoin(walletAddress, "KSPC");
-      const uid = sessionStorage?.uid;
       const point = await userInfo.getPoint(uid);
 
       console.log("amountHandler : ", eth);
@@ -134,8 +134,8 @@ const Main: React.FC = () => {
 
   const copyAddress = () => {
     document.execCommand("copy");
-    present("지갑주소가 복사되었습니다.",1000)
-}
+    present("지갑주소가 복사되었습니다.", 1000);
+  };
 
   return (
     <IonApp>
@@ -179,16 +179,16 @@ const Main: React.FC = () => {
         <IonContent className="background"></IonContent>
         <IonLabel className="bannerText">KONA PAY</IonLabel>
         <IonLabel className="bannerText2">언제 어디서든 간편 한 결제</IonLabel>
-          <div>
+        <div>
           <IonCard className="walletCard">
             <IonSlides>
               <IonSlide>
                 <IonCardContent className="background">
-                  <CopyToClipboard text={walletAddress} >
+                  <CopyToClipboard text={walletAddress}>
                     <IonText onClick={copyAddress} className="card-text1 selectable">
                       {viewAddress}
                     </IonText>
-                            {/* <button className='share-button text-xxs leading-7 text-alarmBoxTitle absolute right-9 bg-lightGray px-2 py-2' onClick={copyAddress}>URL복사</button> */}
+                    {/* <button className='share-button text-xxs leading-7 text-alarmBoxTitle absolute right-9 bg-lightGray px-2 py-2' onClick={copyAddress}>URL복사</button> */}
                   </CopyToClipboard>
                   <br />
                   <IonLabel className="card-text2">KSPC : {kspcAmount}</IonLabel>
@@ -196,7 +196,7 @@ const Main: React.FC = () => {
               </IonSlide>
               <IonSlide>
                 <IonCardContent className="background">
-                  <CopyToClipboard text={walletAddress} >
+                  <CopyToClipboard text={walletAddress}>
                     <IonText onClick={copyAddress} className="card-text1 selectable">
                       {viewAddress}
                     </IonText>
@@ -205,14 +205,22 @@ const Main: React.FC = () => {
                   <IonLabel className="card-text2">ETH : {ethAmount}</IonLabel>
                 </IonCardContent>
               </IonSlide>
+              <IonSlide>
+                <IonCardContent className="background">
+                  <CopyToClipboard text={walletAddress}>
+                    <IonText onClick={copyAddress} className="card-text1 selectable">
+                      {viewAddress}
+                    </IonText>
+                  </CopyToClipboard>
+                  <br />
+                  <IonLabel className="card-text2">POINT : {pointAmount}</IonLabel>
+                </IonCardContent>
+              </IonSlide>
             </IonSlides>
           </IonCard>
-          </div>
-          
- 
-        
+        </div>
 
-        <IonRouterLink href="/scan" >
+        <IonRouterLink href="/scan">
           <IonButton className="pwdBtn">
             <IonLabel>스캔</IonLabel>
           </IonButton>
