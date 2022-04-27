@@ -1,3 +1,4 @@
+import axios from "axios";
 import CustomAxios from "../../common/customAxios";
 
 export default class BuySellList {
@@ -18,6 +19,14 @@ export default class BuySellList {
   public static buyUpdate = async (sellIdx: number) => {
     const payload = { sellIdx };
     let res = await CustomAxios.patch(`/buy/${sellIdx}/reject`, payload);
+
+    return res;
+  };
+  public static sellUpdate = async (payload: any) => {
+    const { sellIdx } = payload;
+    console.log("sellUpdate sellIdx : ", sellIdx);
+    console.log("sellUpdate payload : ", payload);
+    let res = await CustomAxios.patch(`/sell/${sellIdx}/update`, payload);
 
     return res;
   };
