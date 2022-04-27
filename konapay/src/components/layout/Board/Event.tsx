@@ -119,7 +119,7 @@ const Event: React.FC = () => {
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start">
-              <IonBackButton defaultHref="/" icon={chevronBack} />
+              <IonBackButton defaultHref="/"  text={''} color='dark' />
             </IonButtons>
             <IonTitle>이벤트</IonTitle>
           </IonToolbar>

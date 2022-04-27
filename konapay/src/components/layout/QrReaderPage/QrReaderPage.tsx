@@ -42,7 +42,7 @@ const QrReaderPage: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonBackButton defaultHref="/" icon={chevronBack} />
+            <IonBackButton defaultHref="/"  text={''} color='dark'  />
           </IonButtons>
           <IonTitle>구매</IonTitle>
         </IonToolbar>
@@ -109,7 +109,7 @@ const QrReaderPage: React.FC = () => {
           구매하기
         </IonButton>
       ) : (
-        <IonButton color="danger" disabled>
+        <IonButton disabled>
           QR코드를 인식해주세요.
         </IonButton>
       )}

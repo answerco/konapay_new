@@ -95,7 +95,7 @@ const BuyerList: React.FC = () => {
                 setDetailIsValid(false);
               }}
             >
-              <IonIcon icon={closeSharp}></IonIcon>
+              <IonIcon icon={closeSharp}  color='dark'></IonIcon>
             </IonButton>
           </IonHeader>
 
@@ -133,7 +133,7 @@ const BuyerList: React.FC = () => {
           <IonHeader>
             <IonToolbar>
               <IonButtons slot="start">
-                <IonBackButton defaultHref="/" icon={chevronBack} />
+                <IonBackButton defaultHref="/"  text={''} color='dark'  />
               </IonButtons>
               <IonTitle>구매내역</IonTitle>
             </IonToolbar>

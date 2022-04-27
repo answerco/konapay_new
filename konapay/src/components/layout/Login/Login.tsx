@@ -77,12 +77,6 @@ const Login: React.FC = () => {
                 <div style={{display:'flex', justifyContent:'center', marginTop:'15%'}}>
                   <img src={konaPayLogo} alt="" style={{ width:"70px" }}/>
                 </div>
-                
-                <IonIcon
-                  src={konaPayLogo}
-                  
-                  icon={konaPayLogo}
-                />
               </IonCol>
             </IonRow>
 

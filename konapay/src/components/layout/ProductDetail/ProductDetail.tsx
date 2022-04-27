@@ -82,7 +82,7 @@ const ProductDetail: React.FC = () => {
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start">
-              <IonBackButton defaultHref="/" icon={chevronBack} />
+              <IonBackButton defaultHref="/"  text={''} color='dark'  />
             </IonButtons>
             <IonTitle>디테일</IonTitle>
           </IonToolbar>

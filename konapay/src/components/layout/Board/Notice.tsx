@@ -119,7 +119,7 @@ const Notice: React.FC = () => {
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start">
-              <IonBackButton defaultHref="/" icon={chevronBack} />
+              <IonBackButton defaultHref="/"  text={''} color='dark'  />
             </IonButtons>
             <IonTitle>공지사항</IonTitle>
           </IonToolbar>

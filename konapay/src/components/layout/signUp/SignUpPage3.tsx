@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import SignUpHeaderGrid1 from "./SignUpHeaderGrid1";
 import SignUpHeaderGrid2 from "./SignUpHeaderGrid2";
 import SignUpInputBox from "./SignUpInputBox";
-import { IonBackButton, IonButtons, IonHeader, IonIcon, IonItem, IonRouterLink, IonTitle, IonToolbar, useIonAlert, IonCheckbox, IonLabel, IonApp, IonPage, IonContent, useIonToast } from "@ionic/react";
+import { IonBackButton, IonButtons, IonHeader, IonIcon, IonItem, IonRouterLink, IonTitle, IonToolbar, useIonAlert, IonCheckbox, IonLabel, IonApp, IonPage, IonContent, useIonToast, IonButton } from "@ionic/react";
 import { useHistory, useLocation } from "react-router";
 import { chevronBack } from "ionicons/icons";
 import Signup from "../../../model/user/signup";
@@ -52,7 +52,7 @@ const SignUpPage2: React.FC = () => {
       let res = await Signup.signup(uid, password, name, email, userType);
       return res;
     } catch (err) {
-      paste(err as any);
+      // paste(err as any);
       return err;
     }
   };
@@ -84,19 +84,18 @@ const SignUpPage2: React.FC = () => {
       } else {
         let res = await regist();
         if (!!res) {
-          paste('회원가입이 완료되었습니다.')
-          present('회원가입이 완료되었습니다.',2000)
+          present('회원가입이 완료되었습니다.',1500)
           setTimeout(()=>{
             const link = document.createElement("a");
             link.href = "/";
             document.body.appendChild(link);
             link.click();
             link.remove();
-          },2000)
+          },1500)
         }
       }
     } catch (err) {
-      paste(err as "");
+      paste("err as ");
     }
   };
 
@@ -137,7 +136,7 @@ const SignUpPage2: React.FC = () => {
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start">
-              <IonBackButton defaultHref="/" icon={chevronBack} />
+              <IonBackButton defaultHref="/"  text={''} color='dark' />
             </IonButtons>
             <IonTitle>회원가입</IonTitle>
           </IonToolbar>
@@ -192,11 +191,11 @@ const SignUpPage2: React.FC = () => {
               </div> */}
 
               <div className="box-init" style={{ display: "flex", height: "70px", width: "100%", marginTop: "5%", flexDirection: "column", justifyContent: "flex-start" }}>
-                <button className="box-init" style={{ height: "50%", width: "65%", color: "gray", border: "none", fontSize: "20px" }} onClick={registButton}>
-                  {/* <div className="box-init" style={{ height: "27.5%", width: "100%", marginTop: "10%", flexDirection: "column", justifyContent: "flex-start" }}>
-                <button className="box-init" style={{ height: "25%", width: "65%", color: "gray", border: "none", fontSize: "20px" }} onClick={registButton}> */}
+              
+                <IonButton className="box-init" style={{ height: "50%", width: "65%", fontSize: "20px" }} onClick={registButton}>
                   회원가입
-                </button>
+                </IonButton>
+
               </div>
             </div>
           </div>

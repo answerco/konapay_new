@@ -34,7 +34,7 @@ const Layout: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonBackButton defaultHref="/" icon={chevronBack} />
+            <IonBackButton defaultHref="/" text={''} color='dark' />
           </IonButtons>
           <IonTitle>환전</IonTitle>
         </IonToolbar>

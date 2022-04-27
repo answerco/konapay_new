@@ -21,7 +21,7 @@ const Header: React.FC<HeaderInterface> = ({ name }) => {
       }}
     >
       <div className="box-init" style={{ height: "100%", color: "black", justifyContent: "flex-start", fontSize: "20px" }}>
-        <IonIcon icon={chevronBackOutline} size="large" onClick={backLocation}></IonIcon>
+        <IonIcon icon={chevronBackOutline} size="large" onClick={backLocation}  color='dark'></IonIcon>
         {name}
       </div>
     </div>
