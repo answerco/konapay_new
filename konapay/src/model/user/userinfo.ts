@@ -12,15 +12,19 @@ export default class userInfo {
     let res = await CustomAxios.get(`/user/select/${uid}`);
     return res;
   };
-  public static getkscp = async (wallet: string, symbol: string) => {
+  public static getCoin = async (wallet: string, symbol: string) => {
     // let payload = { uid };
     let res = await CustomAxios.get(`/${wallet}/getbalance/${symbol}`);
-    return res;
+    let coin = res.data.data;
+    return coin;
   };
 
   public static getPoint = async (uid: string) => {
     let res = await CustomAxios.get(`point/balance/${uid}`);
-
-    return res;
+    let totalPoint = res.data.data.totalPoint;
+    if (totalPoint === null) {
+      return 0;
+    }
+    return totalPoint;
   };
 }

@@ -21,7 +21,7 @@ import {
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { Redirect, Route } from "react-router-dom";
-import { setupConfig } from '@ionic/react'
+import { setupConfig } from "@ionic/react";
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
@@ -68,7 +68,6 @@ import Login from "./components/layout/Login/Login";
 import SellerList from "./components/layout/List/SellerList";
 import BuyerList from "./components/layout/List/BuyerList";
 
-
 const App: React.FC = () => {
 
   return(
@@ -88,86 +87,87 @@ const App: React.FC = () => {
         </Route>
         <Route exact path="/signuppage2">
           <SignUpPage2 />
-        </Route>
-        <Route exact path="/signuppage3">
-          <SignUpPage3 />
-        </Route>
+        </Route> */}
+          <Route exact path="/signuppage3">
+            <SignUpPage3 />
+          </Route>
 
-        <Route exact path="/scan">
-          <QrReaderPage />
-        </Route>
-        <Route exact path="/detail/:productIdx">
-          <ProductDetail />
-        </Route>
-        <Route exact path="/swap">
-          <SwapPage />
-        </Route>
-        {/* <Route exact path="/"> < /> </Route> */}
+          <Route exact path="/scan">
+            <QrReaderPage />
+          </Route>
+          <Route exact path="/detail/:productIdx">
+            <ProductDetail />
+          </Route>
+          <Route exact path="/swap">
+            <SwapPage />
+          </Route>
+          {/* <Route exact path="/"> < /> </Route> */}
 
-        <Route exact path="/purchasehistory">
-          <PurchaseHistory />
-        </Route>
+          <Route exact path="/purchasehistory">
+            <PurchaseHistory />
+          </Route>
 
-        <Route exact path="/inout">
-          <Inout />
-        </Route>
-        <Route exact path="/sendkspc">
-          <SendKSPC />
-        </Route>
+          <Route exact path="/inout">
+            <Inout />
+          </Route>
+          <Route exact path="/sendkspc">
+            <SendKSPC />
+          </Route>
 
-        <Route exact path="/mywallet">
-          <MyWallet />
-        </Route>
+          <Route exact path="/mywallet">
+            <MyWallet />
+          </Route>
 
-        <Route exact path="/board">
-          <Board />
-        </Route>
-        <Route exact path="/notice">
-          <Notice />
-        </Route>
-        <Route exact path="/event">
-          <Event />
-        </Route>
-        <Route exact path="/board/write">
-          <BoardWrite />
-        </Route>
-        <Route exact path="/board/page/:params">
-          <BoardRead />
-        </Route>
+          <Route exact path="/board">
+            <Board />
+          </Route>
+          <Route exact path="/notice">
+            <Notice />
+          </Route>
+          <Route exact path="/event">
+            <Event />
+          </Route>
+          <Route exact path="/board/write">
+            <BoardWrite />
+          </Route>
+          <Route exact path="/board/page/:params">
+            <BoardRead />
+          </Route>
 
-        <Route exact path="/payment">
-          <Payment />
-        </Route>
-        <Route exact path="/payment2">
-          <Payment2 />
-        </Route>
-        <Route exact path="/payment3">
-          <Payment3 />
-        </Route>
-        <Route exact path="/payment4">
-          <Payment4 />
-        </Route>
+          <Route exact path="/payment">
+            <Payment />
+          </Route>
+          <Route exact path="/payment2">
+            <Payment2 />
+          </Route>
+          <Route exact path="/payment3">
+            <Payment3 />
+          </Route>
+          <Route exact path="/payment4">
+            <Payment4 />
+          </Route>
 
-        <Route exact path="/list/sell">
-          {" "}
-          <SellerList />{" "}
-        </Route>
-        <Route exact path="/list/buy">
-          {" "}
-          <BuyerList />{" "}
-        </Route>
+          <Route exact path="/list/sell">
+            {" "}
+            <SellerList />{" "}
+          </Route>
+          <Route exact path="/list/buy">
+            {" "}
+            <BuyerList />{" "}
+          </Route>
 
-        <Route exact path="/list/sell">
-          {" "}
-          <SellerList />{" "}
-        </Route>
-        <Route exact path="/list/buy">
-          {" "}
-          <BuyerList />{" "}
-        </Route>
-      </IonRouterOutlet>
-    </IonReactRouter>
-  </IonApp>
-);}
+          <Route exact path="/list/sell">
+            {" "}
+            <SellerList />{" "}
+          </Route>
+          <Route exact path="/list/buy">
+            {" "}
+            <BuyerList />{" "}
+          </Route>
+        </IonRouterOutlet>
+      </IonReactRouter>
+    </IonApp>
+  );
+};
 
 export default App;
