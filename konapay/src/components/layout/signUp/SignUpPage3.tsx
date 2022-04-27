@@ -95,7 +95,7 @@ const SignUpPage2: React.FC = () => {
         }
       }
     } catch (err) {
-      paste("err as ");
+      paste(err as "");
     }
   };
 

@@ -17,8 +17,9 @@ import {
   useIonAlert,
   IonSlides,
   IonSlide,
+  useIonToast,
 } from "@ionic/react";
-
+import {CopyToClipboard} from  'react-copy-to-clipboard'
 import React, { useEffect, useState } from "react";
 import "@ionic/react/css/normalize.css";
 import "@ionic/react/css/structure.css";
@@ -52,6 +53,7 @@ const Main: React.FC = () => {
   const [pointAmount, setPointAmount] = useState<string>("");
   const [copySucess, setCopySucess] = useState<boolean>(false);
 
+  const [present, dismiss] = useIonToast();
   const [paste] = useIonAlert();
 
   const amountHandler = async () => {
@@ -130,6 +132,11 @@ const Main: React.FC = () => {
     paste("서비스 준비 중 입니다.");
   };
 
+  const copyAddress = () => {
+    document.execCommand("copy");
+    present("지갑주소가 복사되었습니다.",1000)
+}
+
   return (
     <IonApp>
       <IonAlert
@@ -147,7 +154,7 @@ const Main: React.FC = () => {
       ></IonAlert>
 
       <SideBarMenu></SideBarMenu>
-      <IonPage className="ion-page">
+      <IonPage>
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start" id="main-content">
@@ -172,55 +179,40 @@ const Main: React.FC = () => {
         <IonContent className="background"></IonContent>
         <IonLabel className="bannerText">KONA PAY</IonLabel>
         <IonLabel className="bannerText2">언제 어디서든 간편 한 결제</IonLabel>
+          <div>
+          <IonCard className="walletCard">
+            <IonSlides>
+              <IonSlide>
+                <IonCardContent className="background">
+                  <CopyToClipboard text={walletAddress} >
+                    <IonText onClick={copyAddress} className="card-text1 selectable">
+                      {viewAddress}
+                    </IonText>
+                            {/* <button className='share-button text-xxs leading-7 text-alarmBoxTitle absolute right-9 bg-lightGray px-2 py-2' onClick={copyAddress}>URL복사</button> */}
+                  </CopyToClipboard>
+                  <br />
+                  <IonLabel className="card-text2">KSPC : {kspcAmount}</IonLabel>
+                </IonCardContent>
+              </IonSlide>
+              <IonSlide>
+                <IonCardContent className="background">
+                  <CopyToClipboard text={walletAddress} >
+                    <IonText onClick={copyAddress} className="card-text1 selectable">
+                      {viewAddress}
+                    </IonText>
+                  </CopyToClipboard>
+                  <br />
+                  <IonLabel className="card-text2">ETH : {ethAmount}</IonLabel>
+                </IonCardContent>
+              </IonSlide>
+            </IonSlides>
+          </IonCard>
+          </div>
+          
+ 
+        
 
-        <IonCard className="walletCard">
-          <IonSlides>
-            <IonSlide>
-              <IonCardContent className="background">
-                <IonText
-                  onClick={(e) => {
-                    addressCopy(e);
-                  }}
-                  className="card-text1 selectable"
-                >
-                  {viewAddress}
-                </IonText>
-                <br />
-                <IonLabel className="card-text2">KSPC : {kspcAmount}</IonLabel>
-              </IonCardContent>
-            </IonSlide>
-            <IonSlide>
-              <IonCardContent className="background">
-                <IonText
-                  onClick={(e) => {
-                    addressCopy(e);
-                  }}
-                  className="card-text1 selectable"
-                >
-                  {viewAddress}
-                </IonText>
-                <br />
-                <IonLabel className="card-text2">ETH : {ethAmount}</IonLabel>
-              </IonCardContent>
-            </IonSlide>
-            <IonSlide>
-              <IonCardContent className="background">
-                <IonText
-                  onClick={(e) => {
-                    addressCopy(e);
-                  }}
-                  className="card-text1 selectable"
-                >
-                  {viewAddress}
-                </IonText>
-                <br />
-                <IonLabel className="card-text2">Point : {pointAmount}</IonLabel>
-              </IonCardContent>
-            </IonSlide>
-          </IonSlides>
-        </IonCard>
-
-        <IonRouterLink href="/scan">
+        <IonRouterLink href="/scan" >
           <IonButton className="pwdBtn">
             <IonLabel>스캔</IonLabel>
           </IonButton>
