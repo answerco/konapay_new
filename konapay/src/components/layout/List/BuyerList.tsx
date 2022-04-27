@@ -29,6 +29,8 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import BuySellList from "../../../model/buySell/seller";
 
+import "./list.css";
+
 const BuyerList: React.FC = () => {
   const history = useHistory();
 
@@ -228,10 +230,10 @@ const BuyerList: React.FC = () => {
               Toggle Infinite Scroll
             </IonButton> */}
             <IonList>
-              <IonItem>
+              <IonItem className="fontSize-small textAlign-center">
                 <IonGrid>
                   <IonRow>
-                    <IonCol size="4">구매상품</IonCol>
+                    <IonCol>구매상품</IonCol>
                     <IonCol>구매일자</IonCol>
                     <IonCol>판매자</IonCol>
                     <IonCol>상태</IonCol>
@@ -244,13 +246,14 @@ const BuyerList: React.FC = () => {
               {
                 // @ts-expect-error
                 buyData.map((item) => {
-                  item[`sellDate`] = item[`sellDate`].split("T")[0];
+                  console.log(item[`sellDate`].split("T")[0].split("-"));
+                  // item[`sellDate`] = item[`sellDate`].split("T")[0];
+                  item[`sellDate`] = item[`sellDate`].split("T")[0]?.split("-");
                   return (
-                    <IonItem key={item[`sellIdx`]}>
+                    <IonItem className="fontSize-small textAlign-center" key={item[`sellIdx`]}>
                       <IonGrid>
                         <IonRow>
                           <IonCol
-                            size="4"
                             onClick={() => {
                               openDetailModal(item[`sellIdx`]);
                             }}

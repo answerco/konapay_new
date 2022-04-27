@@ -1,0 +1,10 @@
+ion-item.fontSize-small {
+  font-size: small;
+}
+
+ion-item.textAlign-center {
+  text-align: center;
+}
+ion-item.textAlign-end {
+  text-align: end;
+}
