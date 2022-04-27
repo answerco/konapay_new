@@ -70,13 +70,12 @@ const Payment2: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const requirePay = async () => {
-    try{
-      await registPay()
-      setEndTime(new Date().getTime() + 32 * 1000)
-      setIsOpen(true)     
-    }
-    catch(err){
-      paste(err as any)
+    try {
+      await registPay();
+      setEndTime(new Date().getTime() + 32 * 1000);
+      setIsOpen(true);
+    } catch (err) {
+      paste(err as any);
     }
   };
 
@@ -97,14 +96,12 @@ const Payment2: React.FC = () => {
     }
   };
 
-  const [endTime, setEndTime] = useState<number>(
-    10
-  );
+  const [endTime, setEndTime] = useState<number>(10);
   const [timeLeft, setTimeLeft] = useState<number>(30);
 
   useEffect(() => {
-    if(isOpen){
-        setTimeout(() => {
+    if (isOpen) {
+      setTimeout(() => {
         setTimeLeft(calculateTimeLeft());
       }, 1000);
     }
@@ -112,7 +109,7 @@ const Payment2: React.FC = () => {
 
   useEffect(() => {
     if (timeLeft <= 0) {
-      prevHistoryFunction()
+      prevHistoryFunction();
     }
   }, [timeLeft]);
 
@@ -120,9 +117,6 @@ const Payment2: React.FC = () => {
     const currTime = new Date().getTime();
     return endTime - currTime;
   };
-
-
-
 
   return (
     <IonApp>

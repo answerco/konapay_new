@@ -25,9 +25,7 @@ const Layout: React.FC = () => {
       {/* <div className="box-init box" style={{ height: "7.5%" }}>
         <Header name="스왑"></Header>
       </div> */}
-      <div className="box-init box" style={{ height: "5%", justifyContent: "flex-start", flexDirection: "column" }}>
-        <p style={{ color: "#E3E3E3", fontSize: "14px", width: "75%" }}>TOTAL PORTFOLIO VALUE</p>
-      </div>
+      <div className="box-init box" style={{ height: "5%", justifyContent: "flex-start", flexDirection: "column" }}></div>
       <div className="box-init box" style={{ height: "20%" }}>
         <div
           className="box-init card"

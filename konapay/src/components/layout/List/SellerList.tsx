@@ -30,7 +30,7 @@ import { useHistory } from "react-router";
 import QRCode from "react-qr-code";
 import axios from "axios";
 
-import ProductManager from "./productManager";
+import BuySellList from "../../../model/buySell/seller";
 
 const SellerList: React.FC = () => {
   const history = useHistory();
@@ -40,46 +40,41 @@ const SellerList: React.FC = () => {
   const [isInfiniteDisabled, setInfiniteDisabled] = useState(false);
   const [qrIsValid, setQrIsValid] = useState<boolean>(false);
   const [detailIsValid, setDetailIsValid] = useState<boolean>(false);
-  const [rowItem, setRowItem] = useState<any[][]>();
 
-  // Axios sellListGetHandler
-  /*
-        로그인 이후 아이디값 sellerUid 값으로 변경 필요
-  */
-  const pushSellDataHandler = async () => {
-    try {
-      const limit = sellData.length + 20;
-      const offset = limit == 0 ? 0 : limit - 20;
-      const sellItem = await ProductManager.getSellInformation("jos", "S", limit, offset);
-      console.log("sellInformation : ", sellItem);
-      setSellData([...sellData, ...sellItem]);
-    } catch (error) {
-      console.error(error);
-      console.trace();
+  const setSellDataHandler = async () => {
+    const limit = sellData.length + 20;
+    const offset = limit == 0 ? 0 : limit - 20;
+    let _limit = limit;
+    let _offset = offset;
+    const sellerUid = window.sessionStorage.uid;
+    let status = "";
+    const sellList = await BuySellList.sellList(sellerUid, status, _limit, _offset);
+    console.log(typeof sellList);
+    setSellStatusFormatingHandler(sellList);
+    setSellData([...sellData, ...sellList]);
+  };
+
+  const setSellStatusFormatingHandler = (sellList: any) => {
+    for (let sellItem of sellList) {
+      switch (sellItem[`sellStatus`]) {
+        case "S":
+          sellItem[`sellStatus`] = "구매요청";
+          break;
+        case "F":
+          sellItem[`sellStatus`] = "판매완료";
+          break;
+        case "C":
+          sellItem[`sellStatus`] = "판매취소";
+          break;
+        case "R":
+          sellItem[`sellStatus`] = "구매요청 거절";
+          break;
+      }
     }
   };
 
-  useEffect(() => {
-    const axiosFunction = async () => {
-      console.log("useEffect productIdx : ", productIdx);
-      try {
-        const htmlMapProductInformation = await ProductManager.getList(productIdx);
-
-        if (htmlMapProductInformation != null) {
-          setRowItem(htmlMapProductInformation);
-        } else {
-          throw new Error("....");
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    axiosFunction();
-  }, [detailIsValid]);
-
   useIonViewWillEnter(() => {
-    pushSellDataHandler();
+    setSellDataHandler();
   });
 
   const openQRModal = (idx: any) => {
@@ -105,32 +100,59 @@ const SellerList: React.FC = () => {
             </IonButton>
           </IonHeader>
 
-          <IonCard>
+          {/* <IonCard>
             <IonCardHeader>상품 사진</IonCardHeader>
             <IonCardContent>
               <IonImg src="https://placeimg.com/320/100/any/grayscale"></IonImg>
             </IonCardContent>
-          </IonCard>
+          </IonCard> */}
           <IonCard>
             <IonCardHeader>
               <IonTitle>상품 확인서</IonTitle>
             </IonCardHeader>
-            <IonCardContent>
-              <IonGrid>
-                {detailIsValid ? (
-                  rowItem?.map((item, index) => {
-                    return (
-                      <IonRow key={index}>
-                        <IonCol size="4">{item[0]}</IonCol>
-                        <IonCol>{item[1]}</IonCol>
+
+            {sellData
+              .filter((item: any) => {
+                return item[`sellIdx`] === productIdx;
+              })
+              .map((item: any) => {
+                console.log("detail Item : ", item);
+                return (
+                  <IonCardContent key={item[`sellIdx`]}>
+                    <IonGrid key={item[`sellIdx`]}>
+                      <IonRow>
+                        <IonCol>상품번호</IonCol>
+                        <IonCol>{item[`sellIdx`]}</IonCol>
                       </IonRow>
-                    );
-                  })
-                ) : (
-                  <IonTitle>상품을 불러오지 못했습니다.</IonTitle>
-                )}
-              </IonGrid>
-            </IonCardContent>
+                      <IonRow>
+                        <IonCol>판매상태</IonCol>
+                        <IonCol>{item[`sellStatus`]}</IonCol>
+                      </IonRow>
+                      <IonRow>
+                        <IonCol>상품명</IonCol>
+                        <IonCol>{item[`productName`]}</IonCol>
+                      </IonRow>
+                      <IonRow>
+                        <IonCol>구매자</IonCol>
+                        <IonCol>{item[`buyerUid`]}</IonCol>
+                      </IonRow>
+                      <IonRow>
+                        <IonCol>판매가격</IonCol>
+                        <IonCol>{item[`productPrice`]}</IonCol>
+                      </IonRow>
+                      <IonRow>
+                        <IonCol>구매일</IonCol>
+                        <IonCol>{item[`buyDate`]}</IonCol>
+                      </IonRow>
+                      <IonRow>
+                        <IonCol>txHash</IonCol>
+                        <IonCol>{item[`txHash`]}</IonCol>
+                      </IonRow>
+                    </IonGrid>
+                    {item[`sellStatus`] === "구매요청" ? <IonButton>판매취소</IonButton> : <IonButton disabled>판매취소</IonButton>}
+                  </IonCardContent>
+                );
+              })}
           </IonCard>
         </IonContent>
       </IonModal>
@@ -173,10 +195,10 @@ const SellerList: React.FC = () => {
               <IonItem>
                 <IonGrid>
                   <IonRow>
-                    <IonCol>판매상품</IonCol>
-                    <IonCol>구매자</IonCol>
-                    <IonCol>판매가격</IonCol>
-                    <IonCol>QR생성</IonCol>
+                    <IonCol size="4">판매상품</IonCol>
+                    <IonCol size="3">판매상태</IonCol>
+                    <IonCol size="3">판매가격</IonCol>
+                    <IonCol size="2">QR</IonCol>
                   </IonRow>
                 </IonGrid>
               </IonItem>
@@ -200,16 +222,20 @@ const SellerList: React.FC = () => {
                               {item[`productName`]}
                             </IonText>
                           </IonCol>
-                          <IonCol>{item[`buyerUid`]}</IonCol>
-                          <IonCol>{item[`productPrice`]}</IonCol>
-                          <IonCol>
-                            <IonButton
-                              onClick={() => {
-                                openQRModal(item[`sellIdx`]);
-                              }}
-                            >
-                              <IonIcon icon={qrCodeOutline} color='dark'></IonIcon>
-                            </IonButton>
+                          <IonCol size="3">{item[`sellStatus`]}</IonCol>
+                          <IonCol size="3">{item[`productPrice`]}</IonCol>
+                          <IonCol size="2">
+                            {item[`sellStatus`] !== "F" ? (
+                              <IonButton
+                                onClick={() => {
+                                  openQRModal(item[`sellIdx`]);
+                                }}
+                              >
+                                <IonIcon icon={qrCodeOutline} color='dark'></IonIcon>
+                              </IonButton>
+                            ) : (
+                              <></>
+                            )}
                           </IonCol>
                         </IonRow>
                       </IonGrid>
@@ -219,7 +245,7 @@ const SellerList: React.FC = () => {
               }
             </IonList>
 
-            <IonInfiniteScroll onIonInfinite={pushSellDataHandler} threshold="100px" disabled={isInfiniteDisabled}>
+            <IonInfiniteScroll onIonInfinite={setSellDataHandler} threshold="100px" disabled={isInfiniteDisabled}>
               <IonInfiniteScrollContent loadingSpinner="bubbles" loadingText="Loading more data..."></IonInfiniteScrollContent>
             </IonInfiniteScroll>
           </IonContent>
