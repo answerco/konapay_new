@@ -64,7 +64,7 @@ const SideBarMenu: React.FC = () => {
                 <IonLabel>판매내역</IonLabel>
               </IonItem>
             </IonRouterLink>
-            <IonRouterLink href="/purchasehistory">
+            <IonRouterLink href="/purchasehistorysell">
               <IonItem button>
                 <IonIcon src={statsChart} slot="start" name="home" color="dark"></IonIcon>
                 <IonLabel>판매집계</IonLabel>
@@ -82,7 +82,7 @@ const SideBarMenu: React.FC = () => {
                 <IonLabel>구매내역</IonLabel>
               </IonItem>
             </IonRouterLink>
-            <IonRouterLink href="/purchasehistory">
+            <IonRouterLink href="/purchasehistorybuy">
               <IonItem button>
                 <IonIcon src={statsChart} slot="start" name="home" color="dark"></IonIcon>
                 <IonLabel>구매집계</IonLabel>

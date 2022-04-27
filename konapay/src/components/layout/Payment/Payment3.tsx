@@ -1,4 +1,4 @@
-import { IonApp, IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonButtons, IonBackButton, IonGrid, IonRow, IonCol, IonRouterLink, IonItem, IonIcon } from "@ionic/react";
+import { IonApp, IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonButtons, IonBackButton, IonGrid, IonRow, IonCol, IonRouterLink, IonItem, IonIcon, IonButton } from "@ionic/react";
 
 import React from "react";
 import { useHistory, useLocation } from "react-router";
@@ -41,7 +41,7 @@ const Payment3: React.FC = () => {
           <div style={{ padding: "0px 2%" }}>
             <div style={{ margin: "7% 0px", display: "flex", justifyContent: "space-between" }}>
               <div style={{ fontSize: "20px", color: "gray", fontWeight: "bold" }}>KONA PAY</div>
-              <div style={{ fontWeight: "bold", color: "lightgray" }}>● ● ○ ●</div>
+              <div style={{ fontWeight: "bold", color: "lightgray" }}>● ● ○ </div>
             </div>
             <div>지불 승인이 완료 되었습니다.</div>
 
@@ -64,9 +64,9 @@ const Payment3: React.FC = () => {
             </IonGrid>
             {/* <IonRouterLink href="/payment4"> */}
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <button style={{ width: "75%", fontSize: "18px", padding: "10px", borderRadius: "10px" }} onClick={prevHistoryFunction}>
+            <IonButton style={{ width: "75%", fontSize: "18px", padding: "10px", borderRadius: "10px" }} onClick={prevHistoryFunction}>
                 홈으로
-              </button>
+              </IonButton>
             </div>
             {/* </IonRouterLink> */}
           </div>

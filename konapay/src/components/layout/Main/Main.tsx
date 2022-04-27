@@ -76,7 +76,7 @@ const Main: React.FC = () => {
   const getWalletAddressHandler = async () => {
     const uid = sessionStorage?.uid;
     const result = await userInfo.getUser(uid);
-    const user = result;
+    const user: any = result;
     console.log("getWalletAddressHandler user : ", user);
     const walletAddress: string = user.address;
     console.log("getWalletAddressHandler walletAddress : ", walletAddress);
@@ -134,7 +134,7 @@ const Main: React.FC = () => {
 
   const copyAddress = () => {
     document.execCommand("copy");
-    present("지갑주소가 복사되었습니다.", 1000);
+    present({message: "지갑주소가 복사되었습니다.", duration: 1000 , cssClass:"main_toast"});
   };
 
   return (

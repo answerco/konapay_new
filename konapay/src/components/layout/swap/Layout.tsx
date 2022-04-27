@@ -1,9 +1,10 @@
 import "./Layout.css";
 import React, { useEffect, useState } from "react";
 import Header from "./Header";
-import { IonBackButton, IonButton, IonButtons, IonHeader, IonRow, IonTitle, IonToolbar } from "@ionic/react";
+import { IonBackButton, IonButton, IonButtons, IonHeader, IonLoading, IonRow, IonTitle, IonToolbar, useIonLoading, useIonToast } from "@ionic/react";
 import { chevronBack } from "ionicons/icons";
 import Point from "../../../model/user/point";
+
 
 const meta = document.createElement("meta");
 meta.name = "viewport";
@@ -12,6 +13,9 @@ document.getElementsByTagName("head")[0].appendChild(meta);
 
 const Layout: React.FC = () => {
   const [point, setPoint]: any = useState(0);
+  const [amount, setAmount]: any = useState()
+  const [present, dismiss] = useIonToast();
+  const [showLoading, setShowLoading] = useState(false);
 
   const getPoint = async () => {
     let res = await Point.view(sessionStorage.uid);
@@ -21,6 +25,17 @@ const Layout: React.FC = () => {
       setPoint(res);
     }
   };
+
+  const swap = () => {
+    try{
+      let uid = sessionStorage.uid
+      let res: any = Point.swap(uid, 'KSPC',amount )
+      present('포인트 전환중입니다...(약 2~3분 정도 소요됩니다.)', 3000)
+    }
+    catch(err){
+      present(err as "", 1500)
+    }
+  }
 
   useEffect(() => {
     getPoint();
@@ -36,7 +51,13 @@ const Layout: React.FC = () => {
           <IonTitle>환전</IonTitle>
         </IonToolbar>
       </IonHeader>
-
+      <IonLoading
+        // cssClass='my-custom-class'
+        isOpen={showLoading}
+        onDidDismiss={() => setShowLoading(false)}
+        message={'Please wait...'}
+        // duration={5000}
+      />
       <div className="box-init box" style={{ height: "7.5%", justifyContent: "flex-start", flexDirection: "column" }}></div>
       <div className="box-init box" style={{ height: "22.5%" }}>
         <div
@@ -52,13 +73,13 @@ const Layout: React.FC = () => {
       </div>
       <div className="box-init box" style={{ height: "25%", justifyContent: "flex-start", flexDirection: "column" }}>
         <div className="card2" style={{ width: "80%", height: "100%", textAlign: "center" }}>
-          <input type="text" placeholder="수량을 입력해주세요." style={{ width: "90%", height: "20%", marginTop: "10%", borderRadius: "5px", border: "1px solid gray" }} />
+          <input type="text" placeholder="수량을 입력해주세요." style={{ width: "90%", height: "20%", marginTop: "10%", borderRadius: "5px", border: "1px solid gray" }} value={amount} onChange={(e:any)=> {setAmount(e.target.value)}} />
         </div>
       </div>
       <div className="box-init box" style={{ height: "22.5%", justifyContent: "flex-start", flexDirection: "column" }}>
         <div className="card2" style={{ width: "90%", height: "100%", textAlign: "center" }}>
           <p style={{ color: "black", textAlign: "start", fontSize: "13px", marginBottom: "5%" }}>[유의사항]</p>
-          <p style={{ color: "black", textAlign: "start", fontSize: "13px" }}>개인정보 입력에 유의해주세요.</p>
+          <p style={{ color: "black", textAlign: "start", fontSize: "13px" }}>포인트 전환은 약 2~3분정도 소요됩니다.</p>
           <p style={{ color: "black", textAlign: "start", fontSize: "13px" }}>KSPC 이외의 주소로는 전송되지 않아요.</p>
           <p style={{ color: "black", textAlign: "start", fontSize: "13px" }}>KSPC를 전송할 경우에는 이더리움 가스비가 필요합니다.</p>
           <p style={{ color: "black", textAlign: "start", fontSize: "13px" }}>미리 이더리움을 충전해 놓으시기 바랍니다.</p>
@@ -66,7 +87,7 @@ const Layout: React.FC = () => {
       </div>
       <div className="box-init box" style={{ height: "15%" }}>
         {/* <button style={{ width: "80%", height: "50%", border: "none", backgroundColor: "GrayText", borderRadius: "5px" }}>포인트 전환</button> */}
-        <IonButton key={""} size="large">
+        <IonButton key={""} size="large" onClick={swap}>
           포인트 변환
         </IonButton>
       </div>

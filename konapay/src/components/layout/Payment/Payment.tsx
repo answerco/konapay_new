@@ -73,7 +73,7 @@ const Payment: React.FC = () => {
           <div style={{ padding: "0px 2%" }}>
             <div style={{ margin: "7% 0px", display: "flex", justifyContent: "space-between" }}>
               <div style={{ fontSize: "20px", color: "gray", fontWeight: "bold" }}>KONA PAY</div>
-              <div style={{ fontWeight: "bold", color: "lightgray" }}>○ ● ● ●</div>
+              <div style={{ fontWeight: "bold", color: "lightgray" }}>○ ● ● </div>
             </div>
             <div style={{ border: "2px solid lightgray", padding: "15px 20px", borderRadius: "10px", margin: "1.5% 0px" }}>
               <div style={{ margin: "0px 0px 10px 0px" }}>상품명</div>
@@ -93,7 +93,7 @@ const Payment: React.FC = () => {
               </div>
               <input style={{ width: "100%", height: "30px" }} type="text" name="id" value={content.id} onChange={onChange} disabled={content.valid} ></input>
             </div>
-            <div style={{ fontSize: "80%", margin: "15% 0px" }}>
+            <div style={{ fontSize: "80%", margin: "10% 0px" }}>
               [유의사항]
               <br />
               <br />
@@ -106,13 +106,11 @@ const Payment: React.FC = () => {
               미리 이더리움을 충전해 놓으시기 바랍니다.
             </div>
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <button
-                style={{ width: "75%", fontSize: "18px", padding: "10px", borderRadius: "10px" }}
+            <IonButton style={{ height:"70px", width: "75%", fontSize: "18px", padding: "10px", borderRadius: "10px" }}
                 disabled={content.product === "" || content.price === "" || content.id === "" || !content.valid}
-                onClick={prevHistoryFunction}
-              >
+                onClick={prevHistoryFunction}>
                 승인 요청
-              </button>
+              </IonButton>
             </div>
           </div>
         </IonContent>
