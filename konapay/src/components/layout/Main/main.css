@@ -8,7 +8,7 @@ ion-content.background {
   background-size: cover;
   -ms-overflow-style: none;
   object-fit: contain;
-  /* filter: brightness(70%); */
+  filter: brightness(70%);
 }
 
 ion-card-content.background {
@@ -21,7 +21,7 @@ ion-card-content.background {
   padding-top: 66.64%;
   -ms-overflow-style: none;
   object-fit: contain;
-  /* filter: brightness(70%); */
+  filter: brightness(100%);
 }
 
 @media ( min-width: 430px ){
@@ -37,13 +37,13 @@ ion-card-content.background {
     /* padding-bottom: 25%; */
     -ms-overflow-style: none;
     object-fit: contain;
-    filter: brightness(70%);
+    filter: brightness(100%);
   }
 }
 
 
 ion-text.card-text1 {
-  color: white;
+  color: black;
   width: 65%;
   position: fixed;
   left: 37.5%;
@@ -59,7 +59,7 @@ ion-text.card-text1 {
 } */
 
 ion-label.card-text2 {
-  color: white;
+  color: black;
   width: 50%;
   position: fixed;
   left: 37.5%;
