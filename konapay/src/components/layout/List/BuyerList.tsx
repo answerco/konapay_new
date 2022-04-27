@@ -230,7 +230,7 @@ const BuyerList: React.FC = () => {
               Toggle Infinite Scroll
             </IonButton> */}
             <IonList>
-              <IonItem className="fontSize-small textAlign-center">
+              <IonItem className="fontWeight-bold fontSize-small textAlign-center">
                 <IonGrid>
                   <IonRow>
                     <IonCol>구매상품</IonCol>
@@ -246,14 +246,14 @@ const BuyerList: React.FC = () => {
               {
                 // @ts-expect-error
                 buyData.map((item) => {
-                  console.log(item[`sellDate`].split("T")[0].split("-"));
-                  // item[`sellDate`] = item[`sellDate`].split("T")[0];
-                  item[`sellDate`] = item[`sellDate`].split("T")[0]?.split("-");
+                  item[`sellDate`] = item[`sellDate`].split("T")[0].split("-").join("/");
+
                   return (
                     <IonItem className="fontSize-small textAlign-center" key={item[`sellIdx`]}>
                       <IonGrid>
                         <IonRow>
                           <IonCol
+                            className="fontWeight-bold"
                             onClick={() => {
                               openDetailModal(item[`sellIdx`]);
                             }}

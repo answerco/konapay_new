@@ -1,3 +1,6 @@
+ion-item.fontWeight-bold {
+  font-weight: bold;
+}
 ion-item.fontSize-small {
   font-size: small;
 }
@@ -7,4 +10,8 @@ ion-item.textAlign-center {
 }
 ion-item.textAlign-end {
   text-align: end;
+}
+
+ion-col.fontWeight-bold {
+  font-weight: bold;
 }
