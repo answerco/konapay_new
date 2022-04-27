@@ -16,6 +16,13 @@ export default class BuySellList {
     return res.data.data.rows;
   };
 
+  public static productItem = async (sellIdx: number) => {
+    let res = await CustomAxios.get(`/buy/select/${sellIdx}`);
+    console.log("productItem res : ", res);
+    let product = res.data.data;
+    return product;
+  };
+
   public static buyUpdate = async (sellIdx: number) => {
     const payload = { sellIdx };
     let res = await CustomAxios.patch(`/buy/${sellIdx}/reject`, payload);
@@ -31,12 +38,13 @@ export default class BuySellList {
     return res;
   };
 
-  // ???
-  public static async getSellInformation(sellerId: string, status: string, _limit: any, _offset: number) {
-    let payload = { sellerId, status, _limit, _offset };
-    let res = await CustomAxios.post(`/sell/list?sellerUid=${sellerId}&status=${status}&limit=${_limit}&offset=${_offset}`, payload);
-    console.log("seller list : ", res);
+  static buyProduct = async (sellIdx: number, sellerUid: string, buyerUid: string, symbol: string, quantity: number) => {
+    const payload = { sellerUid, buyerUid, symbol, quantity };
+    console.log("selleIdx : ", sellIdx);
+    console.log("paylaod : ", payload);
+    let res = await CustomAxios.post(`/buy/pay/${sellIdx}`, payload);
+    console.log("buyProduct res : ", res);
 
     return res;
-  }
+  };
 }

@@ -120,13 +120,17 @@ const SellerList: React.FC = () => {
       <IonModal isOpen={detailIsValid}>
         <IonContent>
           <IonHeader>
-            <IonButton
-              onClick={() => {
-                setDetailIsValid(false);
-              }}
-            >
-              <IonIcon icon={closeSharp} color='dark'></IonIcon>
-            </IonButton>
+            <IonToolbar>
+              <IonButtons
+                slot="start"
+                onClick={() => {
+                  setDetailIsValid(false);
+                }}
+              >
+                <IonBackButton defaultHref="/" text={""} color="dark" />
+              </IonButtons>
+              <IonTitle></IonTitle>
+            </IonToolbar>
           </IonHeader>
 
           {/* <IonCard>
@@ -204,7 +208,7 @@ const SellerList: React.FC = () => {
                   setQrIsValid(false);
                 }}
               >
-                <IonIcon icon={closeSharp} color='dark'></IonIcon>
+                <IonIcon icon={closeSharp} color="dark"></IonIcon>
               </IonButton>
             </IonCardHeader>
             <IonCardContent>
@@ -221,7 +225,7 @@ const SellerList: React.FC = () => {
           <IonHeader>
             <IonToolbar>
               <IonButtons slot="start">
-                <IonBackButton defaultHref="/"   text={''} color='dark'  />
+                <IonBackButton defaultHref="/" text={""} color="dark" />
               </IonButtons>
               <IonTitle>판매내역</IonTitle>
             </IonToolbar>
@@ -268,7 +272,7 @@ const SellerList: React.FC = () => {
                                   openQRModal(item[`sellIdx`]);
                                 }}
                               >
-                                <IonIcon icon={qrCodeOutline} color='dark'></IonIcon>
+                                <IonIcon icon={qrCodeOutline} color="dark"></IonIcon>
                               </IonButton>
                             ) : (
                               <></>
