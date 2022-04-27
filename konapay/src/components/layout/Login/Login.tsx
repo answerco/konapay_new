@@ -1,6 +1,6 @@
 import { IonApp, IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonButtons, IonBackButton, IonItem, IonIcon, IonRow, IonCol, IonLabel, IonInput, IonButton, useIonModal, useIonAlert } from "@ionic/react";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import "@ionic/react/css/normalize.css";
 import "@ionic/react/css/structure.css";
@@ -16,7 +16,6 @@ import { useHistory } from "react-router";
 import { chevronBack, personCircle } from "ionicons/icons";
 import Signin from "../../../model/user/signin";
 import konaPayLogo from "../../../assets/icon/konaPay_Logo.png"
-import { Plugins, Capacitor } from "@capacitor/core";
 
 const meta = document.createElement("meta");
 meta.name = "viewport";
@@ -61,25 +60,6 @@ const Login: React.FC = () => {
     }
     
 }
-  useEffect(() => {
-    if (Capacitor.isNative) {
-      Plugins.App.addListener("backButton", (e) => {
-        if (window.location.pathname === "/") {
-          // Show A Confirm Box For User to exit app or not
-          let ans = window.confirm("Are you sure");
-          if (ans) {
-            Plugins.App.exitApp();
-          } 
-        } else if (window.location.pathname === "/YourFirstPageRoute") {
-           // Show A Confirm Box For User to exit app or not
-          let ans = window.confirm("Are you sure");
-          if (ans) {
-            Plugins.App.exitApp();
-          } 
-        } 
-      });
-    }
-  }, []);
 
 
   return (

@@ -69,25 +69,28 @@ import SellerList from "./components/layout/List/SellerList";
 import BuyerList from "./components/layout/List/BuyerList";
 
 const App: React.FC = () => {
+  const [paste] = useIonAlert();
+  setupConfig({
+    hardwareBackButton: false,
+  });
+  return (
+    <IonApp>
+      <IonReactRouter>
+        <IonRouterOutlet>
+          <Route exact path="/">
+            <Main />
+          </Route>
 
-  return(
-  <IonApp>
-    <IonReactRouter>
-      <IonRouterOutlet>
-        <Route exact path="/">
-          <Main />
-        </Route>
+          <Route exact path="/login">
+            <Login></Login>
+          </Route>
 
-        <Route exact path="/login">
-          <Login></Login>
-        </Route>
-
-        <Route exact path="/signuppage1">
-          <SignUpPage1 />
-        </Route>
-        <Route exact path="/signuppage2">
+          <Route exact path="/signuppage1">
+            <SignUpPage1 />
+          </Route>
+          {/* <Route exact path="/signuppage2">
           <SignUpPage2 />
-        </Route>
+        </Route> */}
           <Route exact path="/signuppage3">
             <SignUpPage3 />
           </Route>

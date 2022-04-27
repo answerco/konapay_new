@@ -106,11 +106,13 @@ const Payment: React.FC = () => {
               미리 이더리움을 충전해 놓으시기 바랍니다.
             </div>
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <IonButton style={{ width: "75%", fontSize: "18px", padding: "10px", borderRadius: "10px" }}
+              <button
+                style={{ width: "75%", fontSize: "18px", padding: "10px", borderRadius: "10px" }}
                 disabled={content.product === "" || content.price === "" || content.id === "" || !content.valid}
-                onClick={prevHistoryFunction}>
+                onClick={prevHistoryFunction}
+              >
                 승인 요청
-              </IonButton>
+              </button>
             </div>
           </div>
         </IonContent>
