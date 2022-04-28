@@ -21,7 +21,6 @@ import {
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { Redirect, Route } from "react-router-dom";
-import { setupConfig } from "@ionic/react";
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
@@ -67,12 +66,11 @@ import ProductDetail from "./components/layout/ProductDetail/ProductDetail";
 import Login from "./components/layout/Login/Login";
 import SellerList from "./components/layout/List/SellerList";
 import BuyerList from "./components/layout/List/BuyerList";
+import PotinTotal from "./components/layout/PointTotal/PotinTotal";
 
 const App: React.FC = () => {
   const [paste] = useIonAlert();
-  setupConfig({
-    hardwareBackButton: false,
-  });
+
   return (
     <IonApp>
       <IonReactRouter>
@@ -103,6 +101,9 @@ const App: React.FC = () => {
           </Route>
           <Route exact path="/swap">
             <SwapPage />
+          </Route>
+          <Route exact path="/totalpoint">
+            <PotinTotal />
           </Route>
           {/* <Route exact path="/"> < /> </Route> */}
 

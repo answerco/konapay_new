@@ -34,7 +34,7 @@ import "@ionic/react/css/display.css";
 
 import "./main.css";
 
-import { homeOutline, giftOutline, cardOutline } from "ionicons/icons";
+import { homeOutline, giftOutline, cardOutline, menuSharp } from "ionicons/icons";
 
 import userInfo from "../../../model/user/userinfo";
 import SideBarMenu from "../SideBarMenu/SideBarMenu";
@@ -160,7 +160,7 @@ const Main: React.FC = () => {
             <IonButtons slot="start" id="main-content">
               <IonMenuToggle>
                 <IonButton>
-                  <IonIcon name="menu-sharp" slot="start" color="dark"></IonIcon>
+                  <IonIcon src={menuSharp} slot="start" color="dark"></IonIcon>
                 </IonButton>
               </IonMenuToggle>
             </IonButtons>

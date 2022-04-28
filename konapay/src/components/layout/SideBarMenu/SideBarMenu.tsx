@@ -126,10 +126,12 @@ const SideBarMenu: React.FC = () => {
               <IonLabel>송금</IonLabel>
             </IonItem>
 
-            <IonItem button onClick={gettingReadyAlert}>
-              <IonIcon src={cashOutline} slot="start" name="home" color="dark"></IonIcon>
-              <IonLabel>적립</IonLabel>
-            </IonItem>
+            <IonRouterLink href="/totalpoint">
+              <IonItem button onClick={gettingReadyAlert}>
+                <IonIcon src={cashOutline} slot="start" name="home" color="dark"></IonIcon>
+                <IonLabel>적립</IonLabel>
+              </IonItem>
+            </IonRouterLink>
           </IonMenuToggle>
         </IonList>
 
