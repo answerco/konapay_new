@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import SignUpHeaderGrid1 from "./SignUpHeaderGrid1";
 import SignUpHeaderGrid2 from "./SignUpHeaderGrid2";
 import SignUpInputBox from "./SignUpInputBox";
-import { IonBackButton, IonButtons, IonHeader, IonIcon, IonItem, IonRouterLink, IonTitle, IonToolbar, useIonAlert, IonCheckbox, IonLabel, IonApp, IonPage, IonContent, useIonToast, IonButton } from "@ionic/react";
+import { IonBackButton, IonButtons, IonHeader, IonIcon, IonItem, IonRouterLink, IonTitle, IonToolbar, useIonAlert, IonCheckbox, IonLabel, IonApp, IonPage, IonContent, useIonToast, IonButton, IonModal } from "@ionic/react";
 import { useHistory, useLocation } from "react-router";
 import { chevronBack } from "ionicons/icons";
 import Signup from "../../../model/user/signup";
@@ -65,13 +65,13 @@ const SignUpPage2: React.FC = () => {
   const registButton = async () => {
     try {
       // if(!regId.test(registInfo.uid) || !onlyEn.test(registInfo.uid)){
-      if (false) {
+      if (registInfo.uid === "") {
         throw "아이디는 글자수 3~15의 영문 숫자 조합이어야 합니다.";
       } else if (!isDup.uid) {
         throw "중복검사를 해주세요.";
       }
       // else if(!regId.test(registInfo.password) || !onlyEn.test(registInfo.password)){
-      else if (false) {
+      else if (registInfo.password === "") {
         throw "비밀번호는 글자수 3~15의 영문 숫자 조합이어야 합니다.";
       } else if (registInfo.password !== registInfo.passwordCheck) {
         throw "비밀번호가 다릅니다.";

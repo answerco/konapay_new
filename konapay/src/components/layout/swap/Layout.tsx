@@ -30,7 +30,7 @@ const Layout: React.FC = () => {
     try{
       let uid = sessionStorage.uid
       let res: any = Point.swap(uid, 'KSPC',amount )
-      present('포인트 전환중입니다...(약 2~3분 정도 소요됩니다.)', 3000)
+      present('포인트 전환중입니다...', 3000)
     }
     catch(err){
       present(err as "", 1500)
@@ -73,14 +73,14 @@ const Layout: React.FC = () => {
       </div>
       <div className="box-init box" style={{ height: "25%", justifyContent: "flex-start", flexDirection: "column" }}>
         <div className="card2" style={{ width: "80%", height: "100%", textAlign: "center" }}>
-          <input type="text" placeholder="수량을 입력해주세요." style={{ width: "90%", height: "20%", marginTop: "10%", borderRadius: "5px", border: "1px solid gray" }} value={amount} onChange={(e:any)=> {setAmount(e.target.value)}} />
+          <input type="number" placeholder="수량을 입력해주세요." style={{ width: "90%", height: "20%", marginTop: "10%", borderRadius: "5px", border: "1px solid gray", color : "black" }} value={amount} onChange={(e:any)=> {setAmount(e.target.value)}} />
         </div>
       </div>
       <div className="box-init box" style={{ height: "22.5%", justifyContent: "flex-start", flexDirection: "column" }}>
         <div className="card2" style={{ width: "90%", height: "100%", textAlign: "center" }}>
           <p style={{ color: "black", textAlign: "start", fontSize: "13px", marginBottom: "5%" }}>[유의사항]</p>
-          <p style={{ color: "black", textAlign: "start", fontSize: "13px" }}>포인트 전환은 약 2~3분정도 소요됩니다.</p>
-          <p style={{ color: "black", textAlign: "start", fontSize: "13px" }}>KSPC 이외의 주소로는 전송되지 않아요.</p>
+          {/* <p style={{ color: "black", textAlign: "start", fontSize: "13px" }}>포인트 전환은 약 2~3분정도 소요됩니다.</p> */}
+          <p style={{ color: "black", textAlign: "start", fontSize: "13px" }}>KSPC 이외의 주소로는 전송되지 않습니다.</p>
           <p style={{ color: "black", textAlign: "start", fontSize: "13px" }}>KSPC를 전송할 경우에는 이더리움 가스비가 필요합니다.</p>
           <p style={{ color: "black", textAlign: "start", fontSize: "13px" }}>미리 이더리움을 충전해 놓으시기 바랍니다.</p>
         </div>
