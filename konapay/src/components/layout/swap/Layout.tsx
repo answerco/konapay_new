@@ -27,13 +27,19 @@ const Layout: React.FC = () => {
   };
 
   const swap = () => {
-    try{
-      let uid = sessionStorage.uid
-      let res: any = Point.swap(uid, 'KSPC',amount )
-      present('포인트 전환중입니다...', 3000)
+    if( point >= amount){
+      try{
+        let uid = sessionStorage.uid
+        let res: any = Point.swap(uid, 'KSPC',amount )
+        setAmount(0)
+        present('포인트 전환중입니다...', 3000)
+      }
+      catch(err){
+        present(err as "", 1500)
+      }
     }
-    catch(err){
-      present(err as "", 1500)
+    else{
+      present('포인트가 부족합니다.',3000)
     }
   }
 
