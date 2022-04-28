@@ -26,7 +26,7 @@ const Payment: React.FC = () => {
     product: "",
     price: "",
     id: "",
-    valid:false
+    valid: false,
   });
 
   const onChange = (e: any) => {
@@ -39,22 +39,20 @@ const Payment: React.FC = () => {
     history.push({ pathname: "/payment2", state: content });
   };
 
-  const [paste] = useIonAlert()
+  const [paste] = useIonAlert();
 
   const checkIsValid = async () => {
-    let res
-    try{
+    let res;
+    try {
       res = await Signup.uid(content.id);
+    } catch (err) {
+      res = true;
     }
-    catch(err){
-     res= true
-    }
-    if(res){
+    if (res) {
       paste(`유효하지 않은 아이디입니다.`);
-    }
-    else{
+    } else {
       paste(`유효한 아이디입니다.`);
-      setContent({...content, valid:true})
+      setContent({ ...content, valid: true });
     }
   };
 
@@ -64,7 +62,7 @@ const Payment: React.FC = () => {
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start">
-              <IonBackButton defaultHref="/"  text={''} color='dark'  />
+              <IonBackButton defaultHref="/" text={""} color="dark" />
             </IonButtons>
             <IonTitle>판매</IonTitle>
           </IonToolbar>
@@ -81,17 +79,17 @@ const Payment: React.FC = () => {
             </div>
             <div style={{ border: "2px solid lightgray", padding: "15px 20px", borderRadius: "10px", margin: "1.5% 0px" }}>
               <div style={{ margin: "0px 0px 10px 0px" }}>가격</div>
-              <div style={{ display: "flex", width: "100%", height: "30px", border:"2px solid "}}>
-                <input style={{ border:"none", width: '75%'}} type="number" name="price" value={content.price} onChange={onChange}></input>
-                <div style={{margin: "1% 5%"}}>KSPC</div>
+              <div style={{ display: "flex", width: "100%", height: "30px", border: "2px solid " }}>
+                <input style={{ border: "none", width: "75%" }} type="number" name="price" value={content.price} onChange={onChange}></input>
+                <div style={{ margin: "1% 5%" }}>KSPC</div>
               </div>
             </div>
             <div style={{ border: "2px solid lightgray", padding: "15px 20px", borderRadius: "10px", margin: "1.5% 0px" }}>
-              <div style={{display:'flex', justifyContent:'space-between'}}>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <div style={{ margin: "0px 0px 10px 0px" }}>구매자 아이디</div>
                 <a onClick={checkIsValid}>[아이디 확인]</a>
               </div>
-              <input style={{ width: "100%", height: "30px" }} type="text" name="id" value={content.id} onChange={onChange} disabled={content.valid} ></input>
+              <input style={{ width: "100%", height: "30px" }} type="text" name="id" value={content.id} onChange={onChange} disabled={content.valid}></input>
             </div>
             <div style={{ fontSize: "80%", margin: "10% 0px" }}>
               [유의사항]
@@ -106,9 +104,11 @@ const Payment: React.FC = () => {
               미리 이더리움을 충전해 놓으시기 바랍니다.
             </div>
             <div style={{ display: "flex", justifyContent: "center" }}>
-            <IonButton style={{ height:"70px", width: "75%", fontSize: "18px", padding: "10px", borderRadius: "10px" }}
+              <IonButton
+                style={{ height: "70px", width: "75%", fontSize: "18px", padding: "10px", borderRadius: "10px" }}
                 disabled={content.product === "" || content.price === "" || content.id === "" || !content.valid}
-                onClick={prevHistoryFunction}>
+                onClick={prevHistoryFunction}
+              >
                 승인 요청
               </IonButton>
             </div>

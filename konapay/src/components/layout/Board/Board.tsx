@@ -120,7 +120,7 @@ const Board: React.FC = () => {
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start">
-              <IonBackButton defaultHref="/"  text={''} color='dark'  />
+              <IonBackButton defaultHref="/" text={""} color="dark" />
             </IonButtons>
             <IonTitle>게시판</IonTitle>
           </IonToolbar>
@@ -163,9 +163,9 @@ const Board: React.FC = () => {
                         <p>{item.view}</p>
                       </div>
                     </IonLabel>
-                    <IonThumbnail>
+                    {/* <IonThumbnail>
                       {item.postThumnail === "" ? <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" /> : <img src={item.postThumnail}></img>}
-                    </IonThumbnail>
+                    </IonThumbnail> */}
                     <IonButton slot="end">
                       {item.totalCommentCount}
                       <br />
