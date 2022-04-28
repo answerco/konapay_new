@@ -167,7 +167,7 @@ const BuyerList: React.FC = () => {
                   setDetailIsValid(false);
                 }}
               >
-                <IonBackButton defaultHref="/" text={""} color="dark" />
+                <IonBackButton disabled defaultHref="/" text={""} color="dark" />
               </IonButtons>
               <IonTitle></IonTitle>
             </IonToolbar>
@@ -198,6 +198,10 @@ const BuyerList: React.FC = () => {
               })
               .map((item: any) => {
                 console.log("detail Item : ", item);
+                console.log(item[`buyDate`]);
+                if (item[`buyDate`]) {
+                  item[`buyDate`] = item[`buyDate`].split("T")[0].split("-").join("/");
+                }
                 return (
                   <IonCardContent key={item[`sellIdx`]}>
                     <IonGrid key={item[`sellIdx`]}>

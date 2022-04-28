@@ -119,6 +119,12 @@ const BoardWirte: React.FC = () => {
     };
   }, []);
   const formats = ["header", "bold", "italic", "underline", "strike", "blockquote", "image"];
+  //Max VAlue checker
+  const checkCharacterCount = (event: any) => {
+    if (content.length > 4000 && event.key !== "Backspace") {
+      event.preventDefault();
+    }
+  };
 
   return (
     <IonPage>
@@ -161,6 +167,7 @@ const BoardWirte: React.FC = () => {
               ref={(element) => {
                 if (element !== null) quillRef.current = element;
               }}
+              onKeyDown={checkCharacterCount}
               modules={modules}
               formats={formats}
               value={content}
