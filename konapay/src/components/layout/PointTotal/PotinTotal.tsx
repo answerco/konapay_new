@@ -71,7 +71,7 @@ const PotinTotal: React.FC = () => {
 
                 {list.map((data: any)=>{
                     return (
-                        <IonRow className="table_th" style={ data.pointType !== "C" ? {backgroundColor:"#e6faff", padding:"1.2% 0"} : {backgroundColor:"#ffebeb", padding:"1.2% 0"}}>
+                        <IonRow className="table_row" style={ data.pointType !== "C" ? {backgroundColor:"#e6faff", padding:"1.2% 0"} : {backgroundColor:"#ffebeb", padding:"1.2% 0"}}>
                             <IonCol>{data.pointType === "C" ? "사용" : "적립"}</IonCol>
                             <IonCol>{data.point}P</IonCol>
                         </IonRow>

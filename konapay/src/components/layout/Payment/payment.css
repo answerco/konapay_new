@@ -19,6 +19,10 @@
     border-bottom: 1px solid gray;
 }
 
+.table_row {
+    border-bottom: 0.5px solid gray;
+}
+
 .table_total {
     border-top: 2px dashed gray;
     border-bottom: 2px dashed gray;

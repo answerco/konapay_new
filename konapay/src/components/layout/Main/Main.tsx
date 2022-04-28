@@ -207,7 +207,7 @@ const Main: React.FC = () => {
                 </IonCardContent>
                   </CopyToClipboard>
               </IonSlide>
-              <IonSlide>
+              {/* <IonSlide>
                   <CopyToClipboard text={walletAddress}>
                 <IonCardContent className="background" onClick={copyAddress}>
                     <IonText className="card-text1 selectable">
@@ -217,7 +217,7 @@ const Main: React.FC = () => {
                   <IonLabel className="card-text2">POINT : {pointAmount}</IonLabel>
                 </IonCardContent>
                   </CopyToClipboard>
-              </IonSlide>
+              </IonSlide> */}
             </IonSlides>
           </IonCard>
         </div>
