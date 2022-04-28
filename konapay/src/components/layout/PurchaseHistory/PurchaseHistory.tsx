@@ -28,40 +28,38 @@ interface PurchaseHistoryProps {
 }
 
 const PurchaseHistory = (props: PurchaseHistoryProps) => {
+  const [data, setData]: any = useState();
 
-  const [data,setData] : any = useState()
-
-  const [totalSum, setTotalSum] = useState(0)
-  const [monthSum, setMonthSum] = useState(0)
-  const [totalCount, setTotalCount] = useState(0)
-  const [monthCount, setMonthCount] = useState(0)
+  const [totalSum, setTotalSum] = useState(0);
+  const [monthSum, setMonthSum] = useState(0);
+  const [totalCount, setTotalCount] = useState(0);
+  const [monthCount, setMonthCount] = useState(0);
 
   const getTotal = async () => {
-    let uid = sessionStorage.uid
+    let uid = sessionStorage.uid;
 
-    if(props.type === "buy"){
-      let res = await BuySellList.totalBuy(uid)
-      setData(res)
+    if (props.type === "buy") {
+      let res = await BuySellList.totalBuy(uid);
+      setData(res);
+    } else {
+      let res = await Sell.totalSell(uid);
+      setData(res);
     }
-    else{
-      let res = await Sell.totalSell(uid)
-      setData(res)
-    }
-  }
-  
-  useEffect(()=>{
-    getTotal()
-  },[])
+  };
 
-  useEffect(()=>{
-    if(Array.isArray(data)){
-      setTotalSum(data[2][0].sum || 0)
-      setMonthSum(data[0][0].sum || 0)
-      setTotalCount(data[3][0].totalCount || 0)
-      setMonthCount(data[1][0].totalCount || 0)
+  useEffect(() => {
+    getTotal();
+  }, []);
+
+  useEffect(() => {
+    if (Array.isArray(data)) {
+      setTotalSum(data[2][0].sum || 0);
+      setMonthSum(data[0][0].sum || 0);
+      setTotalCount(data[3][0].totalCount || 0);
+      setMonthCount(data[1][0].totalCount || 0);
     }
-  },[data])
-  
+  }, [data]);
+
   const history = useHistory();
   return (
     <IonApp>
@@ -69,7 +67,7 @@ const PurchaseHistory = (props: PurchaseHistoryProps) => {
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start">
-              <IonBackButton defaultHref="/"  text={''} color='dark'  />
+              <IonBackButton defaultHref="/" text={""} color="dark" />
             </IonButtons>
             <IonTitle>집계</IonTitle>
           </IonToolbar>
