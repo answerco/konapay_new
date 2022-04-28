@@ -103,10 +103,10 @@ const SideBarMenu: React.FC = () => {
                 <IonLabel>매출조회</IonLabel>
               </IonItem>
             </IonRouterLink> */}
-            <IonItem button onClick={gettingReadyAlert}>
+            {/* <IonItem button onClick={gettingReadyAlert}>
               <IonIcon src={searchCircleOutline} slot="start" name="home" color="dark"></IonIcon>
               <IonLabel>매출조회</IonLabel>
-            </IonItem>
+            </IonItem> */}
 
             <IonRouterLink href="/swap">
               <IonItem button>
