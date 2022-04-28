@@ -103,10 +103,10 @@ const SideBarMenu: React.FC = () => {
                 <IonLabel>매출조회</IonLabel>
               </IonItem>
             </IonRouterLink> */}
-            <IonItem button onClick={gettingReadyAlert}>
+            {/* <IonItem button onClick={gettingReadyAlert}>
               <IonIcon src={searchCircleOutline} slot="start" name="home" color="dark"></IonIcon>
               <IonLabel>매출조회</IonLabel>
-            </IonItem>
+            </IonItem> */}
 
             <IonRouterLink href="/swap">
               <IonItem button>
@@ -114,17 +114,17 @@ const SideBarMenu: React.FC = () => {
                 <IonLabel>환전</IonLabel>
               </IonItem>
             </IonRouterLink>
-            {/* <IonRouterLink href="/inout">
+            <IonRouterLink href="/inout">
               <IonItem button>
                 <IonIcon src={sendOutline} slot="start" name="home" color="dark"></IonIcon>
                 <IonLabel>송금</IonLabel>
               </IonItem>
-            </IonRouterLink> */}
+            </IonRouterLink>
 
-            <IonItem button onClick={gettingReadyAlert}>
+            {/* <IonItem button onClick={gettingReadyAlert}>
               <IonIcon src={sendOutline} slot="start" name="home" color="dark"></IonIcon>
               <IonLabel>송금</IonLabel>
-            </IonItem>
+            </IonItem> */}
 
             <IonRouterLink href="/totalpoint">
               <IonItem button onClick={gettingReadyAlert}>

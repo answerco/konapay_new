@@ -1,8 +1,44 @@
-import { IonIcon, IonRouterLink, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonRow, IonItem, IonApp } from "@ionic/react";
-import { addOutline, chevronBack, searchOutline, statsChartOutline } from "ionicons/icons";
+import {
+  IonIcon,
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonBackButton,
+  IonTitle,
+  IonRow,
+  IonItem,
+  IonApp,
+  IonPage,
+  IonContent,
+  IonCard,
+  IonCardContent,
+  IonLabel,
+  IonCol,
+  IonButton,
+  IonGrid,
+  IonSlides,
+  IonSlide,
+  IonList,
+  IonInfiniteScroll,
+  IonInfiniteScrollContent,
+  useIonViewWillEnter,
+  IonFab,
+  IonFabButton,
+  IonModal,
+  IonCardHeader,
+  IonText,
+  IonCardSubtitle,
+  IonInput,
+  useIonAlert,
+  useIonToast,
+} from "@ionic/react";
+import { add, arrowUpCircle, qrCodeOutline, toggleSharp } from "ionicons/icons";
 import "./Layout.css";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import { QrReader } from "react-qr-reader";
+import userInfo from "../../../model/user/userinfo";
+import Wallet from "../../../model/wallet";
 
 const meta = document.createElement("meta");
 meta.name = "viewport";
@@ -11,99 +47,226 @@ document.getElementsByTagName("head")[0].appendChild(meta);
 
 const Layout: React.FC = () => {
   const history = useHistory();
-  return (
-    <div className="grid-init grid">
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonBackButton defaultHref="/"  text={''} color='dark'  />
-          </IonButtons>
-          <IonTitle>송금</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+  const [tmpItem, setTmpItem] = useState<string[]>([]);
+  const [isInfiniteDisabled, setInfiniteDisabled] = useState(false);
+  const [qrReader, setQrReader] = useState<boolean>(false);
+  const [eth, setEth] = useState<number>(0);
+  const [kspc, setKspc] = useState<number>(0);
+  const [address, setAddress] = useState<string>("");
+  const [toAddress, setToAddress] = useState<any>("");
+  const [sendPrice, setSendPrice] = useState<number>(0);
+  const sessionUid = sessionStorage?.getItem("uid");
+  const [present] = useIonAlert();
+  const [toast, dismiss] = useIonToast();
+  const pushRemittanceDataHandeler = async () => {
+    const min = tmpItem.length;
+    const max = min + 20;
+    const newItem = [];
+    for (let i = min; i < max; i++) {
+      newItem.push("item" + i);
+    }
+    console.log(newItem);
+    setTmpItem([...tmpItem, ...newItem]);
+  };
 
-      {/* <div className="box-init box" style={{ height: "7.5%" }}>
-        <Header name="스왑"></Header>
-      </div> */}
-      <div className="box-init box" style={{ height: "5%", justifyContent: "flex-start", flexDirection: "column" }}></div>
-      <div className="box-init box" style={{ height: "20%" }}>
-        <div
-          className="box-init card"
-          style={{ width: "80%", height: "90%", backgroundColor: "white", borderRadius: "10px", boxShadow: "5px 5px 5px gray", justifyContent: "center", flexDirection: "column" }}
-        >
-          <div className="box-init" style={{ width: "100%", height: "60%", flexDirection: "column", marginLeft: "25%" }}>
-            <p style={{ width: "100%", color: "black", fontSize: "18px" }}>김철수 고객님 계좌의</p>
-            <p style={{ width: "100%", color: "black", fontSize: "18px" }}>
-              <span style={{ fontWeight: "bold", fontSize: "22px" }}>총출금가능</span> 금액은
-            </p>
-          </div>
-          <div style={{ width: "100%", height: "40%", textAlign: "center" }}>
-            <p style={{ width: "100%", height: "100%", color: "gray", fontSize: "18px" }}>
-              <span style={{ color: "black", marginRight: "5%", fontSize: "30px", textShadow: "2px 2px 2px gray" }}>33,000</span>
-              <span style={{ fontWeight: "bold", fontSize: "18px" }}>KSPC</span>입니다.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div className="box-init box" style={{ margin: "0 auto", height: "12.5%", width: "80%", flexDirection: "row", justifyContent: "space-between" }}>
-        <div className="box-init" style={{ width: "30%", height: "100%" }}>
-          <IonIcon icon={addOutline} style={{ width: "100%", fontSize: "48px", color: "#A1A1A1" }}></IonIcon>
-        </div>
-        <div className="box-init" style={{ width: "30%", height: "100%" }}>
-          <IonIcon icon={searchOutline} style={{ width: "100%", fontSize: "48px", color: "#A1A1A1" }}></IonIcon>
-        </div>
-        <div className="box-init" style={{ width: "30%", height: "100%" }}>
-          <IonIcon icon={statsChartOutline} style={{ width: "100%", fontSize: "48px", color: "#A1A1A1" }}></IonIcon>
-        </div>
-      </div>
-      <div className="box-init box" style={{ margin: "0 auto", width: "80%", height: "17.5%", justifyContent: "space-between", flexDirection: "row" }}>
-        <div className="box-init" style={{ width: "47.5%", height: "100%", borderRadius: "10px", flexDirection: "column", boxShadow: "5px 5px 5px black" }}>
-          <div className="box-init" style={{ width: "90%", flexDirection: "column", height: "60%" }}>
-            <div className="box-init" style={{ width: "100%" }}>
-              <p style={{ fontSize: "14px", fontWeight: "bold", textAlign: "start", width: "100%", color: "black" }}>KSPC</p>
-            </div>
-            <div className="box-init" style={{ width: "100%" }}>
-              <p style={{ fontSize: "28px", textAlign: "start", width: "100%", color: "black", marginTop: "10%" }}>33,000</p>
-            </div>
-          </div>
-          <div className="box-init" style={{ marginTop: "5%", width: "90%", height: "40%" }}>
-            <IonRouterLink href="/sendkspc">
-              <button style={{ width: "100%", height: "75%", borderRadius: "30px", border: "none", backgroundColor: "gray" }}>보내기</button>
-            </IonRouterLink>
-          </div>
-        </div>
-        <div className="box-init" style={{ width: "47.5%", height: "100%", borderRadius: "10px", flexDirection: "column", boxShadow: "5px 5px 5px black" }}></div>
-      </div>
-      <div
-        className="box-init box"
-        style={{
-          margin: "0 auto",
-          width: "80%",
-          minHeight: "37.5%",
-          height: "37.5%",
-          maxHeight: "auto",
-          justifyContent: "flex-end",
-          flexDirection: "column",
-          borderBottom: "1px dashed black",
-          borderRadius: "0px",
-        }}
-      >
-        <div className="box-init" style={{ width: "100%", height: "25%", borderTop: "1px dashed black", borderRadius: "none" }}>
-          <div className="box-init" style={{ width: "27.5%", height: "100%" }}>
-            <p style={{ color: "black", fontSize: "18px" }}>EMART</p>
-          </div>
-          <div className="box-init" style={{ width: "30%", height: "100%" }}>
-            <p style={{ color: "black", fontSize: "18px" }}>22.01.03</p>
-          </div>
-          <div className="box-init" style={{ width: "27.5%", height: "100%" }}>
-            <p style={{ color: "black", fontSize: "18px" }}>33,000</p>
-          </div>
-          <div className="box-init" style={{ width: "15%", height: "100%" }}>
-            <p style={{ color: "black", fontSize: "14px", width: "100%" }}>KSPC</p>
-          </div>
-        </div>
-      </div>
-    </div>
+  const loadData = (event: any) => {
+    setTimeout(() => {
+      pushRemittanceDataHandeler();
+
+      event.target.complete();
+    }, 500);
+  };
+
+  const sendPriceAlert = async () => {
+    if (isNaN(sendPrice) || sendPrice <= 0) {
+      present({
+        header: "송금 실패",
+        message: "금액을 올바르게 입력해주세요.",
+        buttons: ["확인"],
+      });
+      return;
+    }
+    // 상대 지갑 유효성 검사 백앤드 API필요
+    if (toAddress === "") {
+      present({
+        header: "송금 실패",
+        message: "상대 주소를 확인해주세요.",
+        buttons: ["확인"],
+      });
+      return;
+    }
+    present({
+      header: "송금",
+      message: "정말로 송금 하시겠습니까?",
+      buttons: ["아니오", { text: "네", handler: sendKscpHandler }],
+    });
+  };
+
+  const sendKscpHandler = () => {
+    console.log("send 준비");
+    console.log(sendPrice);
+
+    const result = Wallet.FromTransfer(address, "KSPC", sendPrice, toAddress);
+    toast("전송하는데 시간이 걸릴 수 있습니다.", 3000);
+    setAddress("");
+    setSendPrice(0);
+  };
+
+  // Qr reader Modal op/close
+  const qrReaderHandler = () => {
+    setQrReader(!qrReader);
+  };
+  // Qr reader Modal op/close end
+
+  // scrollTop Logic
+  const getContent = () => {
+    return document.querySelector("ion-content");
+  };
+
+  const scrollToTop = () => {
+    getContent()?.scrollToTop(500);
+  };
+  // scrollTop Logic end
+
+  const getUserInfo = async () => {
+    const uid: string = sessionUid !== null ? sessionUid : "";
+    const user = await userInfo.getUser(uid);
+    console.log(user);
+    const { address } = user;
+    const eth = await userInfo.getCoin(address, "ETH");
+    const kspc = await userInfo.getCoin(address, "KSPC");
+    setAddress(address);
+    setEth(eth);
+    setKspc(kspc);
+  };
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+  useIonViewWillEnter(() => {
+    pushRemittanceDataHandeler();
+  });
+  return (
+    <IonApp>
+      <IonModal isOpen={qrReader}>
+        <IonHeader>
+          <IonToolbar>
+            <IonButtons slot="start" onClick={qrReaderHandler}>
+              <IonBackButton disabled defaultHref="/" text={""} color="dark" />
+            </IonButtons>
+            <IonTitle>송금 QR</IonTitle>
+          </IonToolbar>
+        </IonHeader>
+        <IonContent>
+          <IonCard>
+            <QrReader
+              onResult={(result, error) => {
+                if (!!result) {
+                  // setProductIdx(result?.getText());
+                }
+
+                if (!!error) {
+                  // console.log(error);
+                }
+              }}
+              constraints={{
+                facingMode: "environment",
+              }}
+            ></QrReader>
+          </IonCard>
+        </IonContent>
+      </IonModal>
+      <IonPage>
+        <IonHeader>
+          <IonToolbar>
+            <IonButtons slot="start">
+              <IonBackButton defaultHref="/" text={""} color="dark" />
+            </IonButtons>
+            <IonTitle>송금</IonTitle>
+          </IonToolbar>
+        </IonHeader>
+        <IonContent>
+          <IonItem>
+            <IonButton slot="end" onClick={qrReaderHandler}>
+              <IonLabel>QR송금</IonLabel>
+              <IonIcon icon={qrCodeOutline}></IonIcon>
+            </IonButton>
+          </IonItem>
+          <IonSlides>
+            <IonSlide>
+              <IonCard style={{ width: "100%" }}>
+                {/* <p style={{ fontWeight }}></p> */}
+                <IonCardContent style={{ lineHeight: "200%" }}>
+                  <IonLabel style={{ fontSize: "20px" }}>{sessionUid} </IonLabel>
+                  <br />
+                  <IonLabel style={{ textAlign: "center", fontSize: "20px", fontWeight: "bold" }}>{kspc} KSPC</IonLabel>
+                  <IonLabel style={{ fontSize: "20px" }}> 입니다</IonLabel>
+                  <br />
+                  <IonItem style={{ marginBottom: "5%" }}>
+                    <IonCol>
+                      <IonInput
+                        value={sendPrice}
+                        type="number"
+                        placeholder="금액 입력"
+                        style={{ textAlign: "right", marginRight: "10%" }}
+                        onIonChange={(e) => setSendPrice(parseInt(e.detail.value!, 0))}
+                      ></IonInput>
+                      <IonInput value={toAddress} placeholder="상대 주소 입력" style={{ textAlign: "right", marginRight: "10%" }} onIonChange={(e) => setToAddress(e.detail.value)}></IonInput>
+                    </IonCol>
+                  </IonItem>
+                  <IonButton onClick={sendPriceAlert}>송금</IonButton>
+                </IonCardContent>
+              </IonCard>
+            </IonSlide>
+            <IonSlide>
+              <IonCard style={{ width: "100%" }}>
+                <IonCardContent style={{ textAlign: "center" }}>
+                  <IonLabel style={{ fontSize: "20px" }}>{sessionUid} </IonLabel>
+                  <br />
+                  <IonLabel style={{ textAlign: "center", fontSize: "20px", fontWeight: "bold" }}>{eth} ETH</IonLabel>
+                  <IonLabel style={{ fontSize: "20px" }}> 입니다</IonLabel>
+                  <br />
+                  <IonItem>
+                    <IonInput placeholder="금액 입력" style={{ textAlign: "right", marginRight: "10%" }}></IonInput>
+                    <IonButton size="large">송금</IonButton>
+                  </IonItem>
+                </IonCardContent>
+              </IonCard>
+            </IonSlide>
+          </IonSlides>
+          <IonCard>
+            <IonList>
+              <IonGrid>
+                <IonRow>
+                  <IonCol>받은이</IonCol>
+                  <IonCol>보낸날</IonCol>
+                  <IonCol>금액</IonCol>
+                  {/* <IonCol>asdasd</IonCol> */}
+                </IonRow>
+                {tmpItem.map((item) => {
+                  return (
+                    <IonRow key={item}>
+                      <IonCol>{item}</IonCol>
+                      <IonCol>{item}</IonCol>
+                      <IonCol>{item}</IonCol>
+                      {/* <IonCol>{item}</IonCol> */}
+                    </IonRow>
+                  );
+                })}
+              </IonGrid>
+            </IonList>
+          </IonCard>
+          <IonFab vertical="bottom" horizontal="end" slot="fixed">
+            <IonFabButton onClick={scrollToTop}>
+              <IonIcon icon={arrowUpCircle}></IonIcon>
+            </IonFabButton>
+          </IonFab>
+          <IonInfiniteScroll onIonInfinite={loadData} threshold="100px" disabled={isInfiniteDisabled}>
+            <IonInfiniteScrollContent loadingSpinner="bubbles" loadingText="Loading more data..."></IonInfiniteScrollContent>
+          </IonInfiniteScroll>
+        </IonContent>
+      </IonPage>
+    </IonApp>
   );
 };
 

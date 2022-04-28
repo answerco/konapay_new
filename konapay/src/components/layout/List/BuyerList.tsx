@@ -40,9 +40,9 @@ const BuyerList: React.FC = () => {
   const [productIdx, setProductIdx] = useState<number>(0);
   const [detailIsValid, setDetailIsValid] = useState<boolean>(false);
   const [status, setStatus] = useState<string>("");
-
   const [present] = useIonAlert();
   const buyerUid = window.sessionStorage.uid;
+
   const pushBuyDataHandler = async () => {
     const limit = buyData.length + 20;
     const offset = limit == 0 ? 0 : limit - 20;
@@ -137,6 +137,14 @@ const BuyerList: React.FC = () => {
 
   const QRredirect = () => {
     window.location.replace("/scan");
+  };
+
+  const loadData = (ev: any) => {
+    setTimeout(() => {
+      pushBuyDataHandler();
+      console.log("Loaded data");
+      ev.target.complete();
+    }, 500);
   };
 
   useIonViewWillEnter(() => {
@@ -320,7 +328,7 @@ const BuyerList: React.FC = () => {
               }
             </IonList>
 
-            <IonInfiniteScroll onIonInfinite={pushBuyDataHandler} threshold="100px" disabled={isInfiniteDisabled}>
+            <IonInfiniteScroll onIonInfinite={loadData} threshold="100px" disabled={isInfiniteDisabled}>
               <IonInfiniteScrollContent loadingSpinner="bubbles" loadingText="Loading more data..."></IonInfiniteScrollContent>
             </IonInfiniteScroll>
           </IonContent>

@@ -102,10 +102,6 @@ const SellerList: React.FC = () => {
     }
   };
 
-  useIonViewWillEnter(() => {
-    setSellDataHandler();
-  });
-
   const openQRModal = (idx: any) => {
     setQrIsValid(true);
     setProductIdx(idx);
@@ -115,6 +111,16 @@ const SellerList: React.FC = () => {
     setDetailIsValid(true);
     setProductIdx(idx);
   };
+  const loadData = (ev: any) => {
+    setTimeout(() => {
+      setSellDataHandler();
+      console.log("Loaded data");
+      ev.target.complete();
+    }, 500);
+  };
+  useIonViewWillEnter(() => {
+    setSellDataHandler();
+  });
   return (
     <>
       <IonModal isOpen={detailIsValid}>
@@ -286,7 +292,7 @@ const SellerList: React.FC = () => {
               }
             </IonList>
 
-            <IonInfiniteScroll onIonInfinite={setSellDataHandler} threshold="100px" disabled={isInfiniteDisabled}>
+            <IonInfiniteScroll onIonInfinite={loadData} threshold="100px" disabled={isInfiniteDisabled}>
               <IonInfiniteScrollContent loadingSpinner="bubbles" loadingText="Loading more data..."></IonInfiniteScrollContent>
             </IonInfiniteScroll>
           </IonContent>
