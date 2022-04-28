@@ -133,7 +133,7 @@ const SellerList: React.FC = () => {
                   setDetailIsValid(false);
                 }}
               >
-                <IonBackButton defaultHref="/" text={""} color="dark" />
+                <IonBackButton disabled defaultHref="/" text={""} color="dark" />
               </IonButtons>
               <IonTitle></IonTitle>
             </IonToolbar>
