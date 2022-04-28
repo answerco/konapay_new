@@ -121,7 +121,7 @@ const BoardWirte: React.FC = () => {
   const formats = ["header", "bold", "italic", "underline", "strike", "blockquote", "image"];
   //Max VAlue checker
   const checkCharacterCount = (event: any) => {
-    if (content.length > 4000 && event.key !== "Backspace") {
+    if (content.length > 2048 && event.key !== "Backspace") {
       event.preventDefault();
     }
   };
