@@ -220,16 +220,19 @@ const Layout: React.FC = () => {
             </IonSlide>
             <IonSlide>
               <IonCard style={{ width: "100%" }}>
-                <IonCardContent style={{ textAlign: "center" }}>
+                <IonCardContent style={{ lineHeight: "200%" }}>
                   <IonLabel style={{ fontSize: "20px" }}>{sessionUid} </IonLabel>
                   <br />
                   <IonLabel style={{ textAlign: "center", fontSize: "20px", fontWeight: "bold" }}>{eth} ETH</IonLabel>
                   <IonLabel style={{ fontSize: "20px" }}> 입니다</IonLabel>
                   <br />
                   <IonItem>
-                    <IonInput placeholder="금액 입력" style={{ textAlign: "right", marginRight: "10%" }}></IonInput>
-                    <IonButton size="large">송금</IonButton>
+                    <IonCol>
+                      <IonInput placeholder="금액 입력" style={{ textAlign: "right", marginRight: "10%" }}></IonInput>
+                      <IonInput placeholder="상대 주소 입력" style={{ textAlign: "right", marginRight: "10%" }}></IonInput>
+                    </IonCol>
                   </IonItem>
+                  <IonButton>송금</IonButton>
                 </IonCardContent>
               </IonCard>
             </IonSlide>
