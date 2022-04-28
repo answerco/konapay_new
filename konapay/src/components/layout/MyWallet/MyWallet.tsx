@@ -82,19 +82,16 @@ const MyWallet: React.FC = () => {
         <IonContent className="ion-padding">
           <div style={{ padding: "0px 2%" }}>
             <IonCard className="balance_card">
-              {/* <div className="balanceDate">22.01.03</div> */}
               <div className="balance">{kspcAmount}</div>
               <div className="balance_category">KSPC</div>
             </IonCard>
 
             <IonCard className="balance_card">
-              {/* <div className="balanceDate">22.01.03</div> */}
               <div className="balance">{ethAmount}</div>
               <div className="balance_category">ETH</div>
             </IonCard>
 
             <IonCard className="balance_card">
-              {/* <div className="balanceDate">22.01.03</div> */}
               <div className="balance">{pointAmount}</div>
               <div className="balance_category">POINT</div>
             </IonCard>

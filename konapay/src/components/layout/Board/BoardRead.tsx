@@ -13,40 +13,17 @@ import {
   IonIcon,
   IonInput,
   IonItem,
-  IonLabel,
   IonPage,
   IonRow,
   IonText,
-  IonTextarea,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { chevronBack, heart } from "ionicons/icons";
+import { heart } from "ionicons/icons";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import Board from "../../../model/board/board";
-import Menu from "./menu";
-interface BoardReadInterface {
-  boderId: number | string;
-  category: string;
-  title: string;
-  content: string;
-  reply: ReplyInformationInterface;
-  like: LikeInformationInterface;
-}
 
-interface ReplyInformationInterface {
-  replyId: number | string;
-  userId: number | string;
-  replyContent: string;
-}
-
-interface LikeInformationInterface {
-  boderId: number | string;
-  likeCount: number;
-}
-
-// const BoardRead: React.FC<BoardReadInterface> = ({ boderId, category, content, like, reply, title }) => {
 const BoardRead: React.FC = () => {
   const history = useHistory();
   const params = useParams();
@@ -84,7 +61,7 @@ const BoardRead: React.FC = () => {
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start">
-              <IonBackButton defaultHref="/"  text={''} color='dark'  />
+              <IonBackButton defaultHref="/" text={""} color="dark" />
             </IonButtons>
             <IonTitle>게시판</IonTitle>
           </IonToolbar>
