@@ -159,20 +159,23 @@ const Layout: React.FC = () => {
         </IonHeader>
         <IonContent>
           <IonCard>
-            <QrReader
-              onResult={(result, error) => {
-                if (!!result) {
-                  // setProductIdx(result?.getText());
-                }
+            <IonCardHeader>서비스 준비중입니다</IonCardHeader>
+            <IonCardContent>
+              <QrReader
+                onResult={(result, error) => {
+                  if (!!result) {
+                    // setProductIdx(result?.getText());
+                  }
 
-                if (!!error) {
-                  // console.log(error);
-                }
-              }}
-              constraints={{
-                facingMode: "environment",
-              }}
-            ></QrReader>
+                  if (!!error) {
+                    // console.log(error);
+                  }
+                }}
+                constraints={{
+                  facingMode: "environment",
+                }}
+              ></QrReader>
+            </IonCardContent>
           </IonCard>
         </IonContent>
       </IonModal>
@@ -226,13 +229,31 @@ const Layout: React.FC = () => {
                   <IonLabel style={{ textAlign: "center", fontSize: "20px", fontWeight: "bold" }}>{eth} ETH</IonLabel>
                   <IonLabel style={{ fontSize: "20px" }}> 입니다</IonLabel>
                   <br />
-                  <IonItem>
+                  <IonItem style={{ marginBottom: "5%" }}>
                     <IonCol>
-                      <IonInput placeholder="금액 입력" style={{ textAlign: "right", marginRight: "10%" }}></IonInput>
-                      <IonInput placeholder="상대 주소 입력" style={{ textAlign: "right", marginRight: "10%" }}></IonInput>
+                      <IonInput
+                        onClick={() => {
+                          present("서비스 준비중입니다.");
+                        }}
+                        placeholder="금액 입력"
+                        style={{ textAlign: "right", marginRight: "10%" }}
+                      ></IonInput>
+                      <IonInput
+                        onClick={() => {
+                          present("서비스 준비중입니다.");
+                        }}
+                        placeholder="상대 주소 입력"
+                        style={{ textAlign: "right", marginRight: "10%" }}
+                      ></IonInput>
                     </IonCol>
                   </IonItem>
-                  <IonButton>송금</IonButton>
+                  <IonButton
+                    onClick={() => {
+                      present("서비스 준비중입니다.");
+                    }}
+                  >
+                    송금
+                  </IonButton>
                 </IonCardContent>
               </IonCard>
             </IonSlide>
