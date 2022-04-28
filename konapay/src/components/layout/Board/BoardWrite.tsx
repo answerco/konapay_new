@@ -18,7 +18,7 @@ import {
   useIonAlert,
 } from "@ionic/react";
 import { chevronBack, chevronForward } from "ionicons/icons";
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useHistory } from "react-router";
@@ -28,7 +28,7 @@ const BoardWirte: React.FC = () => {
   const history = useHistory();
   const quillRef = useRef<ReactQuill>();
   const [present] = useIonAlert();
-  const [category, setCategory] = useState<string>();
+  const [category, setCategory] = useState<string>("C");
   const [title, setTitle] = useState<string>();
   const [content, setContent] = useState<string>("");
   const [thumnail, setThumnail] = useState<string>("");
@@ -46,9 +46,10 @@ const BoardWirte: React.FC = () => {
       return;
     }
     try {
+      const uid = sessionStorage.getItem("uid");
       const APIURL = `${process.env.REACT_APP_SERVER}/board/post`;
       const payload = {
-        uid: "",
+        uid: uid,
         postType: category,
         postTitle: title,
         postContent: content,
@@ -95,6 +96,7 @@ const BoardWirte: React.FC = () => {
         const range = editor?.getSelection();
         editor?.insertEmbed(range?.index as any, "image", IMG_URL);
         if (!imgCheck) {
+          console.log("thumImg check : ", imgCheck);
           setThumnail(IMG_URL);
           setImgCheck(true);
         }
@@ -139,9 +141,9 @@ const BoardWirte: React.FC = () => {
                 setCategory(e.detail.value!);
               }}
             >
-              <IonSelectOption value="A">공지사항</IonSelectOption>
-              <IonSelectOption value="E">이벤트</IonSelectOption>
-              <IonSelectOption value="C">커뮤니티</IonSelectOption>
+              {/* <IonSelectOption value="A">공지사항</IonSelectOption>
+              <IonSelectOption value="E">이벤트</IonSelectOption> */}
+              <IonSelectOption value="C">자유 게시판</IonSelectOption>
             </IonSelect>
           </IonCardContent>
           <IonCardContent>
