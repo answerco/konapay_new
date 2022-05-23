@@ -1,4 +1,4 @@
-import { IonApp, IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonButtons, IonBackButton, IonCard, IonItem, IonIcon } from "@ionic/react";
+import { IonApp, IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonButtons, IonBackButton, IonCard, IonItem, IonIcon, useIonToast } from "@ionic/react";
 
 import React, { useEffect, useState } from "react";
 
@@ -14,8 +14,10 @@ import "@ionic/react/css/flex-utils.css";
 import "@ionic/react/css/display.css";
 import "./MyWallet.css";
 import { useHistory } from "react-router";
-import { chevronBack } from "ionicons/icons";
+import { chevronBack, copy } from "ionicons/icons";
 import userInfo from "../../../model/user/userinfo";
+import QRCode from "react-qr-code";
+import CopyToClipboard from "react-copy-to-clipboard";
 
 const meta = document.createElement("meta");
 meta.name = "viewport";
@@ -28,6 +30,8 @@ const MyWallet: React.FC = () => {
   const [ethAmount, setEthAmount] = useState<string>("");
   const [kspcAmount, setKspcAmount] = useState<string>("");
   const [pointAmount, setPointAmount] = useState<string>("");
+  const [toast, ex] = useIonToast()
+
   const amountHandler = async () => {
     if (!!walletAddress) {
       const eth = await userInfo.getCoin(walletAddress, "ETH");
@@ -68,6 +72,7 @@ const MyWallet: React.FC = () => {
       amountHandler();
     }
   }, [walletAddress]);
+
   return (
     <IonApp>
       <IonPage className="ion-page" id="main-content">
@@ -81,24 +86,37 @@ const MyWallet: React.FC = () => {
         </IonHeader>
         <IonContent className="ion-padding">
           <div style={{ padding: "0px 2%" }}>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <QRCode style={{ justifySelf: "center", alignSelf: "center" }} value={walletAddress}></QRCode>
+            </div>
+
+            <IonCard style={{}} onClick={() => { toast(walletAddress, 2000) }} >
+              <CopyToClipboard text={walletAddress}>
+                <div style={{ display: "flex", justifyContent: "space-between", padding: "15px", alignItems: "center" }}>
+                  <div style={{ flex: "9", overflow: "scroll" }}>{walletAddress}</div>
+                  <IonIcon style={{ flex: "1", width: "25px", height: "25px" }} src={copy}></IonIcon>
+                </div>
+              </CopyToClipboard>
+            </IonCard>
+
             <IonCard className="balance_card">
-              <div className="balance">{kspcAmount}</div>
+              <div className="balance">{kspcAmount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</div>
               <div className="balance_category">KSPC</div>
             </IonCard>
 
             <IonCard className="balance_card">
-              <div className="balance">{ethAmount}</div>
+              <div className="balance">{ethAmount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</div>
               <div className="balance_category">ETH</div>
             </IonCard>
 
             <IonCard className="balance_card">
-              <div className="balance">{pointAmount}</div>
+              <div className="balance">{pointAmount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</div>
               <div className="balance_category">POINT</div>
             </IonCard>
           </div>
         </IonContent>
       </IonPage>
-    </IonApp>
+    </IonApp >
   );
 };
 

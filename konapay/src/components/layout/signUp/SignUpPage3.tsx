@@ -20,12 +20,13 @@ const SignUpPage2: React.FC = () => {
   const [paste] = useIonAlert();
   const [present, dismiss] = useIonToast();
 
-  
+
 
   const [registInfo, setRegistInfo] = useState({
     uid: "",
     password: "",
     passwordCheck: "",
+    payPassword: "",
     name: "",
     email: "",
     emailAlarm: 0,
@@ -47,9 +48,9 @@ const SignUpPage2: React.FC = () => {
 
   const regist = async () => {
     try {
-      let { uid, password, name, email, emailAlarm, messageAlarm } = registInfo;
+      let { uid, password, name, email, payPassword, emailAlarm, messageAlarm } = registInfo;
       let userType = "B";
-      let res = await Signup.signup(uid, password, name, email, userType);
+      let res = await Signup.signup(uid, password, name, email, userType, payPassword);
       return res;
     } catch (err) {
       // paste(err as any);
@@ -75,6 +76,8 @@ const SignUpPage2: React.FC = () => {
         throw "비밀번호는 글자수 3~15의 영문 숫자 조합이어야 합니다.";
       } else if (registInfo.password !== registInfo.passwordCheck) {
         throw "비밀번호가 다릅니다.";
+      } else if (registInfo.payPassword.length !== 6) {
+        throw "결제비밀번호 6자리를 입력해주세요";
       } else if (registInfo.name === "") {
         throw "이름을 입력해주세요";
       } else if (!regEmail.test(registInfo.email)) {
@@ -84,14 +87,14 @@ const SignUpPage2: React.FC = () => {
       } else {
         let res = await regist();
         if (!!res) {
-          present('회원가입이 완료되었습니다.',1500)
-          setTimeout(()=>{
+          present('회원가입이 완료되었습니다.', 1500)
+          setTimeout(() => {
             const link = document.createElement("a");
             link.href = "/";
             document.body.appendChild(link);
             link.click();
             link.remove();
-          },1500)
+          }, 1500)
         }
       }
     } catch (err) {
@@ -136,7 +139,7 @@ const SignUpPage2: React.FC = () => {
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start">
-              <IonBackButton defaultHref="/"  text={''} color='dark' />
+              <IonBackButton defaultHref="/" text={''} color='dark' />
             </IonButtons>
             <IonTitle>회원가입</IonTitle>
           </IonToolbar>
@@ -160,6 +163,7 @@ const SignUpPage2: React.FC = () => {
               ></SignUpInputBox>
               <SignUpInputBox id="password" name="비밀번호" checkValue={false} placeHolder="3-15 영문/숫자조합으로 입력" state={registInfo} setState={setRegistInfo}></SignUpInputBox>
               <SignUpInputBox id="passwordCheck" name="비밀번호 확인" checkValue={false} placeHolder="" state={registInfo} setState={setRegistInfo}></SignUpInputBox>
+              <SignUpInputBox id="payPassword" name="결제 비밀번호" checkValue={false} placeHolder="결제 비밀번호" state={registInfo} setState={setRegistInfo}></SignUpInputBox>
               <SignUpInputBox id="name" name="이름" checkValue={false} placeHolder="한글15자, 영어 30자 까지 가능" state={registInfo} setState={setRegistInfo}></SignUpInputBox>
               <SignUpInputBox id="email" name="이메일" checkValue={true} placeHolder="" state={registInfo} setState={setRegistInfo} checkIsDup={checkIsDup} isDup={isDup}></SignUpInputBox>
 
@@ -191,7 +195,7 @@ const SignUpPage2: React.FC = () => {
               </div> */}
 
               <div className="box-init" style={{ display: "flex", height: "70px", width: "100%", marginTop: "5%", flexDirection: "column", justifyContent: "flex-start" }}>
-              
+
                 <IonButton className="box-init" style={{ height: "50%", width: "65%", fontSize: "20px" }} onClick={registButton}>
                   회원가입
                 </IonButton>

@@ -6,4 +6,8 @@ export default class Wallet {
     let res = await CustomAxios.post(`/${wallet}/fromtransfer/${symbol}`, payload);
     return res.data;
   };
+  public static getTransferList = async (wallet: string,offset: number,limit: number) => { //,key: string
+    let res = await CustomAxios.get(`/${wallet}/transfer/list?offset=${offset}&limit=${limit}`)
+    return res.data;
+  }
 }

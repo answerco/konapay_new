@@ -77,9 +77,7 @@ const Main: React.FC = () => {
     const uid = sessionStorage?.uid;
     const result = await userInfo.getUser(uid);
     const user: any = result;
-    console.log("getWalletAddressHandler user : ", user);
     const walletAddress: string = user.address;
-    console.log("getWalletAddressHandler walletAddress : ", walletAddress);
     let first = walletAddress.substring(0, 8);
     let last = walletAddress.substring(walletAddress.length - 8, walletAddress.length);
     const setAddress = `${first}...${last}`;
@@ -134,7 +132,7 @@ const Main: React.FC = () => {
 
   const copyAddress = () => {
     document.execCommand("copy");
-    present({message: "지갑주소가 복사되었습니다.", duration: 1000 , cssClass:"main_toast"});
+    present({ message: "지갑주소가 복사되었습니다.", duration: 1000, cssClass: "main_toast" });
   };
 
   return (
@@ -185,44 +183,44 @@ const Main: React.FC = () => {
           <IonCard className="walletCard">
             <IonSlides>
               <IonSlide>
-                  <CopyToClipboard text={walletAddress}>
-                <IonCardContent className="background" onClick={copyAddress}>
+                <CopyToClipboard text={walletAddress}>
+                  <IonCardContent className="background" onClick={copyAddress}>
                     <IonText className="card-text1 selectable">
                       {viewAddress}
                     </IonText>
                     {/* <button className='share-button text-xxs leading-7 text-alarmBoxTitle absolute right-9 bg-lightGray px-2 py-2' onClick={copyAddress}>URL복사</button> */}
-                  <br />
-                  <IonLabel className="card-text2">KSPC : {kspcAmount}</IonLabel>
-                </IonCardContent>
-                  </CopyToClipboard>
-              </IonSlide>
-              <IonSlide>
-                  <CopyToClipboard text={walletAddress}>
-                <IonCardContent className="background" onClick={copyAddress}>
-                    <IonText className="card-text1 selectable">
-                      {viewAddress}
-                    </IonText>
-                  <br />
-                  <IonLabel className="card-text2">ETH : {ethAmount}</IonLabel>
-                </IonCardContent>
-                  </CopyToClipboard>
+                    <br />
+                    <IonLabel className="card-text2">KSPC : {kspcAmount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</IonLabel>
+                  </IonCardContent>
+                </CopyToClipboard>
               </IonSlide>
               {/* <IonSlide>
-                  <CopyToClipboard text={walletAddress}>
-                <IonCardContent className="background" onClick={copyAddress}>
+                <CopyToClipboard text={walletAddress}>
+                  <IonCardContent className="background" onClick={copyAddress}>
                     <IonText className="card-text1 selectable">
                       {viewAddress}
                     </IonText>
-                  <br />
-                  <IonLabel className="card-text2">POINT : {pointAmount}</IonLabel>
-                </IonCardContent>
-                  </CopyToClipboard>
+                    <br />
+                    <IonLabel className="card-text2">ETH : {ethAmount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</IonLabel>
+                  </IonCardContent>
+                </CopyToClipboard>
               </IonSlide> */}
+              <IonSlide>
+                <CopyToClipboard text={walletAddress}>
+                  <IonCardContent className="background" onClick={copyAddress}>
+                    <IonText className="card-text1 selectable">
+                      {viewAddress}
+                    </IonText>
+                    <br />
+                    <IonLabel className="card-text2">POINT : {pointAmount}</IonLabel>
+                  </IonCardContent>
+                </CopyToClipboard>
+              </IonSlide>
             </IonSlides>
           </IonCard>
         </div>
 
-        <IonRouterLink href="/scan">
+        <IonRouterLink href="/paypass">
           <IonButton className="pwdBtn">
             <IonLabel>스캔</IonLabel>
           </IonButton>

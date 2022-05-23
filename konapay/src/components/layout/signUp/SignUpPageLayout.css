@@ -12,6 +12,10 @@
 }
 
 ion-item.signup_item {
-  
+
   --inner-border-width: 0px 0px 0px 0px;
+}
+
+.disc {
+  -webkit-text-security: disc;
 }

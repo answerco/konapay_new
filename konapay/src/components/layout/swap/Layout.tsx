@@ -4,6 +4,7 @@ import Header from "./Header";
 import { IonBackButton, IonButton, IonButtons, IonHeader, IonLoading, IonRow, IonTitle, IonToolbar, useIonLoading, useIonToast } from "@ionic/react";
 import { chevronBack } from "ionicons/icons";
 import Point from "../../../model/user/point";
+import userInfo from "../../../model/user/userinfo";
 
 
 const meta = document.createElement("meta");
@@ -13,9 +14,16 @@ document.getElementsByTagName("head")[0].appendChild(meta);
 
 const Layout: React.FC = () => {
   const [point, setPoint]: any = useState(0);
-  const [amount, setAmount]: any = useState()
+  const [amount, setAmount]: any = useState("")
   const [present, dismiss] = useIonToast();
   const [showLoading, setShowLoading] = useState(false);
+  const [kspcAmount, setKspcAmount] = useState<string>("");
+
+  const getWalletAddressHandler = async () => {
+    const result = await userInfo.getUser(sessionStorage.uid);
+    const kspc = await userInfo.getCoin(result.address, "KSPC");
+    setKspcAmount(kspc);
+  };
 
   const getPoint = async () => {
     let res = await Point.view(sessionStorage.uid);
@@ -26,25 +34,30 @@ const Layout: React.FC = () => {
     }
   };
 
-  const swap = () => {
-    if( point >= amount){
-      try{
+  const swap = async () => {
+    if (point >= amount) {
+      try {
         let uid = sessionStorage.uid
-        let res: any = Point.swap(uid, 'KSPC',amount )
-        setAmount(0)
+        let res: any = await Point.swap(uid, 'KSPC', amount)
+        setAmount('')
         present('포인트 전환중입니다...', 3000)
+        console.log(res)
+        if (!!res) {
+          getPoint()
+        }
       }
-      catch(err){
+      catch (err) {
         present(err as "", 1500)
       }
     }
-    else{
-      present('포인트가 부족합니다.',3000)
+    else {
+      present('포인트가 부족합니다.', 3000)
     }
   }
 
   useEffect(() => {
     getPoint();
+    getWalletAddressHandler()
   }, []);
 
   return (
@@ -62,27 +75,42 @@ const Layout: React.FC = () => {
         isOpen={showLoading}
         onDidDismiss={() => setShowLoading(false)}
         message={'Please wait...'}
-        // duration={5000}
+      // duration={5000}
       />
-      <div className="box-init box" style={{ height: "7.5%", justifyContent: "flex-start", flexDirection: "column" }}></div>
-      <div className="box-init box" style={{ height: "22.5%" }}>
+      {/* <div className="box-init box" style={{ height: "7.5%", justifyContent: "flex-start", flexDirection: "column" }}></div> */}
+      <div className="box-init box" style={{ marginTop: "5%", height: "125px" }}>
         <div
           className="box-init card"
           style={{ width: "80%", height: "90%", backgroundColor: "white", borderRadius: "10px", boxShadow: "5px 5px 5px gray", justifyContent: "center", flexDirection: "column" }}
         >
           <div style={{ width: "100%", textAlign: "center" }}>
             <p style={{ width: "100%", height: "100%", color: "gray" }}>
-              <span style={{ color: "black", marginRight: "5%" }}>{point}</span>KSP POINT
+              <span style={{ color: "black", marginRight: "5%" }}>{point} {amount === "" ? "" : <span style={{ color: "skyblue" }}>▶ {point - amount}</span>}</span>KSP POINT
             </p>
           </div>
         </div>
       </div>
-      <div className="box-init box" style={{ height: "25%", justifyContent: "flex-start", flexDirection: "column" }}>
+      <div className="box-init box" style={{ height: "12%", justifyContent: "flex-start", flexDirection: "column" }}>
         <div className="card2" style={{ width: "80%", height: "100%", textAlign: "center" }}>
-          <input type="number" placeholder="수량을 입력해주세요." style={{ width: "90%", height: "20%", marginTop: "10%", borderRadius: "5px", border: "1px solid gray", color : "black" }} value={amount} onChange={(e:any)=> {setAmount(e.target.value)}} />
+          <input type="number" placeholder="수량을 입력해주세요." style={{ width: "90%", height: "50%", marginTop: "10%", borderRadius: "5px", border: "1px solid gray", color: "black" }} value={amount} onChange={(e: any) => { setAmount(e.target.value) }} />
         </div>
       </div>
-      <div className="box-init box" style={{ height: "22.5%", justifyContent: "flex-start", flexDirection: "column" }}>
+      {amount === "" ? <div style={{ display: "block", height: "10%" }}></div> :
+        <div className="box-init box" style={{ height: "125px" }}>
+          <div
+            className="box-init card"
+            style={{ width: "80%", height: "90%", backgroundColor: "white", borderRadius: "10px", boxShadow: "5px 5px 5px gray", justifyContent: "center", flexDirection: "column" }}
+          >
+            <div style={{ width: "100%", textAlign: "center" }}>
+              <p style={{ width: "100%", height: "100%", color: "gray" }}>
+                <span style={{ color: "black", marginRight: "5%" }}>{`${kspcAmount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}`}<span style={{ color: "skyblue" }}>▶ ${(Number(kspcAmount) + Number(amount)).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</span></span>KSP COIN
+              </p>
+            </div>
+          </div>
+        </div>}
+
+
+      <div className="box-init box" style={{ height: "125px", justifyContent: "flex-start", flexDirection: "column" }}>
         <div className="card2" style={{ width: "90%", height: "100%", textAlign: "center" }}>
           <p style={{ color: "black", textAlign: "start", fontSize: "13px", marginBottom: "5%" }}>[유의사항]</p>
           {/* <p style={{ color: "black", textAlign: "start", fontSize: "13px" }}>포인트 전환은 약 2~3분정도 소요됩니다.</p> */}

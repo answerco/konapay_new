@@ -8,7 +8,7 @@ export default class Point {
 
     public static swap = async (uid: string, symbol: string ,quantity : string) => {
         let payload = {symbol : symbol, quantity : quantity}
-        CustomAxios.post(`/point/tocoin/${uid}`, payload)
+        return CustomAxios.post(`/point/tocoin/${uid}`, payload)
     }
 
     public static total = async (uid : string) => {

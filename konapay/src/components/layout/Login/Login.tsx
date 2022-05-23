@@ -83,7 +83,7 @@ const Login: React.FC = () => {
             <IonRow>
               <IonCol>
                 <IonItem>
-                  <IonLabel position="floating"> id</IonLabel>
+                  <IonLabel position="floating"> ID</IonLabel>
                   <IonInput type='text' id="uid" value={content.uid} onIonChange={onChange} >
                   </IonInput>
                 </IonItem>
@@ -93,7 +93,7 @@ const Login: React.FC = () => {
             <IonRow>
               <IonCol>
                 <IonItem>
-                  <IonLabel position="floating"> password</IonLabel>
+                  <IonLabel position="floating"> Password</IonLabel>
                   <IonInput type="password" id="password" value={content.password} onIonChange={onChange} >
                   </IonInput>
                 </IonItem>
