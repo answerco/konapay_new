@@ -32,13 +32,16 @@ import {
   useIonAlert,
   useIonToast,
 } from "@ionic/react";
-import { add, arrowUpCircle, qrCodeOutline, toggleSharp } from "ionicons/icons";
+import { add, arrowUpCircle, qrCode, qrCodeOutline, search, toggleSharp } from "ionicons/icons";
 import "./Layout.css";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { QrReader } from "react-qr-reader";
 import userInfo from "../../../model/user/userinfo";
 import Wallet from "../../../model/wallet";
+import PayPassword from "../../../model/user/payPassword";
+import IsUidWallet from "../../../model/user/uidWallet";
+import CopyToClipboard from "react-copy-to-clipboard";
 
 const meta = document.createElement("meta");
 meta.name = "viewport";
@@ -58,15 +61,13 @@ const Layout: React.FC = () => {
   const sessionUid = sessionStorage?.getItem("uid");
   const [present] = useIonAlert();
   const [toast, dismiss] = useIonToast();
+  const [current, setCurrent] = useState(10)
   const pushRemittanceDataHandeler = async () => {
-    const min = tmpItem.length;
-    const max = min + 20;
-    const newItem = [];
-    for (let i = min; i < max; i++) {
-      newItem.push("item" + i);
+    if (address) {
+      const list = await Wallet.getTransferList(address, current, current + 10)
+      setTmpItem([...tmpItem, ...list.data.rows])
+      setCurrent(current + 10)
     }
-    console.log(newItem);
-    setTmpItem([...tmpItem, ...newItem]);
   };
 
   const loadData = (event: any) => {
@@ -75,6 +76,37 @@ const Layout: React.FC = () => {
 
       event.target.complete();
     }, 500);
+  };
+
+  const [payPassword, setPayPassword] = useState<string>("");
+
+  const isValid = async () => {
+    try {
+      const res = await PayPassword.payPassword(sessionStorage.uid, payPassword)
+      console.log(res[0].state)
+      if (res[0].state) {
+        sendKscpHandler()
+      }
+      else {
+        toast("결제 비밀번호가 틀렸습니다.", 2000)
+      }
+    } catch { }
+  };
+
+  const isUidValid = async () => {
+    try {
+      console.log(searchUid)
+      const res = await IsUidWallet.isUidWallet(searchUid)
+      console.log(res)
+      if (res) {
+        setToAddress(res.address)
+        setSearchUid("")
+        setSearchModal(false)
+      }
+      else {
+        toast("존재하지 않는 사용자입니다.", 2000)
+      }
+    } catch { }
   };
 
   const sendPriceAlert = async () => {
@@ -98,17 +130,19 @@ const Layout: React.FC = () => {
     present({
       header: "송금",
       message: "정말로 송금 하시겠습니까?",
-      buttons: ["아니오", { text: "네", handler: sendKscpHandler }],
+      buttons: ["아니오", { text: "네", handler: () => { setPayPass(true) } }],
     });
   };
 
   const sendKscpHandler = () => {
     console.log("send 준비");
     console.log(sendPrice);
+    console.log(toAddress)
 
     const result = Wallet.FromTransfer(address, "KSPC", sendPrice, toAddress);
+    setPayPass(false)
     toast("전송하는데 시간이 걸릴 수 있습니다.", 3000);
-    setAddress("");
+    setToAddress("");
     setSendPrice(0);
   };
 
@@ -143,9 +177,25 @@ const Layout: React.FC = () => {
   useEffect(() => {
     getUserInfo();
   }, []);
+  useEffect(() => {
+    transferList();
+  }, [address]);
   useIonViewWillEnter(() => {
     pushRemittanceDataHandeler();
   });
+
+  const [payPass, setPayPass] = useState(false)
+  const [searchModal, setSearchModal] = useState(false)
+  const [searchUid, setSearchUid] = useState("")
+
+  const transferList = async () => {
+    if (address) {
+      const list = await Wallet.getTransferList(address, 0, 10)
+      console.log(list.data.rows)
+      setTmpItem(list.data.rows)
+    }
+  }
+
   return (
     <IonApp>
       <IonModal isOpen={qrReader}>
@@ -159,12 +209,13 @@ const Layout: React.FC = () => {
         </IonHeader>
         <IonContent>
           <IonCard>
-            <IonCardHeader>서비스 준비중입니다</IonCardHeader>
+            {/* <IonCardHeader>서비스 준비중입니다</IonCardHeader> */}
             <IonCardContent>
               <QrReader
-                onResult={(result, error) => {
+                onResult={(result: any, error) => {
                   if (!!result) {
-                    // setProductIdx(result?.getText());
+                    setToAddress(result.getText())
+                    qrReaderHandler()
                   }
 
                   if (!!error) {
@@ -178,6 +229,55 @@ const Layout: React.FC = () => {
             </IonCardContent>
           </IonCard>
         </IonContent>
+
+
+
+      </IonModal>
+      <IonModal isOpen={payPass}>
+        <IonHeader>
+          <IonToolbar>
+            <IonButtons slot="start" onClick={() => { setPayPass(false) }}>
+              <IonBackButton disabled defaultHref="/" text={""} color="dark" />
+            </IonButtons>
+            <IonTitle>비밀번호</IonTitle>
+          </IonToolbar>
+        </IonHeader>
+
+        <IonContent>
+          <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", height: "100%", alignItems: "center" }}>
+            <div style={{ display: "flex", justifyContent: "center", height: "125px", width: "95%" }}>
+              <IonCard style={{ heigth: "100%", width: "100%", padding: "0 20px" }} >
+                <IonInput style={{ width: "100%", height: "100%", fontSize: "200%", letterSpacing: "30px" }} inputmode="numeric" type="password" maxlength={6} onIonChange={(e: any) => setPayPassword(e.target.value)} ></IonInput>
+              </IonCard>
+            </div>
+            <IonButton onClick={isValid}>
+              비밀번호 인증
+            </IonButton>
+          </div>
+        </IonContent>
+      </IonModal>
+      <IonModal isOpen={searchModal}>
+        <IonHeader>
+          <IonToolbar>
+            <IonButtons slot="start" onClick={() => { setSearchModal(false) }}>
+              <IonBackButton disabled defaultHref="/" text={""} color="dark" />
+            </IonButtons>
+            <IonTitle>사용자 검색</IonTitle>
+          </IonToolbar>
+        </IonHeader>
+
+        <IonContent>
+          <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", height: "100%", alignItems: "center" }}>
+            <div style={{ display: "flex", justifyContent: "center", height: "125px", width: "95%" }}>
+              <IonCard style={{ heigth: "100%", width: "100%", padding: "0 20px" }} >
+                <IonInput style={{ width: "100%", height: "100%", fontSize: "200%" }} type="text" value={searchUid} onIonChange={(e: any) => setSearchUid(e.target.value)} ></IonInput>
+              </IonCard>
+            </div>
+            <IonButton onClick={isUidValid}>
+              검색
+            </IonButton>
+          </div>
+        </IonContent>
       </IonModal>
       <IonPage>
         <IonHeader>
@@ -189,12 +289,12 @@ const Layout: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <IonContent>
-          <IonItem>
+          {/* <IonItem>
             <IonButton slot="end" onClick={qrReaderHandler}>
               <IonLabel>QR송금</IonLabel>
               <IonIcon icon={qrCodeOutline}></IonIcon>
             </IonButton>
-          </IonItem>
+          </IonItem> */}
           <IonSlides>
             <IonSlide>
               <IonCard style={{ width: "100%" }}>
@@ -202,8 +302,8 @@ const Layout: React.FC = () => {
                 <IonCardContent style={{ lineHeight: "200%" }}>
                   <IonLabel style={{ fontSize: "20px" }}>{sessionUid} </IonLabel>
                   <br />
-                  <IonLabel style={{ textAlign: "center", fontSize: "20px", fontWeight: "bold" }}>{kspc} KSPC</IonLabel>
-                  <IonLabel style={{ fontSize: "20px" }}> 입니다</IonLabel>
+                  <IonLabel style={{ textAlign: "center", fontSize: "20px", fontWeight: "bold" }}>{kspc.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")} KSPC</IonLabel>
+                  {/* <IonLabel style={{ fontSize: "20px" }}> 입니다</IonLabel> */}
                   <br />
                   <IonItem style={{ marginBottom: "5%" }}>
                     <IonCol>
@@ -214,10 +314,16 @@ const Layout: React.FC = () => {
                         style={{ textAlign: "right", marginRight: "10%" }}
                         onIonChange={(e) => setSendPrice(parseInt(e.detail.value!, 0))}
                       ></IonInput>
-                      <IonInput value={toAddress} placeholder="상대 주소 입력" style={{ textAlign: "right", marginRight: "10%" }} onIonChange={(e) => setToAddress(e.detail.value)}></IonInput>
+                      <div style={{ display: "flex", alignItems: "center" }}>
+                        <IonInput value={toAddress} placeholder="지갑 주소" style={{ textAlign: "right", marginRight: "1%" }} onIonChange={(e) => setToAddress(e.detail.value)}></IonInput>
+                        <IonButton onClick={qrReaderHandler} ><IonIcon src={qrCode}></IonIcon></IonButton>
+                        <IonButton onClick={() => { setSearchModal(true) }} ><IonIcon src={search}></IonIcon></IonButton>
+                      </div>
+
                     </IonCol>
                   </IonItem>
-                  <IonButton onClick={sendPriceAlert}>송금</IonButton>
+                  <IonButton style={{ marginRight: "20px" }} onClick={sendPriceAlert}>보내기</IonButton>
+                  <IonButton onClick={() => history.push("/mywallet")}>받기</IonButton>
                 </IonCardContent>
               </IonCard>
             </IonSlide>
@@ -227,7 +333,7 @@ const Layout: React.FC = () => {
                   <IonLabel style={{ fontSize: "20px" }}>{sessionUid} </IonLabel>
                   <br />
                   <IonLabel style={{ textAlign: "center", fontSize: "20px", fontWeight: "bold" }}>{eth} ETH</IonLabel>
-                  <IonLabel style={{ fontSize: "20px" }}> 입니다</IonLabel>
+                  {/* <IonLabel style={{ fontSize: "20px" }}> 입니다</IonLabel> */}
                   <br />
                   <IonItem style={{ marginBottom: "5%" }}>
                     <IonCol>
@@ -258,6 +364,7 @@ const Layout: React.FC = () => {
               </IonCard>
             </IonSlide>
           </IonSlides>
+
           <IonCard>
             <IonList>
               <IonGrid>
@@ -267,14 +374,16 @@ const Layout: React.FC = () => {
                   <IonCol>금액</IonCol>
                   {/* <IonCol>asdasd</IonCol> */}
                 </IonRow>
-                {tmpItem.map((item) => {
+                {tmpItem.map((item: any) => {
                   return (
-                    <IonRow key={item}>
-                      <IonCol>{item}</IonCol>
-                      <IonCol>{item}</IonCol>
-                      <IonCol>{item}</IonCol>
-                      {/* <IonCol>{item}</IonCol> */}
-                    </IonRow>
+                    <CopyToClipboard text={item.toAddress}>
+                      <IonRow key={item.transferIdx} onClick={() => { toast(`${item.uid} : ${item.toAddress}`, 2000) }}>
+                        <IonCol style={{ maxWidth: "111px" }}>{item.uid}</IonCol>
+                        <IonCol style={{ maxWidth: "111px" }}>{item.transferAt ? item.transferAt.slice(0, 10) : ""}</IonCol>
+                        <IonCol style={{ maxWidth: "111px" }}>{item.amount}</IonCol>
+                        {/* <IonCol>{item}</IonCol> */}
+                      </IonRow>
+                    </CopyToClipboard>
                   );
                 })}
               </IonGrid>
@@ -290,7 +399,7 @@ const Layout: React.FC = () => {
           </IonInfiniteScroll>
         </IonContent>
       </IonPage>
-    </IonApp>
+    </IonApp >
   );
 };
 

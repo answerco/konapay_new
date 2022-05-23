@@ -67,6 +67,7 @@ import Login from "./components/layout/Login/Login";
 import SellerList from "./components/layout/List/SellerList";
 import BuyerList from "./components/layout/List/BuyerList";
 import PotinTotal from "./components/layout/PointTotal/PotinTotal";
+import PayPass from "./components/layout/PayPass/PayPass";
 
 const App: React.FC = () => {
   const [paste] = useIonAlert();
@@ -96,6 +97,11 @@ const App: React.FC = () => {
           <Route exact path="/scan">
             <QrReaderPage />
           </Route>
+
+          <Route exact path="/paypass">
+            <PayPass />
+          </Route>
+
           <Route exact path="/detail/:productIdx">
             <ProductDetail />
           </Route>

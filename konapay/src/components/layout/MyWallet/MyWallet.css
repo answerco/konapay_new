@@ -22,15 +22,15 @@ ion-card.balance_card {
   flex: 1;
 }
 
-ion-card > div.balance {
+ion-card>div.balance {
   flex: 4;
   text-align: center;
   align-content: center;
   align-self: center;
-  font-size: 250%;
+  font-size: 200%;
 }
 
 .balance_category {
-  flex: 2;
+  flex: 1;
   align-self: center;
 }

@@ -1,10 +1,11 @@
 import "./QrReaderPage.css";
-import { IonApp, IonBackButton, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCol, IonContent, IonGrid, IonHeader, IonRow, IonTitle, IonToolbar } from "@ionic/react";
+import { IonApp, IonBackButton, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCol, IonContent, IonGrid, IonHeader, IonRow, IonTitle, IonToolbar, useIonToast } from "@ionic/react";
 import axios from "axios";
 import { chevronBack } from "ionicons/icons";
 import React, { useEffect, useState } from "react";
 import { QrReader } from "react-qr-reader";
 import { useHistory } from "react-router";
+
 const QrReaderPage: React.FC = () => {
   const history = useHistory();
   const [isValidData, setIsValidData] = useState(false);
@@ -13,6 +14,7 @@ const QrReaderPage: React.FC = () => {
   const [price, setPrice] = useState<string>("");
   const [seller, setSeller] = useState<string>("");
   const [buyer, setByuer] = useState<string>("");
+  const [toast, ex] = useIonToast()
 
   useEffect(() => {
     const axiosFunction = async () => {
@@ -30,7 +32,7 @@ const QrReaderPage: React.FC = () => {
           setSeller(item.sellerUid);
           setByuer(item.buyerUid);
         }
-      } catch {}
+      } catch { }
     };
     if (productIdx !== "-1") {
       axiosFunction();
@@ -102,8 +104,14 @@ const QrReaderPage: React.FC = () => {
       </IonContent>
       {isValidData ? (
         <IonButton
-          onClick={() => {
-            history.push({ pathname: `/detail/${productIdx}`, state: {} });
+          onClick={async () => {
+            if (buyer === sessionStorage.uid) {
+              history.push({ pathname: `/detail/${productIdx}`, state: {} });
+            }
+            else {
+              await toast("당신은 구매자가 아닙니다.", 3000)
+              history.push({ pathname: `/`, state: {} })
+            }
           }}
         >
           구매하기

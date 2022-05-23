@@ -65,17 +65,21 @@ const ProductDetail: React.FC = () => {
   };
 
   const buyProductHandler = async () => {
-    console.log("확인");
-    const product = await BuySellList.productItem(productIdx);
-    console.log(product);
+    try {
+      console.log("확인");
+      const product = await BuySellList.productItem(productIdx);
+      console.log(product);
 
-    const { sellIdx, buyerUid, sellerUid, symbol, productPrice } = product;
+      const { sellIdx, buyerUid, sellerUid, symbol, productPrice } = product;
 
-    const result = await BuySellList.buyProduct(sellIdx, sellerUid, buyerUid, symbol, productPrice);
-    console.log(result);
-    if (result.status === 200) {
+      const result = await BuySellList.buyProduct(sellIdx, sellerUid, buyerUid, symbol, productPrice);
+      console.log(result);
+
       present("구매 완료 되었습니다.");
       window.location.replace("/list/buy");
+    }
+    catch (err) {
+
     }
   };
   useEffect(() => {
