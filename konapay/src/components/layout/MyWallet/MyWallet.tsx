@@ -105,7 +105,7 @@ const MyWallet: React.FC = () => {
             </IonCard>
 
             <IonCard className="balance_card">
-              <div className="balance">{ethAmount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</div>
+              <div className="balance">{ethAmount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",").slice(0,10)}</div>
               <div className="balance_category">ETH</div>
             </IonCard>
 
